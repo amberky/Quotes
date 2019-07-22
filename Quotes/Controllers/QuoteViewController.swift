@@ -11,14 +11,14 @@ import CoreData
 
 class QuoteViewController: UITableViewController {
     
-    var quotesArray = [Quote]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    var quotesArray = [Quote]()
     
     @IBOutlet var quoteTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
         // quoteTableView.register(UINib(nibName: "QuoteCell", bundle: nil) , forCellReuseIdentifier: "customQuoteCell")
         // quoteTableView.register(UINib(nibName: "MessageCell", bundle: nil) , forCellReuseIdentifier: "customMessageCell")
@@ -49,17 +49,22 @@ class QuoteViewController: UITableViewController {
     func mockData() {
         deleteData()
         
+        
+//        let defaultCategory = Category()
+//        defaultCategory.name = "Steve Jobs"
+//        defaultCategory.icon = ""
+        
         let newQuote = Quote(context: self.context)
         newQuote.quote = "Focusing is about saying no"
         newQuote.author = "Steve Jobs"
-        newQuote.year = 2019
+//        newQuote.category = defaultCategory
         
         self.quotesArray.append(newQuote)
         
         let newQuote1 = Quote(context: self.context)
         newQuote1.quote = "Because the people who are crazy enough to think they can change the world are the ones who do"
         newQuote1.author = "Steve Jobs"
-        newQuote1.year = 2019
+//        newQuote1.category = defaultCategory
         
         self.quotesArray.append(newQuote1)
         
@@ -109,7 +114,7 @@ class QuoteViewController: UITableViewController {
         let quote = quotesArray[indexPath.row]
         
         cell.quoteLabel.text = quote.quote
-        cell.authorLabel.text = "\(quote.author ?? "") \(quote.year)"
+        cell.authorLabel.text = "\(quote.author ?? "")"
         
         return cell
     }
@@ -118,7 +123,7 @@ class QuoteViewController: UITableViewController {
         return quotesArray.count
     }
     
-    @IBAction func cancel(_ unwindSegue: UIStoryboardSegue) {}
+    @IBAction func backToHome(_ unwindSegue: UIStoryboardSegue) {}
 }
 
 //MARK: - Search Bar methods

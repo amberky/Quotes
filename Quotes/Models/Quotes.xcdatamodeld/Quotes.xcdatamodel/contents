@@ -3,7 +3,7 @@
     <entity name="Category" representedClassName="Category" syncable="YES" codeGenerationType="class">
         <attribute name="icon" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="quotes" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Quote" inverseName="category" inverseEntity="Quote" syncable="YES"/>
+        <relationship name="quotes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Quote" inverseName="category" inverseEntity="Quote" syncable="YES"/>
     </entity>
     <entity name="Quote" representedClassName="Quote" syncable="YES" codeGenerationType="class">
         <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>
@@ -13,7 +13,7 @@
         <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="quotes" inverseEntity="Category" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Quote" positionX="-63" positionY="-18" width="128" height="118"/>
         <element name="Category" positionX="100.6796875" positionY="-17.33984375" width="128" height="88"/>
+        <element name="Quote" positionX="-63" positionY="-18" width="128" height="118"/>
     </elements>
 </model>
