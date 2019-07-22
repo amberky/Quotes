@@ -20,9 +20,8 @@ class QuoteViewController: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        //        quoteTableView.register(UINib(nibName: "QuoteCell", bundle: nil) , forCellReuseIdentifier: "customQuoteCell")
-        //
-        //        quoteTableView.register(UINib(nibName: "MessageCell", bundle: nil) , forCellReuseIdentifier: "customMessageCell")
+        // quoteTableView.register(UINib(nibName: "QuoteCell", bundle: nil) , forCellReuseIdentifier: "customQuoteCell")
+        // quoteTableView.register(UINib(nibName: "MessageCell", bundle: nil) , forCellReuseIdentifier: "customMessageCell")
         
         configureTableView()
         
@@ -31,11 +30,6 @@ class QuoteViewController: UITableViewController {
         loadQuotes()
     }
     
-    func configureTableView() {
-        quoteTableView.rowHeight = UITableView.automaticDimension
-        quoteTableView.estimatedRowHeight = 500.0
-    }
-
     func loadQuotes(with request: NSFetchRequest<Quote> = Quote.fetchRequest(), predicate: NSPredicate? = nil) {
         //let request : NSFetchRequest<Quote> = Quote.fetchRequest()
         
@@ -53,6 +47,8 @@ class QuoteViewController: UITableViewController {
     }
     
     func mockData() {
+        deleteData()
+        
         let newQuote = Quote(context: self.context)
         newQuote.quote = "Focusing is about saying no"
         newQuote.author = "Steve Jobs"
@@ -70,6 +66,24 @@ class QuoteViewController: UITableViewController {
         saveContext()
     }
     
+    func deleteData() {
+        let request: NSFetchRequest<Quote> = Quote.fetchRequest()
+        
+        do {
+            let dataToBeDeleted = try context.fetch(request)
+            
+            for i in dataToBeDeleted
+            {
+                context.delete(i)
+            }
+            
+            try context.save()
+            
+        } catch {
+            
+        }
+    }
+    
     func saveContext() {
         do {
             try context.save()
@@ -80,23 +94,22 @@ class QuoteViewController: UITableViewController {
         }
     }
     
+    func configureTableView() {
+        quoteTableView.rowHeight = UITableView.automaticDimension
+        quoteTableView.estimatedRowHeight = 500.0
+    }
+
     //MARK: - TableView Delegate Methods
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "QuoteCell", for: indexPath) as! QuoteTableViewCell
         
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
-        
-        //        let cell = tableView.dequeueReusableCell(withIdentifier: "customMessageCell", for: indexPath) as! CustomMessageCell
-        
+
         let quote = quotesArray[indexPath.row]
         
         cell.quoteLabel.text = quote.quote
         cell.authorLabel.text = "\(quote.author ?? "") \(quote.year)"
-        
-        //        cell.messageBody.text = quote.quote
-        //        cell.senderUsername.text = quote.author
-        
         
         return cell
     }
@@ -104,6 +117,8 @@ class QuoteViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return quotesArray.count
     }
+    
+    @IBAction func cancel(_ unwindSegue: UIStoryboardSegue) {}
 }
 
 //MARK: - Search Bar methods

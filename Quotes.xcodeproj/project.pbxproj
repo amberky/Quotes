@@ -14,6 +14,7 @@
 		2566C29722E4970C003BFA91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2566C29622E4970C003BFA91 /* Assets.xcassets */; };
 		2566C29A22E4970C003BFA91 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2566C29822E4970C003BFA91 /* LaunchScreen.storyboard */; };
 		2566C2B222E4B53E003BFA91 /* QuoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2566C2B122E4B53E003BFA91 /* QuoteTableViewCell.swift */; };
+		2566C2B422E4D0B5003BFA91 /* AddQuoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2566C2B322E4D0B5003BFA91 /* AddQuoteController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		2566C29922E4970C003BFA91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2566C29B22E4970C003BFA91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2566C2B122E4B53E003BFA91 /* QuoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteTableViewCell.swift; sourceTree = "<group>"; };
+		2566C2B322E4D0B5003BFA91 /* AddQuoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddQuoteController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 		2566C2A122E49720003BFA91 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2566C2B322E4D0B5003BFA91 /* AddQuoteController.swift */,
 				2566C28E22E4970A003BFA91 /* QuoteViewController.swift */,
 			);
 			path = Controllers;
@@ -167,6 +170,7 @@
 			files = (
 				2566C28F22E4970A003BFA91 /* QuoteViewController.swift in Sources */,
 				2566C2B222E4B53E003BFA91 /* QuoteTableViewCell.swift in Sources */,
+				2566C2B422E4D0B5003BFA91 /* AddQuoteController.swift in Sources */,
 				2566C29522E4970A003BFA91 /* Quotes.xcdatamodeld in Sources */,
 				2566C28D22E4970A003BFA91 /* AppDelegate.swift in Sources */,
 			);
