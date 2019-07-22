@@ -9,14 +9,13 @@
 import UIKit
 import CoreData
 
-class CategoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class CategoryViewController: UITableViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var categoryArray = [Category]()
     
     //MARK: - IBOutlet
-    @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var categoryTableView: UITableView!
     
     //MARK: - Functions
@@ -43,17 +42,12 @@ class CategoryViewController: UIViewController, UITableViewDataSource, UITableVi
         categoryTableView.reloadData()
     }
     
-    //MARK: - IBAction
-    @IBAction func addButtonPressed(_ sender: Any) {
-        print("Add button pressed")
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return categoryArray.count
     }
     
     //MARK: - Data Source
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
         
         let category = categoryArray[indexPath.row]
