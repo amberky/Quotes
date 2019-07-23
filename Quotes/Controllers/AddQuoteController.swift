@@ -29,7 +29,7 @@ class AddQuoteController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    var dismissHandler: (() -> Void)!
+    //var dismissHandler: (() -> Void)!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,23 +67,21 @@ class AddQuoteController: UIViewController, UITextFieldDelegate {
         self.authorTextField.becomeFirstResponder()
     }
     
-    @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
-        print("selectedCategory \(selectedCategory)")
-        
-        let newQuote = Quote(context: self.context)
-        newQuote.quote = quoteTextField.text!
-        newQuote.author = authorTextField?.text ?? ""
-        newQuote.category = selectedCategory
-        
-        context.insert(newQuote)
-        
-        saveContext()
-        
-        dismiss(animated: true) {
-            self.dismissHandler()
-        }
-    }
-    
+//    @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
+//        let newQuote = Quote(context: self.context)
+//        newQuote.quote = quoteTextField.text!
+//        newQuote.author = authorTextField?.text ?? ""
+//        newQuote.category = selectedCategory
+//
+//        context.insert(newQuote)
+//
+//        saveContext()
+//
+//        //        dismiss(animated: true) {
+//        //            self.dismissHandler()
+//        //        }
+//    }
+
     func saveContext() {
         do {
             try context.save()
@@ -98,12 +96,38 @@ class AddQuoteController: UIViewController, UITextFieldDelegate {
         print(quoteTextField.text ?? "")
     }
     
-    //MARK: - unwind Segue
+//    //MARK: - unwind Segue
+//    @IBAction func backToAddQuote(_ unwindSegue: UIStoryboardSegue) {}
+    
     @IBAction func backToAddQuote(_ unwindSegue: UIStoryboardSegue) {}
     
-    @IBAction func backToAddWithSelectedCategory(_ unwindSegue: UIStoryboardSegue) {}
-
-    //NOTE: - No preparation is required
-    // backToAddQuote - no action required
-    // backToAddWithSelectedCategory - handled by didSet()
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let identifier = segue.identifier else { return }
+        
+        switch identifier {
+        case "doneClicked":
+            let newQuote = Quote(context: self.context)
+            newQuote.quote = quoteTextField.text!
+            newQuote.author = authorTextField?.text ?? ""
+            newQuote.category = selectedCategory
+            
+            context.insert(newQuote)
+            
+            saveContext()
+            
+            print("Done bar button clicked")
+            
+            let destination = segue.destination as! QuoteViewController
+            destination.loadQuotes()
+            
+        case "cancelClicked":
+            print("Cancel bar button clicked")
+            
+        case "goToCategory":
+            print("Let's go to select a category")
+            
+        default:
+            print("unexpected segue identifier")
+        }
+    }
 }

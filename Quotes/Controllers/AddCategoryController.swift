@@ -32,8 +32,6 @@ class AddCategoryController: UIViewController {
     
     var selectedIndex = 0
     
-    var dismissHandler: (() -> Void)!
-    
     //MARK: - view delegate
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,21 +49,33 @@ class AddCategoryController: UIViewController {
         loadIcon()
     }
     
-    //MARK: - IBAction
-    
-    @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
-        let newCategory = Category(context: self.context)
-        newCategory.name = categoryTextField.text
-        newCategory.icon = iconArray[selectedIndex].name
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let identifier = segue.identifier else { return }
         
-        context.insert(newCategory)
-        
-        saveContext()
-        
-        dismiss(animated: true) {
-            //self.dismissHandler()
+        switch identifier {
+        case "doneClicked":
+            let newCategory = Category(context: self.context)
+            newCategory.name = categoryTextField.text
+            newCategory.icon = iconArray[selectedIndex].name
+            
+            context.insert(newCategory)
+            
+            saveContext()
+            
+            print("Done bar button clicked")
+            
+            let destination = segue.destination as! CategoryViewController
+            destination.loadCategories()
+            
+            
+        case "cancelClicked":
+            print("Cancel bar button clicked")
+            
+        default:
+            print("unexpected segue identifier")
         }
     }
+    
     
     //MARK: - functions
     func saveContext() {

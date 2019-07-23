@@ -100,7 +100,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="OMS-UJ-1s1">
                             <color key="tintColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
-                                <segue destination="bYU-ic-ayS" kind="popoverPresentation" popoverAnchorBarButtonItem="OMS-UJ-1s1" id="YPG-Ug-Te0">
+                                <segue destination="bYU-ic-ayS" kind="popoverPresentation" identifier="" popoverAnchorBarButtonItem="OMS-UJ-1s1" id="YPG-Ug-Te0">
                                     <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                 </segue>
                             </connections>
@@ -137,13 +137,14 @@
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="OlZ-Cs-WoD">
                                             <color key="tintColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <connections>
-                                                <segue destination="iPp-wn-Pzy" kind="unwind" unwindAction="backToQuoteView:" id="gjm-vz-GMn"/>
+                                                <segue destination="iPp-wn-Pzy" kind="unwind" identifier="cancelClicked" unwindAction="backToQuoteView:" id="mfq-Tb-XLG"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="YGw-lj-1mV">
                                             <color key="tintColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <connections>
-                                                <action selector="doneButtonPressed:" destination="bYU-ic-ayS" id="drx-Jm-lgM"/>
+                                                <action selector="doneButtonPressed:" destination="bYU-ic-ayS" id="T34-sn-D1d"/>
+                                                <segue destination="iPp-wn-Pzy" kind="unwind" identifier="doneClicked" unwindAction="backToQuoteView:" id="Weh-Go-V6a"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -328,7 +329,7 @@
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="u8x-WK-1io">
                                             <color key="tintColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <connections>
-                                                <segue destination="joQ-5y-OR0" kind="unwind" unwindAction="backToAddQuote:" id="O5F-O0-KfP"/>
+                                                <segue destination="joQ-5y-OR0" kind="unwind" identifier="cancelClicked" unwindAction="backToAddQuote:" id="SOo-7F-MJe"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -346,7 +347,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="joQ-5y-OR0" kind="unwind" unwindAction="backToAddWithSelectedCategory:" id="4U5-9K-lAz"/>
+                                            <segue destination="joQ-5y-OR0" kind="unwind" identifier="categorySelected" unwindAction="backToAddQuote:" id="RbC-al-VRG"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -366,7 +367,9 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="Iua-JE-UhH" kind="showDetail" identifier="goToAddCategory" id="6eZ-P3-BBU"/>
+                                    <segue destination="Iua-JE-UhH" kind="popoverPresentation" identifier="goToAddCategory" popoverAnchorView="hza-Xg-QMj" id="6eZ-P3-BBU">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
                                 </connections>
                             </button>
                         </subviews>
@@ -416,13 +419,13 @@
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="AqI-f8-CYa">
                                             <color key="tintColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <connections>
-                                                <segue destination="jiA-Hp-z5I" kind="unwind" unwindAction="backToCategory:" id="fbR-26-UEz"/>
+                                                <segue destination="jiA-Hp-z5I" kind="unwind" identifier="cancelClicked" unwindAction="backToCategoryView:" id="sGo-z4-YC1"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="aoY-YU-wAn">
                                             <color key="tintColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <connections>
-                                                <action selector="doneButtonPressed:" destination="Iua-JE-UhH" id="Wdr-6c-jN9"/>
+                                                <segue destination="jiA-Hp-z5I" kind="unwind" identifier="doneClicked" unwindAction="backToCategoryView:" id="eR3-Xm-Fz0"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -566,7 +569,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pSl-kV-e6j" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="jiA-Hp-z5I" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3701.5999999999999" y="117.48768472906404"/>
+            <point key="canvasLocation" x="3698" y="117"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ldE-VC-9PT">

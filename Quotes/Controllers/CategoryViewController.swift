@@ -41,35 +41,28 @@ class CategoryViewController: UIViewController {
     }
     
     //MARK: - unwind Segue
-    @IBAction func backToCategory(_ unwindSegue: UIStoryboardSegue) {}
-    
-    func bindCategoryAfterSelected(segue: UIStoryboardSegue) {
-        let destinationVC = segue.destination as! AddQuoteController
-        
-        if let indexPath = categoryTableView.indexPathForSelectedRow {
-            destinationVC.selectedCategory = categoryArray[indexPath.row]
-        }
-    }
-    
-    func reloadCategoriesAfterAddNew(segue: UIStoryboardSegue) {
-        let destinationVC = segue.destination as! AddCategoryController
-        destinationVC.dismissHandler = {
-            print("loadCategories")
-            self.loadCategories()
-        }
-    }
+    @IBAction func backToCategoryView(_ unwindSegue: UIStoryboardSegue) {}
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("segue identifier: \(segue.identifier ?? "")")
+        guard let identifier = segue.identifier else { return }
         
-        if segue.identifier == "backToCategory" {
-            reloadCategoriesAfterAddNew(segue: segue)
-        }
-        else if segue.identifier == "goToAddCategory" {
-            print("Add Category button clicked")
-        }
-        else {
-            bindCategoryAfterSelected(segue: segue)
+        switch identifier {
+        case "cancelClicked":
+            print("Cancel bar button clicked")
+            
+        case "categorySelected":
+            print("Category Selected")
+            let destinationVC = segue.destination as! AddQuoteController
+            
+            if let indexPath = categoryTableView.indexPathForSelectedRow {
+                destinationVC.selectedCategory = categoryArray[indexPath.row]
+            }
+            
+        case "goToAddCategory":
+            print("Let's go to add new category")
+            
+        default:
+            print("unexpected segue identifier")
         }
     }
 }

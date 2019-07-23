@@ -150,18 +150,6 @@ class QuoteViewController: UITableViewController {
     
     //MARK: - unwind Segue
     @IBAction func backToQuoteView(_ unwindSegue: UIStoryboardSegue) {}
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print(segue.identifier ?? "")
-        
-        if segue.identifier == "backToQuoteView" {
-            let destinationVC = segue.destination as! AddQuoteController
-            destinationVC.dismissHandler = {
-                print("loadQuotes")
-                self.loadQuotes()
-            }
-        }
-    }
 }
 
 //MARK: - Search Bar methods
