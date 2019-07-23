@@ -1,5 +1,5 @@
 //
-//  AddCategoryViewController.swift
+//  AddCollectionViewController.swift
 //  Quotes
 //
 //  Created by Kharnyee Eu on 22/07/2019.
@@ -9,16 +9,16 @@
 import UIKit
 import CoreData
 
-class AddCategoryViewController: UIViewController {
+class AddCollectionViewController: UIViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     //MARK: - IBOutlet
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
-    @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var collectionLabel: UILabel!
     
-    @IBOutlet weak var categoryTextField: UITextField!
+    @IBOutlet weak var collectionTextField: UITextField!
     
     @IBOutlet weak var iconCollectionView: UICollectionView!
     
@@ -41,10 +41,10 @@ class AddCategoryViewController: UIViewController {
         iconCollectionView.delegate = self
         iconCollectionView.dataSource = self
         
-        categoryTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
+        collectionTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         
-        let categoryLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(categoryLabelTapped))
-        categoryLabel.addGestureRecognizer(categoryLabelTapGesture)
+        let collectionLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(collectionLabelTapped))
+        collectionLabel.addGestureRecognizer(collectionLabelTapGesture)
         
         loadIcon()
     }
@@ -54,17 +54,17 @@ class AddCategoryViewController: UIViewController {
         
         switch identifier {
         case "doneClicked":
-            let newCategory = Category(context: self.context)
-            newCategory.name = categoryTextField.text
-            newCategory.icon = iconArray[selectedIndex].name
+            let newCollection = Collection(context: self.context)
+            newCollection.name = collectionTextField.text
+            newCollection.icon = iconArray[selectedIndex].name
             
-            context.insert(newCategory)
+            context.insert(newCollection)
             
             saveContext()
             
             print("Done bar button clicked")
             
-            let destination = segue.destination as! CategoryViewController
+            let destination = segue.destination as! CollectionViewController
             destination.loadCategories()
             
             
@@ -87,15 +87,15 @@ class AddCategoryViewController: UIViewController {
         }
     }
     
-    @objc func categoryLabelTapped() {
-        print("category label tapped")
+    @objc func collectionLabelTapped() {
+        print("collection label tapped")
         DispatchQueue.main.async {
-            self.categoryTextField.becomeFirstResponder()
+            self.collectionTextField.becomeFirstResponder()
         }
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        doneButton.isEnabled = categoryTextField.text != "" ? true : false
+        doneButton.isEnabled = collectionTextField.text != "" ? true : false
     }
     
     func loadIcon() {
@@ -113,13 +113,13 @@ class AddCategoryViewController: UIViewController {
     }
 }
 
-extension AddCategoryViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+extension AddCollectionViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return iconArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryIconCollectionCell", for: indexPath) as! CategoryIconCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionIconCollectionCell", for: indexPath) as! CollectionIconCollectionViewCell
         cell.iconImage.image = iconArray[indexPath.row].image
         
         cell.backgroundColor = selectedIndex == indexPath.row ? selectedColor : unselectedColor

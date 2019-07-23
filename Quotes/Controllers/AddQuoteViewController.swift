@@ -18,18 +18,16 @@ class AddQuoteViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var quoteTextField: UITextField!
     @IBOutlet weak var authorTextField: UITextField!
-    @IBOutlet weak var categoryButton: UIButton!
+    @IBOutlet weak var collectionButton: UIButton!
     
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
-    var selectedCategory : Category? {
+    var selectedCollection : Collection? {
         didSet {
             print("didSet")
-            setSelectedCategory()
+            setSelectedCollection()
         }
     }
-    
-    //var dismissHandler: (() -> Void)!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,10 +46,10 @@ class AddQuoteViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    func setSelectedCategory() {
-        print("selectedCategory: \(selectedCategory?.name ?? "nil")")
-        if selectedCategory != nil {
-            categoryButton.setTitle(selectedCategory?.name ?? "none" , for: .normal)
+    func setSelectedCollection() {
+        print("selectedCollection: \(selectedCollection?.name ?? "nil")")
+        if selectedCollection != nil {
+            collectionButton.setTitle(selectedCollection?.name ?? "none" , for: .normal)
         }
     }
     
@@ -67,21 +65,6 @@ class AddQuoteViewController: UIViewController, UITextFieldDelegate {
         self.authorTextField.becomeFirstResponder()
     }
     
-//    @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
-//        let newQuote = Quote(context: self.context)
-//        newQuote.quote = quoteTextField.text!
-//        newQuote.author = authorTextField?.text ?? ""
-//        newQuote.category = selectedCategory
-//
-//        context.insert(newQuote)
-//
-//        saveContext()
-//
-//        //        dismiss(animated: true) {
-//        //            self.dismissHandler()
-//        //        }
-//    }
-
     func saveContext() {
         do {
             try context.save()
@@ -107,7 +90,7 @@ class AddQuoteViewController: UIViewController, UITextFieldDelegate {
             let newQuote = Quote(context: self.context)
             newQuote.quote = quoteTextField.text!
             newQuote.author = authorTextField?.text ?? ""
-            newQuote.category = selectedCategory
+            newQuote.collection = selectedCollection
             
             context.insert(newQuote)
             
@@ -121,8 +104,8 @@ class AddQuoteViewController: UIViewController, UITextFieldDelegate {
         case "cancelClicked":
             print("Cancel bar button clicked")
             
-        case "goToCategory":
-            print("Let's go to select a category")
+        case "goToCollection":
+            print("Let's go to select a collection")
             
         default:
             print("unexpected segue identifier")

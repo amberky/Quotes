@@ -1,5 +1,5 @@
 //
-//  CategoryIconCollectionViewCell.swift
+//  CollectionIconCollectionViewCell.swift
 //  Quotes
 //
 //  Created by Kharnyee Eu on 23/07/2019.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CategoryIconCollectionViewCell: UICollectionViewCell {
+class CollectionIconCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var iconImage: UIImageView!
     

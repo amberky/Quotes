@@ -233,11 +233,11 @@
                                             <constraint firstItem="BCG-8R-WbQ" firstAttribute="centerY" secondItem="zfk-qb-MU0" secondAttribute="centerY" id="zhp-tQ-CtT"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5RR-Ir-ns4" userLabel="Category View">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5RR-Ir-ns4" userLabel="Collection View">
                                         <rect key="frame" x="0.0" y="100" width="335" height="50"/>
                                         <subviews>
-                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="12f-bI-9tq" userLabel="Category">
-                                                <rect key="frame" x="5" y="5" width="79.333333333333329" height="25"/>
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Collection  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="12f-bI-9tq" userLabel="Collection">
+                                                <rect key="frame" x="5" y="5" width="85.666666666666671" height="25"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -249,7 +249,7 @@
                                                     <constraint firstAttribute="height" constant="1" id="8KK-aN-Z2m"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QH4-3w-BDY">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QH4-3w-BDY" userLabel="Collection Button">
                                                 <rect key="frame" x="5" y="0.0" width="325" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="gPG-aE-xe6"/>
@@ -258,7 +258,9 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="oHD-BC-j5N" kind="showDetail" identifier="goToCategory" id="4xl-2F-e3b"/>
+                                                    <segue destination="oHD-BC-j5N" kind="popoverPresentation" identifier="goToCollectionView" popoverAnchorView="QH4-3w-BDY" id="t7f-Dn-n40">
+                                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                                    </segue>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -296,7 +298,7 @@
                     <connections>
                         <outlet property="authorLabel" destination="BCG-8R-WbQ" id="TxC-ct-Ugf"/>
                         <outlet property="authorTextField" destination="zfk-qb-MU0" id="obA-oq-Ekp"/>
-                        <outlet property="categoryButton" destination="QH4-3w-BDY" id="Zvi-Xe-wTc"/>
+                        <outlet property="collectionButton" destination="QH4-3w-BDY" id="rhL-HX-Zh8"/>
                         <outlet property="doneButton" destination="YGw-lj-1mV" id="lTX-jZ-1dH"/>
                         <outlet property="quoteLabel" destination="S50-5d-wLA" id="tS3-ZB-wgX"/>
                         <outlet property="quoteTextField" destination="vpr-Q8-tmf" id="QGE-Dl-LZ4"/>
@@ -307,10 +309,10 @@
             </objects>
             <point key="canvasLocation" x="1968.8" y="117.48768472906404"/>
         </scene>
-        <!--Category View Controller-->
+        <!--Collection View Controller-->
         <scene sceneID="NS2-PA-bTS">
             <objects>
-                <viewController id="oHD-BC-j5N" customClass="CategoryViewController" customModule="Quotes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="oHD-BC-j5N" customClass="CollectionViewController" customModule="Quotes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kCE-eK-ASd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -325,7 +327,7 @@
                                     <color key="textColor" red="0.89019607840000003" green="0.75294117650000003" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="Category" id="hJc-yx-v2r">
+                                    <navigationItem title="Collection" id="hJc-yx-v2r">
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="u8x-WK-1io">
                                             <color key="tintColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <connections>
@@ -335,11 +337,11 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="G5v-et-wQt">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="G5v-et-wQt" userLabel="Collection Table View">
                                 <rect key="frame" x="10" y="163" width="355" height="486"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="CategoryCell" id="WCt-tk-Q5O">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="CollectionCell" id="WCt-tk-Q5O" userLabel="CollectionCell">
                                         <rect key="frame" x="0.0" y="28" width="355" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WCt-tk-Q5O" id="HPV-3N-4AB">
@@ -347,7 +349,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="joQ-5y-OR0" kind="unwind" identifier="categorySelected" unwindAction="backToAddQuoteView:" id="RbC-al-VRG"/>
+                                            <segue destination="joQ-5y-OR0" kind="unwind" identifier="collectionSelected" unwindAction="backToAddQuoteView:" id="RbC-al-VRG"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -360,14 +362,14 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Add New Category"/>
+                                <state key="normal" title="Add New Collection"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="Iua-JE-UhH" kind="popoverPresentation" identifier="goToAddCategoryView" popoverAnchorView="hza-Xg-QMj" id="6eZ-P3-BBU">
+                                    <segue destination="Iua-JE-UhH" kind="popoverPresentation" identifier="goToAddCollectionView" popoverAnchorView="hza-Xg-QMj" id="6eZ-P3-BBU">
                                         <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                     </segue>
                                 </connections>
@@ -389,7 +391,7 @@
                         <viewLayoutGuide key="safeArea" id="SqQ-HT-9AD"/>
                     </view>
                     <connections>
-                        <outlet property="categoryTableView" destination="G5v-et-wQt" id="D6a-B0-SVl"/>
+                        <outlet property="collectionTableView" destination="G5v-et-wQt" id="azS-A0-f0f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xID-Ej-GGi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -397,10 +399,10 @@
             </objects>
             <point key="canvasLocation" x="2852" y="118"/>
         </scene>
-        <!--Add Category View Controller-->
+        <!--Add Collection View Controller-->
         <scene sceneID="hTc-he-uB6">
             <objects>
-                <viewController id="Iua-JE-UhH" customClass="AddCategoryViewController" customModule="Quotes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Iua-JE-UhH" customClass="AddCollectionViewController" customModule="Quotes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MGm-6L-vBz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -415,17 +417,17 @@
                                     <color key="textColor" red="0.89019607840000003" green="0.75294117650000003" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="Add Category" id="8C0-w6-WkO">
+                                    <navigationItem title="Add Collection" id="8C0-w6-WkO">
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="AqI-f8-CYa">
                                             <color key="tintColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <connections>
-                                                <segue destination="jiA-Hp-z5I" kind="unwind" identifier="cancelClicked" unwindAction="backToCategoryView:" id="sGo-z4-YC1"/>
+                                                <segue destination="jiA-Hp-z5I" kind="unwind" identifier="cancelClicked" unwindAction="backToCollectionView:" id="sGo-z4-YC1"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="aoY-YU-wAn">
                                             <color key="tintColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <connections>
-                                                <segue destination="jiA-Hp-z5I" kind="unwind" identifier="doneClicked" unwindAction="backToCategoryView:" id="eR3-Xm-Fz0"/>
+                                                <segue destination="jiA-Hp-z5I" kind="unwind" identifier="doneClicked" unwindAction="backToCollectionView:" id="eR3-Xm-Fz0"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -437,14 +439,14 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gcp-N6-JX2">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="50"/>
                                         <subviews>
-                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ak-zc-dRe" userLabel="Category Label">
-                                                <rect key="frame" x="5" y="0.0" width="79.333333333333329" height="35"/>
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Collection  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ak-zc-dRe" userLabel="Collection Label">
+                                                <rect key="frame" x="5" y="0.0" width="85.666666666666671" height="35"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="CYt-UN-PDp">
-                                                <rect key="frame" x="84.333333333333329" y="0.0" width="245.66666666666669" height="35"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="CYt-UN-PDp" userLabel="Collection Text Field">
+                                                <rect key="frame" x="90.666666666666671" y="0.0" width="239.33333333333331" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="g9l-Ah-DFy"/>
                                                 </constraints>
@@ -479,7 +481,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z1u-g1-Fd3" userLabel="Icons View">
                                 <rect key="frame" x="20" y="163" width="335" height="265"/>
                                 <subviews>
-                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Icon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QVY-hx-in7" userLabel="Category">
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Icon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QVY-hx-in7" userLabel="Collection">
                                         <rect key="frame" x="5" y="0.0" width="325" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="BTf-Xl-f3i"/>
@@ -499,7 +501,7 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CategoryIconCollectionCell" id="IK7-sU-Dqo" customClass="CategoryIconCollectionViewCell" customModule="Quotes" customModuleProvider="target">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionIconCollectionCell" id="IK7-sU-Dqo" customClass="CollectionIconCollectionViewCell" customModule="Quotes" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -560,8 +562,8 @@
                         <viewLayoutGuide key="safeArea" id="xaM-j8-8Wf"/>
                     </view>
                     <connections>
-                        <outlet property="categoryLabel" destination="3ak-zc-dRe" id="V6e-Yd-yfL"/>
-                        <outlet property="categoryTextField" destination="CYt-UN-PDp" id="xUu-pO-zYU"/>
+                        <outlet property="collectionLabel" destination="3ak-zc-dRe" id="ElL-mA-dM9"/>
+                        <outlet property="collectionTextField" destination="CYt-UN-PDp" id="iLf-j0-bhw"/>
                         <outlet property="doneButton" destination="aoY-YU-wAn" id="6tu-4G-blb"/>
                         <outlet property="iconCollectionView" destination="zQK-9X-lej" id="bSF-ON-t28"/>
                     </connections>

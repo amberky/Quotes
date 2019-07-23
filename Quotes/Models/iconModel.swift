@@ -1,5 +1,5 @@
 //
-//  categoryModel.swift
+//  collectionModel.swift
 //  Quotes
 //
 //  Created by Kharnyee Eu on 22/07/2019.
