@@ -1,5 +1,5 @@
 //
-//  AddQuoteController.swift
+//  AddQuoteViewController.swift
 //  Quotes
 //
 //  Created by Kharnyee Eu on 22/07/2019.
@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class AddQuoteController: UIViewController, UITextFieldDelegate {
+class AddQuoteViewController: UIViewController, UITextFieldDelegate {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -97,9 +97,7 @@ class AddQuoteController: UIViewController, UITextFieldDelegate {
     }
     
 //    //MARK: - unwind Segue
-//    @IBAction func backToAddQuote(_ unwindSegue: UIStoryboardSegue) {}
-    
-    @IBAction func backToAddQuote(_ unwindSegue: UIStoryboardSegue) {}
+    @IBAction func backToAddQuoteView(_ unwindSegue: UIStoryboardSegue) {}
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier else { return }

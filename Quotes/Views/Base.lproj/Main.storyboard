@@ -100,7 +100,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="OMS-UJ-1s1">
                             <color key="tintColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
-                                <segue destination="bYU-ic-ayS" kind="popoverPresentation" identifier="" popoverAnchorBarButtonItem="OMS-UJ-1s1" id="YPG-Ug-Te0">
+                                <segue destination="bYU-ic-ayS" kind="popoverPresentation" identifier="goToAddQuoteView" popoverAnchorBarButtonItem="OMS-UJ-1s1" id="YPG-Ug-Te0">
                                     <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                 </segue>
                             </connections>
@@ -114,10 +114,10 @@
             </objects>
             <point key="canvasLocation" x="1078.2608695652175" y="118.52678571428571"/>
         </scene>
-        <!--Add Quote Controller-->
+        <!--Add Quote View Controller-->
         <scene sceneID="uPg-nc-Sra">
             <objects>
-                <viewController id="bYU-ic-ayS" customClass="AddQuoteController" customModule="Quotes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="bYU-ic-ayS" customClass="AddQuoteViewController" customModule="Quotes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WtB-cl-ldq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -329,7 +329,7 @@
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="u8x-WK-1io">
                                             <color key="tintColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <connections>
-                                                <segue destination="joQ-5y-OR0" kind="unwind" identifier="cancelClicked" unwindAction="backToAddQuote:" id="SOo-7F-MJe"/>
+                                                <segue destination="joQ-5y-OR0" kind="unwind" identifier="cancelClicked" unwindAction="backToAddQuoteView:" id="SOo-7F-MJe"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -347,7 +347,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="joQ-5y-OR0" kind="unwind" identifier="categorySelected" unwindAction="backToAddQuote:" id="RbC-al-VRG"/>
+                                            <segue destination="joQ-5y-OR0" kind="unwind" identifier="categorySelected" unwindAction="backToAddQuoteView:" id="RbC-al-VRG"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -367,7 +367,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="Iua-JE-UhH" kind="popoverPresentation" identifier="goToAddCategory" popoverAnchorView="hza-Xg-QMj" id="6eZ-P3-BBU">
+                                    <segue destination="Iua-JE-UhH" kind="popoverPresentation" identifier="goToAddCategoryView" popoverAnchorView="hza-Xg-QMj" id="6eZ-P3-BBU">
                                         <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                     </segue>
                                 </connections>
@@ -397,10 +397,10 @@
             </objects>
             <point key="canvasLocation" x="2852" y="118"/>
         </scene>
-        <!--Add Category Controller-->
+        <!--Add Category View Controller-->
         <scene sceneID="hTc-he-uB6">
             <objects>
-                <viewController id="Iua-JE-UhH" customClass="AddCategoryController" customModule="Quotes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Iua-JE-UhH" customClass="AddCategoryViewController" customModule="Quotes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MGm-6L-vBz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

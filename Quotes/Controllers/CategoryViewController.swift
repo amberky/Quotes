@@ -52,13 +52,13 @@ class CategoryViewController: UIViewController {
             
         case "categorySelected":
             print("Category Selected")
-            let destinationVC = segue.destination as! AddQuoteController
+            let destinationVC = segue.destination as! AddQuoteViewController
             
             if let indexPath = categoryTableView.indexPathForSelectedRow {
                 destinationVC.selectedCategory = categoryArray[indexPath.row]
             }
             
-        case "goToAddCategory":
+        case "goToAddCategoryView":
             print("Let's go to add new category")
             
         default:

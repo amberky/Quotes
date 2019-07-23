@@ -1,5 +1,5 @@
 //
-//  AddCategoryController.swift
+//  AddCategoryViewController.swift
 //  Quotes
 //
 //  Created by Kharnyee Eu on 22/07/2019.
@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class AddCategoryController: UIViewController {
+class AddCategoryViewController: UIViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -113,7 +113,7 @@ class AddCategoryController: UIViewController {
     }
 }
 
-extension AddCategoryController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+extension AddCategoryViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return iconArray.count
     }
