@@ -139,8 +139,6 @@ class QuoteViewController: UITableViewController {
         
         cell.quoteLabel.text = quote.quote
         cell.authorLabel.text = "\(quote.author ?? "")"
-        cell.quoteLabel.textColor = colorArray[mod]
-        cell.authorLabel.textColor = colorArray[mod]
         cell.quoteBackground.backgroundColor = colorArray[mod]
         
         return cell
@@ -150,18 +148,18 @@ class QuoteViewController: UITableViewController {
         return quotesArray.count
     }
     
-    @IBAction func backToHome(_ unwindSegue: UIStoryboardSegue) {}
-    
-    @IBAction func backToHomeAfterCreate(sender: UIStoryboardSegue)
-    {
-        loadQuotes()
-    }
+    //MARK: - unwind Segue
+    @IBAction func backToQuoteView(_ unwindSegue: UIStoryboardSegue) {}
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as! AddQuoteController
-        destinationVC.dismissHandler = {
-            print("loadQuotes")
-            self.loadQuotes()
+        print(segue.identifier ?? "")
+        
+        if segue.identifier == "backToQuoteView" {
+            let destinationVC = segue.destination as! AddQuoteController
+            destinationVC.dismissHandler = {
+                print("loadQuotes")
+                self.loadQuotes()
+            }
         }
     }
 }

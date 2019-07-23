@@ -16,8 +16,9 @@
 		2566C2B422E4D0B5003BFA91 /* AddQuoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2566C2B322E4D0B5003BFA91 /* AddQuoteController.swift */; };
 		257535E722E5C76300DB2BAD /* AddCategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257535E622E5C76300DB2BAD /* AddCategoryController.swift */; };
 		257535E922E5C77300DB2BAD /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257535E822E5C77300DB2BAD /* CategoryViewController.swift */; };
-		25BB358122E59EDF00A4D6DA /* categoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BB358022E59EDF00A4D6DA /* categoryModel.swift */; };
+		25BB358122E59EDF00A4D6DA /* iconModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BB358022E59EDF00A4D6DA /* iconModel.swift */; };
 		25F0CE5022E69EA0001DE1A0 /* QuoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F0CE4E22E69EA0001DE1A0 /* QuoteTableViewCell.swift */; };
+		25F0CE5422E6EF05001DE1A0 /* CategoryIconCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F0CE5322E6EF05001DE1A0 /* CategoryIconCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,8 +33,9 @@
 		2566C2B322E4D0B5003BFA91 /* AddQuoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddQuoteController.swift; sourceTree = "<group>"; };
 		257535E622E5C76300DB2BAD /* AddCategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryController.swift; sourceTree = "<group>"; };
 		257535E822E5C77300DB2BAD /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
-		25BB358022E59EDF00A4D6DA /* categoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = categoryModel.swift; sourceTree = "<group>"; };
+		25BB358022E59EDF00A4D6DA /* iconModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iconModel.swift; sourceTree = "<group>"; };
 		25F0CE4E22E69EA0001DE1A0 /* QuoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteTableViewCell.swift; sourceTree = "<group>"; };
+		25F0CE5322E6EF05001DE1A0 /* CategoryIconCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryIconCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,7 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				2566C29322E4970A003BFA91 /* Quotes.xcdatamodeld */,
-				25BB358022E59EDF00A4D6DA /* categoryModel.swift */,
+				25BB358022E59EDF00A4D6DA /* iconModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -110,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				25F0CE4E22E69EA0001DE1A0 /* QuoteTableViewCell.swift */,
+				25F0CE5322E6EF05001DE1A0 /* CategoryIconCollectionViewCell.swift */,
 			);
 			path = "Custom Cell";
 			sourceTree = "<group>";
@@ -185,13 +188,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25F0CE5422E6EF05001DE1A0 /* CategoryIconCollectionViewCell.swift in Sources */,
 				2566C28F22E4970A003BFA91 /* QuoteViewController.swift in Sources */,
 				2566C2B422E4D0B5003BFA91 /* AddQuoteController.swift in Sources */,
 				2566C29522E4970A003BFA91 /* Quotes.xcdatamodeld in Sources */,
 				257535E922E5C77300DB2BAD /* CategoryViewController.swift in Sources */,
 				25F0CE5022E69EA0001DE1A0 /* QuoteTableViewCell.swift in Sources */,
 				2566C28D22E4970A003BFA91 /* AppDelegate.swift in Sources */,
-				25BB358122E59EDF00A4D6DA /* categoryModel.swift in Sources */,
+				25BB358122E59EDF00A4D6DA /* iconModel.swift in Sources */,
 				257535E722E5C76300DB2BAD /* AddCategoryController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

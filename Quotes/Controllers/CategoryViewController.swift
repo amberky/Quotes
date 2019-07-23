@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class CategoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class CategoryViewController: UIViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -21,8 +21,6 @@ class CategoryViewController: UIViewController, UITableViewDataSource, UITableVi
     //MARK: - Functions
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         
         categoryTableView.delegate = self
         categoryTableView.dataSource = self
@@ -42,6 +40,41 @@ class CategoryViewController: UIViewController, UITableViewDataSource, UITableVi
         categoryTableView.reloadData()
     }
     
+    //MARK: - unwind Segue
+    @IBAction func backToCategory(_ unwindSegue: UIStoryboardSegue) {}
+    
+    func bindCategoryAfterSelected(segue: UIStoryboardSegue) {
+        let destinationVC = segue.destination as! AddQuoteController
+        
+        if let indexPath = categoryTableView.indexPathForSelectedRow {
+            destinationVC.selectedCategory = categoryArray[indexPath.row]
+        }
+    }
+    
+    func reloadCategoriesAfterAddNew(segue: UIStoryboardSegue) {
+        let destinationVC = segue.destination as! AddCategoryController
+        destinationVC.dismissHandler = {
+            print("loadCategories")
+            self.loadCategories()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("segue identifier: \(segue.identifier ?? "")")
+        
+        if segue.identifier == "backToCategory" {
+            reloadCategoriesAfterAddNew(segue: segue)
+        }
+        else if segue.identifier == "goToAddCategory" {
+            print("Add Category button clicked")
+        }
+        else {
+            bindCategoryAfterSelected(segue: segue)
+        }
+    }
+}
+
+extension CategoryViewController: UITableViewDataSource, UITableViewDelegate {
     //MARK: - Table View Data Source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return categoryArray.count
@@ -55,13 +88,5 @@ class CategoryViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.textLabel?.text = category.name
         
         return cell
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as! AddQuoteController
-        
-        if let indexPath = categoryTableView.indexPathForSelectedRow {
-            destinationVC.selectedCategory = categoryArray[indexPath.row]
-        }
     }
 }

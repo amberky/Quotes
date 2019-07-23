@@ -22,7 +22,6 @@ class AddQuoteController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
-    var categoryArray = [Category]()
     var selectedCategory : Category? {
         didSet {
             print("didSet")
@@ -52,7 +51,7 @@ class AddQuoteController: UIViewController, UITextFieldDelegate {
     func setSelectedCategory() {
         print("selectedCategory: \(selectedCategory?.name ?? "nil")")
         if selectedCategory != nil {
-            categoryButton.setTitle(selectedCategory?.name ?? "" , for: .normal)
+            categoryButton.setTitle(selectedCategory?.name ?? "none" , for: .normal)
         }
     }
     
@@ -69,6 +68,8 @@ class AddQuoteController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
+        print("selectedCategory \(selectedCategory)")
+        
         let newQuote = Quote(context: self.context)
         newQuote.quote = quoteTextField.text!
         newQuote.author = authorTextField?.text ?? ""
@@ -92,69 +93,17 @@ class AddQuoteController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func mockData() {
-        let newCategory = Category(context: self.context)
-        newCategory.name = "None"
-        newCategory.icon = ""
-        
-        let newCategory1 = Category(context: self.context)
-        newCategory1.name = "Work"
-        newCategory1.icon = ""
-        
-        let newCategory2 = Category(context: self.context)
-        newCategory2.name = "Motivation"
-        newCategory2.icon = ""
-        
-        let newCategory3 = Category(context: self.context)
-        newCategory3.name = "Steve Jobs"
-        newCategory3.icon = ""
-        
-        let newCategory4 = Category(context: self.context)
-        newCategory4.name = "Others"
-        newCategory4.icon = ""
-        
-        categoryArray.append(newCategory)
-        categoryArray.append(newCategory1)
-        categoryArray.append(newCategory2)
-        categoryArray.append(newCategory3)
-        categoryArray.append(newCategory4)
-        
-        saveContext()
-        
-        //categoryPicker.reloadAllComponents()
-    }
-    
-    func deleteData() {
-        let request: NSFetchRequest<Category> = Category.fetchRequest()
-        
-        do {
-            let dataToBeDeleted = try context.fetch(request)
-            
-            for i in dataToBeDeleted
-            {
-                context.delete(i)
-            }
-            
-            try context.save()
-            
-        } catch {
-            
-        }
-    }
-    
     @objc func textFieldDidChange(_ textField: UITextField) {
         doneButton.isEnabled = quoteTextField.text != "" ? true : false
         print(quoteTextField.text ?? "")
     }
     
-    //MARK: - Segue
-    @IBAction func backToAdd(_ unwindSegue: UIStoryboardSegue) {}
+    //MARK: - unwind Segue
+    @IBAction func backToAddQuote(_ unwindSegue: UIStoryboardSegue) {}
     
-    @IBAction func backToAddWithCategory(_ unwindSegue: UIStoryboardSegue) {}
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let destinationVC = segue.destination as! QuoteViewController
-//
-//        destinationVC.loadQuotes()
-//    }
+    @IBAction func backToAddWithSelectedCategory(_ unwindSegue: UIStoryboardSegue) {}
+
+    //NOTE: - No preparation is required
+    // backToAddQuote - no action required
+    // backToAddWithSelectedCategory - handled by didSet()
 }
