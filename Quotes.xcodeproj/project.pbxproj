@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,11 +13,11 @@
 		2566C29522E4970A003BFA91 /* Quotes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2566C29322E4970A003BFA91 /* Quotes.xcdatamodeld */; };
 		2566C29722E4970C003BFA91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2566C29622E4970C003BFA91 /* Assets.xcassets */; };
 		2566C29A22E4970C003BFA91 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2566C29822E4970C003BFA91 /* LaunchScreen.storyboard */; };
-		2566C2B222E4B53E003BFA91 /* QuoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2566C2B122E4B53E003BFA91 /* QuoteTableViewCell.swift */; };
 		2566C2B422E4D0B5003BFA91 /* AddQuoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2566C2B322E4D0B5003BFA91 /* AddQuoteController.swift */; };
 		257535E722E5C76300DB2BAD /* AddCategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257535E622E5C76300DB2BAD /* AddCategoryController.swift */; };
 		257535E922E5C77300DB2BAD /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257535E822E5C77300DB2BAD /* CategoryViewController.swift */; };
 		25BB358122E59EDF00A4D6DA /* categoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BB358022E59EDF00A4D6DA /* categoryModel.swift */; };
+		25F0CE5022E69EA0001DE1A0 /* QuoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F0CE4E22E69EA0001DE1A0 /* QuoteTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,11 +29,11 @@
 		2566C29622E4970C003BFA91 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2566C29922E4970C003BFA91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2566C29B22E4970C003BFA91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2566C2B122E4B53E003BFA91 /* QuoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteTableViewCell.swift; sourceTree = "<group>"; };
 		2566C2B322E4D0B5003BFA91 /* AddQuoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddQuoteController.swift; sourceTree = "<group>"; };
 		257535E622E5C76300DB2BAD /* AddCategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCategoryController.swift; sourceTree = "<group>"; };
 		257535E822E5C77300DB2BAD /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		25BB358022E59EDF00A4D6DA /* categoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = categoryModel.swift; sourceTree = "<group>"; };
+		25F0CE4E22E69EA0001DE1A0 /* QuoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +92,7 @@
 			children = (
 				2566C29822E4970C003BFA91 /* LaunchScreen.storyboard */,
 				2566C29022E4970A003BFA91 /* Main.storyboard */,
-				2566C2B122E4B53E003BFA91 /* QuoteTableViewCell.swift */,
+				25F0CE5222E69EA4001DE1A0 /* Custom Cell */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -104,6 +104,14 @@
 				25BB358022E59EDF00A4D6DA /* categoryModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		25F0CE5222E69EA4001DE1A0 /* Custom Cell */ = {
+			isa = PBXGroup;
+			children = (
+				25F0CE4E22E69EA0001DE1A0 /* QuoteTableViewCell.swift */,
+			);
+			path = "Custom Cell";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,10 +186,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2566C28F22E4970A003BFA91 /* QuoteViewController.swift in Sources */,
-				2566C2B222E4B53E003BFA91 /* QuoteTableViewCell.swift in Sources */,
 				2566C2B422E4D0B5003BFA91 /* AddQuoteController.swift in Sources */,
 				2566C29522E4970A003BFA91 /* Quotes.xcdatamodeld in Sources */,
 				257535E922E5C77300DB2BAD /* CategoryViewController.swift in Sources */,
+				25F0CE5022E69EA0001DE1A0 /* QuoteTableViewCell.swift in Sources */,
 				2566C28D22E4970A003BFA91 /* AppDelegate.swift in Sources */,
 				25BB358122E59EDF00A4D6DA /* categoryModel.swift in Sources */,
 				257535E722E5C76300DB2BAD /* AddCategoryController.swift in Sources */,

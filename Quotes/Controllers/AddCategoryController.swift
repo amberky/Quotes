@@ -6,4 +6,18 @@
 //  Copyright © 2019 focus. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import CoreData
+
+class AddCategoryViewController: UIViewController {
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    //MARK: - Functions
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        //print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        
+    }
+}

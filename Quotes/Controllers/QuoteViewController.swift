@@ -17,22 +17,25 @@ class QuoteViewController: UITableViewController {
     var quotesArray = [Quote]()
     var colorCount: Int = 0
     
+    
     @IBOutlet var quoteTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // quoteTableView.register(UINib(nibName: "QuoteCell", bundle: nil) , forCellReuseIdentifier: "customQuoteCell")
+        //  quoteTableView.register(UINib(nibName: "QuoteTableViewCell", bundle: nil) , forCellReuseIdentifier: "QuoteCell")
         // quoteTableView.register(UINib(nibName: "MessageCell", bundle: nil) , forCellReuseIdentifier: "customMessageCell")
         
         setupColors()
         
         configureTableView()
         
+        print("viewDidLoad")
         //mockData()
         
         loadQuotes()
     }
+    
     
     func setupColors() {
         let c1 = UIColor.rgb(red: 196, green: 215, blue: 209)
@@ -40,6 +43,12 @@ class QuoteViewController: UITableViewController {
         let c3 = UIColor.rgb(red: 240, green: 188, blue: 104)
         let c4 = UIColor.rgb(red: 170, green: 184, blue: 187)
         let c5 = UIColor.rgb(red: 227, green: 218, blue: 210)
+        
+        //        let c1 = UIColor.rgb(red: 42, green: 73, blue: 101)
+        //        let c2 = UIColor.rgb(red: 154, green: 85, blue: 56)
+        //        let c3 = UIColor.rgb(red: 229, green: 153, blue: 133)
+        //        let c4 = UIColor.rgb(red: 224, green: 176, blue: 99)
+        //        let c5 = UIColor.rgb(red: 95, green: 149, blue: 99)
         
         colorArray.append(c1)
         colorArray.append(c2)
@@ -51,8 +60,6 @@ class QuoteViewController: UITableViewController {
     }
     
     func loadQuotes(with request: NSFetchRequest<Quote> = Quote.fetchRequest(), predicate: NSPredicate? = nil) {
-        //let request : NSFetchRequest<Quote> = Quote.fetchRequest()
-        
         if (predicate != nil) {
             request.predicate = predicate
         }
@@ -69,22 +76,17 @@ class QuoteViewController: UITableViewController {
     func mockData() {
         deleteData()
         
-        
-//        let defaultCategory = Category()
-//        defaultCategory.name = "Steve Jobs"
-//        defaultCategory.icon = ""
-        
         let newQuote = Quote(context: self.context)
         newQuote.quote = "Focusing is about saying no"
         newQuote.author = "Steve Jobs"
-//        newQuote.category = defaultCategory
+        newQuote.addedOn = Date()
         
         self.quotesArray.append(newQuote)
         
         let newQuote1 = Quote(context: self.context)
         newQuote1.quote = "Because the people who are crazy enough to think they can change the world are the ones who do"
         newQuote1.author = "Steve Jobs"
-//        newQuote1.category = defaultCategory
+        newQuote.addedOn = Date()
         
         self.quotesArray.append(newQuote1)
         
@@ -120,24 +122,26 @@ class QuoteViewController: UITableViewController {
     }
     
     func configureTableView() {
-        quoteTableView.rowHeight = UITableView.automaticDimension
         quoteTableView.estimatedRowHeight = 500.0
+        quoteTableView.rowHeight = UITableView.automaticDimension
     }
-
+    
     //MARK: - TableView Delegate Methods
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        //let mod = indexPath.row % colorCount
+        let mod = indexPath.row % colorCount
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "QuoteCell", for: indexPath) as! QuoteTableViewCell
         
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
-
+        
         let quote = quotesArray[indexPath.row]
         
         cell.quoteLabel.text = quote.quote
         cell.authorLabel.text = "\(quote.author ?? "")"
-        //cell.backgroundColor = colorArray[mod]
+        cell.quoteLabel.textColor = colorArray[mod]
+        cell.authorLabel.textColor = colorArray[mod]
+        cell.quoteBackground.backgroundColor = colorArray[mod]
         
         return cell
     }
@@ -151,9 +155,14 @@ class QuoteViewController: UITableViewController {
     @IBAction func backToHomeAfterCreate(sender: UIStoryboardSegue)
     {
         loadQuotes()
-        
-        //let sourceViewController = sender.sourceViewController
-        // Pull any data from the view controller which initiated the unwind segue.
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! AddQuoteController
+        destinationVC.dismissHandler = {
+            print("loadQuotes")
+            self.loadQuotes()
+        }
     }
 }
 

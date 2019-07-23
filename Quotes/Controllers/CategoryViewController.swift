@@ -41,7 +41,7 @@ class CategoryViewController: UIViewController, UITableViewDataSource, UITableVi
         
         categoryTableView.reloadData()
     }
-
+    
     //MARK: - Table View Data Source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return categoryArray.count

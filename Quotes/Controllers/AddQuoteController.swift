@@ -13,14 +13,14 @@ class AddQuoteController: UIViewController, UITextFieldDelegate {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    @IBOutlet var categoryPopover: UIView!
-    
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
     
     @IBOutlet weak var quoteTextField: UITextField!
     @IBOutlet weak var authorTextField: UITextField!
     @IBOutlet weak var categoryButton: UIButton!
+    
+    @IBOutlet weak var doneButton: UIBarButtonItem!
     
     var categoryArray = [Category]()
     var selectedCategory : Category? {
@@ -30,8 +30,15 @@ class AddQuoteController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    var dismissHandler: (() -> Void)!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        doneButton.isEnabled = false
+        quoteTextField.delegate = self
+
+        quoteTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         
         let quoteLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(quoteLabelTapped))
         quoteLabel.addGestureRecognizer(quoteLabelTapGesture)
@@ -71,6 +78,9 @@ class AddQuoteController: UIViewController, UITextFieldDelegate {
         
         saveContext()
         
+        dismiss(animated: true) {
+            self.dismissHandler()
+        }
     }
     
     func saveContext() {
@@ -130,6 +140,11 @@ class AddQuoteController: UIViewController, UITextFieldDelegate {
         } catch {
             
         }
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        doneButton.isEnabled = quoteTextField.text != "" ? true : false
+        print(quoteTextField.text ?? "")
     }
     
     //MARK: - Segue

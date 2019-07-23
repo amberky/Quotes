@@ -2,7 +2,7 @@
 //  QuoteTableViewCell.swift
 //  Quotes
 //
-//  Created by Kharnyee Eu on 21/07/2019.
+//  Created by Kharnyee Eu on 23/07/2019.
 //  Copyright © 2019 focus. All rights reserved.
 //
 
@@ -24,5 +24,5 @@ class QuoteTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
 }
