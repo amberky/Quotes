@@ -10,6 +10,7 @@ import UIKit
 
 class QuoteTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var quoteBackground: UIView!
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
     

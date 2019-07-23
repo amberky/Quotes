@@ -13,7 +13,9 @@ class QuoteViewController: UITableViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    var colorArray = [UIColor]()
     var quotesArray = [Quote]()
+    var colorCount: Int = 0
     
     @IBOutlet var quoteTableView: UITableView!
     
@@ -23,11 +25,29 @@ class QuoteViewController: UITableViewController {
         // quoteTableView.register(UINib(nibName: "QuoteCell", bundle: nil) , forCellReuseIdentifier: "customQuoteCell")
         // quoteTableView.register(UINib(nibName: "MessageCell", bundle: nil) , forCellReuseIdentifier: "customMessageCell")
         
+        setupColors()
+        
         configureTableView()
         
-        mockData()
+        //mockData()
         
         loadQuotes()
+    }
+    
+    func setupColors() {
+        let c1 = UIColor.rgb(red: 196, green: 215, blue: 209)
+        let c2 = UIColor.rgb(red: 245, green: 209, blue: 195)
+        let c3 = UIColor.rgb(red: 240, green: 188, blue: 104)
+        let c4 = UIColor.rgb(red: 170, green: 184, blue: 187)
+        let c5 = UIColor.rgb(red: 227, green: 218, blue: 210)
+        
+        colorArray.append(c1)
+        colorArray.append(c2)
+        colorArray.append(c3)
+        colorArray.append(c4)
+        colorArray.append(c5)
+        
+        colorCount = colorArray.count
     }
     
     func loadQuotes(with request: NSFetchRequest<Quote> = Quote.fetchRequest(), predicate: NSPredicate? = nil) {
@@ -107,6 +127,8 @@ class QuoteViewController: UITableViewController {
     //MARK: - TableView Delegate Methods
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        //let mod = indexPath.row % colorCount
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "QuoteCell", for: indexPath) as! QuoteTableViewCell
         
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
@@ -115,6 +137,7 @@ class QuoteViewController: UITableViewController {
         
         cell.quoteLabel.text = quote.quote
         cell.authorLabel.text = "\(quote.author ?? "")"
+        //cell.backgroundColor = colorArray[mod]
         
         return cell
     }
@@ -124,6 +147,14 @@ class QuoteViewController: UITableViewController {
     }
     
     @IBAction func backToHome(_ unwindSegue: UIStoryboardSegue) {}
+    
+    @IBAction func backToHomeAfterCreate(sender: UIStoryboardSegue)
+    {
+        loadQuotes()
+        
+        //let sourceViewController = sender.sourceViewController
+        // Pull any data from the view controller which initiated the unwind segue.
+    }
 }
 
 //MARK: - Search Bar methods
@@ -172,3 +203,8 @@ extension QuoteViewController: UISearchBarDelegate {
     }
 }
 
+extension UIColor {
+    static func rgb(red: CGFloat, green: CGFloat, blue: CGFloat) -> UIColor {
+        return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: 1)
+    }
+}

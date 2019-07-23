@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreData
-import PickerView
 
 class AddQuoteController: UIViewController, UITextFieldDelegate {
     
@@ -24,6 +23,12 @@ class AddQuoteController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var categoryButton: UIButton!
     
     var categoryArray = [Category]()
+    var selectedCategory : Category? {
+        didSet {
+            print("didSet")
+            setSelectedCategory()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +40,13 @@ class AddQuoteController: UIViewController, UITextFieldDelegate {
         let authorLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(authorLabelTapped))
         authorLabel.addGestureRecognizer(authorLabelTapGesture)
         
+    }
+    
+    func setSelectedCategory() {
+        print("selectedCategory: \(selectedCategory?.name ?? "nil")")
+        if selectedCategory != nil {
+            categoryButton.setTitle(selectedCategory?.name ?? "" , for: .normal)
+        }
     }
     
     @objc func quoteLabelTapped() {
@@ -50,12 +62,21 @@ class AddQuoteController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
+        let newQuote = Quote(context: self.context)
+        newQuote.quote = quoteTextField.text!
+        newQuote.author = authorTextField?.text ?? ""
+        newQuote.category = selectedCategory
+        
+        context.insert(newQuote)
+        
+        saveContext()
         
     }
     
     func saveContext() {
         do {
             try context.save()
+            print("Saved successfully")
         } catch {
             print("Error saving data from context \(error)")
         }
@@ -113,4 +134,12 @@ class AddQuoteController: UIViewController, UITextFieldDelegate {
     
     //MARK: - Segue
     @IBAction func backToAdd(_ unwindSegue: UIStoryboardSegue) {}
+    
+    @IBAction func backToAddWithCategory(_ unwindSegue: UIStoryboardSegue) {}
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        let destinationVC = segue.destination as! QuoteViewController
+//
+//        destinationVC.loadQuotes()
+//    }
 }

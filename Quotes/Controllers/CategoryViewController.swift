@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class CategoryViewController: UITableViewController {
+class CategoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -22,7 +22,7 @@ class CategoryViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        //print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         
         categoryTableView.delegate = self
         categoryTableView.dataSource = self
@@ -41,13 +41,13 @@ class CategoryViewController: UITableViewController {
         
         categoryTableView.reloadData()
     }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+    //MARK: - Table View Data Source
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return categoryArray.count
     }
     
-    //MARK: - Data Source
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
         
         let category = categoryArray[indexPath.row]
@@ -55,5 +55,13 @@ class CategoryViewController: UITableViewController {
         cell.textLabel?.text = category.name
         
         return cell
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! AddQuoteController
+        
+        if let indexPath = categoryTableView.indexPathForSelectedRow {
+            destinationVC.selectedCategory = categoryArray[indexPath.row]
+        }
     }
 }
