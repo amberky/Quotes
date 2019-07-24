@@ -11,9 +11,4 @@ import UIKit
 class CollectionIconCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var iconImage: UIImageView!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
 }

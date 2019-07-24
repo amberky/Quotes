@@ -109,11 +109,11 @@ class AddQuoteViewController: UIViewController {
         case "goToCollectionView":
             print("Let's go to select a collection")
             
-            let destination = segue.destination as! CollectionViewController
+            let destination = segue.destination as! SelectCollectionViewController
             destination.selectedCollection = selectedCollection?.name ?? ""
             
         default:
-            print("unexpected segue identifier")
+            print("unknown segue identifier")
         }
     }
 }

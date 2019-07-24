@@ -31,7 +31,7 @@ class AddCollectionViewController: UIViewController {
     let selectedColor = UIColor.rgb(red: 170, green: 184, blue: 187)
     
     var selectedIndex = 0
-    
+
     //MARK: - view delegate
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +57,8 @@ class AddCollectionViewController: UIViewController {
         
         switch identifier {
         case "doneClicked":
+            print("Done bar button clicked")
+            
             let newCollection = Collection(context: self.context)
             newCollection.name = collectionTextField.text
             newCollection.icon = iconArray[selectedIndex].name
@@ -66,20 +68,16 @@ class AddCollectionViewController: UIViewController {
             
             saveContext()
             
-            print("Done bar button clicked")
-            
-            let destination = segue.destination as! CollectionViewController
-            destination.loadCategories()
-            
+            let destination = segue.destination as! SelectCollectionViewController
+            destination.loadCollections()
             
         case "cancelClicked":
             print("Cancel bar button clicked")
             
         default:
-            print("unexpected segue identifier")
+            print("unknown segue identifier")
         }
     }
-    
     
     //MARK: - functions
     func saveContext() {
@@ -130,7 +128,8 @@ extension AddCollectionViewController: UICollectionViewDelegateFlowLayout, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionIconCollectionCell", for: indexPath) as! CollectionIconCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionIconCollectionViewCell", for: indexPath) as! CollectionIconCollectionViewCell
+        
         cell.iconImage.image = iconArray[indexPath.row].image
         
         cell.backgroundColor = selectedIndex == indexPath.row ? selectedColor : unselectedColor

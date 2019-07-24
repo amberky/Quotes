@@ -1,5 +1,5 @@
 //
-//  CollectionViewController.swift
+//  SelectCollectionViewController.swift
 //  Quotes
 //
 //  Created by Kharnyee Eu on 22/07/2019.
@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class CollectionViewController: UIViewController {
+class SelectCollectionViewController: UIViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -26,10 +26,10 @@ class CollectionViewController: UIViewController {
         collectionTableView.delegate = self
         collectionTableView.dataSource = self
         
-        loadCategories()
+        loadCollections()
     }
     
-    func loadCategories() {
+    func loadCollections() {
         let request: NSFetchRequest<Collection> = Collection.fetchRequest()
         
         do {
@@ -60,15 +60,15 @@ class CollectionViewController: UIViewController {
             }
             
         case "goToAddCollectionView":
+            // nothing to pass to Collection view
             print("Let's go to add new collection")
-            
         default:
-            print("unexpected segue identifier")
+            print("unknown segue identifier")
         }
     }
 }
 
-extension CollectionViewController: UITableViewDataSource, UITableViewDelegate {
+extension SelectCollectionViewController: UITableViewDataSource, UITableViewDelegate {
     //MARK: - Table View Data Source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return collectionArray.count
