@@ -41,6 +41,9 @@ class AddCollectionViewController: UIViewController {
         iconCollectionView.delegate = self
         iconCollectionView.dataSource = self
         
+        collectionTextField.delegate = self
+        collectionTextField.becomeFirstResponder()
+        
         collectionTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         
         let collectionLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(collectionLabelTapped))
@@ -114,6 +117,13 @@ class AddCollectionViewController: UIViewController {
     }
 }
 
+extension AddCollectionViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        collectionTextField.resignFirstResponder()
+        return false
+    }
+}
+
 extension AddCollectionViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return iconArray.count
@@ -129,6 +139,10 @@ extension AddCollectionViewController: UICollectionViewDelegateFlowLayout, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionTextField.isFirstResponder {
+            collectionTextField.resignFirstResponder()
+        }
+        
         let icon = iconArray[indexPath.row]
         print(icon.name)
         

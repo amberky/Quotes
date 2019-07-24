@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class AddQuoteViewController: UIViewController, UITextFieldDelegate {
+class AddQuoteViewController: UIViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -33,7 +33,9 @@ class AddQuoteViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         doneButton.isEnabled = false
+        quoteTextField.becomeFirstResponder()
         quoteTextField.delegate = self
+        authorTextField.delegate = self
 
         quoteTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         
@@ -110,5 +112,16 @@ class AddQuoteViewController: UIViewController, UITextFieldDelegate {
         default:
             print("unexpected segue identifier")
         }
+    }
+}
+
+extension AddQuoteViewController : UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == quoteTextField {
+            authorTextField.becomeFirstResponder()
+        } else {
+            authorTextField.resignFirstResponder()
+        }
+        return false
     }
 }
