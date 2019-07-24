@@ -42,8 +42,20 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cKB-1W-b1z">
                                             <rect key="frame" x="20" y="10" width="335" height="140"/>
                                             <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cb0-dV-qiX" userLabel="Header View">
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="24"/>
+                                                    <color key="backgroundColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="24" id="DcA-Kt-Pho"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <integer key="value" value="12"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gwg-SE-1d6" userLabel="Label View">
-                                                    <rect key="frame" x="30" y="25" width="275" height="90"/>
+                                                    <rect key="frame" x="30" y="44" width="275" height="76"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quote Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nUO-zR-sHo" userLabel="Quote Label">
                                                             <rect key="frame" x="0.0" y="0.0" width="275" height="20.333333333333332"/>
@@ -52,7 +64,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Author Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dmN-VG-sxk" userLabel="Author Label">
-                                                            <rect key="frame" x="0.0" y="75.666666666666671" width="275" height="14.333333333333329"/>
+                                                            <rect key="frame" x="0.0" y="61.666666666666679" width="275" height="14.333333333333336"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="24" id="da2-5n-bFi"/>
                                                             </constraints>
@@ -71,17 +83,30 @@
                                                         <constraint firstAttribute="bottom" secondItem="dmN-VG-sxk" secondAttribute="bottom" id="jn6-ML-heh"/>
                                                     </constraints>
                                                 </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uoa-Y2-iZv" userLabel="Fake Layer View">
+                                                    <rect key="frame" x="0.0" y="12" width="335" height="12"/>
+                                                    <color key="backgroundColor" red="0.56078431370000004" green="0.69411764710000001" blue="0.76470588240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="12" id="N61-qI-Nyo"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" red="0.82387381792068481" green="0.85850101709365845" blue="0.87843507528305054" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="gwg-SE-1d6" secondAttribute="bottom" constant="20" id="EXT-5R-QMv"/>
+                                                <constraint firstAttribute="trailing" secondItem="Cb0-dV-qiX" secondAttribute="trailing" id="Fou-73-NAn"/>
+                                                <constraint firstItem="uoa-Y2-iZv" firstAttribute="leading" secondItem="cKB-1W-b1z" secondAttribute="leading" id="JFZ-96-Loo"/>
                                                 <constraint firstItem="gwg-SE-1d6" firstAttribute="leading" secondItem="cKB-1W-b1z" secondAttribute="leading" constant="30" id="P7k-fC-qaO"/>
-                                                <constraint firstItem="gwg-SE-1d6" firstAttribute="centerY" secondItem="cKB-1W-b1z" secondAttribute="centerY" id="Vjq-qe-ejW"/>
-                                                <constraint firstItem="gwg-SE-1d6" firstAttribute="top" secondItem="cKB-1W-b1z" secondAttribute="top" constant="25" id="ZX8-yx-UFu"/>
-                                                <constraint firstItem="gwg-SE-1d6" firstAttribute="centerX" secondItem="cKB-1W-b1z" secondAttribute="centerX" id="b6t-r5-XWJ"/>
+                                                <constraint firstItem="gwg-SE-1d6" firstAttribute="centerX" secondItem="cKB-1W-b1z" secondAttribute="centerX" id="PjS-n5-a4w"/>
+                                                <constraint firstAttribute="trailing" secondItem="uoa-Y2-iZv" secondAttribute="trailing" id="Y4P-P8-4kp"/>
+                                                <constraint firstItem="gwg-SE-1d6" firstAttribute="top" secondItem="Cb0-dV-qiX" secondAttribute="bottom" constant="20" id="c4b-ug-7mU"/>
+                                                <constraint firstItem="uoa-Y2-iZv" firstAttribute="top" secondItem="cKB-1W-b1z" secondAttribute="top" constant="12" id="joP-3c-P3z"/>
+                                                <constraint firstItem="Cb0-dV-qiX" firstAttribute="top" secondItem="cKB-1W-b1z" secondAttribute="top" id="rvQ-AR-OyL"/>
+                                                <constraint firstItem="Cb0-dV-qiX" firstAttribute="leading" secondItem="cKB-1W-b1z" secondAttribute="leading" id="y15-tO-Yfx"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                    <integer key="value" value="15"/>
+                                                    <integer key="value" value="12"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </view>
@@ -96,7 +121,9 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="authorLabel" destination="dmN-VG-sxk" id="deh-fK-RtH"/>
+                                    <outlet property="fakeQuoteHeader" destination="uoa-Y2-iZv" id="LIm-oL-2C3"/>
                                     <outlet property="quoteBackground" destination="cKB-1W-b1z" id="vON-SN-fJk"/>
+                                    <outlet property="quoteHeader" destination="Cb0-dV-qiX" id="yyH-Gr-DYU"/>
                                     <outlet property="quoteLabel" destination="nUO-zR-sHo" id="gGo-e0-YD8"/>
                                 </connections>
                             </tableViewCell>
@@ -128,7 +155,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5va-4l-PFb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1078.2608695652175" y="118.52678571428571"/>
+            <point key="canvasLocation" x="1077.5999999999999" y="118.22660098522168"/>
         </scene>
         <!--Add Quote View Controller-->
         <scene sceneID="uPg-nc-Sra">

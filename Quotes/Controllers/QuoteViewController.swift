@@ -84,13 +84,39 @@ class QuoteViewController: UITableViewController {
             cell.authorLabel.topAnchor.constraint(equalTo: cell.quoteLabel.bottomAnchor, constant: 0).isActive = true
         }
         
-        cell.quoteBackground.backgroundColor = colorArray[mod]
+        cell.quoteHeader.backgroundColor = colorArray[mod]
+        
+        cell.quoteHeader.clipsToBounds = true
+        cell.fakeQuoteHeader.backgroundColor = colorArray[mod]
+        
+//        cell.quoteHeader.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        
+        cell.quoteBackground.backgroundColor = .white //colorArray[mod]
+//        cell.quoteBackground.layer.masksToBounds = false
+        cell.quoteBackground.layer.shadowOpacity = 0.2
+        cell.quoteBackground.layer.shadowRadius = 2
+        cell.quoteBackground.layer.shadowOffset = CGSize(width: 2, height: 2)
+        cell.quoteBackground.layer.shadowColor = UIColor.lightGray.cgColor
         
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.contentView.layer.masksToBounds = true
+        
+        let radius = cell.contentView.layer.cornerRadius
+        cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: radius).cgPath
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return quotesArray.count
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        context.delete(quotesArray[indexPath.row])
+        quotesArray.remove(at: indexPath.row)
+        
+        saveContext()
     }
     
     //MARK: - unwind Segue
@@ -173,3 +199,4 @@ extension UIColor {
         return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: 1)
     }
 }
+

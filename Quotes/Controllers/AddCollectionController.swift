@@ -70,7 +70,6 @@ class AddCollectionViewController: UIViewController {
             
             let destination = segue.destination as! SelectCollectionViewController
             destination.loadCollections()
-            
         case "cancelClicked":
             print("Cancel bar button clicked")
             

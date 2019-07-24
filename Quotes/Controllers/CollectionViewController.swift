@@ -46,7 +46,7 @@ class CollectionViewController: UIViewController {
     //MARK: - IBAction
     
     //MARK: - unwind Segue
-    @IBAction func backToCollectionView(_ unwindSegue: UIStoryboardSegue) {}
+    @IBAction func backToCollectionManageView(_ unwindSegue: UIStoryboardSegue) {}
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
