@@ -341,13 +341,14 @@
                                 <rect key="frame" x="10" y="163" width="355" height="486"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="CollectionCell" id="WCt-tk-Q5O" userLabel="CollectionCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CollectionCell" id="WCt-tk-Q5O" userLabel="CollectionCell">
                                         <rect key="frame" x="0.0" y="28" width="355" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WCt-tk-Q5O" id="HPV-3N-4AB">
                                             <rect key="frame" x="0.0" y="0.0" width="355" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <color key="tintColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>
                                             <segue destination="joQ-5y-OR0" kind="unwind" identifier="collectionSelected" unwindAction="backToAddQuoteView:" id="RbC-al-VRG"/>
                                         </connections>

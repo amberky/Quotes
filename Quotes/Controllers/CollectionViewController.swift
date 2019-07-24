@@ -14,6 +14,7 @@ class CollectionViewController: UIViewController {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var collectionArray = [Collection]()
+    var selectedCollection: String = ""
     
     //MARK: - IBOutlet
     @IBOutlet weak var collectionTableView: UITableView!
@@ -52,9 +53,9 @@ class CollectionViewController: UIViewController {
             
         case "collectionSelected":
             print("Collection Selected")
-            let destinationVC = segue.destination as! AddQuoteViewController
             
             if let indexPath = collectionTableView.indexPathForSelectedRow {
+                let destinationVC = segue.destination as! AddQuoteViewController
                 destinationVC.selectedCollection = collectionArray[indexPath.row]
             }
             
@@ -79,6 +80,10 @@ extension CollectionViewController: UITableViewDataSource, UITableViewDelegate {
         let collection = collectionArray[indexPath.row]
         
         cell.textLabel?.text = collection.name
+        
+        if collection.name == selectedCollection {
+            cell.accessoryType = .checkmark
+        }
         
         return cell
     }

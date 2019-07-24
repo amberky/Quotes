@@ -106,8 +106,11 @@ class AddQuoteViewController: UIViewController {
         case "cancelClicked":
             print("Cancel bar button clicked")
             
-        case "goToCollection":
+        case "goToCollectionView":
             print("Let's go to select a collection")
+            
+            let destination = segue.destination as! CollectionViewController
+            destination.selectedCollection = selectedCollection?.name ?? ""
             
         default:
             print("unexpected segue identifier")
