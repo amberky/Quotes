@@ -101,6 +101,11 @@ class QuoteViewController: UITableViewController {
         
         cell.quoteLabel.text = quote.quote
         cell.authorLabel.text = "\(quote.author ?? "")"
+        
+        if quote.author == "" {
+            cell.authorLabel.frame = CGRect.zero
+        }
+        
         cell.quoteBackground.backgroundColor = colorArray[mod]
         
         return cell
