@@ -30,9 +30,6 @@ class QuoteViewController: UITableViewController {
         
         configureTableView()
         
-        print("viewDidLoad")
-        //mockData()
-        
         loadQuotes()
     }
     
@@ -60,6 +57,9 @@ class QuoteViewController: UITableViewController {
     }
     
     func loadQuotes(with request: NSFetchRequest<Quote> = Quote.fetchRequest(), predicate: NSPredicate? = nil) {
+        
+        request.sortDescriptors = [NSSortDescriptor(key: "addedOn", ascending: false)]
+        
         if (predicate != nil) {
             request.predicate = predicate
         }
@@ -71,44 +71,6 @@ class QuoteViewController: UITableViewController {
         }
         
         tableView.reloadData()
-    }
-    
-    func mockData() {
-        deleteData()
-        
-        let newQuote = Quote(context: self.context)
-        newQuote.quote = "Focusing is about saying no"
-        newQuote.author = "Steve Jobs"
-        newQuote.addedOn = Date()
-        
-        self.quotesArray.append(newQuote)
-        
-        let newQuote1 = Quote(context: self.context)
-        newQuote1.quote = "Because the people who are crazy enough to think they can change the world are the ones who do"
-        newQuote1.author = "Steve Jobs"
-        newQuote.addedOn = Date()
-        
-        self.quotesArray.append(newQuote1)
-        
-        saveContext()
-    }
-    
-    func deleteData() {
-        let request: NSFetchRequest<Quote> = Quote.fetchRequest()
-        
-        do {
-            let dataToBeDeleted = try context.fetch(request)
-            
-            for i in dataToBeDeleted
-            {
-                context.delete(i)
-            }
-            
-            try context.save()
-            
-        } catch {
-            
-        }
     }
     
     func saveContext() {

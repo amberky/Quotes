@@ -76,7 +76,6 @@ class AddQuoteViewController: UIViewController, UITextFieldDelegate {
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         doneButton.isEnabled = quoteTextField.text != "" ? true : false
-        print(quoteTextField.text ?? "")
     }
     
 //    //MARK: - unwind Segue
@@ -91,6 +90,7 @@ class AddQuoteViewController: UIViewController, UITextFieldDelegate {
             newQuote.quote = quoteTextField.text!
             newQuote.author = authorTextField?.text ?? ""
             newQuote.collection = selectedCollection
+            newQuote.addedOn = Date()
             
             context.insert(newQuote)
             

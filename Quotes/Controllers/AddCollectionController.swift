@@ -57,6 +57,7 @@ class AddCollectionViewController: UIViewController {
             let newCollection = Collection(context: self.context)
             newCollection.name = collectionTextField.text
             newCollection.icon = iconArray[selectedIndex].name
+            newCollection.addedOn = Date()
             
             context.insert(newCollection)
             
