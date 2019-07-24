@@ -18,6 +18,7 @@
 		257535E922E5C77300DB2BAD /* SelectCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257535E822E5C77300DB2BAD /* SelectCollectionViewController.swift */; };
 		2589380422E80CF4001E10FE /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2589380322E80CF4001E10FE /* CollectionViewController.swift */; };
 		2589380822E81F4D001E10FE /* CollectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2589380722E81F4D001E10FE /* CollectionCollectionViewCell.swift */; };
+		2589380A22E86DAC001E10FE /* CollectionQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2589380922E86DAC001E10FE /* CollectionQuoteViewController.swift */; };
 		25BB358122E59EDF00A4D6DA /* iconModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BB358022E59EDF00A4D6DA /* iconModel.swift */; };
 		25F0CE5022E69EA0001DE1A0 /* QuoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F0CE4E22E69EA0001DE1A0 /* QuoteTableViewCell.swift */; };
 		25F0CE5422E6EF05001DE1A0 /* CollectionIconCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F0CE5322E6EF05001DE1A0 /* CollectionIconCollectionViewCell.swift */; };
@@ -37,6 +38,7 @@
 		257535E822E5C77300DB2BAD /* SelectCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCollectionViewController.swift; sourceTree = "<group>"; };
 		2589380322E80CF4001E10FE /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		2589380722E81F4D001E10FE /* CollectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCollectionViewCell.swift; sourceTree = "<group>"; };
+		2589380922E86DAC001E10FE /* CollectionQuoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionQuoteViewController.swift; sourceTree = "<group>"; };
 		25BB358022E59EDF00A4D6DA /* iconModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iconModel.swift; sourceTree = "<group>"; };
 		25F0CE4E22E69EA0001DE1A0 /* QuoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteTableViewCell.swift; sourceTree = "<group>"; };
 		25F0CE5322E6EF05001DE1A0 /* CollectionIconCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionIconCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -85,11 +87,9 @@
 		2566C2A122E49720003BFA91 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				2566C2B322E4D0B5003BFA91 /* AddQuoteViewController.swift */,
-				2566C28E22E4970A003BFA91 /* QuoteViewController.swift */,
-				257535E622E5C76300DB2BAD /* AddCollectionController.swift */,
-				257535E822E5C77300DB2BAD /* SelectCollectionViewController.swift */,
-				2589380322E80CF4001E10FE /* CollectionViewController.swift */,
+				2589380D22E86DD8001E10FE /* Main */,
+				2589380B22E86DBB001E10FE /* Quote */,
+				2589380C22E86DC5001E10FE /* Collection */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -111,6 +111,33 @@
 				25BB358022E59EDF00A4D6DA /* iconModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		2589380B22E86DBB001E10FE /* Quote */ = {
+			isa = PBXGroup;
+			children = (
+				2566C2B322E4D0B5003BFA91 /* AddQuoteViewController.swift */,
+				257535E622E5C76300DB2BAD /* AddCollectionController.swift */,
+				257535E822E5C77300DB2BAD /* SelectCollectionViewController.swift */,
+			);
+			path = Quote;
+			sourceTree = "<group>";
+		};
+		2589380C22E86DC5001E10FE /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				2589380322E80CF4001E10FE /* CollectionViewController.swift */,
+				2589380922E86DAC001E10FE /* CollectionQuoteViewController.swift */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
+		2589380D22E86DD8001E10FE /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				2566C28E22E4970A003BFA91 /* QuoteViewController.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		25F0CE5222E69EA4001DE1A0 /* Custom Cell */ = {
@@ -197,6 +224,7 @@
 				25F0CE5422E6EF05001DE1A0 /* CollectionIconCollectionViewCell.swift in Sources */,
 				2566C28F22E4970A003BFA91 /* QuoteViewController.swift in Sources */,
 				2566C2B422E4D0B5003BFA91 /* AddQuoteViewController.swift in Sources */,
+				2589380A22E86DAC001E10FE /* CollectionQuoteViewController.swift in Sources */,
 				2566C29522E4970A003BFA91 /* Quotes.xcdatamodeld in Sources */,
 				257535E922E5C77300DB2BAD /* SelectCollectionViewController.swift in Sources */,
 				2589380822E81F4D001E10FE /* CollectionCollectionViewCell.swift in Sources */,
