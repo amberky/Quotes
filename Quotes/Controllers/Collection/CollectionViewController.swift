@@ -66,7 +66,9 @@ class CollectionViewController: UIViewController {
     @IBAction func backToCollectionView(_ unwindSegue: UIStoryboardSegue) {}
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
+        guard let identifier = segue.identifier else { return }
+        
+        switch identifier {
         case "goToCollectionQuoteView":
             print("Let's go to Collection Quote View")
             
@@ -80,7 +82,6 @@ class CollectionViewController: UIViewController {
             print("unknown segue identifier")
         }
     }
-    
 }
 
 extension CollectionViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {

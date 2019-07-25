@@ -109,10 +109,10 @@ class EditCollectionViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier else { return }
         
+        checkAndResignFirstResponder()
+        
         switch identifier {
         case "doneClicked":
-            checkAndResignFirstResponder()
-            
             print("Done bar button clicked")
             
             let trimmedText = collectionTextField.text?.trimmingCharacters(in: .whitespaces) ?? ""
