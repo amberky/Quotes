@@ -13,8 +13,9 @@ class QuoteViewController: UITableViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    var colorArray = [UIColor]()
-    var quotesArray = [Quote]()
+    var quoteArray = [Quote]()
+    
+    var colorArray = ColorTheme.init().colorArray
     var colorCount: Int = 0
     
     @IBOutlet var quoteTableView: UITableView!
@@ -22,18 +23,17 @@ class QuoteViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //  quoteTableView.register(UINib(nibName: "QuoteTableViewCell", bundle: nil) , forCellReuseIdentifier: "QuoteCell")
-        // quoteTableView.register(UINib(nibName: "MessageCell", bundle: nil) , forCellReuseIdentifier: "customMessageCell")
+        quoteTableView.register(UINib(nibName: "QuoteTableViewCell", bundle: nil) , forCellReuseIdentifier: "QuoteCell")
         
-        setupColors()
+        colorCount = colorArray.count
         
         configureTableView()
         
         loadQuotes()
     }
     
-    func loadQuotes(with request: NSFetchRequest<Quote> = Quote.fetchRequest(), predicate: NSPredicate? = nil) {
-        
+    func loadQuotes(predicate: NSPredicate? = nil) {
+        let request : NSFetchRequest<Quote> = Quote.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "addedOn", ascending: false)]
         
         if (predicate != nil) {
@@ -41,7 +41,7 @@ class QuoteViewController: UITableViewController {
         }
         
         do {
-            quotesArray = try context.fetch(request)
+            quoteArray = try context.fetch(request)
         } catch {
             print("Error fetching data from context \(error)")
         }
@@ -65,15 +65,17 @@ class QuoteViewController: UITableViewController {
     }
     
     //MARK: - TableView Delegate Methods
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return quoteArray.count
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let mod = indexPath.row % colorCount
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "QuoteCell", for: indexPath) as! QuoteTableViewCell
         
-        cell.selectionStyle = UITableViewCell.SelectionStyle.none
-        
-        let quote = quotesArray[indexPath.row]
+        let quote = quoteArray[indexPath.row]
         
         cell.quoteLabel.text = quote.quote
         cell.authorLabel.text = "\(quote.author ?? "")"
@@ -108,13 +110,9 @@ class QuoteViewController: UITableViewController {
         cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: radius).cgPath
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return quotesArray.count
-    }
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        context.delete(quotesArray[indexPath.row])
-        quotesArray.remove(at: indexPath.row)
+        context.delete(quoteArray[indexPath.row])
+        quoteArray.remove(at: indexPath.row)
         
         saveContext()
     }
@@ -122,30 +120,6 @@ class QuoteViewController: UITableViewController {
     //MARK: - unwind Segue
     @IBAction func backToQuoteView(_ unwindSegue: UIStoryboardSegue) {}
     
-    
-    func setupColors() {
-        let c1 = UIColor.rgb(red: 196, green: 215, blue: 209)
-        let c2 = UIColor.rgb(red: 227, green: 218, blue: 210)
-        let c3 = UIColor.rgb(red: 253, green: 209, blue: 148)
-        // let c2 = UIColor.rgb(red: 245, green: 209, blue: 195)
-        // let c3 = UIColor.rgb(red: 240, green: 188, blue: 104)
-        let c4 = UIColor.rgb(red: 206, green: 202, blue: 205)
-        let c5 = UIColor.rgb(red: 170, green: 184, blue: 187)
-        
-        // let c1 = UIColor.rgb(red: 42, green: 73, blue: 101)
-        // let c2 = UIColor.rgb(red: 154, green: 85, blue: 56)
-        // let c3 = UIColor.rgb(red: 229, green: 153, blue: 133)
-        // let c4 = UIColor.rgb(red: 224, green: 176, blue: 99)
-        // let c5 = UIColor.rgb(red: 95, green: 149, blue: 99)
-        
-        colorArray.append(c1)
-        colorArray.append(c2)
-        colorArray.append(c3)
-        colorArray.append(c4)
-        colorArray.append(c5)
-        
-        colorCount = colorArray.count
-    }
 }
 
 //MARK: - Search Bar methods
@@ -176,13 +150,9 @@ extension QuoteViewController: UISearchBarDelegate {
             loadQuotes()
         }
         else {
-            let request : NSFetchRequest<Quote> = Quote.fetchRequest()
-            
             let predicate = NSPredicate(format: "quote CONTAINS[cd] %@", searchBar.text!)
             
-            request.sortDescriptors = [NSSortDescriptor(key: "quote", ascending: true)]
-            
-            loadQuotes(with: request, predicate: predicate)
+            loadQuotes(predicate: predicate)
         }
         
         if hideKeyboard {

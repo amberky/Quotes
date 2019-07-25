@@ -14,11 +14,15 @@
 		2566C29722E4970C003BFA91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2566C29622E4970C003BFA91 /* Assets.xcassets */; };
 		2566C29A22E4970C003BFA91 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2566C29822E4970C003BFA91 /* LaunchScreen.storyboard */; };
 		2566C2B422E4D0B5003BFA91 /* AddQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2566C2B322E4D0B5003BFA91 /* AddQuoteViewController.swift */; };
-		257535E722E5C76300DB2BAD /* AddCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257535E622E5C76300DB2BAD /* AddCollectionController.swift */; };
 		257535E922E5C77300DB2BAD /* SelectCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257535E822E5C77300DB2BAD /* SelectCollectionViewController.swift */; };
 		2589380422E80CF4001E10FE /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2589380322E80CF4001E10FE /* CollectionViewController.swift */; };
 		2589380822E81F4D001E10FE /* CollectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2589380722E81F4D001E10FE /* CollectionCollectionViewCell.swift */; };
 		2589380A22E86DAC001E10FE /* CollectionQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2589380922E86DAC001E10FE /* CollectionQuoteViewController.swift */; };
+		2589380F22E87588001E10FE /* collectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2589380E22E87588001E10FE /* collectionModel.swift */; };
+		25B5D01722E94B61004E5099 /* QuoteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25B5D01522E94B61004E5099 /* QuoteTableViewCell.xib */; };
+		25B5D01922E95003004E5099 /* colorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B5D01822E95003004E5099 /* colorModel.swift */; };
+		25B5D01F22E96F0B004E5099 /* AddCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B5D01E22E96F0B004E5099 /* AddCollectionViewController.swift */; };
+		25B5D02F22E991B8004E5099 /* AddEditCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B5D02D22E991B8004E5099 /* AddEditCollectionViewController.swift */; };
 		25BB358122E59EDF00A4D6DA /* iconModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BB358022E59EDF00A4D6DA /* iconModel.swift */; };
 		25F0CE5022E69EA0001DE1A0 /* QuoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F0CE4E22E69EA0001DE1A0 /* QuoteTableViewCell.swift */; };
 		25F0CE5422E6EF05001DE1A0 /* CollectionIconCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F0CE5322E6EF05001DE1A0 /* CollectionIconCollectionViewCell.swift */; };
@@ -34,11 +38,15 @@
 		2566C29922E4970C003BFA91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2566C29B22E4970C003BFA91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2566C2B322E4D0B5003BFA91 /* AddQuoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddQuoteViewController.swift; sourceTree = "<group>"; };
-		257535E622E5C76300DB2BAD /* AddCollectionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCollectionController.swift; sourceTree = "<group>"; };
 		257535E822E5C77300DB2BAD /* SelectCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCollectionViewController.swift; sourceTree = "<group>"; };
 		2589380322E80CF4001E10FE /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		2589380722E81F4D001E10FE /* CollectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCollectionViewCell.swift; sourceTree = "<group>"; };
 		2589380922E86DAC001E10FE /* CollectionQuoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionQuoteViewController.swift; sourceTree = "<group>"; };
+		2589380E22E87588001E10FE /* collectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = collectionModel.swift; sourceTree = "<group>"; };
+		25B5D01522E94B61004E5099 /* QuoteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuoteTableViewCell.xib; sourceTree = "<group>"; };
+		25B5D01822E95003004E5099 /* colorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = colorModel.swift; sourceTree = "<group>"; };
+		25B5D01E22E96F0B004E5099 /* AddCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddCollectionViewController.swift; path = ../Quote/AddCollectionViewController.swift; sourceTree = "<group>"; };
+		25B5D02D22E991B8004E5099 /* AddEditCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditCollectionViewController.swift; sourceTree = "<group>"; };
 		25BB358022E59EDF00A4D6DA /* iconModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iconModel.swift; sourceTree = "<group>"; };
 		25F0CE4E22E69EA0001DE1A0 /* QuoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteTableViewCell.swift; sourceTree = "<group>"; };
 		25F0CE5322E6EF05001DE1A0 /* CollectionIconCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionIconCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -109,6 +117,8 @@
 			children = (
 				2566C29322E4970A003BFA91 /* Quotes.xcdatamodeld */,
 				25BB358022E59EDF00A4D6DA /* iconModel.swift */,
+				2589380E22E87588001E10FE /* collectionModel.swift */,
+				25B5D01822E95003004E5099 /* colorModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -117,7 +127,6 @@
 			isa = PBXGroup;
 			children = (
 				2566C2B322E4D0B5003BFA91 /* AddQuoteViewController.swift */,
-				257535E622E5C76300DB2BAD /* AddCollectionController.swift */,
 				257535E822E5C77300DB2BAD /* SelectCollectionViewController.swift */,
 			);
 			path = Quote;
@@ -126,6 +135,8 @@
 		2589380C22E86DC5001E10FE /* Collection */ = {
 			isa = PBXGroup;
 			children = (
+				25B5D02D22E991B8004E5099 /* AddEditCollectionViewController.swift */,
+				25B5D01E22E96F0B004E5099 /* AddCollectionViewController.swift */,
 				2589380322E80CF4001E10FE /* CollectionViewController.swift */,
 				2589380922E86DAC001E10FE /* CollectionQuoteViewController.swift */,
 			);
@@ -144,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				25F0CE4E22E69EA0001DE1A0 /* QuoteTableViewCell.swift */,
+				25B5D01522E94B61004E5099 /* QuoteTableViewCell.xib */,
 				25F0CE5322E6EF05001DE1A0 /* CollectionIconCollectionViewCell.swift */,
 				2589380722E81F4D001E10FE /* CollectionCollectionViewCell.swift */,
 			);
@@ -210,6 +222,7 @@
 			files = (
 				2566C29A22E4970C003BFA91 /* LaunchScreen.storyboard in Resources */,
 				2566C29722E4970C003BFA91 /* Assets.xcassets in Resources */,
+				25B5D01722E94B61004E5099 /* QuoteTableViewCell.xib in Resources */,
 				2566C29222E4970A003BFA91 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -221,18 +234,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25B5D01F22E96F0B004E5099 /* AddCollectionViewController.swift in Sources */,
 				25F0CE5422E6EF05001DE1A0 /* CollectionIconCollectionViewCell.swift in Sources */,
 				2566C28F22E4970A003BFA91 /* QuoteViewController.swift in Sources */,
 				2566C2B422E4D0B5003BFA91 /* AddQuoteViewController.swift in Sources */,
+				25B5D02F22E991B8004E5099 /* AddEditCollectionViewController.swift in Sources */,
 				2589380A22E86DAC001E10FE /* CollectionQuoteViewController.swift in Sources */,
 				2566C29522E4970A003BFA91 /* Quotes.xcdatamodeld in Sources */,
+				25B5D01922E95003004E5099 /* colorModel.swift in Sources */,
+				2589380F22E87588001E10FE /* collectionModel.swift in Sources */,
 				257535E922E5C77300DB2BAD /* SelectCollectionViewController.swift in Sources */,
 				2589380822E81F4D001E10FE /* CollectionCollectionViewCell.swift in Sources */,
 				25F0CE5022E69EA0001DE1A0 /* QuoteTableViewCell.swift in Sources */,
 				2566C28D22E4970A003BFA91 /* AppDelegate.swift in Sources */,
 				2589380422E80CF4001E10FE /* CollectionViewController.swift in Sources */,
 				25BB358122E59EDF00A4D6DA /* iconModel.swift in Sources */,
-				257535E722E5C76300DB2BAD /* AddCollectionController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

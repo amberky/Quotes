@@ -42,7 +42,7 @@ class SelectCollectionViewController: UIViewController {
     }
     
     //MARK: - unwind Segue
-    @IBAction func backToCollectionView(_ unwindSegue: UIStoryboardSegue) {}
+    @IBAction func backToSelectCollectionView(_ unwindSegue: UIStoryboardSegue) {}
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier else { return }
@@ -59,7 +59,8 @@ class SelectCollectionViewController: UIViewController {
                 destinationVC.selectedCollection = collectionArray[indexPath.row]
             }
             
-        case "goToAddCollectionView":
+        case "goToAddEditCollectionView":
+            // perform Add New Collection
             // nothing to pass to Collection view
             print("Let's go to add new collection")
         default:
