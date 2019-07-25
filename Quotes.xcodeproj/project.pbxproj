@@ -21,10 +21,7 @@
 		2589380F22E87588001E10FE /* collectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2589380E22E87588001E10FE /* collectionModel.swift */; };
 		25B5D01722E94B61004E5099 /* QuoteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25B5D01522E94B61004E5099 /* QuoteTableViewCell.xib */; };
 		25B5D01922E95003004E5099 /* colorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B5D01822E95003004E5099 /* colorModel.swift */; };
-		25B5D01F22E96F0B004E5099 /* FailedAddCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B5D01E22E96F0B004E5099 /* FailedAddCollectionViewController.swift */; };
 		25B5D02F22E991B8004E5099 /* AddCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B5D02D22E991B8004E5099 /* AddCollectionViewController.swift */; };
-		25B5D03222E99CCA004E5099 /* AddEditCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B5D03122E99CCA004E5099 /* AddEditCollectionView.swift */; };
-		25B5D03422E99CD7004E5099 /* AddEditCollectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25B5D03322E99CD7004E5099 /* AddEditCollectionView.xib */; };
 		25B5D03922E9A85B004E5099 /* SmallIconCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B5D03722E9A85B004E5099 /* SmallIconCollectionViewCell.swift */; };
 		25B5D04322E9B050004E5099 /* SmallIconCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25B5D04122E9B050004E5099 /* SmallIconCollectionViewCell.xib */; };
 		25B5D04522E9CFCB004E5099 /* EditCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B5D04422E9CFCA004E5099 /* EditCollectionViewController.swift */; };
@@ -49,10 +46,7 @@
 		2589380E22E87588001E10FE /* collectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = collectionModel.swift; sourceTree = "<group>"; };
 		25B5D01522E94B61004E5099 /* QuoteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuoteTableViewCell.xib; sourceTree = "<group>"; };
 		25B5D01822E95003004E5099 /* colorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = colorModel.swift; sourceTree = "<group>"; };
-		25B5D01E22E96F0B004E5099 /* FailedAddCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailedAddCollectionViewController.swift; sourceTree = "<group>"; };
 		25B5D02D22E991B8004E5099 /* AddCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCollectionViewController.swift; sourceTree = "<group>"; };
-		25B5D03122E99CCA004E5099 /* AddEditCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditCollectionView.swift; sourceTree = "<group>"; };
-		25B5D03322E99CD7004E5099 /* AddEditCollectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddEditCollectionView.xib; sourceTree = "<group>"; };
 		25B5D03722E9A85B004E5099 /* SmallIconCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallIconCollectionViewCell.swift; sourceTree = "<group>"; };
 		25B5D04122E9B050004E5099 /* SmallIconCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SmallIconCollectionViewCell.xib; path = "untitled folder/SmallIconCollectionViewCell.xib"; sourceTree = "<group>"; };
 		25B5D04422E9CFCA004E5099 /* EditCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCollectionViewController.swift; sourceTree = "<group>"; };
@@ -177,16 +171,6 @@
 			path = QuoteTableCell;
 			sourceTree = "<group>";
 		};
-		25B5D03E22E9AEA1004E5099 /* AddEditCollectionView */ = {
-			isa = PBXGroup;
-			children = (
-				25B5D01E22E96F0B004E5099 /* FailedAddCollectionViewController.swift */,
-				25B5D03122E99CCA004E5099 /* AddEditCollectionView.swift */,
-				25B5D03322E99CD7004E5099 /* AddEditCollectionView.xib */,
-			);
-			path = AddEditCollectionView;
-			sourceTree = "<group>";
-		};
 		25B5D03F22E9AEAA004E5099 /* CollectionCollectionCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,7 +184,6 @@
 			children = (
 				25B5D03C22E9AE85004E5099 /* QuoteTableCell */,
 				25B5D03F22E9AEAA004E5099 /* CollectionCollectionCell */,
-				25B5D03E22E9AEA1004E5099 /* AddEditCollectionView */,
 				25B5D03B22E9AE7C004E5099 /* SmallIconCollectionCell */,
 			);
 			path = "Custom Cell";
@@ -267,7 +250,6 @@
 				2566C29A22E4970C003BFA91 /* LaunchScreen.storyboard in Resources */,
 				2566C29722E4970C003BFA91 /* Assets.xcassets in Resources */,
 				25B5D01722E94B61004E5099 /* QuoteTableViewCell.xib in Resources */,
-				25B5D03422E99CD7004E5099 /* AddEditCollectionView.xib in Resources */,
 				2566C29222E4970A003BFA91 /* Main.storyboard in Resources */,
 				25B5D04322E9B050004E5099 /* SmallIconCollectionViewCell.xib in Resources */,
 			);
@@ -280,7 +262,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25B5D01F22E96F0B004E5099 /* FailedAddCollectionViewController.swift in Sources */,
 				2566C28F22E4970A003BFA91 /* QuoteViewController.swift in Sources */,
 				2566C2B422E4D0B5003BFA91 /* AddQuoteViewController.swift in Sources */,
 				25B5D02F22E991B8004E5099 /* AddCollectionViewController.swift in Sources */,
@@ -292,7 +273,6 @@
 				257535E922E5C77300DB2BAD /* SelectCollectionViewController.swift in Sources */,
 				2589380822E81F4D001E10FE /* CollectionCollectionViewCell.swift in Sources */,
 				25F0CE5022E69EA0001DE1A0 /* QuoteTableViewCell.swift in Sources */,
-				25B5D03222E99CCA004E5099 /* AddEditCollectionView.swift in Sources */,
 				2566C28D22E4970A003BFA91 /* AppDelegate.swift in Sources */,
 				25B5D03922E9A85B004E5099 /* SmallIconCollectionViewCell.swift in Sources */,
 				2589380422E80CF4001E10FE /* CollectionViewController.swift in Sources */,

@@ -85,7 +85,7 @@ class AddQuoteViewController: UIViewController {
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        doneButton.isEnabled = quoteTextField.text != "" ? true : false
+        doneButton.isEnabled = quoteTextField.text?.trimmingCharacters(in: .whitespaces) != "" ? true : false
     }
     
     //MARK: - unwind Segue: done Clicked, cancel Clicked
@@ -99,8 +99,8 @@ class AddQuoteViewController: UIViewController {
         switch identifier {
         case "doneClicked":
             let newQuote = Quote(context: self.context)
-            newQuote.quote = quoteTextField.text!
-            newQuote.author = authorTextField?.text ?? ""
+            newQuote.quote = quoteTextField.text!.trimmingCharacters(in: .whitespaces)
+            newQuote.author = (authorTextField?.text ?? "").trimmingCharacters(in: .whitespaces)
             newQuote.collection = selectedCollection
             newQuote.addedOn = Date()
             

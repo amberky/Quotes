@@ -65,7 +65,7 @@ class AddCollectionViewController: UIViewController {
             checkAndResignFirstResponder()
 
             let newCollection = Collection(context: self.context)
-            newCollection.name = collectionTextField.text
+            newCollection.name = (collectionTextField.text ?? "").trimmingCharacters(in: .whitespaces)
             newCollection.icon = iconArray[selectedIndex].name
             newCollection.addedOn = Date()
 
@@ -73,8 +73,10 @@ class AddCollectionViewController: UIViewController {
 
             saveContext()
 
-            let destination = segue.destination as! SelectCollectionViewController
-            destination.loadCollections()
+            if segue.destination is SelectCollectionViewController {
+                let destination = segue.destination as! SelectCollectionViewController
+                destination.loadCollections()
+            } else { return }
         case "cancelClicked":
             print("Cancel bar button clicked")
 
@@ -101,7 +103,7 @@ class AddCollectionViewController: UIViewController {
     }
 
     @objc func textFieldDidChange(_ textField: UITextField) {
-        doneButton.isEnabled = collectionTextField.text != "" ? true : false
+        doneButton.isEnabled = collectionTextField.text?.trimmingCharacters(in: .whitespaces) != "" ? true : false
     }
     
     func checkAndResignFirstResponder() {
