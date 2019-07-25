@@ -21,7 +21,7 @@ class CollectionQuoteViewController: UIViewController {
     var selectedCollection: CollectionModel? {
         didSet {
             print("didSet")
-            //            print(self.selectedCollection ?? nil)
+            
             setTitle()
             loadQuotes()
         }
@@ -45,6 +45,10 @@ class CollectionQuoteViewController: UIViewController {
     
     func setTitle() {
         self.title = selectedCollection?.name
+        
+        if selectedCollection?.isAll == true {
+            self.navigationItem.rightBarButtonItem = nil
+        }
     }
     
     func loadQuotes(predicate: NSPredicate? = nil) {
@@ -67,7 +71,32 @@ class CollectionQuoteViewController: UIViewController {
         } catch {
             print("Error fetching data from context \(error)")
         }
+    }
+    
+    
+    //MARK: - unwindSegue
+    @IBAction func backToCategoryQuoteView(_ unwindSegue: UIStoryboardSegue) {}
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let identifier = segue.identifier else { return }
         
+        checkAndResignFirstResponder()
+        
+        switch identifier {
+        case "goToEditCollectionView":
+            print("Let's go to edit a collection")
+            
+            let destination = segue.destination as! EditCollectionViewController
+            destination.selectedCollection = selectedCollection
+        default:
+            print("unknown segue identifier")
+        }
+    }
+    
+    func checkAndResignFirstResponder() {
+        if searchBar.isFirstResponder {
+            searchBar.resignFirstResponder()
+        }
     }
 }
 
@@ -112,10 +141,6 @@ extension CollectionQuoteViewController: UITableViewDelegate, UITableViewDataSou
         let radius = cell.contentView.layer.cornerRadius
         cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: radius).cgPath
     }
-    
-    //MARK: - unwindSegue
-    @IBAction func backToCategoryQuoteView(_ unwindSegue: UIStoryboardSegue) {}
-    
 }
 
 //MARK: - Search Bar methods

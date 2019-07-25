@@ -18,6 +18,7 @@ class QuoteViewController: UITableViewController {
     var colorArray = ColorTheme.init().colorArray
     var colorCount: Int = 0
     
+    @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var quoteTableView: UITableView!
     
     override func viewDidLoad() {
@@ -30,6 +31,14 @@ class QuoteViewController: UITableViewController {
         configureTableView()
         
         loadQuotes()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        if searchBar.text != "" {
+            searchBar.text = ""
+            
+            loadQuotes()
+        }
     }
     
     func loadQuotes(predicate: NSPredicate? = nil) {
@@ -120,6 +129,16 @@ class QuoteViewController: UITableViewController {
     //MARK: - unwind Segue
     @IBAction func backToQuoteView(_ unwindSegue: UIStoryboardSegue) {}
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print(segue.identifier ?? "")
+        checkAndResignFirstResponder()
+    }
+    
+    func checkAndResignFirstResponder() {
+        if searchBar.isFirstResponder {
+            searchBar.resignFirstResponder()
+        }
+    }
 }
 
 //MARK: - Search Bar methods

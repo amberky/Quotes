@@ -59,7 +59,7 @@ class SelectCollectionViewController: UIViewController {
                 destinationVC.selectedCollection = collectionArray[indexPath.row]
             }
             
-        case "goToAddEditCollectionView":
+        case "goToAddCollectionView":
             // perform Add New Collection
             // nothing to pass to Collection view
             print("Let's go to add new collection")

@@ -15,6 +15,7 @@ class AddQuoteViewController: UIViewController {
     
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
+    @IBOutlet weak var collectionLabel: UILabel!
     
     @IBOutlet weak var quoteTextField: UITextField!
     @IBOutlet weak var authorTextField: UITextField!
@@ -46,6 +47,8 @@ class AddQuoteViewController: UIViewController {
         let authorLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(authorLabelTapped))
         authorLabel.addGestureRecognizer(authorLabelTapGesture)
         
+        let collectionLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(collectionLabelTapped))
+        collectionLabel.addGestureRecognizer(collectionLabelTapGesture)
     }
     
     func setSelectedCollection() {
@@ -67,6 +70,11 @@ class AddQuoteViewController: UIViewController {
         self.authorTextField.becomeFirstResponder()
     }
     
+    @objc func collectionLabelTapped() {
+        print("collection label tapped")
+        performSegue(withIdentifier: "goToSelectCollectionView", sender: self)
+    }
+    
     func saveContext() {
         do {
             try context.save()
@@ -85,6 +93,8 @@ class AddQuoteViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier else { return }
+        
+        checkAndResignFirstResponder()
         
         switch identifier {
         case "doneClicked":
@@ -114,6 +124,14 @@ class AddQuoteViewController: UIViewController {
             
         default:
             print("unknown segue identifier")
+        }
+    }
+    
+    func checkAndResignFirstResponder() {
+        if quoteTextField.isFirstResponder {
+            quoteTextField.resignFirstResponder()
+        } else if authorTextField.isFirstResponder {
+                authorTextField.resignFirstResponder()
         }
     }
 }

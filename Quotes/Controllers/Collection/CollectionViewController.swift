@@ -33,10 +33,16 @@ class CollectionViewController: UIViewController {
         
         collectionCollectionView.allowsMultipleSelection = false
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("viewWillAppear")
         loadCollections()
     }
     
     func loadCollections() {
+        collectionArray = [CollectionModel]()
+        
         let request: NSFetchRequest<Collection> = Collection.fetchRequest()
         var collectionContext = [Collection]()
         
@@ -70,7 +76,6 @@ class CollectionViewController: UIViewController {
                     destinationVC.selectedCollection = collectionArray[firstItem.row]
                 }
             }
-            
         default:
             print("unknown segue identifier")
         }
