@@ -25,10 +25,6 @@ class QuoteTableViewCell: UITableViewCell {
     
     @IBOutlet weak var favouriteIcon: UIImageView!
     
-    @IBOutlet weak var animatedFavouriteIconWidthConstraint: NSLayoutConstraint!
-    
-    lazy var favouriteAnimator = FavouriteAnimator(container: contentView, layoutConstraints: animatedFavouriteIconWidthConstraint)
-    
     var delegate: QuoteTableViewCellDelegate?
     
     var quoteFavourite: Bool = false
@@ -49,32 +45,12 @@ class QuoteTableViewCell: UITableViewCell {
         print("long pressed action")
         
         delegate?.longPressed(cell: self)
-        
     }
     
     @objc func doubleTappedGestureAction() {
+        print("double tapped action")
         
         delegate?.doubleTapped(cell: self)
-        
-        //NOTE: quoteFavourite stores the initial value of quote.isFavourite when the cell rendered
-        //      user double tapped to change isFavourite from false to true
-        //      therefore, trigger favouriteAnimator.animate
-        //      else, just hide the favouriteIcon without animation
-        
-        if quoteFavourite == false {
-            self.favouriteAnimator.animate {
-                print("animated")
-                
-                self.configureFavouriteIcon(favouriteStatus: self.quoteFavourite)
-            }
-        } else {
-            self.configureFavouriteIcon(favouriteStatus: self.quoteFavourite)
-        }
-    }
-    
-    func configureFavouriteIcon(favouriteStatus: Bool) {
-        favouriteIcon.isHidden = favouriteStatus
-        quoteFavourite = !favouriteStatus
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -34,7 +34,6 @@ class AddQuoteViewController: UIViewController {
     
     var selectedCollection : Collection? {
         didSet {
-            print("didSet")
             setSelectedCollection()
         }
     }
@@ -55,7 +54,6 @@ class AddQuoteViewController: UIViewController {
     }
     
     func setSelectedCollection() {
-        print("selectedCollection: \(selectedCollection?.name ?? "nil")")
         if selectedCollection != nil {
             collectionButton.setTitle(selectedCollection?.name ?? "none" , for: .normal)
         }

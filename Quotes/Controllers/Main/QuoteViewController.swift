@@ -45,15 +45,19 @@ class QuoteViewController: UITableViewController {
     
     func loadQuotes(predicate: NSPredicate? = nil) {
         let request : NSFetchRequest<Quote> = Quote.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key: "addedOn", ascending: false)]
-        
-        let favouritePredicate = NSPredicate(format: "isFavourite == %@", NSNumber(value: true))
+        request.sortDescriptors = [NSSortDescriptor(key: "isFavourite", ascending: false), NSSortDescriptor(key: "addedOn", ascending: false)]
         
         if (predicate != nil) {
-            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [favouritePredicate, predicate!])
-        } else {
-            request.predicate = favouritePredicate
+            request.predicate = predicate
         }
+        
+//        let favouritePredicate = NSPredicate(format: "isFavourite == %@", NSNumber(value: true))
+        
+//        if (predicate != nil) {
+//            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [favouritePredicate, predicate!])
+//        } else {
+//            request.predicate = favouritePredicate
+//        }
         
         do {
             quoteArray = try context.fetch(request)
@@ -67,6 +71,7 @@ class QuoteViewController: UITableViewController {
     func saveContext() {
         do {
             try context.save()
+            
             tableView.reloadData()
             
         } catch {
@@ -85,7 +90,6 @@ class QuoteViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let mod = indexPath.row % colorCount
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "QuoteCell", for: indexPath) as! QuoteTableViewCell
@@ -96,6 +100,8 @@ class QuoteViewController: UITableViewController {
         cell.quoteLabel.text = quote.quote
         cell.authorLabel.text = "\(quote.author ?? "")"
         cell.favouriteIcon.isHidden = !quote.isFavourite
+        
+        cell.quoteFavourite = quote.isFavourite
         
         if quote.author != "" {
             cell.authorLabel.topAnchor.constraint(equalTo: cell.quoteLabel.bottomAnchor, constant: 10).isActive = true
@@ -202,6 +208,7 @@ extension QuoteViewController: QuoteTableViewCellDelegate {
             let editAction = UIAlertAction.init(title: "Edit", style: .default) { (action) in
                 print("Edit")
             }
+            
             alert.addAction(editAction)
             
             let deleteAction = UIAlertAction.init(title: "Delete", style: .destructive) { (action) in
@@ -218,6 +225,7 @@ extension QuoteViewController: QuoteTableViewCellDelegate {
                 print("Cancel")
             }
             alert.addAction(cancelAction)
+            alert.view.tintColor = UIColor.rgb(red: 93, green: 117, blue: 153);
             
             self.present(alert, animated: true, completion: nil)
         }
@@ -229,9 +237,8 @@ extension QuoteViewController: QuoteTableViewCellDelegate {
             let updateQuote = self.quoteArray[indexPath.row]
             updateQuote.setValue(!updateQuote.isFavourite, forKey: "isFavourite")
             
-            self.quoteArray.remove(at: indexPath.row)
+            //self.quoteArray.remove(at: indexPath.row)
             self.saveContext()
-            
         }
     }
 }

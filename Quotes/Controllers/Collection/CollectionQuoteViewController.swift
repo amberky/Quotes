@@ -69,7 +69,7 @@ class CollectionQuoteViewController: UIViewController {
     
     func loadQuotes(predicate: NSPredicate? = nil) {
         let request: NSFetchRequest<Quote> = Quote.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key: "addedOn", ascending: false)]
+        request.sortDescriptors = [NSSortDescriptor(key: "isFavourite", ascending: false), NSSortDescriptor(key: "addedOn", ascending: false)]
         
         if selectedCollection?.isAll == false {
             if predicate != nil {
@@ -121,8 +121,7 @@ class CollectionQuoteViewController: UIViewController {
         do {
             try context.save()
             
-            //quoteTableView.reloadData()
-            
+            quoteTableView.reloadData()
         } catch {
             print("Error saving data from context \(error)")
         }
@@ -256,7 +255,6 @@ extension CollectionQuoteViewController: QuoteTableViewCellDelegate {
         
         if let indexPath = quoteTableView.indexPath(for: cell) {
             let updateQuote = self.quoteArray[indexPath.row]
-            print("Update favourite to \(!updateQuote.isFavourite)")
             
             updateQuote.setValue(!updateQuote.isFavourite, forKey: "isFavourite")
             

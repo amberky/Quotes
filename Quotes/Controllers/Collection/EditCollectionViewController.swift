@@ -93,6 +93,7 @@ class EditCollectionViewController: UIViewController {
         }
         
         alert.addAction(cancelAction)
+        alert.view.tintColor = UIColor.rgb(red: 93, green: 117, blue: 153);
         
         self.present(alert, animated: true, completion: nil)
     }
@@ -240,7 +241,6 @@ extension EditCollectionViewController: UICollectionViewDelegateFlowLayout, UICo
         }
         
         let icon = iconArray[indexPath.row]
-        print(icon.name)
         
         selectedIndex = indexPath.row
         collectionView.reloadData()

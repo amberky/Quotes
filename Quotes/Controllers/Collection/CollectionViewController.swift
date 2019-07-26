@@ -36,7 +36,6 @@ class CollectionViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("viewWillAppear")
         loadCollections()
     }
     

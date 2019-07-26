@@ -164,7 +164,6 @@ extension AddCollectionViewController: UICollectionViewDelegateFlowLayout, UICol
         }
 
         let icon = iconArray[indexPath.row]
-        print(icon.name)
 
         selectedIndex = indexPath.row
         collectionView.reloadData()
