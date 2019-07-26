@@ -18,12 +18,14 @@ class CollectionQuoteViewController: UIViewController {
     
     @IBOutlet var quoteTableView: UITableView!
     
+    var didSet: Bool = false
     var selectedCollection: CollectionModel? {
         didSet {
             print("didSet")
+            didSet = true
             
             setTitle()
-            loadQuotes()
+            //loadQuotes()
         }
     }
     
@@ -40,7 +42,21 @@ class CollectionQuoteViewController: UIViewController {
         quoteTableView.delegate = self
         quoteTableView.dataSource = self
         
+        searchBar.delegate = self
+        
         colorCount = colorArray.count
+        
+        if didSet {
+            loadQuotes()
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        if searchBar.text != "" {
+            searchBar.text = ""
+            
+            loadQuotes()
+        }
     }
     
     func setTitle() {
@@ -71,6 +87,8 @@ class CollectionQuoteViewController: UIViewController {
         } catch {
             print("Error fetching data from context \(error)")
         }
+        
+        quoteTableView.reloadData()
     }
     
     
@@ -98,6 +116,16 @@ class CollectionQuoteViewController: UIViewController {
             searchBar.resignFirstResponder()
         }
     }
+    
+    func saveContext() {
+        do {
+            try context.save()
+            quoteTableView.reloadData()
+            
+        } catch {
+            print("Error saving data from context \(error)")
+        }
+    }
 }
 
 extension CollectionQuoteViewController: UITableViewDelegate, UITableViewDataSource {
@@ -112,8 +140,11 @@ extension CollectionQuoteViewController: UITableViewDelegate, UITableViewDataSou
         
         let quote = quoteArray[indexPath.row]
         
+        cell.delegate = self
+        
         cell.quoteLabel.text = quote.quote
         cell.authorLabel.text = "\(quote.author ?? "")"
+        cell.favouriteIcon.isHidden = !quote.isFavourite
         
         if quote.author != "" {
             cell.authorLabel.topAnchor.constraint(equalTo: cell.quoteLabel.bottomAnchor, constant: 10).isActive = true
@@ -171,11 +202,7 @@ extension CollectionQuoteViewController: UISearchBarDelegate {
             loadQuotes()
         }
         else {
-            let request : NSFetchRequest<Quote> = Quote.fetchRequest()
-            
             let predicate = NSPredicate(format: "quote CONTAINS[cd] %@", searchBar.text!)
-            
-            request.sortDescriptors = [NSSortDescriptor(key: "quote", ascending: true)]
             
             loadQuotes(predicate: predicate)
         }
@@ -187,4 +214,48 @@ extension CollectionQuoteViewController: UISearchBarDelegate {
             }
         }
     }
+}
+
+extension CollectionQuoteViewController: QuoteTableViewCellDelegate {
+    func longPressed(cell: QuoteTableViewCell) {
+        print("long pressed")
+        
+        if let indexPath = quoteTableView.indexPath(for: cell)
+        {
+            let alert = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
+            
+            let editAction = UIAlertAction.init(title: "Edit", style: .default) { (action) in
+                print("Edit")
+            }
+            alert.addAction(editAction)
+            
+            let deleteAction = UIAlertAction.init(title: "Delete", style: .destructive) { (action) in
+                print("Delete")
+                
+                self.context.delete(self.quoteArray[indexPath.row])
+                self.quoteArray.remove(at: indexPath.row)
+                
+                self.saveContext()
+            }
+            alert.addAction(deleteAction)
+            
+            let cancelAction = UIAlertAction.init(title: "Cancel", style: .cancel) { (action) in
+                print("Cancel")
+            }
+            alert.addAction(cancelAction)
+            
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func doubleTapped(cell: QuoteTableViewCell) {
+        print("double tapped")
+        if let indexPath = quoteTableView.indexPath(for: cell) {
+            let updateQuote = self.quoteArray[indexPath.row]
+            updateQuote.setValue(!updateQuote.isFavourite, forKey: "isFavourite")
+            
+            self.saveContext()
+        }
+    }
+    
 }

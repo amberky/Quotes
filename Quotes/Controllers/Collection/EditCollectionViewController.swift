@@ -34,8 +34,6 @@ class EditCollectionViewController: UIViewController {
     
     var selectedCollection: CollectionModel?
     
-    var cancelDelete: Bool = false
-    
     //MARK: - view delegate
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,8 +90,6 @@ class EditCollectionViewController: UIViewController {
         
         let cancelAction = UIAlertAction.init(title: "Cancel", style: .cancel) { (action) in
             print("Cancel action clicked")
-            
-            self.cancelDelete = true
         }
         
         alert.addAction(cancelAction)

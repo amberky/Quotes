@@ -70,10 +70,18 @@
                                     <constraint firstItem="fim-M8-eXL" firstAttribute="centerX" secondItem="IO6-A8-ABD" secondAttribute="centerX" id="lRz-FH-G9e"/>
                                 </constraints>
                             </view>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star-yellow" translatesAutoresizingMaskIntoConstraints="NO" id="bhr-J7-e5I">
+                                <rect key="frame" x="255" y="74.5" width="15" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="15" id="b1C-5n-XxH"/>
+                                    <constraint firstAttribute="height" constant="15" id="hHg-yG-6mL"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.82387381790000003" green="0.85850101710000004" blue="0.87843507529999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="IO6-A8-ABD" firstAttribute="top" secondItem="F3G-4m-KeI" secondAttribute="bottom" constant="20" id="3tH-1p-KRU"/>
+                            <constraint firstAttribute="trailing" secondItem="bhr-J7-e5I" secondAttribute="trailing" constant="10" id="COa-q9-Q9E"/>
                             <constraint firstItem="F3G-4m-KeI" firstAttribute="top" secondItem="Mb0-3y-ppF" secondAttribute="top" id="FyU-sC-xzZ"/>
                             <constraint firstItem="IO6-A8-ABD" firstAttribute="centerX" secondItem="Mb0-3y-ppF" secondAttribute="centerX" id="LIx-gI-bcw"/>
                             <constraint firstItem="JnD-BL-TB1" firstAttribute="leading" secondItem="Mb0-3y-ppF" secondAttribute="leading" id="PhT-58-ClX"/>
@@ -81,6 +89,7 @@
                             <constraint firstAttribute="bottom" secondItem="IO6-A8-ABD" secondAttribute="bottom" constant="20" id="U93-W2-KR7"/>
                             <constraint firstAttribute="trailing" secondItem="F3G-4m-KeI" secondAttribute="trailing" id="XIc-6b-fNy"/>
                             <constraint firstItem="F3G-4m-KeI" firstAttribute="leading" secondItem="Mb0-3y-ppF" secondAttribute="leading" id="XdM-8t-cbk"/>
+                            <constraint firstAttribute="bottom" secondItem="bhr-J7-e5I" secondAttribute="bottom" constant="10" id="bnv-EJ-JzM"/>
                             <constraint firstItem="JnD-BL-TB1" firstAttribute="top" secondItem="Mb0-3y-ppF" secondAttribute="top" constant="12" id="hbZ-dB-TsS"/>
                             <constraint firstAttribute="trailing" secondItem="JnD-BL-TB1" secondAttribute="trailing" id="yKu-r1-oi3"/>
                         </constraints>
@@ -98,10 +107,12 @@
                     <constraint firstItem="Mb0-3y-ppF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="iN1-Tt-2mA"/>
                 </constraints>
             </tableViewCellContentView>
+            <gestureRecognizers/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="authorLabel" destination="fim-M8-eXL" id="ASf-vB-ogs"/>
                 <outlet property="fakeQuoteHeader" destination="JnD-BL-TB1" id="LCZ-FU-HZi"/>
+                <outlet property="favouriteIcon" destination="bhr-J7-e5I" id="CL6-bg-Ti5"/>
                 <outlet property="quoteBackground" destination="Mb0-3y-ppF" id="hot-sx-n5K"/>
                 <outlet property="quoteHeader" destination="F3G-4m-KeI" id="jDS-wR-wVP"/>
                 <outlet property="quoteLabel" destination="Xp0-Tl-jlX" id="TE4-dc-oFn"/>
@@ -109,4 +120,7 @@
             <point key="canvasLocation" x="34.782608695652179" y="60.267857142857139"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="star-yellow" width="50" height="50"/>
+    </resources>
 </document>

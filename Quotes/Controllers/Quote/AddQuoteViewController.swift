@@ -51,6 +51,11 @@ class AddQuoteViewController: UIViewController {
         collectionLabel.addGestureRecognizer(collectionLabelTapGesture)
     }
     
+    @IBAction func longPressed(_ sender: UILongPressGestureRecognizer) {
+        print("longPressed")
+    }
+    
+    
     func setSelectedCollection() {
         print("selectedCollection: \(selectedCollection?.name ?? "nil")")
         if selectedCollection != nil {
@@ -101,6 +106,7 @@ class AddQuoteViewController: UIViewController {
             let newQuote = Quote(context: self.context)
             newQuote.quote = quoteTextField.text!.trimmingCharacters(in: .whitespaces)
             newQuote.author = (authorTextField?.text ?? "").trimmingCharacters(in: .whitespaces)
+            newQuote.isFavourite = false
             newQuote.collection = selectedCollection
             newQuote.addedOn = Date()
             

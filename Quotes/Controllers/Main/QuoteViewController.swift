@@ -29,7 +29,9 @@ class QuoteViewController: UITableViewController {
         colorCount = colorArray.count
         
         configureTableView()
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         loadQuotes()
     }
     
@@ -45,8 +47,12 @@ class QuoteViewController: UITableViewController {
         let request : NSFetchRequest<Quote> = Quote.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "addedOn", ascending: false)]
         
+        let favouritePredicate = NSPredicate(format: "isFavourite == %@", NSNumber(value: true))
+        
         if (predicate != nil) {
-            request.predicate = predicate
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [favouritePredicate, predicate!])
+        } else {
+            request.predicate = favouritePredicate
         }
         
         do {
@@ -86,8 +92,10 @@ class QuoteViewController: UITableViewController {
         
         let quote = quoteArray[indexPath.row]
         
+        cell.delegate = self
         cell.quoteLabel.text = quote.quote
         cell.authorLabel.text = "\(quote.author ?? "")"
+        cell.favouriteIcon.isHidden = !quote.isFavourite
         
         if quote.author != "" {
             cell.authorLabel.topAnchor.constraint(equalTo: cell.quoteLabel.bottomAnchor, constant: 10).isActive = true
@@ -100,10 +108,10 @@ class QuoteViewController: UITableViewController {
         cell.quoteHeader.clipsToBounds = true
         cell.fakeQuoteHeader.backgroundColor = colorArray[mod]
         
-//        cell.quoteHeader.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        //        cell.quoteHeader.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
         cell.quoteBackground.backgroundColor = .white //colorArray[mod]
-//        cell.quoteBackground.layer.masksToBounds = false
+        //        cell.quoteBackground.layer.masksToBounds = false
         cell.quoteBackground.layer.shadowOpacity = 0.2
         cell.quoteBackground.layer.shadowRadius = 2
         cell.quoteBackground.layer.shadowOffset = CGSize(width: 2, height: 2)
@@ -120,10 +128,10 @@ class QuoteViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        context.delete(quoteArray[indexPath.row])
-        quoteArray.remove(at: indexPath.row)
-        
-        saveContext()
+        //        context.delete(quoteArray[indexPath.row])
+        //        quoteArray.remove(at: indexPath.row)
+        //
+        //        saveContext()
     }
     
     //MARK: - unwind Segue
@@ -179,6 +187,51 @@ extension QuoteViewController: UISearchBarDelegate {
             DispatchQueue.main.async {
                 searchBar.resignFirstResponder()
             }
+        }
+    }
+}
+
+extension QuoteViewController: QuoteTableViewCellDelegate {
+    func longPressed(cell: QuoteTableViewCell) {
+        print("long pressed")
+        
+        if let indexPath = tableView.indexPath(for: cell)
+        {
+            let alert = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
+            
+            let editAction = UIAlertAction.init(title: "Edit", style: .default) { (action) in
+                print("Edit")
+            }
+            alert.addAction(editAction)
+            
+            let deleteAction = UIAlertAction.init(title: "Delete", style: .destructive) { (action) in
+                print("Delete")
+                
+                self.context.delete(self.quoteArray[indexPath.row])
+                self.quoteArray.remove(at: indexPath.row)
+                
+                self.saveContext()
+            }
+            alert.addAction(deleteAction)
+            
+            let cancelAction = UIAlertAction.init(title: "Cancel", style: .cancel) { (action) in
+                print("Cancel")
+            }
+            alert.addAction(cancelAction)
+            
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func doubleTapped(cell: QuoteTableViewCell) {
+        print("double tapped")
+        if let indexPath = tableView.indexPath(for: cell) {
+            let updateQuote = self.quoteArray[indexPath.row]
+            updateQuote.setValue(!updateQuote.isFavourite, forKey: "isFavourite")
+            
+            self.quoteArray.remove(at: indexPath.row)
+            self.saveContext()
+            
         }
     }
 }

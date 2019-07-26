@@ -105,7 +105,6 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout, UICollec
         let imagePath = "\(collection.icon)\(iconMode)"
             cell.collectionImage.image = UIImage.init(named: imagePath)
         
-        
         cell.collectionImage.backgroundColor = beigeColor
         cell.collectionLabel.text = collection.name
         
