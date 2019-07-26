@@ -13,13 +13,22 @@ class AddQuoteViewController: UIViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    let selected = UIImage.init(named: "star-yellow")
+    let unselected = UIImage.init(named: "star-gray-unfilled")
+    
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var collectionLabel: UILabel!
+    @IBOutlet weak var favouriteLabel: UILabel!
     
     @IBOutlet weak var quoteTextField: UITextField!
     @IBOutlet weak var authorTextField: UITextField!
+    
     @IBOutlet weak var collectionButton: UIButton!
+    
+    @IBOutlet weak var favouriteContainer: UIView!
+    
+    @IBOutlet weak var favouriteIcon: UIImageView!
     
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
@@ -29,6 +38,8 @@ class AddQuoteViewController: UIViewController {
             setSelectedCollection()
         }
     }
+    
+    var isFavourite: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,27 +51,34 @@ class AddQuoteViewController: UIViewController {
 
         quoteTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         
-        let quoteLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(quoteLabelTapped))
-        quoteLabel.addGestureRecognizer(quoteLabelTapGesture)
-        
-        
-        let authorLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(authorLabelTapped))
-        authorLabel.addGestureRecognizer(authorLabelTapGesture)
-        
-        let collectionLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(collectionLabelTapped))
-        collectionLabel.addGestureRecognizer(collectionLabelTapGesture)
+        setupGesture()
     }
-    
-    @IBAction func longPressed(_ sender: UILongPressGestureRecognizer) {
-        print("longPressed")
-    }
-    
     
     func setSelectedCollection() {
         print("selectedCollection: \(selectedCollection?.name ?? "nil")")
         if selectedCollection != nil {
             collectionButton.setTitle(selectedCollection?.name ?? "none" , for: .normal)
         }
+    }
+    
+    func setupGesture() {
+        let quoteLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(quoteLabelTapped))
+        quoteLabel.addGestureRecognizer(quoteLabelTapGesture)
+        
+        let authorLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(authorLabelTapped))
+        authorLabel.addGestureRecognizer(authorLabelTapGesture)
+        
+        let collectionLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(collectionLabelTapped))
+        collectionLabel.addGestureRecognizer(collectionLabelTapGesture)
+        
+        let favouriteLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(favouriteTapped))
+        favouriteLabel.addGestureRecognizer(favouriteLabelTapGesture)
+        
+        let favouriteContainerTapGesture = UITapGestureRecognizer(target: self, action: #selector(favouriteTapped))
+        favouriteContainer.addGestureRecognizer(favouriteContainerTapGesture)
+        
+        let favouriteIconTapGesture = UITapGestureRecognizer(target: self, action: #selector(favouriteTapped))
+        favouriteIcon.addGestureRecognizer(favouriteIconTapGesture)
     }
     
     @objc func quoteLabelTapped() {
@@ -78,6 +96,18 @@ class AddQuoteViewController: UIViewController {
     @objc func collectionLabelTapped() {
         print("collection label tapped")
         performSegue(withIdentifier: "goToSelectCollectionView", sender: self)
+    }
+    
+    @objc func favouriteTapped() {
+        print("favourite tapped")
+        
+        if isFavourite == false {
+            favouriteIcon.image = selected
+            isFavourite = true
+        } else {
+            favouriteIcon.image = unselected
+            isFavourite = false
+        }
     }
     
     func saveContext() {
@@ -106,7 +136,7 @@ class AddQuoteViewController: UIViewController {
             let newQuote = Quote(context: self.context)
             newQuote.quote = quoteTextField.text!.trimmingCharacters(in: .whitespaces)
             newQuote.author = (authorTextField?.text ?? "").trimmingCharacters(in: .whitespaces)
-            newQuote.isFavourite = false
+            newQuote.isFavourite = isFavourite
             newQuote.collection = selectedCollection
             newQuote.addedOn = Date()
             

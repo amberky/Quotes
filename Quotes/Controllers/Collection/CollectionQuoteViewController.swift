@@ -120,7 +120,8 @@ class CollectionQuoteViewController: UIViewController {
     func saveContext() {
         do {
             try context.save()
-            quoteTableView.reloadData()
+            
+            //quoteTableView.reloadData()
             
         } catch {
             print("Error saving data from context \(error)")
@@ -145,6 +146,8 @@ extension CollectionQuoteViewController: UITableViewDelegate, UITableViewDataSou
         cell.quoteLabel.text = quote.quote
         cell.authorLabel.text = "\(quote.author ?? "")"
         cell.favouriteIcon.isHidden = !quote.isFavourite
+        
+        cell.quoteFavourite = quote.isFavourite
         
         if quote.author != "" {
             cell.authorLabel.topAnchor.constraint(equalTo: cell.quoteLabel.bottomAnchor, constant: 10).isActive = true
@@ -250,8 +253,11 @@ extension CollectionQuoteViewController: QuoteTableViewCellDelegate {
     
     func doubleTapped(cell: QuoteTableViewCell) {
         print("double tapped")
+        
         if let indexPath = quoteTableView.indexPath(for: cell) {
             let updateQuote = self.quoteArray[indexPath.row]
+            print("Update favourite to \(!updateQuote.isFavourite)")
+            
             updateQuote.setValue(!updateQuote.isFavourite, forKey: "isFavourite")
             
             self.saveContext()
