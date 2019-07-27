@@ -13,8 +13,15 @@ class QuoteViewController: UITableViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    var quoteArray = [Quote]()
+    let impact = UIImpactFeedbackGenerator()
+    let select = UISelectionFeedbackGenerator()
     
+    var quoteArray = [[Quote]]()
+    
+    var pinArray = [Quote]()
+    var unpinArray = [Quote]()
+    
+    var num: Int = 0
     var colorArray = ColorTheme.init().colorArray
     var colorCount: Int = 0
     
@@ -24,8 +31,7 @@ class QuoteViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        quoteTableView.register(UINib(nibName: "QuoteTableViewCell", bundle: nil) , forCellReuseIdentifier: "QuoteCell")
-        
+        tableView.register(UINib(nibName: "QuoteTableViewCell", bundle: nil) , forCellReuseIdentifier: "QuoteCell")
         colorCount = colorArray.count
         
         configureTableView()
@@ -44,23 +50,41 @@ class QuoteViewController: UITableViewController {
     }
     
     func loadQuotes(predicate: NSPredicate? = nil) {
+        num = 0
+        quoteArray = [[Quote]]()
+        
+        let sort = [NSSortDescriptor(key: "addedOn", ascending: false)]
+        
+        let pinRequest : NSFetchRequest<Quote> = Quote.fetchRequest()
+        pinRequest.sortDescriptors = sort
+        
         let request : NSFetchRequest<Quote> = Quote.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key: "isFavourite", ascending: false), NSSortDescriptor(key: "addedOn", ascending: false)]
+        request.sortDescriptors = sort
+        
+        let pinPredicate = NSPredicate.init(format: "isPin == %@", NSNumber(value: true))
+        let unpinPredicate = NSPredicate.init(format: "isPin == %@", NSNumber(value: false))
         
         if (predicate != nil) {
-            request.predicate = predicate
+            pinRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [pinPredicate, predicate!])
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [unpinPredicate, predicate!])
+            
+        } else {
+            pinRequest.predicate = pinPredicate
+            request.predicate = unpinPredicate
         }
         
-//        let favouritePredicate = NSPredicate(format: "isFavourite == %@", NSNumber(value: true))
-        
-//        if (predicate != nil) {
-//            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [favouritePredicate, predicate!])
-//        } else {
-//            request.predicate = favouritePredicate
-//        }
-        
         do {
-            quoteArray = try context.fetch(request)
+            pinArray = try context.fetch(pinRequest)
+            unpinArray = try context.fetch(request)
+            
+            //if pinArray.count > 0 {
+            quoteArray.append(pinArray)
+            //}
+            
+            //if unpinArray.count > 0 {
+            quoteArray.append(unpinArray)
+            //}
+            
         } catch {
             print("Error fetching data from context \(error)")
         }
@@ -68,11 +92,14 @@ class QuoteViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    func saveContext() {
+    func saveContext(retrieveDataFromContext: Bool) {
         do {
             try context.save()
             
-            tableView.reloadData()
+            //            if retrieveDataFromContext {
+            //                loadQuotes()
+            //                quoteTableView.reloadSections(IndexSet(integersIn: 0...quoteArray.count - 1 ), with: .fade)
+            //            }
             
         } catch {
             print("Error saving data from context \(error)")
@@ -85,23 +112,97 @@ class QuoteViewController: UITableViewController {
     }
     
     //MARK: - TableView Delegate Methods
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return quoteArray.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let mod = indexPath.row % colorCount
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return quoteArray[section].count
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = .white
         
+        if section == 0 && pinArray.count > 0 {
+            let image = UIImageView(image: UIImage.init(named: "pin-gray"))
+            image.frame = CGRect(x: tableView.separatorInset.left + 5,
+                                 y: (self.tableView.sectionHeaderHeight - 15) / 2,
+                                 width: 15,
+                                 height: 15)
+            
+            headerView.addSubview(image)
+            
+            let label = UILabel()
+            label.text = "PINNED"
+            label.textColor = .lightGray
+            
+            label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.callout)
+            
+            label.frame = CGRect(x: tableView.separatorInset.left + 15 + 10,
+                                 // table margin left - image width - 10 margin (image - label)
+                y: (self.tableView.sectionHeaderHeight - 15) / 2,
+                width: tableView.frame.width - tableView.separatorInset.left - tableView.separatorInset.left - 20 - 10,
+                height: 15)
+            
+            headerView.addSubview(label)
+            
+            return headerView
+        }
+        
+        return headerView
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = UIView()
+        footerView.backgroundColor = .clear
+        if section == 0 && pinArray.count > 0 && unpinArray.count > 0 {
+            
+            let separator = UIView()
+            separator.frame = CGRect(x: 0,
+                                     y: self.tableView.sectionHeaderHeight / 2,
+                                     width: tableView.frame.width,
+                                     height: 2)
+            
+            if pinArray.count != 0 && unpinArray.count != 0 {
+                separator.backgroundColor = UIColor.rgb(red: 238, green: 238, blue: 238)
+            } else {
+                separator.backgroundColor = .clear
+            }
+            
+            footerView.addSubview(separator)
+        }
+        
+        return footerView
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if (section == 0 && pinArray.count > 0) { //|| (pinArray.count != 0 && unpinArray.count != 0) {
+            return self.tableView.sectionHeaderHeight
+        } else {
+            return 0.0
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if (section == 0 && pinArray.count > 0) { //|| (pinArray.count != 0 && unpinArray.count != 0) {
+            return self.tableView.sectionHeaderHeight
+        } else {
+            return 0.0
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //        let mod = num % colorCount
+        //        num += 1
+        let mod = 0
         let cell = tableView.dequeueReusableCell(withIdentifier: "QuoteCell", for: indexPath) as! QuoteTableViewCell
         
-        let quote = quoteArray[indexPath.row]
+        let quote = quoteArray[indexPath.section][indexPath.row]
         
         cell.delegate = self
         cell.quoteLabel.text = quote.quote
         cell.authorLabel.text = "\(quote.author ?? "")"
-        cell.favouriteIcon.isHidden = !quote.isFavourite
-        
-        cell.quoteFavourite = quote.isFavourite
         
         if quote.author != "" {
             cell.authorLabel.topAnchor.constraint(equalTo: cell.quoteLabel.bottomAnchor, constant: 10).isActive = true
@@ -114,10 +215,7 @@ class QuoteViewController: UITableViewController {
         cell.quoteHeader.clipsToBounds = true
         cell.fakeQuoteHeader.backgroundColor = colorArray[mod]
         
-        //        cell.quoteHeader.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        
-        cell.quoteBackground.backgroundColor = .white //colorArray[mod]
-        //        cell.quoteBackground.layer.masksToBounds = false
+        cell.quoteBackground.backgroundColor = .white
         cell.quoteBackground.layer.shadowOpacity = 0.2
         cell.quoteBackground.layer.shadowRadius = 2
         cell.quoteBackground.layer.shadowOffset = CGSize(width: 2, height: 2)
@@ -133,13 +231,6 @@ class QuoteViewController: UITableViewController {
         cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: radius).cgPath
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        context.delete(quoteArray[indexPath.row])
-        //        quoteArray.remove(at: indexPath.row)
-        //
-        //        saveContext()
-    }
-    
     //MARK: - unwind Segue
     @IBAction func backToQuoteView(_ unwindSegue: UIStoryboardSegue) {}
     
@@ -151,6 +242,78 @@ class QuoteViewController: UITableViewController {
     func checkAndResignFirstResponder() {
         if searchBar.isFirstResponder {
             searchBar.resignFirstResponder()
+        }
+    }
+}
+
+extension QuoteViewController: QuoteTableViewCellDelegate {
+    func longPressed(cell: QuoteTableViewCell) {
+        print("long pressed")
+        
+        select.selectionChanged()
+        
+        if let indexPath = tableView.indexPath(for: cell)
+        {
+            let alert = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
+            
+            let editAction = UIAlertAction.init(title: "Edit", style: .default) { (action) in
+                print("Edit")
+            }
+            alert.addAction(editAction)
+            
+            let deleteAction = UIAlertAction.init(title: "Delete", style: .destructive) { (action) in
+                print("Delete")
+                
+                self.context.delete(self.quoteArray[indexPath.section][indexPath.row])
+                
+                self.quoteArray[indexPath.section].remove(at: indexPath.row)
+                if indexPath.section == 0 {
+                    self.pinArray.remove(at: indexPath.row)
+                } else {
+                    self.unpinArray.remove(at: indexPath.row)
+                }
+                
+                self.quoteTableView.deleteRows(at: [indexPath], with: .fade)
+                self.quoteTableView.reloadSections(IndexSet(integersIn: 0...1), with: .fade)
+                
+                self.saveContext(retrieveDataFromContext: false)
+            }
+            
+            alert.addAction(deleteAction)
+            
+            let cancelAction = UIAlertAction.init(title: "Cancel", style: .cancel) { (action) in
+                print("Cancel")
+            }
+            alert.addAction(cancelAction)
+            alert.view.tintColor = UIColor.rgb(red: 93, green: 117, blue: 153);
+            
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    
+    func doubleTapped(cell: QuoteTableViewCell) {
+        print("double tapped")
+        select.selectionChanged()
+        
+        if let indexPath = tableView.indexPath(for: cell) {
+            let updateQuote = self.quoteArray[indexPath.section][indexPath.row]
+            updateQuote.setValue(!updateQuote.isPin, forKey: "isPin")
+            
+            if updateQuote.isPin == true {
+                pinArray.append(updateQuote)
+                unpinArray.remove(at: indexPath.row)
+            } else {
+                unpinArray.append(updateQuote)
+                pinArray.remove(at: indexPath.row)
+            }
+            
+            saveContext(retrieveDataFromContext: true)
+            
+            num = 0
+            quoteArray = [pinArray, unpinArray]
+            tableView.reloadSections(IndexSet(integersIn: 0...1), with: .automatic)
+            
         }
     }
 }
@@ -197,51 +360,6 @@ extension QuoteViewController: UISearchBarDelegate {
     }
 }
 
-extension QuoteViewController: QuoteTableViewCellDelegate {
-    func longPressed(cell: QuoteTableViewCell) {
-        print("long pressed")
-        
-        if let indexPath = tableView.indexPath(for: cell)
-        {
-            let alert = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
-            
-            let editAction = UIAlertAction.init(title: "Edit", style: .default) { (action) in
-                print("Edit")
-            }
-            
-            alert.addAction(editAction)
-            
-            let deleteAction = UIAlertAction.init(title: "Delete", style: .destructive) { (action) in
-                print("Delete")
-                
-                self.context.delete(self.quoteArray[indexPath.row])
-                self.quoteArray.remove(at: indexPath.row)
-                
-                self.saveContext()
-            }
-            alert.addAction(deleteAction)
-            
-            let cancelAction = UIAlertAction.init(title: "Cancel", style: .cancel) { (action) in
-                print("Cancel")
-            }
-            alert.addAction(cancelAction)
-            alert.view.tintColor = UIColor.rgb(red: 93, green: 117, blue: 153);
-            
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
-    
-    func doubleTapped(cell: QuoteTableViewCell) {
-        print("double tapped")
-        if let indexPath = tableView.indexPath(for: cell) {
-            let updateQuote = self.quoteArray[indexPath.row]
-            updateQuote.setValue(!updateQuote.isFavourite, forKey: "isFavourite")
-            
-            //self.quoteArray.remove(at: indexPath.row)
-            self.saveContext()
-        }
-    }
-}
 
 extension UIColor {
     static func rgb(red: CGFloat, green: CGFloat, blue: CGFloat) -> UIColor {
@@ -249,3 +367,12 @@ extension UIColor {
     }
 }
 
+extension UIImage {
+    func imageWithSize(scaledToSize newSize: CGSize) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
+        self.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return newImage
+    }
+}

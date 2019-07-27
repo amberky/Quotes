@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="QuoteCell" rowHeight="120" id="KGk-i7-Jjw" customClass="QuoteTableViewCell" customModule="Quotes" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" showsReorderControl="YES" indentationWidth="10" reuseIdentifier="QuoteCell" rowHeight="120" id="KGk-i7-Jjw" customClass="QuoteTableViewCell" customModule="Quotes" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -41,13 +41,20 @@
                                     <constraint firstAttribute="height" constant="12" id="Rzr-Jf-jIy"/>
                                 </constraints>
                             </view>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pin-light" translatesAutoresizingMaskIntoConstraints="NO" id="bhr-J7-e5I" userLabel="Icon">
+                                <rect key="frame" x="255" y="5" width="15" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="15" id="54q-WL-jBf"/>
+                                    <constraint firstAttribute="height" constant="15" id="UfE-EW-edm"/>
+                                </constraints>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IO6-A8-ABD" userLabel="Label View">
                                 <rect key="frame" x="30" y="44" width="220" height="35.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quote Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xp0-Tl-jlX" userLabel="Quote Label">
                                         <rect key="frame" x="0.0" y="0.0" width="220" height="20.5"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                        <color key="textColor" red="0.16167595979999999" green="0.20672824980000001" blue="0.27059620620000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="textColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Author Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fim-M8-eXL" userLabel="Author Label">
@@ -56,7 +63,7 @@
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="24" id="umn-TW-DPx"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                        <color key="textColor" red="0.16167595979999999" green="0.20672824980000001" blue="0.27059620620000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="textColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -70,13 +77,6 @@
                                     <constraint firstItem="fim-M8-eXL" firstAttribute="centerX" secondItem="IO6-A8-ABD" secondAttribute="centerX" id="lRz-FH-G9e"/>
                                 </constraints>
                             </view>
-                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star-yellow" translatesAutoresizingMaskIntoConstraints="NO" id="bhr-J7-e5I">
-                                <rect key="frame" x="255" y="74.5" width="15" height="15"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="15" id="54q-WL-jBf"/>
-                                    <constraint firstAttribute="height" constant="15" id="UfE-EW-edm"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.82387381790000003" green="0.85850101710000004" blue="0.87843507529999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
@@ -88,9 +88,9 @@
                             <constraint firstAttribute="bottom" secondItem="IO6-A8-ABD" secondAttribute="bottom" constant="20" id="U93-W2-KR7"/>
                             <constraint firstAttribute="trailing" secondItem="F3G-4m-KeI" secondAttribute="trailing" id="XIc-6b-fNy"/>
                             <constraint firstItem="F3G-4m-KeI" firstAttribute="leading" secondItem="Mb0-3y-ppF" secondAttribute="leading" id="XdM-8t-cbk"/>
+                            <constraint firstAttribute="trailing" secondItem="bhr-J7-e5I" secondAttribute="trailing" constant="10" id="fi3-9O-6f7"/>
                             <constraint firstItem="JnD-BL-TB1" firstAttribute="top" secondItem="Mb0-3y-ppF" secondAttribute="top" constant="12" id="hbZ-dB-TsS"/>
-                            <constraint firstAttribute="trailing" secondItem="bhr-J7-e5I" secondAttribute="trailing" constant="10" id="nce-ld-OIq"/>
-                            <constraint firstAttribute="bottom" secondItem="bhr-J7-e5I" secondAttribute="bottom" constant="10" id="tEI-Sy-WAK"/>
+                            <constraint firstItem="bhr-J7-e5I" firstAttribute="top" secondItem="Mb0-3y-ppF" secondAttribute="top" constant="5" id="mNM-To-E1d"/>
                             <constraint firstAttribute="trailing" secondItem="JnD-BL-TB1" secondAttribute="trailing" id="yKu-r1-oi3"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
@@ -102,8 +102,8 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="Mb0-3y-ppF" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="C92-lT-Ebt"/>
+                    <constraint firstItem="Mb0-3y-ppF" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="E0m-oe-58H"/>
                     <constraint firstItem="Mb0-3y-ppF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="af2-vx-DLE"/>
-                    <constraint firstItem="Mb0-3y-ppF" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="fPS-rW-y0q"/>
                     <constraint firstItem="Mb0-3y-ppF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="iN1-Tt-2mA"/>
                 </constraints>
             </tableViewCellContentView>
@@ -112,7 +112,7 @@
             <connections>
                 <outlet property="authorLabel" destination="fim-M8-eXL" id="ASf-vB-ogs"/>
                 <outlet property="fakeQuoteHeader" destination="JnD-BL-TB1" id="LCZ-FU-HZi"/>
-                <outlet property="favouriteIcon" destination="bhr-J7-e5I" id="CL6-bg-Ti5"/>
+                <outlet property="icon" destination="bhr-J7-e5I" id="Qy2-fG-hud"/>
                 <outlet property="quoteBackground" destination="Mb0-3y-ppF" id="hot-sx-n5K"/>
                 <outlet property="quoteHeader" destination="F3G-4m-KeI" id="jDS-wR-wVP"/>
                 <outlet property="quoteLabel" destination="Xp0-Tl-jlX" id="TE4-dc-oFn"/>
@@ -121,6 +121,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="star-yellow" width="50" height="50"/>
+        <image name="pin-light" width="50" height="50"/>
     </resources>
 </document>

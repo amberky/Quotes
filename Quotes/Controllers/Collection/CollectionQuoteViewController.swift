@@ -69,7 +69,7 @@ class CollectionQuoteViewController: UIViewController {
     
     func loadQuotes(predicate: NSPredicate? = nil) {
         let request: NSFetchRequest<Quote> = Quote.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor(key: "isFavourite", ascending: false), NSSortDescriptor(key: "addedOn", ascending: false)]
+        request.sortDescriptors = [NSSortDescriptor(key: "isPin", ascending: false), NSSortDescriptor(key: "addedOn", ascending: false)]
         
         if selectedCollection?.isAll == false {
             if predicate != nil {
@@ -144,9 +144,7 @@ extension CollectionQuoteViewController: UITableViewDelegate, UITableViewDataSou
         
         cell.quoteLabel.text = quote.quote
         cell.authorLabel.text = "\(quote.author ?? "")"
-        cell.favouriteIcon.isHidden = !quote.isFavourite
-        
-        cell.quoteFavourite = quote.isFavourite
+        cell.icon.isHidden = !quote.isPin
         
         if quote.author != "" {
             cell.authorLabel.topAnchor.constraint(equalTo: cell.quoteLabel.bottomAnchor, constant: 10).isActive = true
@@ -256,7 +254,7 @@ extension CollectionQuoteViewController: QuoteTableViewCellDelegate {
         if let indexPath = quoteTableView.indexPath(for: cell) {
             let updateQuote = self.quoteArray[indexPath.row]
             
-            updateQuote.setValue(!updateQuote.isFavourite, forKey: "isFavourite")
+            updateQuote.setValue(!updateQuote.isPin, forKey: "isPin")
             
             self.saveContext()
         }

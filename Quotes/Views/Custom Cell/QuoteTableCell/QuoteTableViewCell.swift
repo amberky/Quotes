@@ -23,11 +23,9 @@ class QuoteTableViewCell: UITableViewCell {
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
     
-    @IBOutlet weak var favouriteIcon: UIImageView!
+    @IBOutlet weak var icon: UIImageView!
     
     var delegate: QuoteTableViewCellDelegate?
-    
-    var quoteFavourite: Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()

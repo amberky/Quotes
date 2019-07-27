@@ -163,7 +163,7 @@ extension AddCollectionViewController: UICollectionViewDelegateFlowLayout, UICol
             collectionTextField.resignFirstResponder()
         }
 
-        let icon = iconArray[indexPath.row]
+//        let icon = iconArray[indexPath.row]
 
         selectedIndex = indexPath.row
         collectionView.reloadData()

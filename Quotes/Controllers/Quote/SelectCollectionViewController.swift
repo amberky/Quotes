@@ -12,6 +12,7 @@ import CoreData
 class SelectCollectionViewController: UIViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let selection = UISelectionFeedbackGenerator()
     
     var collectionArray = [Collection]()
     var selectedCollection: String = ""
@@ -53,6 +54,8 @@ class SelectCollectionViewController: UIViewController {
             
         case "collectionSelected":
             print("Collection Selected")
+            
+            selection.selectionChanged()
             
             if let indexPath = collectionTableView.indexPathForSelectedRow {
                 let destinationVC = segue.destination as! AddQuoteViewController

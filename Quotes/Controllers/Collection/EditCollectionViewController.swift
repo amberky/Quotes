@@ -240,8 +240,6 @@ extension EditCollectionViewController: UICollectionViewDelegateFlowLayout, UICo
             collectionTextField.resignFirstResponder()
         }
         
-        let icon = iconArray[indexPath.row]
-        
         selectedIndex = indexPath.row
         collectionView.reloadData()
     }
