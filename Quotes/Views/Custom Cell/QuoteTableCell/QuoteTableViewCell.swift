@@ -26,26 +26,26 @@ class QuoteTableViewCell: UITableViewCell {
     @IBOutlet weak var icon: UIImageView!
     
     var delegate: QuoteTableViewCellDelegate?
+    var feedbackGenerator : UISelectionFeedbackGenerator? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
         let longPressedGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressedGestureAction))
-        addGestureRecognizer(longPressedGesture)
         
+        addGestureRecognizer(longPressedGesture)
+
         let doubleTappedGesture = UITapGestureRecognizer(target: self, action: #selector(doubleTappedGestureAction))
         doubleTappedGesture.numberOfTapsRequired = 2
         addGestureRecognizer(doubleTappedGesture)
     }
     
-    @objc func longPressedGestureAction() {
-        print("long pressed action")
-        
+    @objc func longPressedGestureAction(gestureReconizer: UILongPressGestureRecognizer) {
         delegate?.longPressed(cell: self)
     }
     
-    @objc func doubleTappedGestureAction() {
+    @objc func doubleTappedGestureAction(gestureReconizer: UITapGestureRecognizer) {
         print("double tapped action")
         
         delegate?.doubleTapped(cell: self)

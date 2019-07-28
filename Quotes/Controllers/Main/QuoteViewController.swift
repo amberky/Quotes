@@ -13,8 +13,9 @@ class QuoteViewController: UITableViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    let impact = UIImpactFeedbackGenerator()
-    let select = UISelectionFeedbackGenerator()
+    let blueColor = UIColor.rgb(red: 85, green: 85, blue: 85)
+    
+    var feedbackGenerator : UISelectionFeedbackGenerator? = nil
     
     var quoteArray = [[Quote]]()
     
@@ -95,12 +96,6 @@ class QuoteViewController: UITableViewController {
     func saveContext(retrieveDataFromContext: Bool) {
         do {
             try context.save()
-            
-            //            if retrieveDataFromContext {
-            //                loadQuotes()
-            //                quoteTableView.reloadSections(IndexSet(integersIn: 0...quoteArray.count - 1 ), with: .fade)
-            //            }
-            
         } catch {
             print("Error saving data from context \(error)")
         }
@@ -124,31 +119,29 @@ class QuoteViewController: UITableViewController {
         let headerView = UIView()
         headerView.backgroundColor = .white
         
-        if section == 0 && pinArray.count > 0 {
-            let image = UIImageView(image: UIImage.init(named: "pin-gray"))
-            image.frame = CGRect(x: tableView.separatorInset.left + 5,
-                                 y: (self.tableView.sectionHeaderHeight - 15) / 2,
-                                 width: 15,
-                                 height: 15)
-            
-            headerView.addSubview(image)
-            
-            let label = UILabel()
-            label.text = "PINNED"
-            label.textColor = .lightGray
-            
-            label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.callout)
-            
-            label.frame = CGRect(x: tableView.separatorInset.left + 15 + 10,
-                                 // table margin left - image width - 10 margin (image - label)
-                y: (self.tableView.sectionHeaderHeight - 15) / 2,
-                width: tableView.frame.width - tableView.separatorInset.left - tableView.separatorInset.left - 20 - 10,
-                height: 15)
-            
-            headerView.addSubview(label)
-            
-            return headerView
-        }
+        let imageName = section == 0 ? "pin-dark" : "quote-dark"
+        let image = UIImageView(image: UIImage.init(named: imageName))
+        image.frame = CGRect(x: tableView.separatorInset.left + 5,
+                             y: (self.tableView.sectionHeaderHeight - 15) / 2,
+                             width: 15,
+                             height: 15)
+        
+        headerView.addSubview(image)
+        
+        let label = UILabel()
+        label.text = section == 0 ? "PINNED QUOTES" : "QUOTES"
+        label.textColor = .darkGray
+        label.font = UIFont.boldSystemFont(ofSize: 15)
+        
+        label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.callout)
+        
+        label.frame = CGRect(x: tableView.separatorInset.left + 15 + 10,
+                             // table margin left - image width - 10 margin (image - label)
+            y: (self.tableView.sectionHeaderHeight - 15) / 2,
+            width: tableView.frame.width - tableView.separatorInset.left - tableView.separatorInset.left - 20 - 10,
+            height: 15)
+        
+        headerView.addSubview(label)
         
         return headerView
     }
@@ -177,7 +170,9 @@ class QuoteViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if (section == 0 && pinArray.count > 0) { //|| (pinArray.count != 0 && unpinArray.count != 0) {
+        if section == 0 && pinArray.count > 0 {
+            return self.tableView.sectionHeaderHeight
+        } else if section == 1 && unpinArray.count > 0 {
             return self.tableView.sectionHeaderHeight
         } else {
             return 0.0
@@ -185,7 +180,7 @@ class QuoteViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if (section == 0 && pinArray.count > 0) { //|| (pinArray.count != 0 && unpinArray.count != 0) {
+        if (section == 0 && pinArray.count > 0) {
             return self.tableView.sectionHeaderHeight
         } else {
             return 0.0
@@ -193,9 +188,9 @@ class QuoteViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //        let mod = num % colorCount
-        //        num += 1
-        let mod = 0
+        let mod = num % colorCount
+        num += 1
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "QuoteCell", for: indexPath) as! QuoteTableViewCell
         
         let quote = quoteArray[indexPath.section][indexPath.row]
@@ -250,8 +245,6 @@ extension QuoteViewController: QuoteTableViewCellDelegate {
     func longPressed(cell: QuoteTableViewCell) {
         print("long pressed")
         
-        select.selectionChanged()
-        
         if let indexPath = tableView.indexPath(for: cell)
         {
             let alert = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -278,7 +271,7 @@ extension QuoteViewController: QuoteTableViewCellDelegate {
                 
                 self.saveContext(retrieveDataFromContext: false)
             }
-            
+                        
             alert.addAction(deleteAction)
             
             let cancelAction = UIAlertAction.init(title: "Cancel", style: .cancel) { (action) in
@@ -294,7 +287,6 @@ extension QuoteViewController: QuoteTableViewCellDelegate {
     
     func doubleTapped(cell: QuoteTableViewCell) {
         print("double tapped")
-        select.selectionChanged()
         
         if let indexPath = tableView.indexPath(for: cell) {
             let updateQuote = self.quoteArray[indexPath.section][indexPath.row]
@@ -311,7 +303,16 @@ extension QuoteViewController: QuoteTableViewCellDelegate {
             saveContext(retrieveDataFromContext: true)
             
             num = 0
+            pinArray = pinArray.sorted { (a, b) -> Bool in
+                (a.addedOn ?? Date()).compare(b.addedOn ?? Date()) == .orderedDescending
+            }
+            
+            unpinArray = unpinArray.sorted { (a, b) -> Bool in
+                (a.addedOn ?? Date()).compare(b.addedOn ?? Date()) == .orderedDescending
+            }
+            
             quoteArray = [pinArray, unpinArray]
+            
             tableView.reloadSections(IndexSet(integersIn: 0...1), with: .automatic)
             
         }

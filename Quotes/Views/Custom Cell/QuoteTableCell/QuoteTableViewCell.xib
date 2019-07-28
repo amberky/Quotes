@@ -79,6 +79,7 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.82387381790000003" green="0.85850101710000004" blue="0.87843507529999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="IO6-A8-ABD" firstAttribute="top" secondItem="F3G-4m-KeI" secondAttribute="bottom" constant="20" id="3tH-1p-KRU"/>
                             <constraint firstItem="F3G-4m-KeI" firstAttribute="top" secondItem="Mb0-3y-ppF" secondAttribute="top" id="FyU-sC-xzZ"/>
