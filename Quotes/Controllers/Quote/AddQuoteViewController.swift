@@ -27,7 +27,7 @@ class AddQuoteViewController: UIViewController {
     
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
-    var selectedCollection : Collection? {
+    var selectedCollection = [Collection?]() {
         didSet {
             setSelectedCollection()
         }
@@ -47,8 +47,14 @@ class AddQuoteViewController: UIViewController {
     }
     
     func setSelectedCollection() {
-        if selectedCollection != nil {
-            collectionButton.setTitle(selectedCollection?.name ?? "none" , for: .normal)
+        if selectedCollection.count > 0 {
+            let concatCollection = selectedCollection.map { (m) -> String in
+                m!.name ?? ""
+            }.joined(separator: ", ")
+            
+            collectionButton.setTitle(concatCollection, for: .normal)
+        } else {
+            collectionButton.setTitle("None", for: .normal)
         }
     }
     
@@ -107,7 +113,13 @@ class AddQuoteViewController: UIViewController {
             newQuote.quote = quoteTextField.text!.trimmingCharacters(in: .whitespaces)
             newQuote.author = (authorTextField?.text ?? "").trimmingCharacters(in: .whitespaces)
             newQuote.isPin = false
-            newQuote.collection = selectedCollection
+            
+            if selectedCollection.count > 0 {
+                for c in selectedCollection {
+                    newQuote.addToCollections(c!)
+                }
+            }
+            
             newQuote.addedOn = Date()
             
             context.insert(newQuote)
@@ -122,11 +134,11 @@ class AddQuoteViewController: UIViewController {
         case "cancelClicked":
             print("Cancel bar button clicked")
             
-        case "goToCollectionView":
+        case "goToSelectCollectionView":
             print("Let's go to select a collection")
             
             let destination = segue.destination as! SelectCollectionViewController
-            destination.selectedCollection = selectedCollection?.name ?? ""
+            destination.selectedCollection = selectedCollection
             
         default:
             print("unknown segue identifier")

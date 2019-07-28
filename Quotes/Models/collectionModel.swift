@@ -12,10 +12,12 @@ class CollectionModel {
     let name : String
     let icon : String
     let isAll: Bool
+    var isSelected : Bool
     
-    init (collectionName: String, collectionIcon: String, showAll: Bool = false) {
+    init (collectionName: String, collectionIcon: String, showAll: Bool = false, selected: Bool = false) {
         name = collectionName
         icon = collectionIcon
+        isSelected = selected
         isAll = showAll
     }
 }

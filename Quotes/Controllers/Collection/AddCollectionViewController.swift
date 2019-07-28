@@ -68,7 +68,6 @@ class AddCollectionViewController: UIViewController {
             newCollection.name = (collectionTextField.text ?? "").trimmingCharacters(in: .whitespaces)
             newCollection.icon = iconArray[selectedIndex].name
             newCollection.addedOn = Date()
-
             context.insert(newCollection)
 
             saveContext()
@@ -77,6 +76,7 @@ class AddCollectionViewController: UIViewController {
                 let destination = segue.destination as! SelectCollectionViewController
                 destination.loadCollections()
             } else { return }
+            
         case "cancelClicked":
             print("Cancel bar button clicked")
 

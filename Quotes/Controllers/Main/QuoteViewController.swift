@@ -33,24 +33,30 @@ class QuoteViewController: UITableViewController {
         super.viewDidLoad()
         
         tableView.register(UINib(nibName: "QuoteTableViewCell", bundle: nil) , forCellReuseIdentifier: "QuoteCell")
+        
         colorCount = colorArray.count
         
         configureTableView()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
         loadQuotes()
     }
     
+//    override func viewWillAppear(_ animated: Bool) {
+//        print("viewWillAppear")
+//        loadQuotes()
+//    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         if searchBar.text != "" {
-            searchBar.text = ""
-            
-            loadQuotes()
+            let queue = DispatchQueue(label: "loadQuotes", qos: .userInitiated)
+            queue.async {
+                self.searchBar.text = ""
+                self.loadQuotes()
+            }
         }
     }
     
     func loadQuotes(predicate: NSPredicate? = nil) {
+        print("loadQuotes")
         num = 0
         quoteArray = [[Quote]]()
         
@@ -78,14 +84,8 @@ class QuoteViewController: UITableViewController {
             pinArray = try context.fetch(pinRequest)
             unpinArray = try context.fetch(request)
             
-            //if pinArray.count > 0 {
             quoteArray.append(pinArray)
-            //}
-            
-            //if unpinArray.count > 0 {
             quoteArray.append(unpinArray)
-            //}
-            
         } catch {
             print("Error fetching data from context \(error)")
         }
@@ -93,7 +93,7 @@ class QuoteViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    func saveContext(retrieveDataFromContext: Bool) {
+    func saveContext() {
         do {
             try context.save()
         } catch {
@@ -113,6 +113,46 @@ class QuoteViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return quoteArray[section].count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let mod = num % colorCount
+        num += 1
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "QuoteCell", for: indexPath) as! QuoteTableViewCell
+        
+        let quote = quoteArray[indexPath.section][indexPath.row]
+        
+        cell.delegate = self
+        
+        cell.quoteLabel.text = quote.quote
+        cell.authorLabel.text = "\(quote.author ?? "")"
+        
+//        if quote.author != "" {
+//            cell.authorLabel.topAnchor.constraint(equalTo: cell.quoteLabel.bottomAnchor, constant: 10).isActive = true
+//        } else {
+//            cell.authorLabel.topAnchor.constraint(equalTo: cell.quoteLabel.bottomAnchor, constant: 0).isActive = true
+//        }
+        
+        cell.quoteHeader.backgroundColor = colorArray[mod]
+        
+        cell.quoteHeader.clipsToBounds = true
+        cell.fakeQuoteHeader.backgroundColor = colorArray[mod]
+        
+        cell.quoteBackground.backgroundColor = .white
+        cell.quoteBackground.layer.shadowOpacity = 0.2
+        cell.quoteBackground.layer.shadowRadius = 2
+        cell.quoteBackground.layer.shadowOffset = CGSize(width: 2, height: 2)
+        cell.quoteBackground.layer.shadowColor = UIColor.lightGray.cgColor
+        
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.contentView.layer.masksToBounds = true
+        
+        let radius = cell.contentView.layer.cornerRadius
+        cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: radius).cgPath
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -187,44 +227,6 @@ class QuoteViewController: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let mod = num % colorCount
-        num += 1
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "QuoteCell", for: indexPath) as! QuoteTableViewCell
-        
-        let quote = quoteArray[indexPath.section][indexPath.row]
-        
-        cell.delegate = self
-        cell.quoteLabel.text = quote.quote
-        cell.authorLabel.text = "\(quote.author ?? "")"
-        
-        if quote.author != "" {
-            cell.authorLabel.topAnchor.constraint(equalTo: cell.quoteLabel.bottomAnchor, constant: 10).isActive = true
-        } else {
-            cell.authorLabel.topAnchor.constraint(equalTo: cell.quoteLabel.bottomAnchor, constant: 0).isActive = true
-        }
-        
-        cell.quoteHeader.backgroundColor = colorArray[mod]
-        
-        cell.quoteHeader.clipsToBounds = true
-        cell.fakeQuoteHeader.backgroundColor = colorArray[mod]
-        
-        cell.quoteBackground.backgroundColor = .white
-        cell.quoteBackground.layer.shadowOpacity = 0.2
-        cell.quoteBackground.layer.shadowRadius = 2
-        cell.quoteBackground.layer.shadowOffset = CGSize(width: 2, height: 2)
-        cell.quoteBackground.layer.shadowColor = UIColor.lightGray.cgColor
-        
-        return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.contentView.layer.masksToBounds = true
-        
-        let radius = cell.contentView.layer.cornerRadius
-        cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: radius).cgPath
-    }
     
     //MARK: - unwind Segue
     @IBAction func backToQuoteView(_ unwindSegue: UIStoryboardSegue) {}
@@ -260,6 +262,7 @@ extension QuoteViewController: QuoteTableViewCellDelegate {
                 self.context.delete(self.quoteArray[indexPath.section][indexPath.row])
                 
                 self.quoteArray[indexPath.section].remove(at: indexPath.row)
+                
                 if indexPath.section == 0 {
                     self.pinArray.remove(at: indexPath.row)
                 } else {
@@ -269,9 +272,9 @@ extension QuoteViewController: QuoteTableViewCellDelegate {
                 self.quoteTableView.deleteRows(at: [indexPath], with: .fade)
                 self.quoteTableView.reloadSections(IndexSet(integersIn: 0...1), with: .fade)
                 
-                self.saveContext(retrieveDataFromContext: false)
+                self.saveContext()
             }
-                        
+            
             alert.addAction(deleteAction)
             
             let cancelAction = UIAlertAction.init(title: "Cancel", style: .cancel) { (action) in
@@ -300,7 +303,7 @@ extension QuoteViewController: QuoteTableViewCellDelegate {
                 pinArray.remove(at: indexPath.row)
             }
             
-            saveContext(retrieveDataFromContext: true)
+            saveContext()
             
             num = 0
             pinArray = pinArray.sorted { (a, b) -> Bool in
@@ -314,6 +317,7 @@ extension QuoteViewController: QuoteTableViewCellDelegate {
             quoteArray = [pinArray, unpinArray]
             
             tableView.reloadSections(IndexSet(integersIn: 0...1), with: .automatic)
+            tableView.layoutIfNeeded()
             
         }
     }

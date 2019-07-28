@@ -32,7 +32,7 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="4Ow-nR-UmW">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="QuoteCell" id="4Ow-nR-UmW">
                                 <rect key="frame" x="0.0" y="84" width="375" height="160"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4Ow-nR-UmW" id="p05-AC-sj4">
@@ -293,10 +293,15 @@
                                                 <segue destination="joQ-5y-OR0" kind="unwind" identifier="cancelClicked" unwindAction="backToAddQuoteView:" id="SOo-7F-MJe"/>
                                             </connections>
                                         </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="3FB-i1-S92">
+                                            <connections>
+                                                <segue destination="joQ-5y-OR0" kind="unwind" identifier="doneClicked" unwindAction="backToAddQuoteView:" id="q7B-xy-at8"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="G5v-et-wQt" userLabel="Collection Table View">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="G5v-et-wQt" userLabel="Collection Table View">
                                 <rect key="frame" x="10" y="163" width="355" height="605"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -308,9 +313,6 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="tintColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <connections>
-                                            <segue destination="joQ-5y-OR0" kind="unwind" identifier="collectionSelected" unwindAction="backToAddQuoteView:" id="RbC-al-VRG"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

@@ -15,7 +15,7 @@ class SelectCollectionViewController: UIViewController {
     let selection = UISelectionFeedbackGenerator()
     
     var collectionArray = [Collection]()
-    var selectedCollection: String = ""
+    var selectedCollection = [Collection?]()
     
     //MARK: - IBOutlet
     @IBOutlet weak var collectionTableView: UITableView!
@@ -27,6 +27,8 @@ class SelectCollectionViewController: UIViewController {
         collectionTableView.delegate = self
         collectionTableView.dataSource = self
         
+        collectionTableView.allowsMultipleSelection = true
+        
         loadCollections()
     }
     
@@ -35,6 +37,11 @@ class SelectCollectionViewController: UIViewController {
         
         do {
             collectionArray = try context.fetch(request)
+            
+            //            collectionArray = collectionContext.map({ (m) -> CollectionModel in
+            //                return CollectionModel.init(collectionName: m.name ?? "", collectionIcon: m.icon ?? "", showAll: false, selected: false)
+            //            })
+            
         } catch {
             print("Error fetching data from context \(error)")
         }
@@ -49,19 +56,23 @@ class SelectCollectionViewController: UIViewController {
         guard let identifier = segue.identifier else { return }
         
         switch identifier {
-        case "cancelClicked":
-            print("Cancel bar button clicked")
-            
-        case "collectionSelected":
-            print("Collection Selected")
-            
-            selection.selectionChanged()
-            
-            if let indexPath = collectionTableView.indexPathForSelectedRow {
+        case "doneClicked":
+            print("Done bar button clicked")
+            if let indexPath = collectionTableView.indexPathsForSelectedRows {
                 let destinationVC = segue.destination as! AddQuoteViewController
-                destinationVC.selectedCollection = collectionArray[indexPath.row]
+                
+                var selectedArray = [Collection]()
+                
+                for i in indexPath {
+                    selectedArray.append(collectionArray[i.row])
+                }
+                
+                destinationVC.selectedCollection = selectedArray
             }
             
+        case "cancelClicked":
+            print("Cancel bar button clicked")
+        
         case "goToAddCollectionView":
             // perform Add New Collection
             // nothing to pass to Collection view
@@ -81,14 +92,30 @@ extension SelectCollectionViewController: UITableViewDataSource, UITableViewDele
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CollectionCell", for: indexPath)
         
+        cell.selectionStyle = .none
+        
         let collection = collectionArray[indexPath.row]
         
         cell.textLabel?.text = collection.name
         
-        if collection.name == selectedCollection {
-            cell.accessoryType = .checkmark
-        }
-        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        let collection = collectionArray[indexPath.row]
+        
+        if selectedCollection.contains(collection) {
+            cell.accessoryType = .checkmark
+            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        tableView.cellForRow(at: indexPath)?.accessoryType = .none
     }
 }
