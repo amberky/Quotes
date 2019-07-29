@@ -33,6 +33,12 @@ class AddQuoteViewController: UIViewController {
         }
     }
     
+    var quoteCount = 0 {
+        didSet {
+            print("quoteCount \(self.quoteCount)")
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -121,6 +127,8 @@ class AddQuoteViewController: UIViewController {
             }
             
             newQuote.addedOn = Date()
+            newQuote.updatedOn = Date()
+            newQuote.orderIndex = Int64(quoteCount + 1)
             
             context.insert(newQuote)
             

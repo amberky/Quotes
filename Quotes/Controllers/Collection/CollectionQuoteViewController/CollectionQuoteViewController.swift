@@ -13,6 +13,13 @@ class CollectionQuoteViewController: UIViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    let selectionFeedback = UISelectionFeedbackGenerator()
+    
+    var quoteSectionArray = QuoteSections.init().quoteSections
+    
+    var colorArray = ColorTheme.init(alpha: 0.2).colorArray
+    var colorCount: Int = 0
+    
     //MARK: - IBOutlet
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -28,23 +35,17 @@ class CollectionQuoteViewController: UIViewController {
             //loadQuotes()
         }
     }
-    
-    var quoteArray = [[Quote]]()
-    
-    var pinArray = [Quote]()
-    var unpinArray = [Quote]()
-    
-    var num: Int = 0
-    var colorArray = ColorTheme.init().colorArray
-    var colorCount: Int = 0
-    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        quoteTableView.register(UINib(nibName: "QuoteTableViewCell", bundle: nil) , forCellReuseIdentifier: "QuoteCell")
-        
+//        quoteTableView.register(UINib(nibName: "QuoteTableViewCell", bundle: nil) , forCellReuseIdentifier: "QuoteCell")
+//
         quoteTableView.delegate = self
         quoteTableView.dataSource = self
+        quoteTableView.dragInteractionEnabled = true
+        quoteTableView.dragDelegate = self
+        quoteTableView.dropDelegate = self
         
         searchBar.delegate = self
         
@@ -72,54 +73,12 @@ class CollectionQuoteViewController: UIViewController {
     }
     
     func loadQuotes(predicate: NSPredicate? = nil) {
-        num = 0
-        quoteArray = [[Quote]]()
-        
-        let sort = [NSSortDescriptor(key: "addedOn", ascending: false)]
-        
-        let pinRequest : NSFetchRequest<Quote> = Quote.fetchRequest()
-        pinRequest.sortDescriptors = sort
-        
-        let request : NSFetchRequest<Quote> = Quote.fetchRequest()
-        request.sortDescriptors = sort
-        
-        let pinPredicate = NSPredicate.init(format: "isPin == %@", NSNumber(value: true))
-        let unpinPredicate = NSPredicate.init(format: "isPin == %@", NSNumber(value: false))
-        
         if selectedCollection?.isAll == false {
-            // for not 'ALL'
-            
-            let collectionPredicate = NSPredicate(format: "ANY collections.name == %@", selectedCollection!.name)
-            
-            if predicate != nil {
-                pinRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [pinPredicate, collectionPredicate, predicate!])
-                
-                request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [unpinPredicate, collectionPredicate, predicate!])
-            } else {
-                pinRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [pinPredicate, collectionPredicate])
-                
-                request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [unpinPredicate, collectionPredicate])
-            }
-        } else if predicate != nil {
-            // for 'ALL' & with predicate parameter
-            pinRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [pinPredicate, predicate!])
-            
-            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [unpinPredicate, predicate!])
+            quoteSectionArray = QuoteSections.init(collection: selectedCollection?.name, customPredicate: predicate).quoteSections
         } else {
-            // for 'ALL' & no predicate parameter
-            pinRequest.predicate = pinPredicate
-            request.predicate = unpinPredicate
+            quoteSectionArray = QuoteSections.init(customPredicate: predicate).quoteSections
         }
         
-        do {
-            pinArray = try context.fetch(pinRequest)
-            unpinArray = try context.fetch(request)
-            
-            quoteArray.append(pinArray)
-            quoteArray.append(unpinArray)
-        } catch {
-            print("Error fetching data from context \(error)")
-        }
         
         quoteTableView.reloadData()
     }
@@ -153,8 +112,6 @@ class CollectionQuoteViewController: UIViewController {
     func saveContext() {
         do {
             try context.save()
-            
-            quoteTableView.reloadData()
         } catch {
             print("Error saving data from context \(error)")
         }
@@ -162,61 +119,95 @@ class CollectionQuoteViewController: UIViewController {
 }
 
 extension CollectionQuoteViewController: UITableViewDelegate, UITableViewDataSource {
+    //MARK: - TableView Delegate Methods
     func numberOfSections(in tableView: UITableView) -> Int {
-        return quoteArray.count
+        return quoteSectionArray.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return quoteArray[section].count
+        return quoteSectionArray[section].quotes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let mod = num % colorCount
-//        num += 1
+        let mod = (indexPath.row + indexPath.section) % colorCount
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "QuoteCell", for: indexPath) as! QuoteTableViewCell
         
-        let quote = quoteArray[indexPath.section][indexPath.row]
+        let quote = quoteSectionArray[indexPath.section].quotes[indexPath.row]
         
         cell.quote = quote
+        cell.color = colorArray[mod]
         
-        //cell.delegate = self
-        
-//        cell.quoteLabel.text = quote.quote
-//        cell.authorLabel.text = "\(quote.author ?? "")"
-//
-//        if quote.author != "" {
-//            cell.authorLabel.topAnchor.constraint(equalTo: cell.quoteLabel.bottomAnchor, constant: 10).isActive = true
-//        } else {
-//            cell.authorLabel.topAnchor.constraint(equalTo: cell.quoteLabel.bottomAnchor, constant: 0).isActive = true
-//        }
-//
-//        cell.quoteHeader.backgroundColor = colorArray[mod]
-//
-//        cell.quoteHeader.clipsToBounds = true
-//        cell.fakeQuoteHeader.backgroundColor = colorArray[mod]
-//
-//        cell.quoteBackground.backgroundColor = .white
-//        cell.quoteBackground.layer.shadowOpacity = 0.2
-//        cell.quoteBackground.layer.shadowRadius = 2
-//        cell.quoteBackground.layer.shadowOffset = CGSize(width: 2, height: 2)
-//        cell.quoteBackground.layer.shadowColor = UIColor.lightGray.cgColor
-//
         return cell
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.contentView.layer.masksToBounds = true
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return quoteSectionArray[section].sectionName
+    }
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let movedObject = quoteSectionArray[sourceIndexPath.section].quotes[sourceIndexPath.row]
+        print(movedObject)
         
-        let radius = cell.contentView.layer.cornerRadius
-        cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: radius).cgPath
+        quoteSectionArray[sourceIndexPath.section].quotes.remove(at: sourceIndexPath.row)
+        quoteSectionArray[destinationIndexPath.section].quotes.insert(movedObject, at: destinationIndexPath.row)
+        
+        let queue = DispatchQueue(label: "saveOrdering", qos: .userInitiated)
+        queue.async {
+            self.saveOrdering()
+        }
+    }
+    
+    func saveOrdering() {
+        for i in quoteSectionArray {
+            for (index, item) in i.quotes.enumerated() {
+                item.orderIndex = Int64(index)
+            }
+        }
+        
+        saveContext()
+    }
+    
+    func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+        if sourceIndexPath.section != proposedDestinationIndexPath.section {
+            return sourceIndexPath
+        } else {
+            return proposedDestinationIndexPath
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
+    
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.beginUpdates()
+        let cell = tableView.cellForRow(at: indexPath) as! QuoteTableViewCell
+        
+        if cell.quoteLabel.numberOfLines == 2 {
+            cell.quoteLabel.numberOfLines = 0
+        } else {
+            cell.quoteLabel.numberOfLines = 2
+        }
+        tableView.endUpdates()
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView()
         headerView.backgroundColor = .white
         
-        let imageName = section == 0 ? "pin-dark" : "quote-dark"
+        let headerInfo = quoteSectionArray[section]
+        
+        let imageName = headerInfo.sectionIcon
         let image = UIImageView(image: UIImage.init(named: imageName))
         image.frame = CGRect(x: tableView.separatorInset.left + 5,
                              y: (tableView.sectionHeaderHeight - 15) / 2,
@@ -226,14 +217,14 @@ extension CollectionQuoteViewController: UITableViewDelegate, UITableViewDataSou
         headerView.addSubview(image)
         
         let label = UILabel()
-        label.text = section == 0 ? "PINNED QUOTES" : "QUOTES"
+        label.text = headerInfo.sectionName
         label.textColor = .darkGray
         label.font = UIFont.boldSystemFont(ofSize: 15)
         
         label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.callout)
         
-        label.frame = CGRect(x: tableView.separatorInset.left + 15 + 10,
-                             // table margin left - image width - 10 margin (image - label)
+        label.frame = CGRect(x: tableView.separatorInset.left + 15 + 15,
+                             // table margin left - image width - 15 margin (image - label)
             y: (tableView.sectionHeaderHeight - 15) / 2,
             width: tableView.frame.width - tableView.separatorInset.left - tableView.separatorInset.left - 20 - 10,
             height: 15)
@@ -243,91 +234,15 @@ extension CollectionQuoteViewController: UITableViewDelegate, UITableViewDataSou
         return headerView
     }
     
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footerView = UIView()
-        footerView.backgroundColor = .clear
-        if section == 0 && pinArray.count > 0 && unpinArray.count > 0 {
-            
-            let separator = UIView()
-            separator.frame = CGRect(x: 0,
-                                     y: tableView.sectionHeaderHeight / 2,
-                                     width: tableView.frame.width,
-                                     height: 2)
-            
-            if pinArray.count != 0 && unpinArray.count != 0 {
-                separator.backgroundColor = UIColor.rgb(red: 238, green: 238, blue: 238)
-            } else {
-                separator.backgroundColor = .clear
-            }
-            
-            footerView.addSubview(separator)
-        }
-        
-        return footerView
-    }
-    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 && pinArray.count > 0 {
-            return tableView.sectionHeaderHeight
-        } else if section == 1 && unpinArray.count > 0 {
-            return tableView.sectionHeaderHeight
-        } else {
+        if quoteSectionArray[section].quotes.count == 0 {
             return 0.0
+        } else {
+            return tableView.sectionHeaderHeight
         }
     }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if (section == 0 && pinArray.count > 0) {
-            return tableView.sectionHeaderHeight
-        } else {
-            return 0.0
-        }
-    }
-    
-    
 }
 
-//MARK: - Search Bar methods
-extension CollectionQuoteViewController: UISearchBarDelegate {
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchBar.setShowsCancelButton(true, animated: true)
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchBar.setShowsCancelButton(false, animated: true)
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchQuote(searchBar: searchBar, hideKeyboard: true)
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchQuote(searchBar: searchBar)
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.text = ""
-        searchQuote(searchBar: searchBar, hideKeyboard: true)
-    }
-    
-    func searchQuote(searchBar : UISearchBar, hideKeyboard : Bool = false) {
-        if searchBar.text?.count == 0 {
-            loadQuotes()
-        }
-        else {
-            let predicate = NSPredicate(format: "quote CONTAINS[cd] %@", searchBar.text!)
-            
-            loadQuotes(predicate: predicate)
-        }
-        
-        if hideKeyboard {
-            //Dispatch Queue assign the task to different threads
-            DispatchQueue.main.async {
-                searchBar.resignFirstResponder()
-            }
-        }
-    }
-}
 
 //extension CollectionQuoteViewController: QuoteTableViewCellDelegate {
 //    func longPressed(cell: QuoteTableViewCell) {

@@ -13,6 +13,7 @@ class QuoteTableViewCell: UITableViewCell {
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
     
+    @IBOutlet weak var borderView: UIView!
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var quoteHeader: UIView!
     @IBOutlet weak var fakeQuoteHeader: UIView!
@@ -39,12 +40,13 @@ class QuoteTableViewCell: UITableViewCell {
     }
     
     func setColor() {
+        borderView.backgroundColor = color
         bgView.backgroundColor = color
        
-        quoteHeader.backgroundColor = color
+//        quoteHeader.backgroundColor = .clear
+//        fakeQuoteHeader.backgroundColor = .clear
         
-        quoteHeader.clipsToBounds = true
-        fakeQuoteHeader.backgroundColor = color
-                
+//        quoteHeader.clipsToBounds = true
+        
     }
 }

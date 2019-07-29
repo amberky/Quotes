@@ -1,5 +1,5 @@
 //
-//  QuoteViewController+SearchBar.swift
+//  CollectionQuoteViewController+SearchBar.swift
 //  Quotes
 //
 //  Created by Kharnyee Eu on 29/07/2019.
@@ -8,10 +8,8 @@
 
 import UIKit
 
-//MARK: - Search Bar methods
-extension QuoteViewController: UISearchBarDelegate {
+extension CollectionQuoteViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        tableView.dragInteractionEnabled = false
         searchBar.setShowsCancelButton(true, animated: true)
     }
     
@@ -29,7 +27,6 @@ extension QuoteViewController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
-        tableView.dragInteractionEnabled = true
         searchQuote(searchBar: searchBar, hideKeyboard: true)
     }
     
@@ -51,4 +48,3 @@ extension QuoteViewController: UISearchBarDelegate {
         }
     }
 }
-

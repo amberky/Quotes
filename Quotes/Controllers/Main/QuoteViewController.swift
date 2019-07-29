@@ -13,9 +13,11 @@ class QuoteViewController: UITableViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    let selectionFeedback = UISelectionFeedbackGenerator()
+    
     var quoteSectionArray = QuoteSections.init().quoteSections
     
-    var colorArray = ColorTheme.init().colorArray
+    var colorArray = ColorTheme.init(alpha: 0.2).colorArray
     var colorCount: Int = 0
     
     @IBOutlet var searchBar: UISearchBar!
@@ -26,9 +28,7 @@ class QuoteViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        tableView.register(UINib(nibName: "QuoteTableViewCell", bundle: nil) , forCellReuseIdentifier: "QuoteCell")
-        
-        tableView.dragInteractionEnabled = true
+        tableView.dragInteractionEnabled = false
         tableView.dragDelegate = self
         tableView.dropDelegate = self
         
@@ -49,7 +49,7 @@ class QuoteViewController: UITableViewController {
     }
     
     func loadQuotes(predicate: NSPredicate? = nil) {
-        quoteSectionArray = QuoteSections.init().quoteSections
+        quoteSectionArray = QuoteSections.init(customPredicate: predicate).quoteSections
         
         tableView.reloadData()
     }
@@ -98,28 +98,26 @@ class QuoteViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-
-        var updatedIndexPaths = [IndexPath]()
-        
-        if sourceIndexPath.row < destinationIndexPath.row {
-            updatedIndexPaths =  (sourceIndexPath.row...destinationIndexPath.row).map { IndexPath(row: $0, section: 0) }
-        } else if sourceIndexPath.row > destinationIndexPath.row {
-            updatedIndexPaths =  (destinationIndexPath.row...sourceIndexPath.row).map { IndexPath(row: $0, section: 0) }
-        }
-        
-//        self.tableView.beginUpdates()
-        
         let movedObject = quoteSectionArray[sourceIndexPath.section].quotes[sourceIndexPath.row]
-        
         print(movedObject)
         
         quoteSectionArray[sourceIndexPath.section].quotes.remove(at: sourceIndexPath.row)
         quoteSectionArray[destinationIndexPath.section].quotes.insert(movedObject, at: destinationIndexPath.row)
-
-//        self.tableView.moveRow(at: sourceIndexPath, to: destinationIndexPath)
-//
-//        self.tableView.reloadRows(at: updatedIndexPaths, with: .automatic)
-//        self.tableView.endUpdates()
+        
+        let queue = DispatchQueue(label: "saveOrdering", qos: .userInitiated)
+        queue.async {
+            self.saveOrdering()
+        }
+    }
+    
+    func saveOrdering() {
+        for i in quoteSectionArray {
+            for (index, item) in i.quotes.enumerated() {
+                item.orderIndex = Int64(index)
+            }
+        }
+        
+        saveContext()
     }
     
     override func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
@@ -139,9 +137,16 @@ class QuoteViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        tableView.beginUpdates()
         let cell = tableView.cellForRow(at: indexPath) as! QuoteTableViewCell
-        
-        cell.quoteLabel.numberOfLines = 0
+
+        if cell.quoteLabel.numberOfLines == 2 {
+            cell.quoteLabel.numberOfLines = 0
+        } else {
+            cell.quoteLabel.numberOfLines = 2
+        }
+        tableView.endUpdates()
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -177,12 +182,32 @@ class QuoteViewController: UITableViewController {
         return headerView
     }
     
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if quoteSectionArray[section].quotes.count == 0 {
+            return 0.0
+        } else {
+            return tableView.sectionHeaderHeight
+        }
+    }
+    
     //MARK: - unwind Segue
     @IBAction func backToQuoteView(_ unwindSegue: UIStoryboardSegue) {}
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print(segue.identifier ?? "")
+        guard segue.identifier != nil else { return }
+        
         checkAndResignFirstResponder()
+        
+        switch segue.identifier {
+        case "goToAddQuoteView":
+            // Set quoteCount to unpin quotes count
+            let destination = segue.destination as! AddQuoteViewController
+            destination.quoteCount = quoteSectionArray[1].quotes.count
+            
+        default:
+            print("unknown segue identifier")
+            
+        }
     }
     
     func checkAndResignFirstResponder() {
@@ -193,8 +218,8 @@ class QuoteViewController: UITableViewController {
 }
 
 extension UIColor {
-    static func rgb(red: CGFloat, green: CGFloat, blue: CGFloat) -> UIColor {
-        return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: 1)
+    static func rgb(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat = 1) -> UIColor {
+        return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: alpha)
     }
 }
 
