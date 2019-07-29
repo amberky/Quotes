@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		251E18B622EB41A700DEE0F3 /* FavouriteAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251E18B522EB41A700DEE0F3 /* FavouriteAnimator.swift */; };
+		252782DC22EED46A00643736 /* QuoteSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252782DB22EED46A00643736 /* QuoteSectionModel.swift */; };
+		252782DF22EEDE4500643736 /* QuoteViewController+SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252782DE22EEDE4500643736 /* QuoteViewController+SearchBar.swift */; };
+		252782E122EEE63300643736 /* QuoteViewController+Drag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252782E022EEE63300643736 /* QuoteViewController+Drag.swift */; };
+		252782E322EEE63F00643736 /* QuoteViewController+Drop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252782E222EEE63F00643736 /* QuoteViewController+Drop.swift */; };
 		2566C28D22E4970A003BFA91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2566C28C22E4970A003BFA91 /* AppDelegate.swift */; };
 		2566C28F22E4970A003BFA91 /* QuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2566C28E22E4970A003BFA91 /* QuoteViewController.swift */; };
 		2566C29222E4970A003BFA91 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2566C29022E4970A003BFA91 /* Main.storyboard */; };
@@ -20,7 +24,6 @@
 		2589380822E81F4D001E10FE /* CollectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2589380722E81F4D001E10FE /* CollectionCollectionViewCell.swift */; };
 		2589380A22E86DAC001E10FE /* CollectionQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2589380922E86DAC001E10FE /* CollectionQuoteViewController.swift */; };
 		2589380F22E87588001E10FE /* collectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2589380E22E87588001E10FE /* collectionModel.swift */; };
-		25B5D01722E94B61004E5099 /* QuoteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25B5D01522E94B61004E5099 /* QuoteTableViewCell.xib */; };
 		25B5D01922E95003004E5099 /* colorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B5D01822E95003004E5099 /* colorModel.swift */; };
 		25B5D02F22E991B8004E5099 /* AddCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B5D02D22E991B8004E5099 /* AddCollectionViewController.swift */; };
 		25B5D03922E9A85B004E5099 /* SmallIconCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B5D03722E9A85B004E5099 /* SmallIconCollectionViewCell.swift */; };
@@ -32,9 +35,13 @@
 
 /* Begin PBXFileReference section */
 		251E18B522EB41A700DEE0F3 /* FavouriteAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteAnimator.swift; sourceTree = "<group>"; };
+		252782DB22EED46A00643736 /* QuoteSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteSectionModel.swift; sourceTree = "<group>"; };
+		252782DE22EEDE4500643736 /* QuoteViewController+SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuoteViewController+SearchBar.swift"; sourceTree = "<group>"; };
+		252782E022EEE63300643736 /* QuoteViewController+Drag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuoteViewController+Drag.swift"; sourceTree = "<group>"; };
+		252782E222EEE63F00643736 /* QuoteViewController+Drop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuoteViewController+Drop.swift"; sourceTree = "<group>"; };
 		2566C28922E4970A003BFA91 /* Quotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2566C28C22E4970A003BFA91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2566C28E22E4970A003BFA91 /* QuoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteViewController.swift; sourceTree = "<group>"; };
+		2566C28E22E4970A003BFA91 /* QuoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QuoteViewController.swift; path = ../QuoteViewController.swift; sourceTree = "<group>"; };
 		2566C29122E4970A003BFA91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2566C29422E4970A003BFA91 /* Quotes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Quotes.xcdatamodel; sourceTree = "<group>"; };
 		2566C29622E4970C003BFA91 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -46,7 +53,6 @@
 		2589380722E81F4D001E10FE /* CollectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCollectionViewCell.swift; sourceTree = "<group>"; };
 		2589380922E86DAC001E10FE /* CollectionQuoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionQuoteViewController.swift; sourceTree = "<group>"; };
 		2589380E22E87588001E10FE /* collectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = collectionModel.swift; sourceTree = "<group>"; };
-		25B5D01522E94B61004E5099 /* QuoteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuoteTableViewCell.xib; sourceTree = "<group>"; };
 		25B5D01822E95003004E5099 /* colorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = colorModel.swift; sourceTree = "<group>"; };
 		25B5D02D22E991B8004E5099 /* AddCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCollectionViewController.swift; sourceTree = "<group>"; };
 		25B5D03722E9A85B004E5099 /* SmallIconCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallIconCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -67,6 +73,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		252782DD22EEDE2B00643736 /* QuoteViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2566C28E22E4970A003BFA91 /* QuoteViewController.swift */,
+				252782E022EEE63300643736 /* QuoteViewController+Drag.swift */,
+				252782E222EEE63F00643736 /* QuoteViewController+Drop.swift */,
+				252782DE22EEDE4500643736 /* QuoteViewController+SearchBar.swift */,
+			);
+			path = QuoteViewController;
+			sourceTree = "<group>";
+		};
 		2566C28022E4970A003BFA91 = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +140,7 @@
 				25BB358022E59EDF00A4D6DA /* iconModel.swift */,
 				2589380E22E87588001E10FE /* collectionModel.swift */,
 				25B5D01822E95003004E5099 /* colorModel.swift */,
+				252782DB22EED46A00643736 /* QuoteSectionModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -150,7 +168,7 @@
 		2589380D22E86DD8001E10FE /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				2566C28E22E4970A003BFA91 /* QuoteViewController.swift */,
+				252782DD22EEDE2B00643736 /* QuoteViewController */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -168,7 +186,6 @@
 			isa = PBXGroup;
 			children = (
 				25F0CE4E22E69EA0001DE1A0 /* QuoteTableViewCell.swift */,
-				25B5D01522E94B61004E5099 /* QuoteTableViewCell.xib */,
 			);
 			path = QuoteTableCell;
 			sourceTree = "<group>";
@@ -252,7 +269,6 @@
 			files = (
 				2566C29A22E4970C003BFA91 /* LaunchScreen.storyboard in Resources */,
 				2566C29722E4970C003BFA91 /* Assets.xcassets in Resources */,
-				25B5D01722E94B61004E5099 /* QuoteTableViewCell.xib in Resources */,
 				2566C29222E4970A003BFA91 /* Main.storyboard in Resources */,
 				25B5D04322E9B050004E5099 /* SmallIconCollectionViewCell.xib in Resources */,
 			);
@@ -267,7 +283,9 @@
 			files = (
 				2566C28F22E4970A003BFA91 /* QuoteViewController.swift in Sources */,
 				2566C2B422E4D0B5003BFA91 /* AddQuoteViewController.swift in Sources */,
+				252782E322EEE63F00643736 /* QuoteViewController+Drop.swift in Sources */,
 				251E18B622EB41A700DEE0F3 /* FavouriteAnimator.swift in Sources */,
+				252782E122EEE63300643736 /* QuoteViewController+Drag.swift in Sources */,
 				25B5D02F22E991B8004E5099 /* AddCollectionViewController.swift in Sources */,
 				2589380A22E86DAC001E10FE /* CollectionQuoteViewController.swift in Sources */,
 				2566C29522E4970A003BFA91 /* Quotes.xcdatamodeld in Sources */,
@@ -276,9 +294,11 @@
 				2589380F22E87588001E10FE /* collectionModel.swift in Sources */,
 				257535E922E5C77300DB2BAD /* SelectCollectionViewController.swift in Sources */,
 				2589380822E81F4D001E10FE /* CollectionCollectionViewCell.swift in Sources */,
+				252782DF22EEDE4500643736 /* QuoteViewController+SearchBar.swift in Sources */,
 				25F0CE5022E69EA0001DE1A0 /* QuoteTableViewCell.swift in Sources */,
 				2566C28D22E4970A003BFA91 /* AppDelegate.swift in Sources */,
 				25B5D03922E9A85B004E5099 /* SmallIconCollectionViewCell.swift in Sources */,
+				252782DC22EED46A00643736 /* QuoteSectionModel.swift in Sources */,
 				2589380422E80CF4001E10FE /* CollectionViewController.swift in Sources */,
 				25BB358122E59EDF00A4D6DA /* iconModel.swift in Sources */,
 			);

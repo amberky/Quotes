@@ -9,52 +9,22 @@
 import UIKit
 import CoreData
 
-protocol QuoteTableViewCellDelegate {
-    func longPressed(cell: QuoteTableViewCell)
-    
-    func doubleTapped(cell: QuoteTableViewCell)
-}
-
 class QuoteTableViewCell: UITableViewCell {
-    
-    @IBOutlet weak var quoteHeader: UIView!
-    @IBOutlet weak var quoteBackground: UIView!
-    @IBOutlet weak var fakeQuoteHeader: UIView!
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
     
-    @IBOutlet weak var icon: UIImageView!
-    
-    var delegate: QuoteTableViewCellDelegate?
-    var feedbackGenerator : UISelectionFeedbackGenerator? = nil
+    var quote: Quote? {
+        didSet {
+            updateUI()
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        
-        let longPressedGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressedGestureAction))
-        
-        addGestureRecognizer(longPressedGesture)
-
-        let doubleTappedGesture = UITapGestureRecognizer(target: self, action: #selector(doubleTappedGestureAction))
-        doubleTappedGesture.numberOfTapsRequired = 2
-        addGestureRecognizer(doubleTappedGesture)
     }
     
-    @objc func longPressedGestureAction(gestureReconizer: UILongPressGestureRecognizer) {
-        delegate?.longPressed(cell: self)
+    func updateUI() {
+        quoteLabel.text = quote?.quote
+        authorLabel.text = quote?.author
     }
-    
-    @objc func doubleTappedGestureAction(gestureReconizer: UITapGestureRecognizer) {
-        print("double tapped action")
-        
-        delegate?.doubleTapped(cell: self)
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
-    }
-    
 }

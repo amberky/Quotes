@@ -171,35 +171,37 @@ extension CollectionQuoteViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let mod = num % colorCount
-        num += 1
+//        let mod = num % colorCount
+//        num += 1
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "QuoteCell", for: indexPath) as! QuoteTableViewCell
         
         let quote = quoteArray[indexPath.section][indexPath.row]
         
-        cell.delegate = self
+        cell.quote = quote
         
-        cell.quoteLabel.text = quote.quote
-        cell.authorLabel.text = "\(quote.author ?? "")"
+        //cell.delegate = self
         
-        if quote.author != "" {
-            cell.authorLabel.topAnchor.constraint(equalTo: cell.quoteLabel.bottomAnchor, constant: 10).isActive = true
-        } else {
-            cell.authorLabel.topAnchor.constraint(equalTo: cell.quoteLabel.bottomAnchor, constant: 0).isActive = true
-        }
-        
-        cell.quoteHeader.backgroundColor = colorArray[mod]
-        
-        cell.quoteHeader.clipsToBounds = true
-        cell.fakeQuoteHeader.backgroundColor = colorArray[mod]
-        
-        cell.quoteBackground.backgroundColor = .white
-        cell.quoteBackground.layer.shadowOpacity = 0.2
-        cell.quoteBackground.layer.shadowRadius = 2
-        cell.quoteBackground.layer.shadowOffset = CGSize(width: 2, height: 2)
-        cell.quoteBackground.layer.shadowColor = UIColor.lightGray.cgColor
-        
+//        cell.quoteLabel.text = quote.quote
+//        cell.authorLabel.text = "\(quote.author ?? "")"
+//
+//        if quote.author != "" {
+//            cell.authorLabel.topAnchor.constraint(equalTo: cell.quoteLabel.bottomAnchor, constant: 10).isActive = true
+//        } else {
+//            cell.authorLabel.topAnchor.constraint(equalTo: cell.quoteLabel.bottomAnchor, constant: 0).isActive = true
+//        }
+//
+//        cell.quoteHeader.backgroundColor = colorArray[mod]
+//
+//        cell.quoteHeader.clipsToBounds = true
+//        cell.fakeQuoteHeader.backgroundColor = colorArray[mod]
+//
+//        cell.quoteBackground.backgroundColor = .white
+//        cell.quoteBackground.layer.shadowOpacity = 0.2
+//        cell.quoteBackground.layer.shadowRadius = 2
+//        cell.quoteBackground.layer.shadowOffset = CGSize(width: 2, height: 2)
+//        cell.quoteBackground.layer.shadowColor = UIColor.lightGray.cgColor
+//
         return cell
     }
     
@@ -327,79 +329,79 @@ extension CollectionQuoteViewController: UISearchBarDelegate {
     }
 }
 
-extension CollectionQuoteViewController: QuoteTableViewCellDelegate {
-    func longPressed(cell: QuoteTableViewCell) {
-        print("long pressed")
-        
-        if let indexPath = quoteTableView.indexPath(for: cell)
-        {
-            let alert = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
-            
-            let editAction = UIAlertAction.init(title: "Edit", style: .default) { (action) in
-                print("Edit")
-            }
-            alert.addAction(editAction)
-            
-            let deleteAction = UIAlertAction.init(title: "Delete", style: .destructive) { (action) in
-                print("Delete")
-                
-                self.context.delete(self.quoteArray[indexPath.section][indexPath.row])
-                self.quoteArray[indexPath.section].remove(at: indexPath.row)
-                
-                if indexPath.section == 0 {
-                    self.pinArray.remove(at: indexPath.row)
-                } else {
-                    self.unpinArray.remove(at: indexPath.row)
-                }
-                
-                self.quoteTableView.deleteRows(at: [indexPath], with: .fade)
-                self.quoteTableView.reloadSections(IndexSet(integersIn: 0...1), with: .fade)
-                
-                
-                self.saveContext()
-            }
-            alert.addAction(deleteAction)
-            
-            let cancelAction = UIAlertAction.init(title: "Cancel", style: .cancel) { (action) in
-                print("Cancel")
-            }
-            alert.addAction(cancelAction)
-            alert.view.tintColor = UIColor.rgb(red: 93, green: 117, blue: 153);
-            
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
-    
-    func doubleTapped(cell: QuoteTableViewCell) {
-        print("double tapped")
-        
-        if let indexPath = quoteTableView.indexPath(for: cell) {
-            let updateQuote = self.quoteArray[indexPath.section][indexPath.row]
-            updateQuote.setValue(!updateQuote.isPin, forKey: "isPin")
-            
-            if updateQuote.isPin == true {
-                pinArray.append(updateQuote)
-                unpinArray.remove(at: indexPath.row)
-            } else {
-                unpinArray.append(updateQuote)
-                pinArray.remove(at: indexPath.row)
-            }
-            
-            self.saveContext()
-            
-            num = 0
-            pinArray = pinArray.sorted { (a, b) -> Bool in
-                (a.addedOn ?? Date()).compare(b.addedOn ?? Date()) == .orderedDescending
-            }
-            
-            unpinArray = unpinArray.sorted { (a, b) -> Bool in
-                (a.addedOn ?? Date()).compare(b.addedOn ?? Date()) == .orderedDescending
-            }
-            
-            quoteArray = [pinArray, unpinArray]
-            
-            quoteTableView.reloadSections(IndexSet(integersIn: 0...1), with: .automatic)
-        }
-    }
-    
-}
+//extension CollectionQuoteViewController: QuoteTableViewCellDelegate {
+//    func longPressed(cell: QuoteTableViewCell) {
+//        print("long pressed")
+//        
+//        if let indexPath = quoteTableView.indexPath(for: cell)
+//        {
+//            let alert = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
+//            
+//            let editAction = UIAlertAction.init(title: "Edit", style: .default) { (action) in
+//                print("Edit")
+//            }
+//            alert.addAction(editAction)
+//            
+//            let deleteAction = UIAlertAction.init(title: "Delete", style: .destructive) { (action) in
+//                print("Delete")
+//                
+//                self.context.delete(self.quoteArray[indexPath.section][indexPath.row])
+//                self.quoteArray[indexPath.section].remove(at: indexPath.row)
+//                
+//                if indexPath.section == 0 {
+//                    self.pinArray.remove(at: indexPath.row)
+//                } else {
+//                    self.unpinArray.remove(at: indexPath.row)
+//                }
+//                
+//                self.quoteTableView.deleteRows(at: [indexPath], with: .fade)
+//                self.quoteTableView.reloadSections(IndexSet(integersIn: 0...1), with: .fade)
+//                
+//                
+//                self.saveContext()
+//            }
+//            alert.addAction(deleteAction)
+//            
+//            let cancelAction = UIAlertAction.init(title: "Cancel", style: .cancel) { (action) in
+//                print("Cancel")
+//            }
+//            alert.addAction(cancelAction)
+//            alert.view.tintColor = UIColor.rgb(red: 93, green: 117, blue: 153);
+//            
+//            self.present(alert, animated: true, completion: nil)
+//        }
+//    }
+//    
+//    func doubleTapped(cell: QuoteTableViewCell) {
+//        print("double tapped")
+//        
+//        if let indexPath = quoteTableView.indexPath(for: cell) {
+//            let updateQuote = self.quoteArray[indexPath.section][indexPath.row]
+//            updateQuote.setValue(!updateQuote.isPin, forKey: "isPin")
+//            
+//            if updateQuote.isPin == true {
+//                pinArray.append(updateQuote)
+//                unpinArray.remove(at: indexPath.row)
+//            } else {
+//                unpinArray.append(updateQuote)
+//                pinArray.remove(at: indexPath.row)
+//            }
+//            
+//            self.saveContext()
+//            
+//            num = 0
+//            pinArray = pinArray.sorted { (a, b) -> Bool in
+//                (a.addedOn ?? Date()).compare(b.addedOn ?? Date()) == .orderedDescending
+//            }
+//            
+//            unpinArray = unpinArray.sorted { (a, b) -> Bool in
+//                (a.addedOn ?? Date()).compare(b.addedOn ?? Date()) == .orderedDescending
+//            }
+//            
+//            quoteArray = [pinArray, unpinArray]
+//            
+//            quoteTableView.reloadSections(IndexSet(integersIn: 0...1), with: .automatic)
+//        }
+//    }
+//    
+//}
