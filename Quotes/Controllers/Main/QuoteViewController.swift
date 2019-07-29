@@ -77,12 +77,14 @@ class QuoteViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let mod = (indexPath.row + indexPath.section) % colorCount
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "QuoteCell", for: indexPath) as! QuoteTableViewCell
         
         let quote = quoteSectionArray[indexPath.section].quotes[indexPath.row]
         
         cell.quote = quote
+        cell.color = colorArray[mod]
 
         return cell
     }
@@ -91,26 +93,42 @@ class QuoteViewController: UITableViewController {
         return quoteSectionArray[section].sectionName
     }
     
-//    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-//        return true
-//    }
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+
+        var updatedIndexPaths = [IndexPath]()
+        
+        if sourceIndexPath.row < destinationIndexPath.row {
+            updatedIndexPaths =  (sourceIndexPath.row...destinationIndexPath.row).map { IndexPath(row: $0, section: 0) }
+        } else if sourceIndexPath.row > destinationIndexPath.row {
+            updatedIndexPaths =  (destinationIndexPath.row...sourceIndexPath.row).map { IndexPath(row: $0, section: 0) }
+        }
+        
+//        self.tableView.beginUpdates()
+        
+        let movedObject = quoteSectionArray[sourceIndexPath.section].quotes[sourceIndexPath.row]
+        
+        print(movedObject)
+        
+        quoteSectionArray[sourceIndexPath.section].quotes.remove(at: sourceIndexPath.row)
+        quoteSectionArray[destinationIndexPath.section].quotes.insert(movedObject, at: destinationIndexPath.row)
+
+//        self.tableView.moveRow(at: sourceIndexPath, to: destinationIndexPath)
 //
-//    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-//
-//        let movedObject = quoteSectionArray[sourceIndexPath.section].quotes[sourceIndexPath.row]
-//         quoteSectionArray[destinationIndexPath.section].quotes.insert(movedObject, at: destinationIndexPath.row)
-//        quoteSectionArray[sourceIndexPath.section].quotes.remove(at: sourceIndexPath.row)
-//
-//        tableView.reloadData()
-//    }
+//        self.tableView.reloadRows(at: updatedIndexPaths, with: .automatic)
+//        self.tableView.endUpdates()
+    }
     
-//    override func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
-//        if sourceIndexPath.section != proposedDestinationIndexPath.section {
-//            return sourceIndexPath
-//        } else {
-//            return proposedDestinationIndexPath
-//        }
-//    }
+    override func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+        if sourceIndexPath.section != proposedDestinationIndexPath.section {
+            return sourceIndexPath
+        } else {
+            return proposedDestinationIndexPath
+        }
+    }
     
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .none
@@ -120,6 +138,44 @@ class QuoteViewController: UITableViewController {
         return false
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! QuoteTableViewCell
+        
+        cell.quoteLabel.numberOfLines = 0
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = .white
+        
+        let headerInfo = quoteSectionArray[section]
+        
+        let imageName = headerInfo.sectionIcon
+        let image = UIImageView(image: UIImage.init(named: imageName))
+        image.frame = CGRect(x: tableView.separatorInset.left + 5,
+                             y: (tableView.sectionHeaderHeight - 15) / 2,
+                             width: 15,
+                             height: 15)
+        
+        headerView.addSubview(image)
+        
+        let label = UILabel()
+        label.text = headerInfo.sectionName
+        label.textColor = .darkGray
+        label.font = UIFont.boldSystemFont(ofSize: 15)
+        
+        label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.callout)
+        
+        label.frame = CGRect(x: tableView.separatorInset.left + 15 + 15,
+                             // table margin left - image width - 15 margin (image - label)
+            y: (tableView.sectionHeaderHeight - 15) / 2,
+            width: tableView.frame.width - tableView.separatorInset.left - tableView.separatorInset.left - 20 - 10,
+            height: 15)
+        
+        headerView.addSubview(label)
+        
+        return headerView
+    }
     
     //MARK: - unwind Segue
     @IBAction func backToQuoteView(_ unwindSegue: UIStoryboardSegue) {}

@@ -16,14 +16,17 @@ extension QuoteViewController: UITableViewDragDelegate {
     }
     
     func dragItem(indexPath: IndexPath, session: UIDragSession) -> [UIDragItem] {
-        guard let quoteSection = quoteSection, let stringData = quoteSection.quotes[indexPath.row].quote!.data(using: .utf8) else {
-            return []
+        let quote = quoteSectionArray[indexPath.section].quotes[indexPath.row]
+        
+        let data = quote.quote?.data(using: .utf8)
+        let itemProvider = NSItemProvider()
+        
+        itemProvider.registerDataRepresentation(forTypeIdentifier: kUTTypePlainText as String, visibility: .all) { completion in
+            completion(data, nil)
+            return nil
         }
         
-        let itemProvider = NSItemProvider(item: stringData as NSData, typeIdentifier: kUTTypePlainText as String)
-        
         let dragItem = UIDragItem(itemProvider: itemProvider)
-        session.localContext = (quoteSection, indexPath, tableView)
         
         return [dragItem]
     }
