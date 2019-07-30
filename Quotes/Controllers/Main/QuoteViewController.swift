@@ -13,14 +13,15 @@ class QuoteViewController: UITableViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    let selectionFeedback = UISelectionFeedbackGenerator()
+    lazy var selectionHaptic = UISelectionFeedbackGenerator()
     
-    var quoteSectionArray = QuoteSections.init().quoteSections
+    lazy var quoteSectionArray = QuoteSections.init().quoteSections
     
     var colorArray = ColorTheme.init(alpha: 0.2).colorArray
     var colorCount: Int = 0
     
     @IBOutlet var searchBar: UISearchBar!
+    
     @IBOutlet var quoteTableView: UITableView!
     
     var quoteSection: QuoteSection?
@@ -28,23 +29,19 @@ class QuoteViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.dragInteractionEnabled = false
-        tableView.dragDelegate = self
-        tableView.dropDelegate = self
-        
         colorCount = colorArray.count
         
         configureTableView()
-        loadQuotes()
+        //loadQuotes()
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.loadQuotes()
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         if searchBar.text != "" {
-            let queue = DispatchQueue(label: "loadQuotes", qos: .userInitiated)
-            queue.async {
-                self.searchBar.text = ""
-                self.loadQuotes()
-            }
+            searchBar.text = ""
         }
     }
     
@@ -67,6 +64,12 @@ class QuoteViewController: UITableViewController {
         quoteTableView.rowHeight = UITableView.automaticDimension
     }
     
+    //MARK: - IBAction
+    
+    @IBAction func showCopyMenu(_ sender: UILongPressGestureRecognizer) {
+        print("long pressed detected")
+    }
+    
     //MARK: - TableView Delegate Methods
     override func numberOfSections(in tableView: UITableView) -> Int {
         return quoteSectionArray.count
@@ -85,67 +88,20 @@ class QuoteViewController: UITableViewController {
         
         cell.quote = quote
         cell.color = colorArray[mod]
-
+        
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return quoteSectionArray[section].sectionName
-    }
-    
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-
-    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let movedObject = quoteSectionArray[sourceIndexPath.section].quotes[sourceIndexPath.row]
-        print(movedObject)
-        
-        quoteSectionArray[sourceIndexPath.section].quotes.remove(at: sourceIndexPath.row)
-        quoteSectionArray[destinationIndexPath.section].quotes.insert(movedObject, at: destinationIndexPath.row)
-        
-        let queue = DispatchQueue(label: "saveOrdering", qos: .userInitiated)
-        queue.async {
-            self.saveOrdering()
-        }
-    }
-    
-    func saveOrdering() {
-        for i in quoteSectionArray {
-            for (index, item) in i.quotes.enumerated() {
-                item.orderIndex = Int64(index)
-            }
-        }
-        
-        saveContext()
-    }
-    
-    override func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
-        if sourceIndexPath.section != proposedDestinationIndexPath.section {
-            return sourceIndexPath
-        } else {
-            return proposedDestinationIndexPath
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return .none
-    }
-    
-    override func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        
         tableView.beginUpdates()
         let cell = tableView.cellForRow(at: indexPath) as! QuoteTableViewCell
-
         if cell.quoteLabel.numberOfLines == 2 {
             cell.quoteLabel.numberOfLines = 0
         } else {
             cell.quoteLabel.numberOfLines = 2
         }
+        
         tableView.endUpdates()
     }
     
@@ -167,12 +123,12 @@ class QuoteViewController: UITableViewController {
         let label = UILabel()
         label.text = headerInfo.sectionName
         label.textColor = .darkGray
-        label.font = UIFont.boldSystemFont(ofSize: 15)
+//        label.font = UIFont.boldSystemFont(ofSize: 15)
         
-        label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.callout)
+        label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
         
-        label.frame = CGRect(x: tableView.separatorInset.left + 15 + 15,
-                             // table margin left - image width - 15 margin (image - label)
+        label.frame = CGRect(x: tableView.separatorInset.left + 15 + 10,
+                             // table margin left - image width - margin (image - label)
             y: (tableView.sectionHeaderHeight - 15) / 2,
             width: tableView.frame.width - tableView.separatorInset.left - tableView.separatorInset.left - 20 - 10,
             height: 15)
@@ -188,6 +144,161 @@ class QuoteViewController: UITableViewController {
         } else {
             return tableView.sectionHeaderHeight
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        selectionHaptic.prepare()
+        
+        let quoteInfo = quoteSectionArray[indexPath.section].quotes[indexPath.row]
+        var pinIcon = "pin-orange"
+        
+        if quoteInfo.isPin == true {
+            pinIcon = "unpin-orange"
+        }
+        
+        let pinAction = UIContextualAction(style: .normal, title: nil) { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
+            
+            self.selectionHaptic.selectionChanged()
+            
+            print("pin quote")
+            self.pinQuote(indexPath: indexPath)
+            completionHandler(true)
+        }
+        
+        let pinImage = UIGraphicsImageRenderer(size: CGSize(width: 25, height: 25)).image { _ in
+            UIImage(named: pinIcon)?.draw(in: CGRect(x: 0, y: 0, width: 25, height: 25))
+        }
+        
+        if let cgImageX =  pinImage.cgImage {
+            pinAction.image = ImageWithoutRender(cgImage: cgImageX, scale: UIScreen.main.nativeScale , orientation: .up)
+        }
+        
+        pinAction.backgroundColor = .white
+        
+        return UISwipeActionsConfiguration(actions: [pinAction])
+    }
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let moreAction = UIContextualAction(style: .destructive, title: nil) { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
+            
+            self.selectionHaptic.selectionChanged()
+            
+            print("more quote")
+            self.showActionSheet(indexPath: indexPath)
+            completionHandler(false)
+        }
+        
+        let moreImage = UIGraphicsImageRenderer(size: CGSize(width: 25, height: 25)).image { _ in
+            UIImage(named: "more-dark")?.draw(in: CGRect(x: 0, y: 0, width: 25, height: 25))
+        }
+        
+        if let cgImageX = moreImage.cgImage {
+            moreAction.image = ImageWithoutRender(cgImage: cgImageX, scale: UIScreen.main.nativeScale, orientation: .up)
+        }
+        
+        moreAction.backgroundColor = .white
+        
+        let deleteAction = UIContextualAction(style: .destructive, title: nil) { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
+            
+            self.selectionHaptic.selectionChanged()
+            
+            print("delete quote")
+            self.deleteQuote(indexPath: indexPath)
+            completionHandler(true)
+        }
+        
+        let trashImage = UIGraphicsImageRenderer(size: CGSize(width: 25, height: 25)).image { _ in
+            UIImage(named: "trash-red")?.draw(in: CGRect(x: 0, y: 0, width: 25, height: 25))
+        }
+        
+        if let cgImageX = trashImage.cgImage {
+            deleteAction.image = ImageWithoutRender(cgImage: cgImageX, scale: UIScreen.main.nativeScale, orientation: .up)
+        }
+        
+        deleteAction.backgroundColor = .white
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction, moreAction])
+    }
+    
+    func pinQuote(indexPath: IndexPath) {
+        let updateQuote = self.quoteSectionArray[indexPath.section].quotes[indexPath.row]
+        updateQuote.setValue(!updateQuote.isPin, forKey: "isPin")
+        updateQuote.setValue(Date(), forKey: "updatedOn")
+        
+        saveContext()
+        
+        loadQuotes()
+    }
+    
+    func showActionSheet(indexPath: IndexPath) {
+        selectionHaptic.prepare()
+        
+//        let font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
+        
+        let alert = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let copyAction = UIAlertAction.init(title: "Copy", style: .default) { (action) in
+            self.actionSheetAction(action: "Copy", indexPath: indexPath)
+        }
+        
+        let editAction = UIAlertAction.init(title: "Edit", style: .default) { (action) in
+            self.actionSheetAction(action: "Edit", indexPath: indexPath)
+        }
+        
+        let moveAction = UIAlertAction.init(title: "Move Collection", style: .default) { (action) in
+            self.actionSheetAction(action: "Move", indexPath: indexPath)
+        }
+        
+        let shareAction = UIAlertAction.init(title: "Share", style: .default) { (action) in
+            self.actionSheetAction(action: "Share", indexPath: indexPath)
+        }
+        
+        let cancelAction = UIAlertAction.init(title: "Cancel", style: .cancel) { (action) in
+            self.actionSheetAction(action: "Cancel", indexPath: indexPath)
+        }
+        
+        alert.view.tintColor = UIColor.rgb(red: 93, green: 117, blue: 153);
+        
+        alert.addAction(copyAction)
+        alert.addAction(editAction)
+        alert.addAction(moveAction)
+        alert.addAction(shareAction)
+        alert.addAction(cancelAction)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func actionSheetAction (action: String, indexPath: IndexPath) {
+        selectionHaptic.selectionChanged()
+        
+        let cell = tableView.cellForRow(at: indexPath) as! QuoteTableViewCell
+        switch action {
+        case "Copy":
+            let copy = UIPasteboard.general
+            copy.string = cell.quoteLabel.text
+            
+        case "Edit":
+            print("Edit Action selected")
+            
+        case "Move":
+            print("Move Action selected")
+            
+        case "Cancel":
+            print("Cancel Action selected")
+            
+        default:
+            print("unrecognise action")
+        }
+    }
+    
+    func deleteQuote(indexPath: IndexPath) {
+        context.delete(quoteSectionArray[indexPath.section].quotes[indexPath.row])
+        quoteSectionArray[indexPath.section].quotes.remove(at: indexPath.row)
+        
+        tableView.deleteRows(at: [indexPath], with: .fade)
+        
+        saveContext()
     }
     
     //MARK: - unwind Segue
@@ -230,5 +341,11 @@ extension UIImage {
         let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         return newImage
+    }
+}
+
+class ImageWithoutRender: UIImage {
+    override func withRenderingMode(_ renderingMode: UIImage.RenderingMode) -> UIImage {
+        return self
     }
 }

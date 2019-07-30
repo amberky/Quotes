@@ -12,4 +12,5 @@ class CollectionCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var collectionImage: UIImageView!
     @IBOutlet weak var collectionLabel: UILabel!
+    @IBOutlet weak var quoteCountLabel: UILabel!
 }

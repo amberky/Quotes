@@ -46,7 +46,7 @@ class QuoteSection {
         } else {
             request.predicate = predicate
         }
-
+        
         do {
             quoteArray = try context.fetch(request)
         } catch {
@@ -102,12 +102,13 @@ class QuoteSections {
     var quoteSections: [QuoteSection] = [QuoteSection]()
     
     init(customPredicate: NSPredicate? = nil) {
-        quoteSections.append(QuoteSection.init(sectionName: "PINNED QUOTES", sectionIcon: "pin-dark", isPin: true, customPredicate: customPredicate))
-        quoteSections.append(QuoteSection.init(sectionName: "QUOTES", sectionIcon: "quote-dark", isPin: false, customPredicate: customPredicate))
+        print("init")
+        quoteSections.append(QuoteSection.init(sectionName: "PINNED QUOTES", sectionIcon: "pin-darkgray", isPin: true, customPredicate: customPredicate))
+        quoteSections.append(QuoteSection.init(sectionName: "QUOTES", sectionIcon: "quote-darkgray", isPin: false, customPredicate: customPredicate))
     }
     
     init(collection: String? = nil, customPredicate: NSPredicate? = nil) {
-        quoteSections.append(QuoteSection.init(sectionName: "PINNED QUOTES", sectionIcon: "pin-dark", isPin: true, collection: collection, customPredicate: customPredicate))
-        quoteSections.append(QuoteSection.init(sectionName: "QUOTES", sectionIcon: "quote-dark", isPin: false, collection: collection, customPredicate: customPredicate))
+        quoteSections.append(QuoteSection.init(sectionName: "PINNED QUOTES", sectionIcon: "pin-darkgray", isPin: true, collection: collection, customPredicate: customPredicate))
+        quoteSections.append(QuoteSection.init(sectionName: "QUOTES", sectionIcon: "quote-darkgray", isPin: false, collection: collection, customPredicate: customPredicate))
     }
 }

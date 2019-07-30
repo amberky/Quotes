@@ -27,8 +27,8 @@ class EditCollectionViewController: UIViewController {
     
     let iconMode = "-light" // -dark or -light
     
-    let unselectedColor = UIColor.rgb(red: 230, green: 227, blue: 226)
-    let selectedColor = UIColor.rgb(red: 170, green: 184, blue: 187)
+    lazy var unselectedColor = UIColor.rgb(red: 230, green: 227, blue: 226)
+    lazy var selectedColor = UIColor.rgb(red: 170, green: 184, blue: 187)
     
     var selectedIndex = 0
     
@@ -116,16 +116,16 @@ class EditCollectionViewController: UIViewController {
             let newIcon = iconArray[selectedIndex].name
             
             if trimmedText != selectedCollection?.name || selectedCollection!.icon != newIcon {
-                let updatedCollection = CollectionModel.init(collectionName: trimmedText, collectionIcon: iconArray[selectedIndex].name)
+                let updatedCollection = CollectionModel.init(name: trimmedText, icon: iconArray[selectedIndex].name)
                 
                 let request: NSFetchRequest<Collection> = Collection.fetchRequest()
                 request.predicate = NSPredicate(format: "name == %@", selectedCollection!.name)
                 
                 do {
                     if let collection = try context.fetch(request) as [NSManagedObject]? {
-                        if collection.count > 0 {
-                            collection[0].setValue(updatedCollection.name, forKey: "name")
-                            collection[0].setValue(updatedCollection.icon, forKey: "icon")
+                        if collection.first != nil {
+                            collection.first!.setValue(updatedCollection.name, forKey: "name")
+                            collection.first!.setValue(updatedCollection.icon, forKey: "icon")
                             
                             saveContext()
                         }

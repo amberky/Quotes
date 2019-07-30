@@ -11,9 +11,7 @@ import MobileCoreServices
 
 extension CollectionQuoteViewController: UITableViewDragDelegate {
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        selectionFeedback.prepare()
-        selectionFeedback.selectionChanged()
-        
+
         return dragItem(indexPath: indexPath, session: session)
     }
     

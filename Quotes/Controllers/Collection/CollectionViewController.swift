@@ -45,15 +45,19 @@ class CollectionViewController: UIViewController {
         let request: NSFetchRequest<Collection> = Collection.fetchRequest()
         var collectionContext = [Collection]()
         
+        let quoteRequest: NSFetchRequest<Quote> = Quote.fetchRequest()
+        var totalCount = 0
+        
         do {
+            totalCount = try context.fetch(quoteRequest).count
             collectionContext = try context.fetch(request)
         } catch {
             print("Error fetching data from context \(error)")
         }
         
-        collectionArray.append(CollectionModel.init(collectionName: "All", collectionIcon: defaultIcon, showAll: true))
+        collectionArray.insert(CollectionModel.init(name: "All", icon: defaultIcon, count: totalCount, isAll: true), at: 0)
         for i in collectionContext {
-            collectionArray.append(CollectionModel.init(collectionName: i.name ?? "", collectionIcon: i.icon ?? ""))
+            collectionArray.append(CollectionModel.init(name: i.name ?? "", icon: i.icon ?? "", count: i.quotes?.count ?? 0))
         }
         
         collectionCollectionView.reloadData()
@@ -86,8 +90,8 @@ class CollectionViewController: UIViewController {
 extension CollectionViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (collectionView.frame.width - 40) / 3
-        let height = width + 20
+        let width = (collectionView.frame.width - 20) / 2
+        let height = width + 20 + 20
         
         return CGSize(width: width, height: height)
     }
@@ -106,6 +110,7 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout, UICollec
         
         cell.collectionImage.backgroundColor = beigeColor
         cell.collectionLabel.text = collection.name
+        cell.quoteCountLabel.text = "\(collection.count) Quotes"
         
         return cell
     }

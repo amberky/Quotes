@@ -13,9 +13,6 @@ class AddQuoteViewController: UIViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    let selected = UIImage.init(named: "star-yellow")
-    let unselected = UIImage.init(named: "star-gray-unfilled")
-    
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var collectionLabel: UILabel!
