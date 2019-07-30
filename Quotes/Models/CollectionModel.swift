@@ -1,0 +1,25 @@
+//
+//  CollectionModel.swift
+//  Quotes
+//
+//  Created by Kharnyee Eu on 31/07/2019.
+//  Copyright © 2019 focus. All rights reserved.
+//
+
+import Foundation
+
+class CollectionModel {
+    let name : String
+    let icon : String
+    let count : Int
+    let isAll: Bool
+    var isSelected : Bool
+    
+    init (name: String, icon: String, count: Int = 0, isAll: Bool = false, isSelected: Bool = false) {
+        self.name = name
+        self.icon = icon
+        self.count = count
+        self.isSelected = isSelected
+        self.isAll = isAll
+    }
+}
