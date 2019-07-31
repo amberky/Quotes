@@ -21,7 +21,7 @@ class CollectionViewController: UIViewController {
     var selectedCollection: CollectionModel?
     
     let iconMode = "-light" // -dark or -light
-    let beigeColor = UIColor.rgb(red: 230, green: 227, blue: 226)
+    let beigeColor = UIColor.mainBeige()
     
     var defaultIcon = "bookmark"
     
@@ -108,7 +108,7 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout, UICollec
         let imagePath = "\(collection.icon)\(iconMode)"
             cell.collectionImage.image = UIImage.init(named: imagePath)
         
-        cell.collectionImage.backgroundColor = beigeColor
+        cell.collectionImage.backgroundColor = UIColor.mainUnSelected()
         cell.collectionLabel.text = collection.name
         cell.quoteCountLabel.text = "\(collection.count) Quotes"
         

@@ -13,7 +13,7 @@
         <!--Action Sheet View Controller-->
         <scene sceneID="KGq-2M-7tR">
             <objects>
-                <viewController storyboardIdentifier="ActionSheetVC" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="z3p-VJ-wKc" customClass="ActionSheetViewController" customModule="Quotes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ActionSheetVC" modalPresentationStyle="overFullScreen" id="z3p-VJ-wKc" customClass="ActionSheetViewController" customModule="Quotes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8hC-DD-yZC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -193,7 +193,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="eS0-J3-bVj" firstAttribute="leading" secondItem="TaW-Y9-Wvr" secondAttribute="leading" constant="20" id="0BU-MR-CsT"/>
                             <constraint firstItem="bg6-ii-DcE" firstAttribute="top" secondItem="8hC-DD-yZC" secondAttribute="top" id="98b-e2-pUn"/>

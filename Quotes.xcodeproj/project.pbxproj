@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		250DD97C22F13AD00092BF34 /* SmallIconCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 250DD97A22F13AD00092BF34 /* SmallIconCollectionViewCell.xib */; };
 		250DD97D22F13AD00092BF34 /* SmallIconCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250DD97B22F13AD00092BF34 /* SmallIconCollectionViewCell.swift */; };
+		250DD98722F15F080092BF34 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250DD98622F15F080092BF34 /* UIImageExtension.swift */; };
+		250DD98A22F15F300092BF34 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250DD98922F15F300092BF34 /* UIColorExtension.swift */; };
 		251E18B622EB41A700DEE0F3 /* FavouriteAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251E18B522EB41A700DEE0F3 /* FavouriteAnimator.swift */; };
 		252782DC22EED46A00643736 /* QuoteSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252782DB22EED46A00643736 /* QuoteSectionModel.swift */; };
 		252782DF22EEDE4500643736 /* QuoteViewController+SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252782DE22EEDE4500643736 /* QuoteViewController+SearchBar.swift */; };
@@ -43,6 +45,8 @@
 /* Begin PBXFileReference section */
 		250DD97A22F13AD00092BF34 /* SmallIconCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SmallIconCollectionViewCell.xib; sourceTree = "<group>"; };
 		250DD97B22F13AD00092BF34 /* SmallIconCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmallIconCollectionViewCell.swift; sourceTree = "<group>"; };
+		250DD98622F15F080092BF34 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		250DD98922F15F300092BF34 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		251E18B522EB41A700DEE0F3 /* FavouriteAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteAnimator.swift; sourceTree = "<group>"; };
 		252782DB22EED46A00643736 /* QuoteSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteSectionModel.swift; sourceTree = "<group>"; };
 		252782DE22EEDE4500643736 /* QuoteViewController+SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuoteViewController+SearchBar.swift"; sourceTree = "<group>"; };
@@ -94,6 +98,15 @@
 				250DD97A22F13AD00092BF34 /* SmallIconCollectionViewCell.xib */,
 			);
 			path = SmallIconCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		250DD98822F15F1A0092BF34 /* Custom Extension */ = {
+			isa = PBXGroup;
+			children = (
+				250DD98622F15F080092BF34 /* UIImageExtension.swift */,
+				250DD98922F15F300092BF34 /* UIColorExtension.swift */,
+			);
+			path = "Custom Extension";
 			sourceTree = "<group>";
 		};
 		252782DD22EEDE2B00643736 /* QuoteViewController */ = {
@@ -228,8 +241,8 @@
 			isa = PBXGroup;
 			children = (
 				25D369A522F0BC3200D81E76 /* ActionSheetStoryboard.storyboard */,
-				25D3699D22F0B52000D81E76 /* ActionSheetStoryboard_Things3.storyboard */,
 				25D3699F22F0B54E00D81E76 /* ActionSheetViewController.swift */,
+				25D3699D22F0B52000D81E76 /* ActionSheetStoryboard_Things3.storyboard */,
 			);
 			path = ActionSheet;
 			sourceTree = "<group>";
@@ -239,6 +252,7 @@
 			children = (
 				251E18B522EB41A700DEE0F3 /* FavouriteAnimator.swift */,
 				25D369A222F0B7EF00D81E76 /* ActionSheetService.swift */,
+				250DD98822F15F1A0092BF34 /* Custom Extension */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -337,10 +351,12 @@
 				252782E122EEE63300643736 /* QuoteViewController+Drag.swift in Sources */,
 				25B5D02F22E991B8004E5099 /* AddCollectionViewController.swift in Sources */,
 				2589380A22E86DAC001E10FE /* CollectionQuoteViewController.swift in Sources */,
+				250DD98722F15F080092BF34 /* UIImageExtension.swift in Sources */,
 				25D3699A22F0B49900D81E76 /* CollectionModel.swift in Sources */,
 				2566C29522E4970A003BFA91 /* Quotes.xcdatamodeld in Sources */,
 				25B5D04522E9CFCB004E5099 /* EditCollectionViewController.swift in Sources */,
 				25D3699C22F0B4A900D81E76 /* IconModel.swift in Sources */,
+				250DD98A22F15F300092BF34 /* UIColorExtension.swift in Sources */,
 				252782E722EF3E8C00643736 /* CollectionQuoteViewController+Drag.swift in Sources */,
 				25B5D01922E95003004E5099 /* ColorThemeModel.swift in Sources */,
 				252782EA22EF3EF500643736 /* CollectionQuoteViewController+SearchBar.swift in Sources */,

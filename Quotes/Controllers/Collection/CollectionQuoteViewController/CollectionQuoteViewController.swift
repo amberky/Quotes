@@ -289,9 +289,12 @@ extension CollectionQuoteViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func showActionSheet(cell: QuoteTableViewCell) {
-        let actionSheetVC = actionSheetService.show(cell: cell)
+        self.navigationController?.view.alpha = 0.6;
         
-        present(actionSheetVC, animated: true, completion: nil)
+        let actionSheetVC = actionSheetService.show(cell: cell)
+        actionSheetVC.delegate = self
+        
+        self.present(actionSheetVC, animated: true)
     }
     
     func deleteQuote(indexPath: IndexPath) {
@@ -304,3 +307,8 @@ extension CollectionQuoteViewController: UITableViewDelegate, UITableViewDataSou
     }
 }
 
+extension CollectionQuoteViewController: ActionSheetViewControllerDelegate {
+    func handleDismissal() {
+        self.navigationController?.view.alpha = 1
+    }
+}

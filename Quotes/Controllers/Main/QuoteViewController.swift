@@ -30,7 +30,6 @@ class QuoteViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         colorCount = colorArray.count
         
         configureTableView()
@@ -242,9 +241,12 @@ class QuoteViewController: UITableViewController {
     }
     
     func showActionSheet(cell: QuoteTableViewCell) {
-        let actionSheetVC = actionSheetService.show(cell: cell)
+        self.navigationController?.view.alpha = 0.6;
         
-        present(actionSheetVC, animated: true, completion: nil)
+        let actionSheetVC = actionSheetService.show(cell: cell)
+        actionSheetVC.delegate = self
+        
+        self.present(actionSheetVC, animated: true)
     }
     
     func deleteQuote(indexPath: IndexPath) {
@@ -283,24 +285,8 @@ class QuoteViewController: UITableViewController {
     }
 }
 
-extension UIColor {
-    static func rgb(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat = 1) -> UIColor {
-        return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: alpha)
-    }
-}
-
-extension UIImage {
-    func imageWithSize(scaledToSize newSize: CGSize) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
-        self.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
-        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
-        UIGraphicsEndImageContext()
-        return newImage
-    }
-}
-
-class ImageWithoutRender: UIImage {
-    override func withRenderingMode(_ renderingMode: UIImage.RenderingMode) -> UIImage {
-        return self
+extension QuoteViewController: ActionSheetViewControllerDelegate {
+    func handleDismissal() {
+        self.navigationController?.view.alpha = 1
     }
 }

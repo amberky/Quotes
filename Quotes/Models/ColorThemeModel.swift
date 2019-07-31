@@ -18,22 +18,6 @@ class ColorTheme {
 //                let c4 = UIColor.rgb(red: 206, green: 202, blue: 205, alpha: alpha)
 //                let c5 = UIColor.rgb(red: 170, green: 184, blue: 187, alpha: alpha)
         
-//        let c1 = UIColor.init(red: 196, green: 215, blue: 209, alpha: 1)
-//        let c2 = UIColor.init(red: 227, green: 218, blue: 210, alpha: 1)
-//        let c3 = UIColor.init(red: 253, green: 209, blue: 148, alpha: 1)
-//        let c4 = UIColor.init(red: 206, green: 202, blue: 205, alpha: 1)
-//        let c5 = UIColor.init(red: 170, green: 184, blue: 187, alpha: 1)
-//
-        
-        // let c2 = UIColor.rgb(red: 245, green: 209, blue: 195)
-        // let c3 = UIColor.rgb(red: 240, green: 188, blue: 104)
-        
-        // let c1 = UIColor.rgb(red: 42, green: 73, blue: 101)
-        // let c2 = UIColor.rgb(red: 154, green: 85, blue: 56)
-        // let c3 = UIColor.rgb(red: 229, green: 153, blue: 133)
-        // let c4 = UIColor.rgb(red: 224, green: 176, blue: 99)
-        // let c5 = UIColor.rgb(red: 95, green: 149, blue: 99)
-        
         //colorArray.append(c1)
         colorArray.append(c2)
 //        colorArray.append(c3)

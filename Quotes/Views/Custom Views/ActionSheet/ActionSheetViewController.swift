@@ -9,8 +9,14 @@
 import UIKit
 import CoreData
 
+protocol ActionSheetViewControllerDelegate {
+    func handleDismissal()
+}
+
 class ActionSheetViewController: UIViewController {
     
+    var delegate: ActionSheetViewControllerDelegate?
+
     lazy var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var cell = QuoteTableViewCell()
@@ -22,6 +28,7 @@ class ActionSheetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("hihi")
         // Do any additional setup after loading the view.
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapped))
@@ -30,7 +37,7 @@ class ActionSheetViewController: UIViewController {
     
     @objc func tapped() {
         print("tapped")
-        dismiss(animated: true, completion: nil)
+        dismissActionSheet()
     }
     
     @IBAction func copyClicked(_ sender: Any) {
@@ -41,13 +48,13 @@ class ActionSheetViewController: UIViewController {
         let copy = UIPasteboard.general
         copy.string = quote
         
-        dismiss(animated: true, completion: nil)
+        dismissActionSheet()
     }
     
     @IBAction func editClicked(_ sender: Any) {
         print("edit")
         
-        dismiss(animated: true, completion: nil)
+        dismissActionSheet()
     }
     
     @IBAction func moveClicked(_ sender: Any) {
@@ -69,22 +76,27 @@ class ActionSheetViewController: UIViewController {
                 }
             }
         } catch {
-            print("Error deleting data \(error)")
+            print("Error in removing & adding collections to quote \(error)")
         }
         
-        dismiss(animated: true, completion: nil)
+        dismissActionSheet()
     }
     
     @IBAction func shareClicked(_ sender: Any) {
         print("share")
         
-        dismiss(animated: true, completion: nil)
+        dismissActionSheet()
     }
     
     @IBAction func cancelClicked(_ sender: Any) {
         print("cancel")
         
+        dismissActionSheet()
+    }
+    
+    func dismissActionSheet() {
         dismiss(animated: true, completion: nil)
+        delegate?.handleDismissal()
     }
     
     /*

@@ -27,8 +27,8 @@ class AddCollectionViewController: UIViewController {
     
     let iconMode = "-light" // -dark or -light
     
-    lazy var unselectedColor = UIColor.rgb(red: 230, green: 227, blue: 226)
-    lazy var selectedColor = UIColor.rgb(red: 170, green: 184, blue: 187)
+    lazy var unselectedColor = UIColor.mainUnSelected()
+    lazy var selectedColor = UIColor.mainSelected()
     
     var selectedIndex = 0
     
