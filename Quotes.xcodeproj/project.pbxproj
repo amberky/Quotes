@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		250DD97522F1377A0092BF34 /* SmallIconCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 250DD97422F1377A0092BF34 /* SmallIconCollectionViewCell.xib */; };
 		251E18B622EB41A700DEE0F3 /* FavouriteAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251E18B522EB41A700DEE0F3 /* FavouriteAnimator.swift */; };
 		252782DC22EED46A00643736 /* QuoteSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252782DB22EED46A00643736 /* QuoteSectionModel.swift */; };
 		252782DF22EEDE4500643736 /* QuoteViewController+SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252782DE22EEDE4500643736 /* QuoteViewController+SearchBar.swift */; };
@@ -29,7 +30,6 @@
 		25B5D01922E95003004E5099 /* ColorThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B5D01822E95003004E5099 /* ColorThemeModel.swift */; };
 		25B5D02F22E991B8004E5099 /* AddCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B5D02D22E991B8004E5099 /* AddCollectionViewController.swift */; };
 		25B5D03922E9A85B004E5099 /* SmallIconCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B5D03722E9A85B004E5099 /* SmallIconCollectionViewCell.swift */; };
-		25B5D04322E9B050004E5099 /* SmallIconCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25B5D04122E9B050004E5099 /* SmallIconCollectionViewCell.xib */; };
 		25B5D04522E9CFCB004E5099 /* EditCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B5D04422E9CFCA004E5099 /* EditCollectionViewController.swift */; };
 		25D3699A22F0B49900D81E76 /* CollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D3699922F0B49900D81E76 /* CollectionModel.swift */; };
 		25D3699C22F0B4A900D81E76 /* IconModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D3699B22F0B4A900D81E76 /* IconModel.swift */; };
@@ -41,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		250DD97422F1377A0092BF34 /* SmallIconCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SmallIconCollectionViewCell.xib; sourceTree = "<group>"; };
 		251E18B522EB41A700DEE0F3 /* FavouriteAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteAnimator.swift; sourceTree = "<group>"; };
 		252782DB22EED46A00643736 /* QuoteSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteSectionModel.swift; sourceTree = "<group>"; };
 		252782DE22EEDE4500643736 /* QuoteViewController+SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuoteViewController+SearchBar.swift"; sourceTree = "<group>"; };
@@ -65,7 +66,6 @@
 		25B5D01822E95003004E5099 /* ColorThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorThemeModel.swift; sourceTree = "<group>"; };
 		25B5D02D22E991B8004E5099 /* AddCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCollectionViewController.swift; sourceTree = "<group>"; };
 		25B5D03722E9A85B004E5099 /* SmallIconCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallIconCollectionViewCell.swift; sourceTree = "<group>"; };
-		25B5D04122E9B050004E5099 /* SmallIconCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SmallIconCollectionViewCell.xib; path = "untitled folder/SmallIconCollectionViewCell.xib"; sourceTree = "<group>"; };
 		25B5D04422E9CFCA004E5099 /* EditCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCollectionViewController.swift; sourceTree = "<group>"; };
 		25D3699922F0B49900D81E76 /* CollectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionModel.swift; sourceTree = "<group>"; };
 		25D3699B22F0B4A900D81E76 /* IconModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconModel.swift; sourceTree = "<group>"; };
@@ -153,7 +153,7 @@
 			children = (
 				2566C29822E4970C003BFA91 /* LaunchScreen.storyboard */,
 				2566C29022E4970A003BFA91 /* Main.storyboard */,
-				25F0CE5222E69EA4001DE1A0 /* Custom Cell */,
+				25F0CE5222E69EA4001DE1A0 /* Custom Views */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -162,8 +162,8 @@
 			isa = PBXGroup;
 			children = (
 				2566C29322E4970A003BFA91 /* Quotes.xcdatamodeld */,
-				25B5D01822E95003004E5099 /* ColorThemeModel.swift */,
 				252782DB22EED46A00643736 /* QuoteSectionModel.swift */,
+				25B5D01822E95003004E5099 /* ColorThemeModel.swift */,
 				25D3699922F0B49900D81E76 /* CollectionModel.swift */,
 				25D3699B22F0B4A900D81E76 /* IconModel.swift */,
 			);
@@ -203,7 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				25B5D03722E9A85B004E5099 /* SmallIconCollectionViewCell.swift */,
-				25B5D04122E9B050004E5099 /* SmallIconCollectionViewCell.xib */,
+				250DD97422F1377A0092BF34 /* SmallIconCollectionViewCell.xib */,
 			);
 			path = SmallIconCollectionCell;
 			sourceTree = "<group>";
@@ -243,7 +243,7 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
-		25F0CE5222E69EA4001DE1A0 /* Custom Cell */ = {
+		25F0CE5222E69EA4001DE1A0 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
 				25B5D03C22E9AE85004E5099 /* QuoteTableCell */,
@@ -251,7 +251,7 @@
 				25B5D03B22E9AE7C004E5099 /* SmallIconCollectionCell */,
 				25D369A122F0B55200D81E76 /* ActionSheet */,
 			);
-			path = "Custom Cell";
+			path = "Custom Views";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,11 +313,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2566C29A22E4970C003BFA91 /* LaunchScreen.storyboard in Resources */,
+				250DD97522F1377A0092BF34 /* SmallIconCollectionViewCell.xib in Resources */,
 				25D3699E22F0B52000D81E76 /* ActionSheetStoryboard_Things3.storyboard in Resources */,
 				2566C29722E4970C003BFA91 /* Assets.xcassets in Resources */,
 				2566C29222E4970A003BFA91 /* Main.storyboard in Resources */,
 				25D369A622F0BC3200D81E76 /* ActionSheetStoryboard.storyboard in Resources */,
-				25B5D04322E9B050004E5099 /* SmallIconCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
