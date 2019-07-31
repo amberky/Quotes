@@ -102,13 +102,30 @@ class QuoteSections {
     var quoteSections: [QuoteSection] = [QuoteSection]()
     
     init(customPredicate: NSPredicate? = nil) {
-        print("init")
-        quoteSections.append(QuoteSection.init(sectionName: "PINNED QUOTES", sectionIcon: "pin-darkgray", isPin: true, customPredicate: customPredicate))
-        quoteSections.append(QuoteSection.init(sectionName: "QUOTES", sectionIcon: "quote-darkgray", isPin: false, customPredicate: customPredicate))
+        let pinned = QuoteSection.init(sectionName: "PINNED QUOTES", sectionIcon: "pin-darkgray", isPin: true, customPredicate: customPredicate)
+        
+        if pinned.quotes.count > 0 {
+            quoteSections.append(pinned)
+        }
+        
+        let unpinned = QuoteSection.init(sectionName: "QUOTES", sectionIcon: "quote-darkgray", isPin: false, customPredicate: customPredicate)
+        
+        if unpinned.quotes.count > 0 {
+            quoteSections.append(unpinned)
+        }
     }
     
     init(collection: String? = nil, customPredicate: NSPredicate? = nil) {
-        quoteSections.append(QuoteSection.init(sectionName: "PINNED QUOTES", sectionIcon: "pin-darkgray", isPin: true, collection: collection, customPredicate: customPredicate))
-        quoteSections.append(QuoteSection.init(sectionName: "QUOTES", sectionIcon: "quote-darkgray", isPin: false, collection: collection, customPredicate: customPredicate))
+        let pinned = QuoteSection.init(sectionName: "PINNED QUOTES", sectionIcon: "pin-darkgray", isPin: true, collection: collection, customPredicate: customPredicate)
+        
+        if pinned.quotes.count > 0 {
+            quoteSections.append(pinned)
+        }
+        
+        let unpinned = QuoteSection.init(sectionName: "QUOTES", sectionIcon: "quote-darkgray", isPin: false, collection: collection, customPredicate: customPredicate)
+        
+        if unpinned.quotes.count > 0{
+            quoteSections.append(unpinned)
+        }
     }
 }

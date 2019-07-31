@@ -13,6 +13,8 @@ class QuoteViewController: UITableViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    lazy var actionSheetService = ActionSheetService()
+    
     lazy var selectionHaptic = UISelectionFeedbackGenerator()
     
     lazy var quoteSectionArray = QuoteSections.init().quoteSections
@@ -106,6 +108,12 @@ class QuoteViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let tableViewFrame = tableView.frame.width
+        let tableViewLeftMargin = tableView.separatorInset.left
+        let tableViewSectionHeight = tableView.sectionHeaderHeight
+        let yAxis = (tableViewSectionHeight - 15) / 2
+        let width : CGFloat = 15
+        
         let headerView = UIView()
         headerView.backgroundColor = .white
         
@@ -113,10 +121,10 @@ class QuoteViewController: UITableViewController {
         
         let imageName = headerInfo.sectionIcon
         let image = UIImageView(image: UIImage.init(named: imageName))
-        image.frame = CGRect(x: tableView.separatorInset.left + 5,
-                             y: (tableView.sectionHeaderHeight - 15) / 2,
-                             width: 15,
-                             height: 15)
+        image.frame = CGRect(x: tableViewLeftMargin + 5,
+                             y: yAxis,
+                             width: width,
+                             height: width)
         
         headerView.addSubview(image)
         
@@ -127,11 +135,11 @@ class QuoteViewController: UITableViewController {
         
         label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
         
-        label.frame = CGRect(x: tableView.separatorInset.left + 15 + 10,
+        label.frame = CGRect(x: tableViewLeftMargin + 15 + 10,
                              // table margin left - image width - margin (image - label)
-            y: (tableView.sectionHeaderHeight - 15) / 2,
-            width: tableView.frame.width - tableView.separatorInset.left - tableView.separatorInset.left - 20 - 10,
-            height: 15)
+                            y: yAxis,
+                            width: tableViewFrame - (tableViewLeftMargin * 2) - 20 - 10,
+                            height: width)
         
         headerView.addSubview(label)
         
@@ -180,12 +188,14 @@ class QuoteViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
+        let cell = tableView.cellForRow(at: indexPath) as! QuoteTableViewCell
+        
         let moreAction = UIContextualAction(style: .destructive, title: nil) { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
             
             self.selectionHaptic.selectionChanged()
             
             print("more quote")
-            self.showActionSheet(indexPath: indexPath)
+            self.showActionSheet(cell: cell)
             completionHandler(false)
         }
         
@@ -231,65 +241,10 @@ class QuoteViewController: UITableViewController {
         loadQuotes()
     }
     
-    func showActionSheet(indexPath: IndexPath) {
-        selectionHaptic.prepare()
+    func showActionSheet(cell: QuoteTableViewCell) {
+        let actionSheetVC = actionSheetService.show(cell: cell)
         
-//        let font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
-        
-        let alert = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        let copyAction = UIAlertAction.init(title: "Copy", style: .default) { (action) in
-            self.actionSheetAction(action: "Copy", indexPath: indexPath)
-        }
-        
-        let editAction = UIAlertAction.init(title: "Edit", style: .default) { (action) in
-            self.actionSheetAction(action: "Edit", indexPath: indexPath)
-        }
-        
-        let moveAction = UIAlertAction.init(title: "Move Collection", style: .default) { (action) in
-            self.actionSheetAction(action: "Move", indexPath: indexPath)
-        }
-        
-        let shareAction = UIAlertAction.init(title: "Share", style: .default) { (action) in
-            self.actionSheetAction(action: "Share", indexPath: indexPath)
-        }
-        
-        let cancelAction = UIAlertAction.init(title: "Cancel", style: .cancel) { (action) in
-            self.actionSheetAction(action: "Cancel", indexPath: indexPath)
-        }
-        
-        alert.view.tintColor = UIColor.rgb(red: 93, green: 117, blue: 153);
-        
-        alert.addAction(copyAction)
-        alert.addAction(editAction)
-        alert.addAction(moveAction)
-        alert.addAction(shareAction)
-        alert.addAction(cancelAction)
-        
-        self.present(alert, animated: true, completion: nil)
-    }
-    
-    func actionSheetAction (action: String, indexPath: IndexPath) {
-        selectionHaptic.selectionChanged()
-        
-        let cell = tableView.cellForRow(at: indexPath) as! QuoteTableViewCell
-        switch action {
-        case "Copy":
-            let copy = UIPasteboard.general
-            copy.string = cell.quoteLabel.text
-            
-        case "Edit":
-            print("Edit Action selected")
-            
-        case "Move":
-            print("Move Action selected")
-            
-        case "Cancel":
-            print("Cancel Action selected")
-            
-        default:
-            print("unrecognise action")
-        }
+        present(actionSheetVC, animated: true, completion: nil)
     }
     
     func deleteQuote(indexPath: IndexPath) {

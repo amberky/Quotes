@@ -33,6 +33,10 @@
 		25B5D04522E9CFCB004E5099 /* EditCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B5D04422E9CFCA004E5099 /* EditCollectionViewController.swift */; };
 		25D3699A22F0B49900D81E76 /* CollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D3699922F0B49900D81E76 /* CollectionModel.swift */; };
 		25D3699C22F0B4A900D81E76 /* IconModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D3699B22F0B4A900D81E76 /* IconModel.swift */; };
+		25D3699E22F0B52000D81E76 /* ActionSheetStoryboard_Things3.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25D3699D22F0B52000D81E76 /* ActionSheetStoryboard_Things3.storyboard */; };
+		25D369A022F0B54E00D81E76 /* ActionSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D3699F22F0B54E00D81E76 /* ActionSheetViewController.swift */; };
+		25D369A322F0B7EF00D81E76 /* ActionSheetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D369A222F0B7EF00D81E76 /* ActionSheetService.swift */; };
+		25D369A622F0BC3200D81E76 /* ActionSheetStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25D369A522F0BC3200D81E76 /* ActionSheetStoryboard.storyboard */; };
 		25F0CE5022E69EA0001DE1A0 /* QuoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F0CE4E22E69EA0001DE1A0 /* QuoteTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +69,10 @@
 		25B5D04422E9CFCA004E5099 /* EditCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCollectionViewController.swift; sourceTree = "<group>"; };
 		25D3699922F0B49900D81E76 /* CollectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionModel.swift; sourceTree = "<group>"; };
 		25D3699B22F0B4A900D81E76 /* IconModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconModel.swift; sourceTree = "<group>"; };
+		25D3699D22F0B52000D81E76 /* ActionSheetStoryboard_Things3.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ActionSheetStoryboard_Things3.storyboard; sourceTree = "<group>"; };
+		25D3699F22F0B54E00D81E76 /* ActionSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheetViewController.swift; sourceTree = "<group>"; };
+		25D369A222F0B7EF00D81E76 /* ActionSheetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheetService.swift; sourceTree = "<group>"; };
+		25D369A522F0BC3200D81E76 /* ActionSheetStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ActionSheetStoryboard.storyboard; sourceTree = "<group>"; };
 		25F0CE4E22E69EA0001DE1A0 /* QuoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,6 +132,7 @@
 				2566C28C22E4970A003BFA91 /* AppDelegate.swift */,
 				2566C2A122E49720003BFA91 /* Controllers */,
 				2566C2A222E49725003BFA91 /* Views */,
+				25D369A422F0B7F500D81E76 /* Service */,
 				2566C29622E4970C003BFA91 /* Assets.xcassets */,
 				2566C2A322E49733003BFA91 /* Models */,
 			);
@@ -215,13 +224,32 @@
 			path = CollectionCollectionCell;
 			sourceTree = "<group>";
 		};
+		25D369A122F0B55200D81E76 /* ActionSheet */ = {
+			isa = PBXGroup;
+			children = (
+				25D369A522F0BC3200D81E76 /* ActionSheetStoryboard.storyboard */,
+				25D3699D22F0B52000D81E76 /* ActionSheetStoryboard_Things3.storyboard */,
+				25D3699F22F0B54E00D81E76 /* ActionSheetViewController.swift */,
+			);
+			path = ActionSheet;
+			sourceTree = "<group>";
+		};
+		25D369A422F0B7F500D81E76 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				251E18B522EB41A700DEE0F3 /* FavouriteAnimator.swift */,
+				25D369A222F0B7EF00D81E76 /* ActionSheetService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		25F0CE5222E69EA4001DE1A0 /* Custom Cell */ = {
 			isa = PBXGroup;
 			children = (
 				25B5D03C22E9AE85004E5099 /* QuoteTableCell */,
 				25B5D03F22E9AEAA004E5099 /* CollectionCollectionCell */,
 				25B5D03B22E9AE7C004E5099 /* SmallIconCollectionCell */,
-				251E18B522EB41A700DEE0F3 /* FavouriteAnimator.swift */,
+				25D369A122F0B55200D81E76 /* ActionSheet */,
 			);
 			path = "Custom Cell";
 			sourceTree = "<group>";
@@ -285,8 +313,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2566C29A22E4970C003BFA91 /* LaunchScreen.storyboard in Resources */,
+				25D3699E22F0B52000D81E76 /* ActionSheetStoryboard_Things3.storyboard in Resources */,
 				2566C29722E4970C003BFA91 /* Assets.xcassets in Resources */,
 				2566C29222E4970A003BFA91 /* Main.storyboard in Resources */,
+				25D369A622F0BC3200D81E76 /* ActionSheetStoryboard.storyboard in Resources */,
 				25B5D04322E9B050004E5099 /* SmallIconCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -298,6 +328,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25D369A022F0B54E00D81E76 /* ActionSheetViewController.swift in Sources */,
 				2566C28F22E4970A003BFA91 /* QuoteViewController.swift in Sources */,
 				2566C2B422E4D0B5003BFA91 /* AddQuoteViewController.swift in Sources */,
 				252782E322EEE63F00643736 /* QuoteViewController+Drop.swift in Sources */,
@@ -313,6 +344,7 @@
 				25B5D01922E95003004E5099 /* ColorThemeModel.swift in Sources */,
 				252782EA22EF3EF500643736 /* CollectionQuoteViewController+SearchBar.swift in Sources */,
 				257535E922E5C77300DB2BAD /* SelectCollectionViewController.swift in Sources */,
+				25D369A322F0B7EF00D81E76 /* ActionSheetService.swift in Sources */,
 				2589380822E81F4D001E10FE /* CollectionCollectionViewCell.swift in Sources */,
 				252782DF22EEDE4500643736 /* QuoteViewController+SearchBar.swift in Sources */,
 				25F0CE5022E69EA0001DE1A0 /* QuoteTableViewCell.swift in Sources */,
