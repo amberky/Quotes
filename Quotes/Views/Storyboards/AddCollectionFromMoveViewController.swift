@@ -1,5 +1,5 @@
 //
-//  AddCollectionViewController.swift
+//  AddCollectionFromMoveViewController.swift
 //  Quotes
 //
 //  Created by Kharnyee Eu on 22/07/2019.
@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class AddCollectionViewController: UIViewController {
+class AddCollectionFromMoveViewController: UIViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
@@ -127,14 +127,14 @@ class AddCollectionViewController: UIViewController {
     }
 }
 
-extension AddCollectionViewController: UITextFieldDelegate {
+extension AddCollectionFromMoveViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         collectionTextField.resignFirstResponder()
         return false
     }
 }
 
-extension AddCollectionViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+extension AddCollectionFromMoveViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
         //NOTE: - Space between cell is 10pt, therefore deduct 50pt

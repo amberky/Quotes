@@ -30,12 +30,6 @@ class AddQuoteViewController: UIViewController {
         }
     }
     
-    var quoteCount = 0 {
-        didSet {
-            print("quoteCount \(self.quoteCount)")
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -125,7 +119,6 @@ class AddQuoteViewController: UIViewController {
             
             newQuote.addedOn = Date()
             newQuote.updatedOn = Date()
-            newQuote.orderIndex = Int64(quoteCount + 1)
             
             context.insert(newQuote)
             
@@ -139,10 +132,10 @@ class AddQuoteViewController: UIViewController {
         case "cancelClicked":
             print("Cancel bar button clicked")
             
-        case "goToSelectCollectionView":
+        case "goToAddSelectCollectionView":
             print("Let's go to select a collection")
             
-            let destination = segue.destination as! SelectCollectionViewController
+            let destination = segue.destination as! AddSelectCollectionViewController
             destination.selectedCollection = selectedCollection
             
         default:

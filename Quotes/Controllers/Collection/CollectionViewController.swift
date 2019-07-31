@@ -73,7 +73,7 @@ class CollectionViewController: UIViewController {
         
         switch identifier {
         case "goToCollectionQuoteView":
-            print("Let's go to Collection Quote View")
+            print("Let's go to collection-quote view")
             
             if let indexPath = collectionCollectionView.indexPathsForSelectedItems {
                 if let firstItem = indexPath.first {

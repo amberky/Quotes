@@ -10,13 +10,12 @@
         <attribute name="addedOn" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isPin" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="orderIndex" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="quote" attributeType="String" syncable="YES"/>
         <attribute name="updatedOn" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="collections" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Collection" inverseName="quotes" inverseEntity="Collection" syncable="YES"/>
     </entity>
     <elements>
         <element name="Collection" positionX="100.6796875" positionY="-17.33984375" width="128" height="103"/>
-        <element name="Quote" positionX="-63" positionY="-18" width="128" height="150"/>
+        <element name="Quote" positionX="-63" positionY="-18" width="128" height="135"/>
     </elements>
 </model>

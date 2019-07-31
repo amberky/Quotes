@@ -11,6 +11,8 @@ import CoreData
 
 protocol ActionSheetViewControllerDelegate {
     func handleDismissal()
+    
+    func handleEditQuote(cell: QuoteTableViewCell)
 }
 
 class ActionSheetViewController: UIViewController {
@@ -18,6 +20,10 @@ class ActionSheetViewController: UIViewController {
     var delegate: ActionSheetViewControllerDelegate?
 
     lazy var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    lazy var selectionHaptic = UISelectionFeedbackGenerator()
+    
+    lazy var editQuoteService = EditQuoteService()
     
     var cell = QuoteTableViewCell()
     
@@ -42,6 +48,8 @@ class ActionSheetViewController: UIViewController {
     
     @IBAction func copyClicked(_ sender: Any) {
         print("copy")
+        selectionHaptic.selectionChanged()
+        
         guard let quote = cell.quoteLabel.text
             else { return }
         
@@ -53,12 +61,15 @@ class ActionSheetViewController: UIViewController {
     
     @IBAction func editClicked(_ sender: Any) {
         print("edit")
+        selectionHaptic.selectionChanged()
         
         dismissActionSheet()
+        delegate?.handleEditQuote(cell: cell)
     }
     
     @IBAction func moveClicked(_ sender: Any) {
         print("move")
+        selectionHaptic.selectionChanged()
         
         let request: NSFetchRequest<Quote> = Quote.fetchRequest()
         request.predicate = NSPredicate(format: "quote == %@", cell.quoteLabel.text ?? "")
@@ -74,6 +85,8 @@ class ActionSheetViewController: UIViewController {
                 for c in collections {
                     quote.addToCollections(c)
                 }
+                
+                saveContext()
             }
         } catch {
             print("Error in removing & adding collections to quote \(error)")
@@ -84,12 +97,14 @@ class ActionSheetViewController: UIViewController {
     
     @IBAction func shareClicked(_ sender: Any) {
         print("share")
+        selectionHaptic.selectionChanged()
         
         dismissActionSheet()
     }
     
     @IBAction func cancelClicked(_ sender: Any) {
         print("cancel")
+        selectionHaptic.selectionChanged()
         
         dismissActionSheet()
     }
@@ -99,14 +114,12 @@ class ActionSheetViewController: UIViewController {
         delegate?.handleDismissal()
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
+    func saveContext() {
+        do {
+            try context.save()
+            print("Saved successfully")
+        } catch {
+            print("Error saving data from context \(error)")
+        }
+    }
 }

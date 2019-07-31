@@ -14,12 +14,13 @@ class CollectionQuoteViewController: UIViewController {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     lazy var actionSheetService = ActionSheetService()
+    lazy var editQuoteService = EditQuoteService()
     
     lazy var selectionHaptic = UISelectionFeedbackGenerator()
     
     lazy var quoteSectionArray = QuoteSections.init().quoteSections
     
-    var colorArray = ColorTheme.init(alpha: 0.2).colorArray
+    var colorArray = ColorTheme.init(alpha: 0.1).colorArray
     var colorCount: Int = 0
     
     //MARK: - IBOutlet
@@ -289,11 +290,9 @@ extension CollectionQuoteViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func showActionSheet(cell: QuoteTableViewCell) {
-        self.navigationController?.view.alpha = 0.6;
-        
         let actionSheetVC = actionSheetService.show(cell: cell)
         actionSheetVC.delegate = self
-        
+        self.navigationController?.view.alpha = 0.6;
         self.present(actionSheetVC, animated: true)
     }
     
@@ -310,5 +309,18 @@ extension CollectionQuoteViewController: UITableViewDelegate, UITableViewDataSou
 extension CollectionQuoteViewController: ActionSheetViewControllerDelegate {
     func handleDismissal() {
         self.navigationController?.view.alpha = 1
+    }
+    
+    func handleEditQuote(cell: QuoteTableViewCell) {
+        print("Edit Quote")
+        let editQuoteVC = editQuoteService.show(cell: cell)
+        editQuoteVC.delegate = self
+        self.present(editQuoteVC, animated: true)
+    }
+}
+
+extension CollectionQuoteViewController: EditQuoteViewControllerDelegate {
+    func reloadQuote() {
+        loadQuotes()
     }
 }

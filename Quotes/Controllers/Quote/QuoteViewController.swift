@@ -14,12 +14,13 @@ class QuoteViewController: UITableViewController {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     lazy var actionSheetService = ActionSheetService()
+    lazy var editQuoteService = EditQuoteService()
     
     lazy var selectionHaptic = UISelectionFeedbackGenerator()
     
     lazy var quoteSectionArray = QuoteSections.init().quoteSections
     
-    var colorArray = ColorTheme.init(alpha: 0.2).colorArray
+    var colorArray = ColorTheme.init(alpha: 0.1).colorArray
     var colorCount: Int = 0
     
     @IBOutlet var searchBar: UISearchBar!
@@ -109,12 +110,12 @@ class QuoteViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let tableViewFrame = tableView.frame.width
         let tableViewLeftMargin = tableView.separatorInset.left
-        let tableViewSectionHeight = tableView.sectionHeaderHeight
+        let tableViewSectionHeight = tableView.sectionHeaderHeight * 2
         let yAxis = (tableViewSectionHeight - 15) / 2
         let width : CGFloat = 15
         
         let headerView = UIView()
-        headerView.backgroundColor = .white
+        headerView.backgroundColor = .clear
         
         let headerInfo = quoteSectionArray[section]
         
@@ -132,7 +133,7 @@ class QuoteViewController: UITableViewController {
         label.textColor = .darkGray
 //        label.font = UIFont.boldSystemFont(ofSize: 15)
         
-        label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
+        label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title3)
         
         label.frame = CGRect(x: tableViewLeftMargin + 15 + 10,
                              // table margin left - image width - margin (image - label)
@@ -149,7 +150,7 @@ class QuoteViewController: UITableViewController {
         if quoteSectionArray[section].quotes.count == 0 {
             return 0.0
         } else {
-            return tableView.sectionHeaderHeight
+            return tableView.sectionHeaderHeight * 2
         }
     }
     
@@ -241,11 +242,9 @@ class QuoteViewController: UITableViewController {
     }
     
     func showActionSheet(cell: QuoteTableViewCell) {
-        self.navigationController?.view.alpha = 0.6;
-        
         let actionSheetVC = actionSheetService.show(cell: cell)
         actionSheetVC.delegate = self
-        
+        self.navigationController?.view.alpha = 0.6;
         self.present(actionSheetVC, animated: true)
     }
     
@@ -268,10 +267,7 @@ class QuoteViewController: UITableViewController {
         
         switch segue.identifier {
         case "goToAddQuoteView":
-            // Set quoteCount to unpin quotes count
-            let destination = segue.destination as! AddQuoteViewController
-            destination.quoteCount = quoteSectionArray[1].quotes.count
-            
+            print("Let's go to add a quote")
         default:
             print("unknown segue identifier")
             
@@ -288,5 +284,18 @@ class QuoteViewController: UITableViewController {
 extension QuoteViewController: ActionSheetViewControllerDelegate {
     func handleDismissal() {
         self.navigationController?.view.alpha = 1
+    }
+    
+    func handleEditQuote(cell: QuoteTableViewCell) {
+        print("Edit Quote")
+        let editQuoteVC = editQuoteService.show(cell: cell)
+        editQuoteVC.delegate = self
+        self.present(editQuoteVC, animated: true)
+    }
+}
+
+extension QuoteViewController: EditQuoteViewControllerDelegate {
+    func reloadQuote() {
+        loadQuotes()
     }
 }
