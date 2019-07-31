@@ -43,37 +43,9 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9SY-QT-Pux" userLabel="Base View">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="184"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y4k-X0-k4m" userLabel="BorderView">
-                                                    <rect key="frame" x="18" y="10" width="339" height="164"/>
-                                                    <color key="backgroundColor" red="0.88594800233840942" green="0.85530537366867065" blue="0.82744723558425903" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <integer key="value" value="10"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cVf-Cp-fEl" userLabel="Background View">
                                                     <rect key="frame" x="20" y="10" width="335" height="164"/>
                                                     <subviews>
-                                                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e5X-il-RLq" userLabel="Header View">
-                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="24"/>
-                                                            <color key="backgroundColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="24" id="LLX-Ji-h9w"/>
-                                                            </constraints>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                    <integer key="value" value="12"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                            </userDefinedRuntimeAttributes>
-                                                        </view>
-                                                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="anu-6R-N4t" userLabel="Fake Layer View">
-                                                            <rect key="frame" x="0.0" y="12" width="335" height="12"/>
-                                                            <color key="backgroundColor" red="0.56078431370000004" green="0.69411764710000001" blue="0.76470588240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="12" id="DKH-0k-f6k"/>
-                                                            </constraints>
-                                                        </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aku-v5-nPK" userLabel="Label View">
                                                             <rect key="frame" x="30" y="20" width="275" height="124"/>
                                                             <subviews>
@@ -113,18 +85,12 @@
                                                             </constraints>
                                                         </view>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" red="0.92156862750000001" green="0.75294117650000003" blue="0.34509803919999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <gestureRecognizers/>
                                                     <constraints>
                                                         <constraint firstItem="aku-v5-nPK" firstAttribute="top" secondItem="cVf-Cp-fEl" secondAttribute="top" constant="20" id="0XN-oj-0OZ"/>
                                                         <constraint firstAttribute="bottom" secondItem="aku-v5-nPK" secondAttribute="bottom" constant="20" id="1LR-wx-Ldx"/>
-                                                        <constraint firstAttribute="trailing" secondItem="e5X-il-RLq" secondAttribute="trailing" id="9z7-5X-gIz"/>
-                                                        <constraint firstItem="anu-6R-N4t" firstAttribute="top" secondItem="cVf-Cp-fEl" secondAttribute="top" constant="12" id="QOa-Ys-wga"/>
-                                                        <constraint firstItem="e5X-il-RLq" firstAttribute="top" secondItem="cVf-Cp-fEl" secondAttribute="top" id="Znh-rf-XvX"/>
-                                                        <constraint firstItem="anu-6R-N4t" firstAttribute="leading" secondItem="cVf-Cp-fEl" secondAttribute="leading" id="e3O-JG-4FU"/>
                                                         <constraint firstItem="aku-v5-nPK" firstAttribute="centerX" secondItem="cVf-Cp-fEl" secondAttribute="centerX" id="rdn-yc-9p4"/>
-                                                        <constraint firstItem="e5X-il-RLq" firstAttribute="leading" secondItem="cVf-Cp-fEl" secondAttribute="leading" id="scB-U7-0Ac"/>
-                                                        <constraint firstAttribute="trailing" secondItem="anu-6R-N4t" secondAttribute="trailing" id="scs-fz-lM0"/>
                                                         <constraint firstItem="aku-v5-nPK" firstAttribute="leading" secondItem="cVf-Cp-fEl" secondAttribute="leading" constant="30" id="xMY-hq-G1g"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
@@ -136,14 +102,8 @@
                                             </subviews>
                                             <gestureRecognizers/>
                                             <constraints>
-                                                <constraint firstItem="y4k-X0-k4m" firstAttribute="centerX" secondItem="9SY-QT-Pux" secondAttribute="centerX" id="3DK-JV-oxZ"/>
                                                 <constraint firstItem="cVf-Cp-fEl" firstAttribute="top" secondItem="9SY-QT-Pux" secondAttribute="top" constant="10" id="ISf-P5-gwH"/>
-                                                <constraint firstItem="y4k-X0-k4m" firstAttribute="top" secondItem="9SY-QT-Pux" secondAttribute="top" constant="10" id="N4G-Yw-jLB"/>
-                                                <constraint firstAttribute="bottom" secondItem="y4k-X0-k4m" secondAttribute="bottom" constant="10" id="Pjc-HO-iNs"/>
                                                 <constraint firstItem="cVf-Cp-fEl" firstAttribute="leading" secondItem="9SY-QT-Pux" secondAttribute="leading" constant="20" id="R8t-WM-k21"/>
-                                                <constraint firstItem="y4k-X0-k4m" firstAttribute="centerY" secondItem="9SY-QT-Pux" secondAttribute="centerY" id="aMj-3Q-Nbj"/>
-                                                <constraint firstItem="y4k-X0-k4m" firstAttribute="leading" secondItem="9SY-QT-Pux" secondAttribute="leading" constant="18" id="poR-ui-oXA"/>
-                                                <constraint firstAttribute="trailing" secondItem="y4k-X0-k4m" secondAttribute="trailing" constant="18" id="qis-ZS-SW5"/>
                                                 <constraint firstItem="cVf-Cp-fEl" firstAttribute="centerY" secondItem="9SY-QT-Pux" secondAttribute="centerY" id="u6m-0S-TOa"/>
                                                 <constraint firstItem="cVf-Cp-fEl" firstAttribute="centerX" secondItem="9SY-QT-Pux" secondAttribute="centerX" id="y3A-M8-chV"/>
                                             </constraints>
@@ -161,9 +121,6 @@
                                 <connections>
                                     <outlet property="authorLabel" destination="4eh-ly-3VF" id="rHt-uM-xmi"/>
                                     <outlet property="bgView" destination="cVf-Cp-fEl" id="qcq-3z-e8Q"/>
-                                    <outlet property="borderView" destination="y4k-X0-k4m" id="eAx-cW-TnN"/>
-                                    <outlet property="fakeQuoteHeader" destination="anu-6R-N4t" id="Jqd-w7-GiK"/>
-                                    <outlet property="quoteHeader" destination="e5X-il-RLq" id="yZ5-TM-e0P"/>
                                     <outlet property="quoteLabel" destination="AUL-Nj-N16" id="Mua-nb-Btr"/>
                                 </connections>
                             </tableViewCell>
@@ -211,10 +168,10 @@
                                 <color key="tintColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" red="0.89019607840000003" green="0.75294117650000003" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="textColor" red="0.92156862750000001" green="0.75294117650000003" blue="0.34509803919999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </textAttributes>
                                 <textAttributes key="largeTitleTextAttributes">
-                                    <color key="textColor" red="0.89019607840000003" green="0.75294117650000003" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="textColor" red="0.92156862750000001" green="0.75294117650000003" blue="0.34509803919999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Add Quote" id="iSv-mD-Y8F">
@@ -234,10 +191,10 @@
                                 </items>
                             </navigationBar>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="uML-vF-xeE">
-                                <rect key="frame" x="20" y="108" width="335" height="275"/>
+                                <rect key="frame" x="20" y="108" width="335" height="260"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="42I-3w-NVD" userLabel="Quote View">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="85"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="80"/>
                                         <subviews>
                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quote  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S50-5d-wLA">
                                                 <rect key="frame" x="5" y="10" width="325" height="20"/>
@@ -249,16 +206,16 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="vpr-Q8-tmf">
-                                                <rect key="frame" x="5" y="40" width="325" height="40"/>
+                                                <rect key="frame" x="5" y="40" width="325" height="35"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="LgV-BP-X9e"/>
+                                                    <constraint firstAttribute="height" constant="35" id="LgV-BP-X9e"/>
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textField>
                                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UTg-oM-IHf" userLabel="Horizontal Line">
-                                                <rect key="frame" x="5" y="80" width="325" height="1"/>
+                                                <rect key="frame" x="5" y="75" width="325" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="ZJ5-xg-8yo"/>
@@ -267,7 +224,7 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="85" id="26C-sM-D6h"/>
+                                            <constraint firstAttribute="height" constant="80" id="26C-sM-D6h"/>
                                             <constraint firstAttribute="trailing" secondItem="vpr-Q8-tmf" secondAttribute="trailing" constant="5" id="8Ny-Xg-95B"/>
                                             <constraint firstItem="S50-5d-wLA" firstAttribute="leading" secondItem="42I-3w-NVD" secondAttribute="leading" constant="5" id="8s5-cn-eoV"/>
                                             <constraint firstAttribute="trailing" secondItem="S50-5d-wLA" secondAttribute="trailing" constant="5" id="HK6-PH-XlA"/>
@@ -280,7 +237,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P06-XY-DmW" userLabel="Author View">
-                                        <rect key="frame" x="0.0" y="95" width="335" height="85"/>
+                                        <rect key="frame" x="0.0" y="90" width="335" height="80"/>
                                         <subviews>
                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BCG-8R-WbQ">
                                                 <rect key="frame" x="5" y="10" width="325" height="20"/>
@@ -292,16 +249,16 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="zfk-qb-MU0">
-                                                <rect key="frame" x="5" y="40" width="325" height="40"/>
+                                                <rect key="frame" x="5" y="40" width="325" height="35"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="j5b-rS-bHR"/>
+                                                    <constraint firstAttribute="height" constant="35" id="j5b-rS-bHR"/>
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                             </textField>
                                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1S8-rd-FBj" userLabel="Horizontal Line">
-                                                <rect key="frame" x="5" y="80" width="325" height="1"/>
+                                                <rect key="frame" x="5" y="75" width="325" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="qdd-K0-nyA"/>
@@ -313,7 +270,7 @@
                                             <constraint firstItem="BCG-8R-WbQ" firstAttribute="leading" secondItem="P06-XY-DmW" secondAttribute="leading" constant="5" id="5ps-rg-PHS"/>
                                             <constraint firstItem="zfk-qb-MU0" firstAttribute="leading" secondItem="P06-XY-DmW" secondAttribute="leading" constant="5" id="8O1-de-yC6"/>
                                             <constraint firstItem="1S8-rd-FBj" firstAttribute="leading" secondItem="P06-XY-DmW" secondAttribute="leading" constant="5" id="BDg-Zz-xuA"/>
-                                            <constraint firstAttribute="height" constant="85" id="Ga5-R4-2jc"/>
+                                            <constraint firstAttribute="height" constant="80" id="Ga5-R4-2jc"/>
                                             <constraint firstAttribute="trailing" secondItem="zfk-qb-MU0" secondAttribute="trailing" constant="5" id="HrT-qX-Q0O"/>
                                             <constraint firstAttribute="trailing" secondItem="BCG-8R-WbQ" secondAttribute="trailing" constant="5" id="ISB-Xn-v9k"/>
                                             <constraint firstAttribute="trailing" secondItem="1S8-rd-FBj" secondAttribute="trailing" constant="5" id="LkB-qh-vKz"/>
@@ -323,7 +280,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5RR-Ir-ns4" userLabel="Collection View">
-                                        <rect key="frame" x="0.0" y="190" width="335" height="85"/>
+                                        <rect key="frame" x="0.0" y="180" width="335" height="80"/>
                                         <subviews>
                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Collection  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="12f-bI-9tq" userLabel="Collection">
                                                 <rect key="frame" x="5" y="10" width="325" height="20"/>
@@ -335,9 +292,9 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QH4-3w-BDY" userLabel="Collection Button">
-                                                <rect key="frame" x="5" y="40" width="325" height="40"/>
+                                                <rect key="frame" x="5" y="40" width="325" height="35"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="5ts-RK-y7Q"/>
+                                                    <constraint firstAttribute="height" constant="35" id="5ts-RK-y7Q"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <state key="normal" title="None">
@@ -350,7 +307,7 @@
                                                 </connections>
                                             </button>
                                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vC8-Il-yec" userLabel="Horizontal Line">
-                                                <rect key="frame" x="5" y="80" width="325" height="1"/>
+                                                <rect key="frame" x="5" y="75" width="325" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="4Qp-QB-07Q"/>
@@ -359,7 +316,7 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="85" id="6Vc-Jh-VYf"/>
+                                            <constraint firstAttribute="height" constant="80" id="6Vc-Jh-VYf"/>
                                             <constraint firstItem="12f-bI-9tq" firstAttribute="leading" secondItem="5RR-Ir-ns4" secondAttribute="leading" constant="5" id="BLs-o2-T3C"/>
                                             <constraint firstItem="QH4-3w-BDY" firstAttribute="top" secondItem="12f-bI-9tq" secondAttribute="bottom" constant="10" id="EzU-7b-h7t"/>
                                             <constraint firstItem="QH4-3w-BDY" firstAttribute="leading" secondItem="5RR-Ir-ns4" secondAttribute="leading" constant="5" id="G7t-1w-Eao"/>
@@ -405,6 +362,8 @@
         <!--Select Collection View Controller-->
         <scene sceneID="NS2-PA-bTS">
             <objects>
+                <exit id="joQ-5y-OR0" userLabel="Exit" sceneMemberID="exit"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xID-Ej-GGi" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="oHD-BC-j5N" customClass="SelectCollectionViewController" customModule="Quotes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kCE-eK-ASd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
@@ -414,10 +373,10 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" red="0.89019607840000003" green="0.75294117650000003" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="textColor" red="0.92156862750000001" green="0.75294117650000003" blue="0.34509803919999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </textAttributes>
                                 <textAttributes key="largeTitleTextAttributes">
-                                    <color key="textColor" red="0.89019607840000003" green="0.75294117650000003" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="textColor" red="0.92156862750000001" green="0.75294117650000003" blue="0.34509803919999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Collection" id="hJc-yx-v2r">
@@ -436,25 +395,58 @@
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="G5v-et-wQt" userLabel="Collection Table View">
-                                <rect key="frame" x="10" y="198" width="355" height="570"/>
+                                <rect key="frame" x="10" y="193" width="355" height="575"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="CollectionCell" rowHeight="60" id="WCt-tk-Q5O" userLabel="CollectionCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="CollectionCell" rowHeight="60" id="WCt-tk-Q5O" userLabel="CollectionCell" customClass="CollectionTableViewCell" customModule="Quotes" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="355" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WCt-tk-Q5O" id="HPV-3N-4AB">
                                             <rect key="frame" x="0.0" y="0.0" width="355" height="59.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wo0-vi-NcV">
+                                                    <rect key="frame" x="0.0" y="0.0" width="355" height="55"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfd-Te-py4">
+                                                            <rect key="frame" x="20" y="10" width="315" height="35"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="35" id="qaq-G6-EYN"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="tfd-Te-py4" firstAttribute="leading" secondItem="wo0-vi-NcV" secondAttribute="leading" constant="20" id="7rz-HR-5aM"/>
+                                                        <constraint firstAttribute="bottom" secondItem="tfd-Te-py4" secondAttribute="bottom" constant="10" id="AFa-Fl-ZWj"/>
+                                                        <constraint firstItem="tfd-Te-py4" firstAttribute="top" secondItem="wo0-vi-NcV" secondAttribute="top" constant="10" id="G4u-ON-mZn"/>
+                                                        <constraint firstItem="tfd-Te-py4" firstAttribute="centerY" secondItem="wo0-vi-NcV" secondAttribute="centerY" id="UjN-pO-ZrQ"/>
+                                                        <constraint firstAttribute="trailing" secondItem="tfd-Te-py4" secondAttribute="trailing" constant="20" id="zUR-XY-cUL"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="wo0-vi-NcV" firstAttribute="leading" secondItem="HPV-3N-4AB" secondAttribute="leading" id="KuY-3W-P5v"/>
+                                                <constraint firstAttribute="trailing" secondItem="wo0-vi-NcV" secondAttribute="trailing" id="bS0-XW-Mgk"/>
+                                                <constraint firstItem="wo0-vi-NcV" firstAttribute="top" secondItem="HPV-3N-4AB" secondAttribute="top" id="pdq-Fg-nGv"/>
+                                                <constraint firstAttribute="bottom" secondItem="wo0-vi-NcV" secondAttribute="bottom" id="wqH-By-xHE"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="tintColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <connections>
+                                            <outlet property="collectionLabel" destination="tfd-Te-py4" id="W0i-ZA-hgW"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hza-Xg-QMj">
-                                <rect key="frame" x="20" y="118" width="335" height="50"/>
+                                <rect key="frame" x="20" y="118" width="335" height="45"/>
                                 <color key="backgroundColor" red="0.56078431370000004" green="0.69411764710000001" blue="0.76470588240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="3qO-4H-YNn"/>
+                                    <constraint firstAttribute="height" constant="45" id="3qO-4H-YNn"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -490,8 +482,6 @@
                         <outlet property="collectionTableView" destination="G5v-et-wQt" id="azS-A0-f0f"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xID-Ej-GGi" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="joQ-5y-OR0" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2852" y="117.48768472906404"/>
         </scene>
@@ -507,10 +497,10 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" red="0.89019607840000003" green="0.75294117650000003" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="textColor" red="0.92156862750000001" green="0.75294117650000003" blue="0.34509803919999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </textAttributes>
                                 <textAttributes key="largeTitleTextAttributes">
-                                    <color key="textColor" red="0.89019607840000003" green="0.75294117650000003" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="textColor" red="0.92156862750000001" green="0.75294117650000003" blue="0.34509803919999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Add Collection" id="8C0-w6-WkO">
@@ -531,10 +521,10 @@
                                 </items>
                             </navigationBar>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="kgy-G0-QVb">
-                                <rect key="frame" x="20" y="108" width="335" height="85"/>
+                                <rect key="frame" x="20" y="108" width="335" height="80"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gcp-N6-JX2">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="85"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="80"/>
                                         <subviews>
                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Collection  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ak-zc-dRe" userLabel="Collection Label">
                                                 <rect key="frame" x="5" y="10" width="325" height="20"/>
@@ -546,16 +536,16 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="CYt-UN-PDp" userLabel="Collection Text Field">
-                                                <rect key="frame" x="5" y="40" width="325" height="40"/>
+                                                <rect key="frame" x="5" y="40" width="325" height="35"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="sVa-i7-pdM"/>
+                                                    <constraint firstAttribute="height" constant="35" id="sVa-i7-pdM"/>
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textField>
                                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KQr-ef-juq" userLabel="Horizontal Line">
-                                                <rect key="frame" x="5" y="80" width="325" height="1"/>
+                                                <rect key="frame" x="5" y="75" width="325" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="Ktw-OE-4Ni"/>
@@ -570,7 +560,7 @@
                                             <constraint firstAttribute="trailing" secondItem="3ak-zc-dRe" secondAttribute="trailing" constant="5" id="GIS-nG-uHU"/>
                                             <constraint firstAttribute="trailing" secondItem="CYt-UN-PDp" secondAttribute="trailing" constant="5" id="KZw-T9-2ec"/>
                                             <constraint firstItem="CYt-UN-PDp" firstAttribute="leading" secondItem="Gcp-N6-JX2" secondAttribute="leading" constant="5" id="LVS-RE-F44"/>
-                                            <constraint firstAttribute="height" constant="85" id="Pp5-fr-2UJ"/>
+                                            <constraint firstAttribute="height" constant="80" id="Pp5-fr-2UJ"/>
                                             <constraint firstItem="CYt-UN-PDp" firstAttribute="top" secondItem="3ak-zc-dRe" secondAttribute="bottom" constant="10" id="UBW-nQ-RFV"/>
                                             <constraint firstItem="KQr-ef-juq" firstAttribute="top" secondItem="CYt-UN-PDp" secondAttribute="bottom" id="fSy-1F-cJM"/>
                                             <constraint firstItem="3ak-zc-dRe" firstAttribute="leading" secondItem="Gcp-N6-JX2" secondAttribute="leading" constant="5" id="r8x-UE-24Y"/>
@@ -579,20 +569,20 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z1u-g1-Fd3" userLabel="Icons View">
-                                <rect key="frame" x="20" y="203" width="335" height="250"/>
+                                <rect key="frame" x="20" y="198" width="335" height="250"/>
                                 <subviews>
                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Icon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QVY-hx-in7" userLabel="Collection">
-                                        <rect key="frame" x="5" y="0.0" width="325" height="40"/>
+                                        <rect key="frame" x="5" y="0.0" width="325" height="35"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="BTf-Xl-f3i"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="sYZ-hn-UN7"/>
+                                            <constraint firstAttribute="height" constant="35" id="BTf-Xl-f3i"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="sYZ-hn-UN7"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zQK-9X-lej">
-                                        <rect key="frame" x="5" y="50" width="325" height="195"/>
+                                        <rect key="frame" x="5" y="45" width="325" height="200"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="15" minimumInteritemSpacing="10" id="i2p-za-cp1">
                                             <size key="itemSize" width="50" height="50"/>
@@ -666,10 +656,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="titleTextAttributes">
-                            <color key="textColor" red="0.89019607840000003" green="0.75294117650000003" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <color key="textColor" red="0.9233627915" green="0.7531259656" blue="0.34499227999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         </textAttributes>
                         <textAttributes key="largeTitleTextAttributes">
-                            <color key="textColor" red="0.8901960784313725" green="0.75294117647058822" blue="0.72941176470588232" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <color key="textColor" red="0.9233627915" green="0.7531259656" blue="0.34499227999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -821,37 +811,9 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n94-Uz-cFI" userLabel="Base View">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="185"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eLP-gp-gYV" userLabel="BorderView">
-                                                            <rect key="frame" x="18" y="10" width="339" height="165"/>
-                                                            <color key="backgroundColor" red="0.88594800230000004" green="0.85530537370000004" blue="0.8274472356" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                    <integer key="value" value="10"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                            </userDefinedRuntimeAttributes>
-                                                        </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HlF-xi-dh0" userLabel="Background View">
                                                             <rect key="frame" x="20" y="10" width="335" height="165"/>
                                                             <subviews>
-                                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qDw-WR-bAe" userLabel="Header View">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="24"/>
-                                                                    <color key="backgroundColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="24" id="7qo-vi-E6g"/>
-                                                                    </constraints>
-                                                                    <userDefinedRuntimeAttributes>
-                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                            <integer key="value" value="12"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                    </userDefinedRuntimeAttributes>
-                                                                </view>
-                                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vLq-Mf-Q0s" userLabel="Fake Layer View">
-                                                                    <rect key="frame" x="0.0" y="12" width="335" height="12"/>
-                                                                    <color key="backgroundColor" red="0.56078431370000004" green="0.69411764710000001" blue="0.76470588240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="12" id="L2t-g8-ieg"/>
-                                                                    </constraints>
-                                                                </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OdC-on-ZwK" userLabel="Label View">
                                                                     <rect key="frame" x="30" y="20" width="275" height="125"/>
                                                                     <subviews>
@@ -891,18 +853,12 @@
                                                                     </constraints>
                                                                 </view>
                                                             </subviews>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="backgroundColor" red="0.92156862750000001" green="0.75294117650000003" blue="0.34509803919999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="bottom" secondItem="OdC-on-ZwK" secondAttribute="bottom" constant="20" id="0r7-oA-KSJ"/>
-                                                                <constraint firstAttribute="trailing" secondItem="vLq-Mf-Q0s" secondAttribute="trailing" id="2yY-Ew-czY"/>
                                                                 <constraint firstItem="OdC-on-ZwK" firstAttribute="top" secondItem="HlF-xi-dh0" secondAttribute="top" constant="20" id="4Kx-yW-g3f"/>
-                                                                <constraint firstItem="qDw-WR-bAe" firstAttribute="top" secondItem="HlF-xi-dh0" secondAttribute="top" id="ESV-H6-Ljk"/>
                                                                 <constraint firstItem="OdC-on-ZwK" firstAttribute="centerX" secondItem="HlF-xi-dh0" secondAttribute="centerX" id="FOB-9x-Ci9"/>
-                                                                <constraint firstItem="qDw-WR-bAe" firstAttribute="leading" secondItem="HlF-xi-dh0" secondAttribute="leading" id="N4O-Fv-Obq"/>
-                                                                <constraint firstAttribute="trailing" secondItem="qDw-WR-bAe" secondAttribute="trailing" id="XuR-wO-6aM"/>
-                                                                <constraint firstItem="vLq-Mf-Q0s" firstAttribute="top" secondItem="HlF-xi-dh0" secondAttribute="top" constant="12" id="YPW-dI-SOY"/>
                                                                 <constraint firstItem="OdC-on-ZwK" firstAttribute="leading" secondItem="HlF-xi-dh0" secondAttribute="leading" constant="30" id="km2-yM-7XN"/>
-                                                                <constraint firstItem="vLq-Mf-Q0s" firstAttribute="leading" secondItem="HlF-xi-dh0" secondAttribute="leading" id="n8r-Gx-F3W"/>
                                                             </constraints>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -915,12 +871,6 @@
                                                     <constraints>
                                                         <constraint firstItem="HlF-xi-dh0" firstAttribute="centerX" secondItem="n94-Uz-cFI" secondAttribute="centerX" id="10T-ko-5ds"/>
                                                         <constraint firstItem="HlF-xi-dh0" firstAttribute="centerY" secondItem="n94-Uz-cFI" secondAttribute="centerY" id="BRz-xN-b8u"/>
-                                                        <constraint firstItem="eLP-gp-gYV" firstAttribute="centerX" secondItem="n94-Uz-cFI" secondAttribute="centerX" id="Cgz-eh-BgX"/>
-                                                        <constraint firstItem="eLP-gp-gYV" firstAttribute="top" secondItem="n94-Uz-cFI" secondAttribute="top" constant="10" id="OFJ-Mr-MnS"/>
-                                                        <constraint firstItem="eLP-gp-gYV" firstAttribute="centerY" secondItem="n94-Uz-cFI" secondAttribute="centerY" id="bBo-gs-9Jl"/>
-                                                        <constraint firstItem="eLP-gp-gYV" firstAttribute="leading" secondItem="n94-Uz-cFI" secondAttribute="leading" constant="18" id="bKe-Z3-3cb"/>
-                                                        <constraint firstAttribute="bottom" secondItem="eLP-gp-gYV" secondAttribute="bottom" constant="10" id="ejJ-H4-kmp"/>
-                                                        <constraint firstAttribute="trailing" secondItem="eLP-gp-gYV" secondAttribute="trailing" constant="18" id="j0i-3J-8z3"/>
                                                         <constraint firstItem="HlF-xi-dh0" firstAttribute="leading" secondItem="n94-Uz-cFI" secondAttribute="leading" constant="20" id="jxE-9T-7Ov"/>
                                                         <constraint firstItem="HlF-xi-dh0" firstAttribute="top" secondItem="n94-Uz-cFI" secondAttribute="top" constant="10" id="sdq-kI-duT"/>
                                                     </constraints>
@@ -936,9 +886,6 @@
                                         <connections>
                                             <outlet property="authorLabel" destination="asu-af-6UG" id="fBr-DU-BUU"/>
                                             <outlet property="bgView" destination="HlF-xi-dh0" id="Bf4-d0-Dip"/>
-                                            <outlet property="borderView" destination="eLP-gp-gYV" id="5ly-AS-VyV"/>
-                                            <outlet property="fakeQuoteHeader" destination="vLq-Mf-Q0s" id="8bj-or-exw"/>
-                                            <outlet property="quoteHeader" destination="qDw-WR-bAe" id="dRN-V1-EgY"/>
                                             <outlet property="quoteLabel" destination="U8r-Tq-8gL" id="Idy-Cd-SP2"/>
                                         </connections>
                                     </tableViewCell>
@@ -987,10 +934,10 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" red="0.89019607840000003" green="0.75294117650000003" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="textColor" red="0.92156862750000001" green="0.75294117650000003" blue="0.34509803919999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </textAttributes>
                                 <textAttributes key="largeTitleTextAttributes">
-                                    <color key="textColor" red="0.89019607840000003" green="0.75294117650000003" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="textColor" red="0.92156862750000001" green="0.75294117650000003" blue="0.34509803919999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Edit Collection" id="qGj-Mj-wrt">
@@ -1010,10 +957,10 @@
                                 </items>
                             </navigationBar>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="kyp-np-ugW">
-                                <rect key="frame" x="20" y="108" width="335" height="85"/>
+                                <rect key="frame" x="20" y="108" width="335" height="80"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WZ6-hy-k8g">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="85"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="80"/>
                                         <subviews>
                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Collection  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a3W-Xz-OLv" userLabel="Collection Label">
                                                 <rect key="frame" x="5" y="10" width="325" height="20"/>
@@ -1025,16 +972,16 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="VFg-ak-LSM" userLabel="Collection Text Field">
-                                                <rect key="frame" x="5" y="40" width="325" height="40"/>
+                                                <rect key="frame" x="5" y="40" width="325" height="35"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="1tB-ZQ-lht"/>
+                                                    <constraint firstAttribute="height" constant="35" id="1tB-ZQ-lht"/>
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                             </textField>
                                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ADG-W1-wdw" userLabel="Horizontal Line">
-                                                <rect key="frame" x="5" y="80" width="325" height="1"/>
+                                                <rect key="frame" x="5" y="75" width="325" height="1"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="hN3-2v-xeD"/>
@@ -1043,7 +990,7 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="85" id="0R7-X7-zFw"/>
+                                            <constraint firstAttribute="height" constant="80" id="0R7-X7-zFw"/>
                                             <constraint firstItem="VFg-ak-LSM" firstAttribute="top" secondItem="a3W-Xz-OLv" secondAttribute="bottom" constant="10" id="1rJ-2a-54E"/>
                                             <constraint firstItem="VFg-ak-LSM" firstAttribute="leading" secondItem="WZ6-hy-k8g" secondAttribute="leading" constant="5" id="3ug-Io-dc6"/>
                                             <constraint firstAttribute="trailing" secondItem="VFg-ak-LSM" secondAttribute="trailing" constant="5" id="66j-Vl-jgg"/>
@@ -1058,20 +1005,20 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IkJ-qq-vYC" userLabel="Icons View">
-                                <rect key="frame" x="20" y="203" width="335" height="200"/>
+                                <rect key="frame" x="20" y="198" width="335" height="200"/>
                                 <subviews>
                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Icon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m09-Qu-x8E" userLabel="Collection">
-                                        <rect key="frame" x="5" y="0.0" width="325" height="40"/>
+                                        <rect key="frame" x="5" y="0.0" width="325" height="35"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="KLZ-4b-5v3"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="iyX-N4-0Qj"/>
+                                            <constraint firstAttribute="height" constant="35" id="KLZ-4b-5v3"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="35" id="iyX-N4-0Qj"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Rqh-Q9-U2Z">
-                                        <rect key="frame" x="5" y="50" width="325" height="145"/>
+                                        <rect key="frame" x="5" y="45" width="325" height="150"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="15" minimumInteritemSpacing="10" id="d1P-wX-jTC">
                                             <size key="itemSize" width="50" height="50"/>
@@ -1109,16 +1056,16 @@
                                 </constraints>
                             </view>
                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="roB-aX-MWz" userLabel="Separator">
-                                <rect key="frame" x="21" y="413" width="333" height="1"/>
+                                <rect key="frame" x="21" y="408" width="333" height="1"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="6U9-cl-ub4"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uXu-gS-3Yg">
-                                <rect key="frame" x="20" y="424" width="335" height="40"/>
+                                <rect key="frame" x="20" y="419" width="335" height="35"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="dtM-cU-xGM"/>
+                                    <constraint firstAttribute="height" constant="35" id="dtM-cU-xGM"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <state key="normal" title="Delete Collection">
@@ -1129,7 +1076,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="When you delete this collection, the quotes will still be saved." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0IK-UZ-t1D">
-                                <rect key="frame" x="20" y="474" width="335" height="38"/>
+                                <rect key="frame" x="20" y="464" width="335" height="38"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1183,10 +1130,10 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" red="0.89019607840000003" green="0.75294117650000003" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="textColor" red="0.92156862750000001" green="0.75294117650000003" blue="0.34509803919999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </textAttributes>
                                 <textAttributes key="largeTitleTextAttributes">
-                                    <color key="textColor" red="0.89019607840000003" green="0.75294117650000003" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="textColor" red="0.92156862750000001" green="0.75294117650000003" blue="0.34509803919999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Add Collection" id="WA7-o0-eQU">

@@ -40,7 +40,7 @@ class QuoteTableViewCell: UITableViewCell {
     }
     
     func setColor() {
-        borderView.backgroundColor = color
+//        borderView.backgroundColor = color
         bgView.backgroundColor = color
        
 //        quoteHeader.backgroundColor = .clear

@@ -12,16 +12,45 @@ class ColorTheme {
     var colorArray = [UIColor]()
     
     init(alpha: CGFloat = 1) {
-//                let c1 = UIColor.rgb(red: 196, green: 215, blue: 209, alpha: alpha)
-                let c2 = UIColor.rgb(red: 227, green: 218, blue: 210, alpha: alpha)
-//                let c3 = UIColor.rgb(red: 253, green: 209, blue: 148, alpha: alpha)
-//                let c4 = UIColor.rgb(red: 206, green: 202, blue: 205, alpha: alpha)
-//                let c5 = UIColor.rgb(red: 170, green: 184, blue: 187, alpha: alpha)
+        let c1 = UIColor.rgb(red: 235, green: 192, blue: 88, alpha: 0.2)
+        let c2 = UIColor.rgb(red: 93, green: 117, blue: 153, alpha: 0.2)
         
-        //colorArray.append(c1)
+        colorArray.append(c1)
         colorArray.append(c2)
-//        colorArray.append(c3)
-//        colorArray.append(c5)
-//        colorArray.append(c4)
     }
+}
+
+extension UIColor {
+    static func mainBlue() -> UIColor {
+        return UIColor.rgb(red: 93, green: 117, blue: 153)
+    }
+    
+    static func mainYellow() -> UIColor {
+        return UIColor.rgb(red: 235, green: 192, blue: 88)
+    }
+    
+    static func mainLightYellow() -> UIColor {
+        return UIColor.rgb(red: 242, green: 224, blue: 177)
+    }
+    
+    static func mainPink() -> UIColor {
+        return UIColor.rgb(red: 229, green: 192, blue: 186)
+    }
+    
+    static func mainBeige() -> UIColor {
+        return UIColor.rgb(red: 230, green: 227, blue: 226)
+    }
+    
+    static func mainBlack() -> UIColor {
+        return UIColor.rgb(red: 35, green: 37, blue: 39)
+    }
+    
+    static func mainUnSelected() -> UIColor {
+        return mainBeige()
+    }
+    
+    static func mainSelected() -> UIColor {
+        return mainLightYellow()
+    }
+    
 }

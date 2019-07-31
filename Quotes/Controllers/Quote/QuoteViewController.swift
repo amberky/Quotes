@@ -21,7 +21,7 @@ class QuoteViewController: UITableViewController {
     
     lazy var quoteSectionArray = QuoteSections.init().quoteSections
     
-    var colorArray = ColorTheme.init(alpha: 0.1).colorArray
+    var colorArray = ColorTheme.init(alpha: 0.6).colorArray
     var colorCount: Int = 0
     
     @IBOutlet var searchBar: UISearchBar!

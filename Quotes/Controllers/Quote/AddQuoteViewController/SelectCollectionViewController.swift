@@ -89,13 +89,13 @@ extension SelectCollectionViewController: UITableViewDataSource, UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CollectionCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CollectionCell", for: indexPath) as! CollectionTableViewCell
         
         cell.selectionStyle = .none
         
         let collection = collectionArray[indexPath.row]
         
-        cell.textLabel?.text = collection.name
+        cell.collectionLabel?.text = collection.name
         
         return cell
     }
