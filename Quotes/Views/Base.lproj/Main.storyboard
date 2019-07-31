@@ -402,10 +402,10 @@
             </objects>
             <point key="canvasLocation" x="1968.8" y="117.48768472906404"/>
         </scene>
-        <!--Add Select Collection View Controller-->
+        <!--Select Collection View Controller-->
         <scene sceneID="NS2-PA-bTS">
             <objects>
-                <viewController id="oHD-BC-j5N" customClass="AddSelectCollectionViewController" customModule="Quotes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="oHD-BC-j5N" customClass="SelectCollectionViewController" customModule="Quotes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kCE-eK-ASd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -1,5 +1,5 @@
 //
-//  AddSelectCollectionViewController.swift
+//  
 //  Quotes
 //
 //  Created by Kharnyee Eu on 22/07/2019.
@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class AddSelectCollectionViewController: UIViewController {
+class SelectCollectionViewController: UIViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let selection = UISelectionFeedbackGenerator()
@@ -83,7 +83,7 @@ class AddSelectCollectionViewController: UIViewController {
     }
 }
 
-extension AddSelectCollectionViewController: UITableViewDataSource, UITableViewDelegate {
+extension SelectCollectionViewController: UITableViewDataSource, UITableViewDelegate {
     //MARK: - Table View Data Source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return collectionArray.count

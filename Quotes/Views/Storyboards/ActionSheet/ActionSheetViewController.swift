@@ -13,6 +13,8 @@ protocol ActionSheetViewControllerDelegate {
     func handleDismissal()
     
     func handleEditQuote(cell: QuoteTableViewCell)
+    
+    func handleMoveCollection(cell: QuoteTableViewCell)
 }
 
 class ActionSheetViewController: UIViewController {
@@ -71,28 +73,8 @@ class ActionSheetViewController: UIViewController {
         print("move")
         selectionHaptic.selectionChanged()
         
-        let request: NSFetchRequest<Quote> = Quote.fetchRequest()
-        request.predicate = NSPredicate(format: "quote == %@", cell.quoteLabel.text ?? "")
-        
-        do {
-            if let quoteContext = try self.context.fetch(request) as [NSManagedObject]?, quoteContext.first != nil {
-                let quote = quoteContext.first as! Quote
-                
-                for c in quote.collections! {
-                    quote.removeFromCollections(c as! Collection)
-                }
-                
-                for c in collections {
-                    quote.addToCollections(c)
-                }
-                
-                saveContext()
-            }
-        } catch {
-            print("Error in removing & adding collections to quote \(error)")
-        }
-        
         dismissActionSheet()
+        delegate?.handleMoveCollection(cell: cell)
     }
     
     @IBAction func shareClicked(_ sender: Any) {

@@ -135,7 +135,7 @@ class AddQuoteViewController: UIViewController {
         case "goToAddSelectCollectionView":
             print("Let's go to select a collection")
             
-            let destination = segue.destination as! AddSelectCollectionViewController
+            let destination = segue.destination as! SelectCollectionViewController
             destination.selectedCollection = selectedCollection
             
         default:

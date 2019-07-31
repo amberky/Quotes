@@ -15,6 +15,7 @@ class CollectionQuoteViewController: UIViewController {
     
     lazy var actionSheetService = ActionSheetService()
     lazy var editQuoteService = EditQuoteService()
+    lazy var moveCollectionService = MoveCollectionService()
     
     lazy var selectionHaptic = UISelectionFeedbackGenerator()
     
@@ -316,6 +317,12 @@ extension CollectionQuoteViewController: ActionSheetViewControllerDelegate {
         let editQuoteVC = editQuoteService.show(cell: cell)
         editQuoteVC.delegate = self
         self.present(editQuoteVC, animated: true)
+    }
+    
+    func handleMoveCollection(cell: QuoteTableViewCell) {
+        print("Move Collection")
+        let moveCollectionVC = moveCollectionService.show(cell: cell)
+        self.present(moveCollectionVC, animated: true)
     }
 }
 

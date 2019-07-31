@@ -13,7 +13,7 @@
         <!--Move Collection View Controller-->
         <scene sceneID="sjt-Sn-aFn">
             <objects>
-                <viewController id="TGO-L6-ssk" customClass="MoveCollectionViewController" customModule="Quotes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MoveCollectionVC" id="TGO-L6-ssk" customClass="MoveCollectionViewController" customModule="Quotes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rr3-xF-LWE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -31,8 +31,15 @@
                                     <navigationItem title="Collection" id="Oob-eh-ECT">
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="gl1-bX-9kN">
                                             <color key="tintColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <connections>
+                                                <action selector="cancelClicked:" destination="TGO-L6-ssk" id="yvw-ab-qIA"/>
+                                            </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="8vx-b6-tNK"/>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="8vx-b6-tNK">
+                                            <connections>
+                                                <action selector="doneClicked:" destination="TGO-L6-ssk" id="Lyn-Sg-qyA"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -66,7 +73,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="AL5-ip-MHf" kind="popoverPresentation" popoverAnchorView="quR-3w-Wpf" id="pZj-Km-31k">
+                                    <segue destination="AL5-ip-MHf" kind="popoverPresentation" identifier="goToAddCollectionFromMove" popoverAnchorView="quR-3w-Wpf" id="W3u-JT-rfs">
                                         <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                     </segue>
                                 </connections>
@@ -88,7 +95,7 @@
                         <viewLayoutGuide key="safeArea" id="nPf-1i-mx0"/>
                     </view>
                     <connections>
-                        <outlet property="collectionTableView" destination="UYH-js-zG8" id="xqL-4y-g4i"/>
+                        <outlet property="collectionTableView" destination="UYH-js-zG8" id="MbZ-I1-RSM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lOm-Pu-A7Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -98,7 +105,7 @@
         <!--Add Collection From Move View Controller-->
         <scene sceneID="ruC-Zi-hAM">
             <objects>
-                <viewController id="AL5-ip-MHf" customClass="AddCollectionFromMoveViewController" customModule="Quotes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddCollectionFromMoveVC" id="AL5-ip-MHf" customClass="AddCollectionFromMoveViewController" customModule="Quotes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PJ8-h7-DPE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -117,11 +124,14 @@
                                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="fcl-92-Gk4">
                                             <color key="tintColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <connections>
-                                                <action selector="cancelButtonClicked:" destination="AL5-ip-MHf" id="QE7-ET-MKa"/>
+                                                <segue destination="EpR-NU-ooA" kind="unwind" identifier="cancelClicked" unwindAction="backToMoveCollectionView:" id="VtR-w2-MMQ"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="eQe-9k-vIM">
                                             <color key="tintColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <connections>
+                                                <segue destination="EpR-NU-ooA" kind="unwind" identifier="doneClicked" unwindAction="backToMoveCollectionView:" id="sOa-xM-vHy"/>
+                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -241,13 +251,14 @@
                         <viewLayoutGuide key="safeArea" id="7vC-Ey-Ft0"/>
                     </view>
                     <connections>
-                        <outlet property="collectionLabel" destination="Xzo-mi-3if" id="wiw-KQ-Yw6"/>
-                        <outlet property="collectionTextField" destination="UPB-gt-gK0" id="vTj-1B-Urr"/>
-                        <outlet property="doneButton" destination="eQe-9k-vIM" id="rsb-uS-bza"/>
-                        <outlet property="iconCollectionView" destination="cqe-XN-eQN" id="EcZ-tg-qp3"/>
+                        <outlet property="collectionLabel" destination="Xzo-mi-3if" id="mXK-lY-eiX"/>
+                        <outlet property="collectionTextField" destination="UPB-gt-gK0" id="Uyf-JR-K9S"/>
+                        <outlet property="doneButton" destination="eQe-9k-vIM" id="1Y2-1E-YN6"/>
+                        <outlet property="iconCollectionView" destination="cqe-XN-eQN" id="AFK-gA-FLL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fiU-WJ-TZD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="EpR-NU-ooA" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3677" y="117"/>
         </scene>

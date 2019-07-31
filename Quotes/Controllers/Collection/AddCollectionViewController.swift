@@ -23,9 +23,8 @@ class AddCollectionViewController: UIViewController {
     @IBOutlet weak var iconCollectionView: UICollectionView!
     
     //MARK: Variables
-    var iconArray = [IconModel]()
-    
     let iconMode = "-light" // -dark or -light
+    lazy var iconArray = IconThemeModel.init(iconMode: iconMode, alpha: 1).iconArray
     
     lazy var unselectedColor = UIColor.mainUnSelected()
     lazy var selectedColor = UIColor.mainSelected()
@@ -51,8 +50,6 @@ class AddCollectionViewController: UIViewController {
 
         let collectionLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(collectionLabelTapped))
         collectionLabel.addGestureRecognizer(collectionLabelTapGesture)
-
-        loadIcon()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -73,8 +70,8 @@ class AddCollectionViewController: UIViewController {
 
             saveContext()
 
-            if segue.destination is AddSelectCollectionViewController {
-                let destination = segue.destination as! AddSelectCollectionViewController
+            if segue.destination is SelectCollectionViewController {
+                let destination = segue.destination as! SelectCollectionViewController
                 destination.loadCollections()
             } else { return }
             
@@ -111,19 +108,6 @@ class AddCollectionViewController: UIViewController {
         if collectionTextField.isFirstResponder {
             collectionTextField.resignFirstResponder()
         }
-    }
-
-    func loadIcon() {
-        iconArray.append(IconModel.init(iconName: "star", iconImage: UIImage.init(named: "star\(iconMode)")!))
-        iconArray.append(IconModel.init(iconName: "coffee", iconImage: UIImage.init(named: "coffee\(iconMode)")!))
-        iconArray.append(IconModel.init(iconName: "fire", iconImage: UIImage.init(named: "fire\(iconMode)")!))
-        iconArray.append(IconModel.init(iconName: "heart", iconImage: UIImage.init(named: "heart\(iconMode)")!))
-        iconArray.append(IconModel.init(iconName: "home", iconImage: UIImage.init(named: "home\(iconMode)")!))
-        iconArray.append(IconModel.init(iconName: "idea", iconImage: UIImage.init(named: "idea\(iconMode)")!))
-        iconArray.append(IconModel.init(iconName: "smile", iconImage: UIImage.init(named: "smile\(iconMode)")!))
-        iconArray.append(IconModel.init(iconName: "sun", iconImage: UIImage.init(named: "sun\(iconMode)")!))
-        iconArray.append(IconModel.init(iconName: "thumbs-up", iconImage: UIImage.init(named: "thumbs-up\(iconMode)")!))
-        iconArray.append(IconModel.init(iconName: "toolbox", iconImage: UIImage.init(named: "toolbox\(iconMode)")!))
     }
 }
 
