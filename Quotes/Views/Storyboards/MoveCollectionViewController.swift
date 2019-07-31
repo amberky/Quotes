@@ -43,6 +43,9 @@ class MoveCollectionViewController: UIViewController {
     
     func loadCollections() {
         let request: NSFetchRequest<Collection> = Collection.fetchRequest()
+        let sort = [NSSortDescriptor(key: "addedOn", ascending: true)]
+        
+        request.sortDescriptors = sort
         
         do {
             collectionArray = try context.fetch(request)
@@ -91,6 +94,11 @@ class MoveCollectionViewController: UIViewController {
         dismissView()
     }
     
+    @IBAction func cancelClicked(_ sender: UIBarButtonItem) {
+        print("cancel bar button clicked")
+        dismissView()
+    }
+    
     func saveContext() {
         do {
             try context.save()
@@ -101,10 +109,6 @@ class MoveCollectionViewController: UIViewController {
     
     func dismissView() {
         dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func cancelClicked(_ sender: UIBarButtonItem) {
-        print("cancel bar button clicked")
     }
     
     //MARK: - unwind Segue

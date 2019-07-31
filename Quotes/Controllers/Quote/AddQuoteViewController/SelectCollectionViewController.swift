@@ -34,13 +34,12 @@ class SelectCollectionViewController: UIViewController {
     
     func loadCollections() {
         let request: NSFetchRequest<Collection> = Collection.fetchRequest()
+        let sort = [NSSortDescriptor(key: "addedOn", ascending: true)]
+        
+        request.sortDescriptors = sort
         
         do {
             collectionArray = try context.fetch(request)
-            
-            //            collectionArray = collectionContext.map({ (m) -> CollectionModel in
-            //                return CollectionModel.init(collectionName: m.name ?? "", collectionIcon: m.icon ?? "", showAll: false, selected: false)
-            //            })
             
         } catch {
             print("Error fetching data from context \(error)")

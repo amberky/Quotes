@@ -13,7 +13,7 @@ class QuoteViewController: UITableViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    lazy var actionSheetService = ActionSheetService()
+    lazy var quoteActionSheetService = QuoteActionSheetService()
     lazy var editQuoteService = EditQuoteService()
     lazy var moveCollectionService = MoveCollectionService()
     
@@ -243,10 +243,10 @@ class QuoteViewController: UITableViewController {
     }
     
     func showActionSheet(cell: QuoteTableViewCell) {
-        let actionSheetVC = actionSheetService.show(cell: cell)
-        actionSheetVC.delegate = self
+        let quoteActionSheetVC = quoteActionSheetService.show(cell: cell)
+        quoteActionSheetVC.delegate = self
         self.navigationController?.view.alpha = 0.6;
-        self.present(actionSheetVC, animated: true)
+        self.present(quoteActionSheetVC, animated: true)
     }
     
     func deleteQuote(indexPath: IndexPath) {
@@ -282,7 +282,7 @@ class QuoteViewController: UITableViewController {
     }
 }
 
-extension QuoteViewController: ActionSheetViewControllerDelegate {
+extension QuoteViewController: QuoteActionSheetViewControllerDelegate {
     func handleDismissal() {
         self.navigationController?.view.alpha = 1
     }
@@ -298,6 +298,16 @@ extension QuoteViewController: ActionSheetViewControllerDelegate {
         print("Move Collection")
         let moveCollectionVC = moveCollectionService.show(cell: cell)
         self.present(moveCollectionVC, animated: true)
+    }
+    
+    func handleShare(cell: QuoteTableViewCell) {
+        var text = cell.quoteLabel.text
+        if cell.authorLabel.text != "" {
+            text = "\(text ?? "") \n- \(cell.authorLabel.text ?? "")"
+        }
+        
+        let vc = UIActivityViewController(activityItems: [text ?? ""], applicationActivities: [])
+        present(vc, animated: true, completion: nil)
     }
 }
 

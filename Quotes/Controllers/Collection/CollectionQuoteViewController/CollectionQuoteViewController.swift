@@ -13,7 +13,7 @@ class CollectionQuoteViewController: UIViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    lazy var actionSheetService = ActionSheetService()
+    lazy var quoteActionSheetService = QuoteActionSheetService()
     lazy var editQuoteService = EditQuoteService()
     lazy var moveCollectionService = MoveCollectionService()
     
@@ -291,10 +291,10 @@ extension CollectionQuoteViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func showActionSheet(cell: QuoteTableViewCell) {
-        let actionSheetVC = actionSheetService.show(cell: cell)
-        actionSheetVC.delegate = self
+        let quoteActionSheetVC = quoteActionSheetService.show(cell: cell)
+        quoteActionSheetVC.delegate = self
         self.navigationController?.view.alpha = 0.6;
-        self.present(actionSheetVC, animated: true)
+        self.present(quoteActionSheetVC, animated: true)
     }
     
     func deleteQuote(indexPath: IndexPath) {
@@ -307,7 +307,7 @@ extension CollectionQuoteViewController: UITableViewDelegate, UITableViewDataSou
     }
 }
 
-extension CollectionQuoteViewController: ActionSheetViewControllerDelegate {
+extension CollectionQuoteViewController: QuoteActionSheetViewControllerDelegate {
     func handleDismissal() {
         self.navigationController?.view.alpha = 1
     }
@@ -323,6 +323,18 @@ extension CollectionQuoteViewController: ActionSheetViewControllerDelegate {
         print("Move Collection")
         let moveCollectionVC = moveCollectionService.show(cell: cell)
         self.present(moveCollectionVC, animated: true)
+    }
+    
+    func handleShare(cell: QuoteTableViewCell) {
+        var text = cell.quoteLabel.text
+        if cell.authorLabel.text != "" {
+            text = "\(text ?? "") \n- \(cell.authorLabel.text ?? "")"
+        }
+        
+        let shareText = text ?? ""
+        
+        let vc = UIActivityViewController(activityItems: [shareText], applicationActivities: [])
+        present(vc, animated: true, completion: nil)
     }
 }
 

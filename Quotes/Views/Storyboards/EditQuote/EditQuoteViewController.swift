@@ -108,6 +108,8 @@ class EditQuoteViewController: UIViewController {
     @IBAction func doneClicked(_ sender: UIBarButtonItem) {
         print("Done bar button clicked")
         
+        checkAndResignFirstResponder()
+        
         let request: NSFetchRequest<Quote> = Quote.fetchRequest()
         request.predicate = NSPredicate(format: "quote == %@", cell.quoteLabel.text ?? "")
         
@@ -130,6 +132,8 @@ class EditQuoteViewController: UIViewController {
     
     @IBAction func cancelClicked(_ sender: UIBarButtonItem) {
         print("Cancel bar button clicked")
+        checkAndResignFirstResponder()
+        
         dimissView(reload: false)
     }
     

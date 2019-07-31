@@ -43,21 +43,25 @@ class CollectionViewController: UIViewController {
         collectionArray = [CollectionModel]()
         
         let request: NSFetchRequest<Collection> = Collection.fetchRequest()
-        var collectionContext = [Collection]()
+        let sort = [NSSortDescriptor(key: "addedOn", ascending: true)]
+        
+        request.sortDescriptors = sort
         
         let quoteRequest: NSFetchRequest<Quote> = Quote.fetchRequest()
         var totalCount = 0
         
         do {
             totalCount = try context.fetch(quoteRequest).count
-            collectionContext = try context.fetch(request)
+            
+            let collectionContext = try context.fetch(request)
+            
+            collectionArray.insert(CollectionModel.init(name: "All", icon: defaultIcon, count: totalCount, isAll: true), at: 0)
+            for i in collectionContext {
+                collectionArray.append(CollectionModel.init(name: i.name ?? "", icon: i.icon ?? "", count: i.quotes?.count ?? 0))
+            }
+            
         } catch {
             print("Error fetching data from context \(error)")
-        }
-        
-        collectionArray.insert(CollectionModel.init(name: "All", icon: defaultIcon, count: totalCount, isAll: true), at: 0)
-        for i in collectionContext {
-            collectionArray.append(CollectionModel.init(name: i.name ?? "", icon: i.icon ?? "", count: i.quotes?.count ?? 0))
         }
         
         collectionCollectionView.reloadData()

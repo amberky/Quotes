@@ -11,7 +11,6 @@ import UIKit
 //MARK: - Search Bar methods
 extension QuoteViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        tableView.dragInteractionEnabled = false
         searchBar.setShowsCancelButton(true, animated: true)
     }
     
@@ -24,7 +23,8 @@ extension QuoteViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchQuote(searchBar: searchBar)
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(searchQuote(searchBar:hideKeyboard:)), object: searchBar)
+        self.perform(#selector(searchQuote(searchBar:hideKeyboard:)), with: searchBar, afterDelay: 0.1)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -33,14 +33,19 @@ extension QuoteViewController: UISearchBarDelegate {
         searchQuote(searchBar: searchBar, hideKeyboard: true)
     }
     
-    func searchQuote(searchBar : UISearchBar, hideKeyboard : Bool = false) {
+    @objc func searchQuote(searchBar : UISearchBar, hideKeyboard : Bool = false) {
         if searchBar.text?.count == 0 {
             loadQuotes()
         }
         else {
-            let predicate = NSPredicate(format: "quote CONTAINS[cd] %@", searchBar.text!)
+            let predicate = NSPredicate(format: "quote CONTAINS[cd] %@ or author CONTAINS[cd] %@", searchBar.text!, searchBar.text!)
             
             loadQuotes(predicate: predicate)
+        }
+        
+        if quoteSectionArray.count > 0 {
+            //tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            tableView.scrollsToTop = true
         }
         
         if hideKeyboard {
