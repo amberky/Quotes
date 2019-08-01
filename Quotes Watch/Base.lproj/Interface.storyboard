@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14490.70" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch40" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14490.21"/>
+    </dependencies>
+    <scenes>
+        <!--Interface Controller-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Quotes_Watch" customModuleProvider="target">
+                    <items>
+                        <table alignment="left" id="vno-Xf-oul">
+                            <items>
+                                <tableRow identifier="QuoteTableRowController" id="v9A-AM-0v8" customClass="QuoteTableRowController" customModule="Quotes_Watch_Extension">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" radius="10" id="o2w-Ba-JIo">
+                                        <items>
+                                            <group alignment="left" layout="vertical" id="Bqj-T0-wTZ">
+                                                <items>
+                                                    <label width="136" alignment="left" verticalAlignment="center" text="Focusing is about saying no" numberOfLines="0" id="JSw-N0-3c3"/>
+                                                    <label width="136" alignment="left" verticalAlignment="center" text="Steve Jobs" id="vOF-Gk-0nZ">
+                                                        <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                                    </label>
+                                                </items>
+                                                <edgeInsets key="margins" left="0.0" right="0.0" top="10" bottom="10"/>
+                                            </group>
+                                        </items>
+                                        <color key="backgroundColor" red="0.9233627915" green="0.7531259656" blue="0.34499227999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </group>
+                                    <connections>
+                                        <outlet property="authorLabel" destination="vOF-Gk-0nZ" id="7qQ-fc-5FZ"/>
+                                        <outlet property="quoteLabel" destination="JSw-N0-3c3" id="7Gw-JZ-hVP"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="tableView" destination="vno-Xf-oul" id="K0A-N0-Kdv"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="219.95061728395061" y="344.74619289340097"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="AEw-b0-oYE">
+            <objects>
+                <notificationController id="YCC-NB-fut">
+                    <items>
+                        <label alignment="left" text="Alert Label" numberOfLines="0" id="IdU-wH-bcW"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="myCategory" id="JfB-70-Muf"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="IdU-wH-bcW" id="JKC-fr-R95"/>
+                        <segue destination="4sK-HA-Art" kind="relationship" relationship="dynamicNotificationInterface" id="kXh-Jw-8B1"/>
+                        <segue destination="eXb-UN-Cd0" kind="relationship" relationship="dynamicInteractiveNotificationInterface" id="mpB-YA-K8N"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="220" y="643"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="ZPc-GJ-vnh">
+            <objects>
+                <controller id="4sK-HA-Art" customClass="NotificationController" customModule="Quotes_Watch" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="468" y="643"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="Niz-AI-uX2">
+            <objects>
+                <controller id="eXb-UN-Cd0" customClass="NotificationController" customModule="Quotes_Watch" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="468" y="345"/>
+        </scene>
+    </scenes>
+</document>
