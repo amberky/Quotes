@@ -164,31 +164,38 @@ extension CollectionQuoteViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let tableViewFrame = tableView.frame.width
+        let tableViewLeftMargin = tableView.separatorInset.left
+        let tableViewSectionHeight = tableView.sectionHeaderHeight
+        let yAxis = (tableViewSectionHeight - 15) / 2
+        let width : CGFloat = 15
+        
         let headerView = UIView()
-        headerView.backgroundColor = .white
+        headerView.backgroundColor = .clear
         
         let headerInfo = quoteSectionArray[section]
         
         let imageName = headerInfo.sectionIcon
         let image = UIImageView(image: UIImage.init(named: imageName))
-        image.frame = CGRect(x: tableView.separatorInset.left + 5,
-                             y: (tableView.sectionHeaderHeight - 15) / 2,
-                             width: 15,
-                             height: 15)
+        image.frame = CGRect(x: tableViewLeftMargin + 5,
+                             y: yAxis,
+                             width: width,
+                             height: width)
         
         headerView.addSubview(image)
         
         let label = UILabel()
         label.text = headerInfo.sectionName
         label.textColor = .darkGray
+        //        label.font = UIFont.boldSystemFont(ofSize: 15)
         
-        label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
+        label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title3)
         
-        label.frame = CGRect(x: tableView.separatorInset.left + 15 + 10,
-                             // table margin left - image width - 15 margin (image - label)
-            y: (tableView.sectionHeaderHeight - 15) / 2,
-            width: tableView.frame.width - tableView.separatorInset.left - tableView.separatorInset.left - 20 - 10,
-            height: 15)
+        label.frame = CGRect(x: tableViewLeftMargin + 15 + 10,
+                             // table margin left - image width - margin (image - label)
+            y: yAxis,
+            width: tableViewFrame - (tableViewLeftMargin * 2) - 20 - 10,
+            height: width)
         
         headerView.addSubview(label)
         

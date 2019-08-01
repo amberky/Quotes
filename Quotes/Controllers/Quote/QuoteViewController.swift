@@ -111,7 +111,7 @@ class QuoteViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let tableViewFrame = tableView.frame.width
         let tableViewLeftMargin = tableView.separatorInset.left
-        let tableViewSectionHeight = tableView.sectionHeaderHeight * 2
+        let tableViewSectionHeight = tableView.sectionHeaderHeight
         let yAxis = (tableViewSectionHeight - 15) / 2
         let width : CGFloat = 15
         
@@ -151,7 +151,7 @@ class QuoteViewController: UITableViewController {
         if quoteSectionArray[section].quotes.count == 0 {
             return 0.0
         } else {
-            return tableView.sectionHeaderHeight * 2
+            return tableView.sectionHeaderHeight
         }
     }
     

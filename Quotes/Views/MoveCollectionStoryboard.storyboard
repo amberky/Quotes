@@ -45,21 +45,22 @@
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UYH-js-zG8" userLabel="Collection Table View">
-                                <rect key="frame" x="10" y="193" width="394" height="659"/>
+                                <rect key="frame" x="0.0" y="193" width="414" height="659"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="separatorInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="CollectionCell" rowHeight="60" id="cpj-gj-3pI" userLabel="CollectionCell" customClass="CollectionTableViewCell" customModule="Quotes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="394" height="60"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cpj-gj-3pI" id="I7O-WM-iHe">
-                                            <rect key="frame" x="0.0" y="0.0" width="394" height="59.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="59.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3DH-J3-hwR">
-                                                    <rect key="frame" x="0.0" y="0.0" width="394" height="55"/>
+                                                    <rect key="frame" x="5" y="0.0" width="404" height="55"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Rn-vL-aX9">
-                                                            <rect key="frame" x="20" y="10" width="354" height="35"/>
+                                                            <rect key="frame" x="20" y="10" width="364" height="35"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="35" id="Xch-T6-G71"/>
                                                             </constraints>
@@ -81,8 +82,8 @@
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="3DH-J3-hwR" secondAttribute="bottom" id="34a-as-iA4"/>
                                                 <constraint firstItem="3DH-J3-hwR" firstAttribute="top" secondItem="I7O-WM-iHe" secondAttribute="top" id="5ns-nT-sHP"/>
-                                                <constraint firstAttribute="trailing" secondItem="3DH-J3-hwR" secondAttribute="trailing" id="ayy-9W-aqx"/>
-                                                <constraint firstItem="3DH-J3-hwR" firstAttribute="leading" secondItem="I7O-WM-iHe" secondAttribute="leading" id="cR5-d7-9Ul"/>
+                                                <constraint firstAttribute="trailing" secondItem="3DH-J3-hwR" secondAttribute="trailing" constant="5" id="ayy-9W-aqx"/>
+                                                <constraint firstItem="3DH-J3-hwR" firstAttribute="leading" secondItem="I7O-WM-iHe" secondAttribute="leading" constant="5" id="cR5-d7-9Ul"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="tintColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -118,7 +119,7 @@
                             <constraint firstItem="UYH-js-zG8" firstAttribute="top" secondItem="quR-3w-Wpf" secondAttribute="bottom" constant="30" id="5fa-Ui-Lb7"/>
                             <constraint firstItem="Vek-SX-Ze5" firstAttribute="trailing" secondItem="nPf-1i-mx0" secondAttribute="trailing" id="75i-u2-1M1"/>
                             <constraint firstItem="Vek-SX-Ze5" firstAttribute="top" secondItem="nPf-1i-mx0" secondAttribute="top" id="D3n-1X-oUR"/>
-                            <constraint firstItem="UYH-js-zG8" firstAttribute="leading" secondItem="nPf-1i-mx0" secondAttribute="leading" constant="10" id="VP0-Dd-YO6"/>
+                            <constraint firstItem="UYH-js-zG8" firstAttribute="leading" secondItem="nPf-1i-mx0" secondAttribute="leading" id="VP0-Dd-YO6"/>
                             <constraint firstItem="UYH-js-zG8" firstAttribute="centerX" secondItem="rr3-xF-LWE" secondAttribute="centerX" id="bqa-9n-c0h"/>
                             <constraint firstItem="quR-3w-Wpf" firstAttribute="leading" secondItem="nPf-1i-mx0" secondAttribute="leading" constant="20" id="c0m-at-SJy"/>
                             <constraint firstItem="Vek-SX-Ze5" firstAttribute="leading" secondItem="nPf-1i-mx0" secondAttribute="leading" id="cJ5-Ql-r2Y"/>

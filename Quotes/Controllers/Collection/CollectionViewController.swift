@@ -94,7 +94,7 @@ class CollectionViewController: UIViewController {
 extension CollectionViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (collectionView.frame.width - 20) / 2
+        let width = (collectionView.frame.width - 20 - 40) / 2
         let height = width + 20 + 20
         
         return CGSize(width: width, height: height)
