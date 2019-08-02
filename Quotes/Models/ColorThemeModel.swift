@@ -12,8 +12,8 @@ class ColorTheme {
     var colorArray = [UIColor]()
     
     init(alpha: CGFloat = 1) {
-        let c1 = UIColor.rgb(red: 235, green: 192, blue: 88, alpha: 0.2)
-        let c2 = UIColor.rgb(red: 93, green: 117, blue: 153, alpha: 0.2)
+        let c1 = UIColor.rgb(red: 235, green: 192, blue: 88, alpha: alpha)
+        let c2 = UIColor.rgb(red: 93, green: 117, blue: 153, alpha: alpha)
         
         colorArray.append(c1)
         colorArray.append(c2)

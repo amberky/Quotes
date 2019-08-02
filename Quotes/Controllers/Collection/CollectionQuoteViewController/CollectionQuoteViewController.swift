@@ -9,25 +9,26 @@
 import UIKit
 import CoreData
 
-class CollectionQuoteViewController: UIViewController {
+class CollectionQuoteViewController: UITableViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     lazy var quoteActionSheetService = QuoteActionSheetService()
     lazy var editQuoteService = EditQuoteService()
     lazy var moveCollectionService = MoveCollectionService()
+    lazy var updateAppContextService = UpdateAppContextService()
     
     lazy var selectionHaptic = UISelectionFeedbackGenerator()
     
     lazy var quoteSectionArray = QuoteSections.init().quoteSections
     
-    var colorArray = ColorTheme.init(alpha: 0.6).colorArray
+    var colorArray = ColorTheme.init(alpha: 0.2).colorArray
     var colorCount: Int = 0
     
     //MARK: - IBOutlet
     @IBOutlet weak var searchBar: UISearchBar!
     
-    @IBOutlet var quoteTableView: UITableView!
+//    @IBOutlet var quoteTableView: UITableView!
     
     var didSet: Bool = false
     var selectedCollection: CollectionModel? {
@@ -45,8 +46,8 @@ class CollectionQuoteViewController: UIViewController {
         
 //        quoteTableView.register(UINib(nibName: "QuoteTableViewCell", bundle: nil) , forCellReuseIdentifier: "QuoteCell")
 //
-        quoteTableView.delegate = self
-        quoteTableView.dataSource = self
+//        quoteTableView.delegate = self
+//        quoteTableView.dataSource = self
         
         searchBar.delegate = self
         
@@ -85,12 +86,12 @@ class CollectionQuoteViewController: UIViewController {
         }
         
         
-        quoteTableView.reloadData()
+        tableView.reloadData()
     }
     
     func configureTableView() {
-        quoteTableView.estimatedRowHeight = 500.0
-        quoteTableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 500.0
+        tableView.rowHeight = UITableView.automaticDimension
     }
     
     //MARK: - unwindSegue
@@ -121,23 +122,38 @@ class CollectionQuoteViewController: UIViewController {
     func saveContext() {
         do {
             try context.save()
+            
+            loadQuotes()
+            
+            updateAppContext()
+            
         } catch {
             print("Error saving data from context \(error)")
         }
     }
+    
+    func updateAppContext() {
+        updateAppContextService.updateAppContext()
+    }
 }
 
-extension CollectionQuoteViewController: UITableViewDelegate, UITableViewDataSource {
+extension CollectionQuoteViewController {
     //MARK: - TableView Delegate Methods
-    func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        if quoteSectionArray.count == 0 {
+            tableView.setEmptyView()
+        } else {
+            tableView.removeEmptyView()
+        }
+        
         return quoteSectionArray.count
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return quoteSectionArray[section].quotes.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let mod = (indexPath.row + indexPath.section) % colorCount
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "QuoteCell", for: indexPath) as! QuoteTableViewCell
@@ -150,7 +166,7 @@ extension CollectionQuoteViewController: UITableViewDelegate, UITableViewDataSou
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.beginUpdates()
         let cell = tableView.cellForRow(at: indexPath) as! QuoteTableViewCell
@@ -163,7 +179,7 @@ extension CollectionQuoteViewController: UITableViewDelegate, UITableViewDataSou
         tableView.endUpdates()
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let tableViewFrame = tableView.frame.width
         let tableViewLeftMargin = tableView.separatorInset.left
         let tableViewSectionHeight = tableView.sectionHeaderHeight
@@ -202,7 +218,7 @@ extension CollectionQuoteViewController: UITableViewDelegate, UITableViewDataSou
         return headerView
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if quoteSectionArray[section].quotes.count == 0 {
             return 0.0
         } else {
@@ -210,14 +226,14 @@ extension CollectionQuoteViewController: UITableViewDelegate, UITableViewDataSou
         }
     }
     
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         selectionHaptic.prepare()
         
         let quoteInfo = quoteSectionArray[indexPath.section].quotes[indexPath.row]
-        var pinIcon = "pin-orange"
+        var pinIcon = "star-yellow"
         
         if quoteInfo.isPin == true {
-            pinIcon = "unpin-orange"
+            pinIcon = "unstar-yellow"
         }
         
         let pinAction = UIContextualAction(style: .normal, title: nil) { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
@@ -242,7 +258,7 @@ extension CollectionQuoteViewController: UITableViewDelegate, UITableViewDataSou
         return UISwipeActionsConfiguration(actions: [pinAction])
     }
     
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let cell = tableView.cellForRow(at: indexPath) as! QuoteTableViewCell
         
@@ -294,7 +310,7 @@ extension CollectionQuoteViewController: UITableViewDelegate, UITableViewDataSou
         
         saveContext()
         
-        loadQuotes()
+//        loadQuotes()
     }
     
     func showActionSheet(cell: QuoteTableViewCell) {
@@ -308,7 +324,7 @@ extension CollectionQuoteViewController: UITableViewDelegate, UITableViewDataSou
         context.delete(quoteSectionArray[indexPath.section].quotes[indexPath.row])
         quoteSectionArray[indexPath.section].quotes.remove(at: indexPath.row)
         
-        quoteTableView.deleteRows(at: [indexPath], with: .fade)
+        tableView.deleteRows(at: [indexPath], with: .fade)
         
         saveContext()
     }
@@ -348,5 +364,6 @@ extension CollectionQuoteViewController: QuoteActionSheetViewControllerDelegate 
 extension CollectionQuoteViewController: EditQuoteViewControllerDelegate {
     func reloadQuote() {
         loadQuotes()
+        updateAppContext()
     }
 }

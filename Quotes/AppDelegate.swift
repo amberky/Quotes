@@ -8,15 +8,18 @@
 
 import UIKit
 import CoreData
+import WatchConnectivity
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        WatchSessionManager.sharedManager.startSession()
+        
         return true
     }
 
@@ -69,4 +72,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
-

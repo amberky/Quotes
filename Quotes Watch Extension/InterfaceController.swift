@@ -8,22 +8,73 @@
 
 import WatchKit
 import Foundation
+import WatchConnectivity
 
 class InterfaceController: WKInterfaceController {
-    let tableData = ["Focusing is about saying no", "Because people who are crazy enough to think that they can change the world are the ons who do", "Three", "Four", "Five", "Six"]
+
+    var tableData = [QuoteWatchModel]()
+    var colorArray = ColorTheme.init(alpha: 1).colorArray
     
     @IBOutlet weak var tableView: WKInterfaceTable!
+    
+    @IBOutlet weak var interfaceGroup: WKInterfaceGroup!
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
+        print("awake")
+        
+        super.becomeCurrentPage()
         // Configure interface objects here.
-        loadTableData()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(receivedApplicationContext(_:)), name: NSNotification.Name(rawValue: "receivedApplicationContext"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(receivedMessage(_:)), name: NSNotification.Name(rawValue: "receivedMessageData"), object: nil)
+        
+        setBackgroundImage()
+    }
+    
+    @objc func receivedApplicationContext(_ notification: Notification) {
+        print("receivedApplicationContext")
+        
+        do {
+            guard let receivedQuotes = notification.object as? [String: AnyObject] else { return }
+            
+            let pinQuotes = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(receivedQuotes["pinQuotes"] as! Data)
+            
+            guard let quotesModel = pinQuotes as? [QuoteWatchModel] else { return }
+            
+            self.tableData = quotesModel
+            self.loadTableData()
+        } catch {
+            print(error)
+        }
+    }
+    
+    @objc func receivedMessage(_ notification: Notification) {
+        print("receivedMessage")
+        
+        do {
+            guard let receivedQuotes = notification.object as? [String: AnyObject] else { return }
+            
+            let pinQuotes = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(receivedQuotes["pinQuotes"] as! Data)
+            
+            guard let quotesModel = pinQuotes as? [QuoteWatchModel] else { return }
+            
+            self.tableData = quotesModel
+            self.loadTableData()
+        } catch {
+            print(error)
+        }
+        
+        super.becomeCurrentPage()
     }
     
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
+        
+        print("willActivate")
     }
     
     override func didDeactivate() {
@@ -31,19 +82,31 @@ class InterfaceController: WKInterfaceController {
         super.didDeactivate()
     }
     
-    private func getPinQuotes(){
-        
+    private func setBackgroundImage() {
+        if tableData.count > 0 {
+            interfaceGroup.setHidden(true)
+        } else {
+            interfaceGroup.setHidden(false)
+        }
     }
     
     private func loadTableData() {
+        print("loadTableData")
+        print(tableData.count)
+        
+        setBackgroundImage()
+        
         tableView.setNumberOfRows(tableData.count, withRowType: "QuoteTableRowController")
+        let colorCount = colorArray.count
         
         for (index, rowModel) in tableData.enumerated() {
+            let mod = index % colorCount
+            
             if let rowController = tableView.rowController(at: index) as? QuoteTableRowController {
-                rowController.quoteLabel.setText(rowModel)
-                rowController.authorLabel.setText("Steve Jobs")
+                rowController.quoteLabel.setText(rowModel.quote)
+                rowController.authorLabel.setText(rowModel.author)
+                rowController.bgColor.setBackgroundColor(colorArray[mod])
             }
         }
     }
 }
-

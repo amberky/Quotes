@@ -16,12 +16,13 @@ class QuoteViewController: UITableViewController {
     lazy var quoteActionSheetService = QuoteActionSheetService()
     lazy var editQuoteService = EditQuoteService()
     lazy var moveCollectionService = MoveCollectionService()
+    lazy var updateAppContextService = UpdateAppContextService()
     
     lazy var selectionHaptic = UISelectionFeedbackGenerator()
     
     lazy var quoteSectionArray = QuoteSections.init().quoteSections
     
-    var colorArray = ColorTheme.init(alpha: 0.6).colorArray
+    var colorArray = ColorTheme.init(alpha: 0.2).colorArray
     var colorCount: Int = 0
     
     @IBOutlet var searchBar: UISearchBar!
@@ -35,7 +36,6 @@ class QuoteViewController: UITableViewController {
         colorCount = colorArray.count
         
         configureTableView()
-        //loadQuotes()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,9 +57,18 @@ class QuoteViewController: UITableViewController {
     func saveContext() {
         do {
             try context.save()
+            
+            reloadQuote()
+            
+            updateAppContext()
+            
         } catch {
             print("Error saving data from context \(error)")
         }
+    }
+    
+    func updateAppContext() {
+        updateAppContextService.updateAppContext()
     }
     
     func configureTableView() {
@@ -75,10 +84,17 @@ class QuoteViewController: UITableViewController {
     
     //MARK: - TableView Delegate Methods
     override func numberOfSections(in tableView: UITableView) -> Int {
+        if quoteSectionArray.count == 0 {
+            tableView.setEmptyView(tableView: tableView)
+        } else {
+            tableView.removeEmptyView()
+        }
+        
         return quoteSectionArray.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return quoteSectionArray[section].quotes.count
     }
     
@@ -159,10 +175,10 @@ class QuoteViewController: UITableViewController {
         selectionHaptic.prepare()
         
         let quoteInfo = quoteSectionArray[indexPath.section].quotes[indexPath.row]
-        var pinIcon = "pin-orange"
+        var pinIcon = "star-yellow"
         
         if quoteInfo.isPin == true {
-            pinIcon = "unpin-orange"
+            pinIcon = "unstar-yellow"
         }
         
         let pinAction = UIContextualAction(style: .normal, title: nil) { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
@@ -239,7 +255,9 @@ class QuoteViewController: UITableViewController {
         
         saveContext()
         
-        loadQuotes()
+//        loadQuotes()
+        
+//        updateAppContext()
     }
     
     func showActionSheet(cell: QuoteTableViewCell) {
@@ -256,6 +274,8 @@ class QuoteViewController: UITableViewController {
         tableView.deleteRows(at: [indexPath], with: .fade)
         
         saveContext()
+        
+//        updateAppContext()
     }
     
     //MARK: - unwind Segue
@@ -314,5 +334,6 @@ extension QuoteViewController: QuoteActionSheetViewControllerDelegate {
 extension QuoteViewController: EditQuoteViewControllerDelegate {
     func reloadQuote() {
         loadQuotes()
+        updateAppContext()
     }
 }

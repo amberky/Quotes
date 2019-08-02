@@ -193,7 +193,7 @@
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                             </textField>
                                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qTR-pr-Z8y" userLabel="Horizontal Line">
                                                 <rect key="frame" x="5" y="75" width="364" height="1"/>

@@ -102,7 +102,7 @@ class QuoteSections {
     var quoteSections: [QuoteSection] = [QuoteSection]()
     
     init(customPredicate: NSPredicate? = nil) {
-        let pinned = QuoteSection.init(sectionName: "PINNED QUOTES", sectionIcon: "pin-darkgray", isPin: true, customPredicate: customPredicate)
+        let pinned = QuoteSection.init(sectionName: "FAVOURITE", sectionIcon: "star-darkgray", isPin: true, customPredicate: customPredicate)
         
         if pinned.quotes.count > 0 {
             quoteSections.append(pinned)
@@ -116,7 +116,7 @@ class QuoteSections {
     }
     
     init(collection: String? = nil, customPredicate: NSPredicate? = nil) {
-        let pinned = QuoteSection.init(sectionName: "PINNED QUOTES", sectionIcon: "pin-darkgray", isPin: true, collection: collection, customPredicate: customPredicate)
+        let pinned = QuoteSection.init(sectionName: "FAVOURITE QUOTES", sectionIcon: "star-darkgray", isPin: true, collection: collection, customPredicate: customPredicate)
         
         if pinned.quotes.count > 0 {
             quoteSections.append(pinned)
@@ -127,5 +127,26 @@ class QuoteSections {
         if unpinned.quotes.count > 0{
             quoteSections.append(unpinned)
         }
+    }
+}
+
+@objc(QuoteWatchModel)
+class QuoteWatchModel: NSObject, NSCoding {
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(quote, forKey:"quote")
+        aCoder.encode(author, forKey:"author")
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        self.quote = aDecoder.decodeObject(forKey: "quote") as? String ?? ""
+        self.author = aDecoder.decodeObject(forKey: "author") as? String ?? ""
+    }
+    
+    let quote: String
+    let author: String
+    
+    init(quote: String, author: String) {
+        self.quote = quote
+        self.author = author
     }
 }

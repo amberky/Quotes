@@ -14,4 +14,5 @@ class QuoteTableRowController: NSObject {
     @IBOutlet weak var quoteLabel: WKInterfaceLabel!
     @IBOutlet weak var authorLabel: WKInterfaceLabel!
     
+    @IBOutlet weak var bgColor: WKInterfaceGroup!
 }

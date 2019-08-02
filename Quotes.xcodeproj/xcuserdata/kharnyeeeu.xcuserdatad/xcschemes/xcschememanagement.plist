@@ -7,37 +7,27 @@
 		<key>Quotes Watch (Notification).xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>5</integer>
+			<integer>6</integer>
 		</dict>
 		<key>Quotes Watch.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>4</integer>
+			<integer>5</integer>
 		</dict>
 		<key>Quotes.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
-		<key>QuotesCoreDataKit.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
-		</dict>
-		<key>QuotesWatch (Notification).xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
-		</dict>
-		<key>QuotesWatch.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
-		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>2509A92722F2D2B6008723AB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2509A94F22F2E6C0008723AB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
