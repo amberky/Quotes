@@ -26,6 +26,8 @@ class SmallIconCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+//        iconLabel.font = UIFont.init(name: "FontAwesome5Free-Solid", size: 30)
     }
     
 //    override func setSelected(_ selected: Bool, animated: Bool) {

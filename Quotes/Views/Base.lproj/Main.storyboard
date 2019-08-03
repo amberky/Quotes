@@ -196,7 +196,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="42I-3w-NVD" userLabel="Quote View">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="80"/>
                                         <subviews>
-                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quote  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S50-5d-wLA">
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quote" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S50-5d-wLA">
                                                 <rect key="frame" x="5" y="10" width="325" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="FGa-N4-Yxb"/>
@@ -878,7 +878,7 @@
                                         <size key="customSize" width="105" height="146"/>
                                         <connections>
                                             <outlet property="collectionImage" destination="Rm2-vI-pbq" id="3RP-fq-c1m"/>
-                                            <outlet property="collectionLabel" destination="CCO-Un-ZOA" id="zcC-NK-PBi"/>
+                                            <outlet property="collectionLabel" destination="CCO-Un-ZOA" id="jp1-Bw-lhc"/>
                                             <outlet property="quoteCountLabel" destination="z7d-f5-Nra" id="s2M-yL-kir"/>
                                             <segue destination="Qqg-MU-Q1I" kind="show" identifier="goToCollectionQuoteView" id="4MT-0T-mX7"/>
                                         </connections>

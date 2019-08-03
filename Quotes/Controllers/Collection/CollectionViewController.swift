@@ -110,9 +110,11 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout, UICollec
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionCollectionViewCell", for: indexPath) as! CollectionCollectionViewCell
         
         let imagePath = "\(collection.icon)\(iconMode)"
-            cell.collectionImage.image = UIImage.init(named: imagePath)
+        
+        cell.collectionImage.image = UIImage.init(named: imagePath)
         
         cell.collectionImage.backgroundColor = UIColor.mainUnSelected()
+        
         cell.collectionLabel.text = collection.name
         cell.quoteCountLabel.text = "\(collection.count) Quotes"
         

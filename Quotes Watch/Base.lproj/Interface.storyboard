@@ -67,7 +67,9 @@
                                         <items>
                                             <group alignment="left" layout="vertical" id="Bqj-T0-wTZ">
                                                 <items>
-                                                    <label width="136" alignment="left" verticalAlignment="center" text="Focusing is about saying no" numberOfLines="0" id="JSw-N0-3c3"/>
+                                                    <label width="136" alignment="left" verticalAlignment="center" text="Focusing is about saying no" numberOfLines="0" id="JSw-N0-3c3">
+                                                        <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                                    </label>
                                                     <label width="136" alignment="left" verticalAlignment="center" text="Steve Jobs" id="vOF-Gk-0nZ">
                                                         <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                                                     </label>

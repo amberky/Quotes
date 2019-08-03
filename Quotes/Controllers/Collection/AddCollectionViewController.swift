@@ -139,7 +139,7 @@ extension AddCollectionViewController: UICollectionViewDelegateFlowLayout, UICol
         cell.iconImage.image = iconArray[indexPath.row].image
 
         cell.iconBackground.backgroundColor = selectedIndex == indexPath.row ? selectedColor : unselectedColor
-
+        
         return cell
     }
 

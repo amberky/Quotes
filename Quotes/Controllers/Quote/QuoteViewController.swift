@@ -150,9 +150,9 @@ class QuoteViewController: UITableViewController {
         label.textColor = .darkGray
 //        label.font = UIFont.boldSystemFont(ofSize: 15)
         
-        label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title3)
+        label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
         
-        label.frame = CGRect(x: tableViewLeftMargin + 15 + 10,
+        label.frame = CGRect(x: tableViewLeftMargin + 15 + 15,
                              // table margin left - image width - margin (image - label)
                             y: yAxis,
                             width: tableViewFrame - (tableViewLeftMargin * 2) - 20 - 10,
