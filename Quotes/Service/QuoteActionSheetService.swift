@@ -14,7 +14,7 @@ class QuoteActionSheetService {
 
         let quoteActionSheetVC = storyboard.instantiateViewController(withIdentifier: "QuoteActionSheetVC") as! QuoteActionSheetViewController
 
-        quoteActionSheetVC.modalPresentationStyle = .custom
+//        quoteActionSheetVC.modalPresentationStyle = .overFullScreen
         quoteActionSheetVC.cell = cell
 
         return quoteActionSheetVC

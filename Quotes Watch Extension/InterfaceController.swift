@@ -91,12 +91,10 @@ class InterfaceController: WKInterfaceController {
     }
     
     private func loadTableData() {
-        print("loadTableData")
-        print(tableData.count)
-        
         setBackgroundImage()
         
         tableView.setNumberOfRows(tableData.count, withRowType: "QuoteTableRowController")
+        
         let colorCount = colorArray.count
         
         for (index, rowModel) in tableData.enumerated() {

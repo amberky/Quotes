@@ -37,7 +37,6 @@ class CollectionQuoteViewController: UITableViewController {
             didSet = true
             
             setTitle()
-            //loadQuotes()
         }
     }
    
@@ -205,9 +204,9 @@ extension CollectionQuoteViewController {
         label.textColor = .darkGray
         //        label.font = UIFont.boldSystemFont(ofSize: 15)
         
-        label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title3)
+        label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
         
-        label.frame = CGRect(x: tableViewLeftMargin + 15 + 10,
+        label.frame = CGRect(x: tableViewLeftMargin + 15 + 15,
                              // table margin left - image width - margin (image - label)
             y: yAxis,
             width: tableViewFrame - (tableViewLeftMargin * 2) - 20 - 10,
@@ -240,7 +239,6 @@ extension CollectionQuoteViewController {
             
             self.selectionHaptic.selectionChanged()
             
-            print("pin quote")
             self.pinQuote(indexPath: indexPath)
             completionHandler(true)
         }
@@ -266,7 +264,6 @@ extension CollectionQuoteViewController {
             
             self.selectionHaptic.selectionChanged()
             
-            print("more quote")
             self.showActionSheet(cell: cell)
             completionHandler(false)
         }
@@ -285,7 +282,6 @@ extension CollectionQuoteViewController {
             
             self.selectionHaptic.selectionChanged()
             
-            print("delete quote")
             self.deleteQuote(indexPath: indexPath)
             completionHandler(true)
         }
@@ -316,6 +312,7 @@ extension CollectionQuoteViewController {
     func showActionSheet(cell: QuoteTableViewCell) {
         let quoteActionSheetVC = quoteActionSheetService.show(cell: cell)
         quoteActionSheetVC.delegate = self
+        
         self.navigationController?.view.alpha = 0.6;
         self.present(quoteActionSheetVC, animated: true)
     }
@@ -336,15 +333,15 @@ extension CollectionQuoteViewController: QuoteActionSheetViewControllerDelegate 
     }
     
     func handleEditQuote(cell: QuoteTableViewCell) {
-        print("Edit Quote")
         let editQuoteVC = editQuoteService.show(cell: cell)
         editQuoteVC.delegate = self
+        
         self.present(editQuoteVC, animated: true)
     }
     
     func handleMoveCollection(cell: QuoteTableViewCell) {
-        print("Move Collection")
         let moveCollectionVC = moveCollectionService.show(cell: cell)
+        
         self.present(moveCollectionVC, animated: true)
     }
     

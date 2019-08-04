@@ -45,12 +45,9 @@ class WatchSessionManager: NSObject, WCSessionDelegate {
             }
             
         }) { (error) in
-            print("error")
-            
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "receivedMessageFromPhone"), object: false)
             }
-            
         }
     }
     

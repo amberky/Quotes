@@ -64,6 +64,7 @@ class EditCollectionViewController: UIViewController {
         
         let collectionActionSheetVC = collectionActionSheetService.show(collection: selectedCollection!)
         collectionActionSheetVC.delegate = self
+        
         self.view.alpha = 0.6;
         self.present(collectionActionSheetVC, animated: true)
     }
@@ -169,11 +170,15 @@ extension EditCollectionViewController: UITextFieldDelegate {
 
 extension EditCollectionViewController: CollectionActionSheetViewControllerDelegate {
     func handleDismissal() {
-        self.view.alpha = 1
+        UIView.animate(withDuration: 0.1) {
+            self.view.alpha = 1
+        }
     }
     
     func handleDismissalBackToCollectionView() {
-        self.view.alpha = 1
+        UIView.animate(withDuration: 0.1) {
+            self.view.alpha = 1
+        }
         
 //        self.navigationController?.popViewController(animated: true)
         self.backToCollectionView()

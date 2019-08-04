@@ -32,7 +32,6 @@ class CollectionActionSheetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("hihi")
         // Do any additional setup after loading the view.
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapped))
@@ -40,12 +39,10 @@ class CollectionActionSheetViewController: UIViewController {
     }
     
     @objc func tapped() {
-        print("tapped")
         dismissActionSheet(with: "")
     }
     
     @IBAction func deleteClicked(_ sender: Any) {
-        print("delete")
         selectionHaptic.selectionChanged()
         
         let request: NSFetchRequest<Collection> = Collection.fetchRequest()
@@ -67,7 +64,6 @@ class CollectionActionSheetViewController: UIViewController {
     
     
     @IBAction func cancelClicked(sender: AnyObject) {
-        print("cancel")
         selectionHaptic.selectionChanged()
         
         dismissActionSheet(with: "")
@@ -76,11 +72,15 @@ class CollectionActionSheetViewController: UIViewController {
     func dismissActionSheet(with destination: String) {
         switch destination {
         case "BackToCollectionView":
-            self.presentedViewController?.dismiss(animated: true, completion: nil)
-            delegate?.handleDismissalBackToCollectionView()
+            UIView.animate(withDuration: 0.5) {
+                self.presentedViewController?.dismiss(animated: true, completion: nil)
+                self.delegate?.handleDismissalBackToCollectionView()
+            }
         default:
-            dismiss(animated: true, completion: nil)
-            delegate?.handleDismissal()
+            UIView.animate(withDuration: 0.5) {
+                self.dismiss(animated: true, completion: nil)
+                self.delegate?.handleDismissal()
+            }
         }
         
         delegate?.handleDismissal()

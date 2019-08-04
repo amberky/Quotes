@@ -36,7 +36,6 @@ class QuoteActionSheetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("hihi")
         // Do any additional setup after loading the view.
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapped))
@@ -44,12 +43,10 @@ class QuoteActionSheetViewController: UIViewController {
     }
     
     @objc func tapped() {
-        print("tapped")
         dismissActionSheet()
     }
     
     @IBAction func copyClicked(_ sender: Any) {
-        print("copy")
         selectionHaptic.selectionChanged()
         
         guard cell.quoteLabel.text != nil
@@ -67,7 +64,6 @@ class QuoteActionSheetViewController: UIViewController {
     }
     
     @IBAction func editClicked(_ sender: Any) {
-        print("edit")
         selectionHaptic.selectionChanged()
         
         dismissActionSheet()
@@ -75,7 +71,6 @@ class QuoteActionSheetViewController: UIViewController {
     }
     
     @IBAction func moveClicked(_ sender: Any) {
-        print("move")
         selectionHaptic.selectionChanged()
         
         dismissActionSheet()
@@ -83,7 +78,6 @@ class QuoteActionSheetViewController: UIViewController {
     }
     
     @IBAction func shareClicked(_ sender: Any) {
-        print("share")
         selectionHaptic.selectionChanged()
         
         dismissActionSheet()
@@ -91,15 +85,14 @@ class QuoteActionSheetViewController: UIViewController {
     }
     
     @IBAction func cancelClicked(_ sender: Any) {
-        print("cancel")
         selectionHaptic.selectionChanged()
         
         dismissActionSheet()
     }
     
     func dismissActionSheet() {
-        dismiss(animated: true, completion: nil)
-        delegate?.handleDismissal()
+        self.dismiss(animated: true, completion: nil)
+        self.delegate?.handleDismissal()
     }
     
     func saveContext() {

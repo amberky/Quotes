@@ -185,7 +185,6 @@ class QuoteViewController: UITableViewController {
             
             self.selectionHaptic.selectionChanged()
             
-            print("pin quote")
             self.pinQuote(indexPath: indexPath)
             completionHandler(true)
         }
@@ -211,7 +210,6 @@ class QuoteViewController: UITableViewController {
             
             self.selectionHaptic.selectionChanged()
             
-            print("more quote")
             self.showActionSheet(cell: cell)
             completionHandler(false)
         }
@@ -230,7 +228,6 @@ class QuoteViewController: UITableViewController {
             
             self.selectionHaptic.selectionChanged()
             
-            print("delete quote")
             self.deleteQuote(indexPath: indexPath)
             completionHandler(true)
         }
@@ -263,6 +260,7 @@ class QuoteViewController: UITableViewController {
     func showActionSheet(cell: QuoteTableViewCell) {
         let quoteActionSheetVC = quoteActionSheetService.show(cell: cell)
         quoteActionSheetVC.delegate = self
+        
         self.navigationController?.view.alpha = 0.6;
         self.present(quoteActionSheetVC, animated: true)
     }
@@ -304,19 +302,22 @@ class QuoteViewController: UITableViewController {
 
 extension QuoteViewController: QuoteActionSheetViewControllerDelegate {
     func handleDismissal() {
-        self.navigationController?.view.alpha = 1
+        UIView.animate(withDuration: 0.1) {
+            self.navigationController?.view.alpha = 1
+        }
     }
     
     func handleEditQuote(cell: QuoteTableViewCell) {
-        print("Edit Quote")
         let editQuoteVC = editQuoteService.show(cell: cell)
         editQuoteVC.delegate = self
+        
         self.present(editQuoteVC, animated: true)
     }
     
     func handleMoveCollection(cell: QuoteTableViewCell) {
         print("Move Collection")
         let moveCollectionVC = moveCollectionService.show(cell: cell)
+        
         self.present(moveCollectionVC, animated: true)
     }
     
