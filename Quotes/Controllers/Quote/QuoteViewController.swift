@@ -301,6 +301,7 @@ class QuoteViewController: UITableViewController {
 }
 
 extension QuoteViewController: QuoteActionSheetViewControllerDelegate {
+    
     func handleDismissal() {
         UIView.animate(withDuration: 0.1) {
             self.navigationController?.view.alpha = 1
@@ -319,6 +320,12 @@ extension QuoteViewController: QuoteActionSheetViewControllerDelegate {
         let moveCollectionVC = moveCollectionService.show(cell: cell)
         
         self.present(moveCollectionVC, animated: true)
+    }
+    
+    func handleRemoveFromCollection(reload: Bool) {
+        if reload {
+            reloadQuote()
+        }
     }
     
     func handleShare(cell: QuoteTableViewCell) {

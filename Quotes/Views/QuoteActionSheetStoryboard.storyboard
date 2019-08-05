@@ -51,10 +51,10 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g11-yT-uk5">
-                                <rect key="frame" x="20" y="493" width="335" height="220"/>
+                                <rect key="frame" x="20" y="438" width="335" height="275"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cW9-Nx-Ey4">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="220"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="275"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fm1-7F-oMI">
                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="55"/>
@@ -135,7 +135,7 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tnn-zV-sUB">
                                                         <rect key="frame" x="0.0" y="0.0" width="335" height="54"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                        <state key="normal" title="Move Collection">
+                                                        <state key="normal" title="Add To Collection">
                                                             <color key="titleColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         </state>
                                                         <connections>
@@ -155,8 +155,41 @@
                                                     <constraint firstItem="KpI-A2-2uz" firstAttribute="leading" secondItem="YbI-Jp-WcT" secondAttribute="leading" id="khq-GA-QZs"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jIG-gz-tga">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hJ8-Kx-xyc">
                                                 <rect key="frame" x="0.0" y="165" width="335" height="55"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gcn-61-QME" userLabel="Horizontal Line">
+                                                        <rect key="frame" x="0.0" y="54" width="335" height="1"/>
+                                                        <color key="backgroundColor" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="1" id="l0e-fx-Lay"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zmg-NM-KLZ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="54"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <state key="normal" title="Remove From Collection">
+                                                            <color key="titleColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="removeFromCollectionClicked:" destination="z3p-VJ-wKc" eventType="touchUpInside" id="c6E-C9-hSS"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="zmg-NM-KLZ" firstAttribute="top" secondItem="hJ8-Kx-xyc" secondAttribute="top" id="SJW-ju-ahW"/>
+                                                    <constraint firstAttribute="trailing" secondItem="zmg-NM-KLZ" secondAttribute="trailing" id="Tza-cN-UcU"/>
+                                                    <constraint firstItem="gcn-61-QME" firstAttribute="leading" secondItem="hJ8-Kx-xyc" secondAttribute="leading" id="U1X-va-tnL"/>
+                                                    <constraint firstItem="gcn-61-QME" firstAttribute="top" secondItem="zmg-NM-KLZ" secondAttribute="bottom" id="d6z-SL-oeb"/>
+                                                    <constraint firstAttribute="height" constant="55" id="g9D-bE-VUI"/>
+                                                    <constraint firstAttribute="trailing" secondItem="gcn-61-QME" secondAttribute="trailing" id="uYT-vE-1Kb"/>
+                                                    <constraint firstAttribute="bottom" secondItem="gcn-61-QME" secondAttribute="bottom" id="wMj-mL-rwt"/>
+                                                    <constraint firstItem="zmg-NM-KLZ" firstAttribute="leading" secondItem="hJ8-Kx-xyc" secondAttribute="leading" id="yfx-d8-2Jv"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jIG-gz-tga">
+                                                <rect key="frame" x="0.0" y="220" width="335" height="55"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AVt-SV-8cE">
                                                         <rect key="frame" x="0.0" y="0.0" width="335" height="55"/>
@@ -215,6 +248,7 @@
                     </view>
                     <connections>
                         <outlet property="bgView" destination="bg6-ii-DcE" id="Klc-nb-YWh"/>
+                        <outlet property="removeFromCollectionView" destination="hJ8-Kx-xyc" id="cWa-L8-dcP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hh0-PW-wgQ" userLabel="First Responder" sceneMemberID="firstResponder"/>

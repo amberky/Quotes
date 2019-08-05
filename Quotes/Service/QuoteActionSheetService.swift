@@ -9,13 +9,14 @@
 import UIKit
 
 class QuoteActionSheetService {
-    func show(cell: QuoteTableViewCell) -> QuoteActionSheetViewController {
+    func show(cell: QuoteTableViewCell, collection: Collection? = nil) -> QuoteActionSheetViewController {
         let storyboard = UIStoryboard(name: "QuoteActionSheetStoryboard", bundle: .main)
 
         let quoteActionSheetVC = storyboard.instantiateViewController(withIdentifier: "QuoteActionSheetVC") as! QuoteActionSheetViewController
 
 //        quoteActionSheetVC.modalPresentationStyle = .overFullScreen
         quoteActionSheetVC.cell = cell
+        quoteActionSheetVC.collection = collection
 
         return quoteActionSheetVC
     }

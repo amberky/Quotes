@@ -39,6 +39,12 @@ class CollectionQuoteViewController: UITableViewController {
             setTitle()
         }
     }
+    
+    var collection: Collection? {
+        didSet {
+            print("didSet")
+        }
+    }
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,6 +80,17 @@ class CollectionQuoteViewController: UITableViewController {
         
         if selectedCollection?.isAll == true {
             self.navigationItem.rightBarButtonItem = nil
+        } else {
+            let request: NSFetchRequest<Collection> = Collection.fetchRequest()
+            request.predicate = NSPredicate(format: "name == %@", selectedCollection?.name ?? "")
+            
+            do {
+                if let collectionContext = try self.context.fetch(request) as [NSManagedObject]?, collectionContext.first != nil {
+                    collection = collectionContext.first as? Collection
+                }
+            } catch {
+                print("Error in fetching collection \(error)")
+            }
         }
     }
     
@@ -310,7 +327,7 @@ extension CollectionQuoteViewController {
     }
     
     func showActionSheet(cell: QuoteTableViewCell) {
-        let quoteActionSheetVC = quoteActionSheetService.show(cell: cell)
+        let quoteActionSheetVC = quoteActionSheetService.show(cell: cell, collection: collection)
         quoteActionSheetVC.delegate = self
         
         self.navigationController?.view.alpha = 0.6;
@@ -343,6 +360,12 @@ extension CollectionQuoteViewController: QuoteActionSheetViewControllerDelegate 
         let moveCollectionVC = moveCollectionService.show(cell: cell)
         
         self.present(moveCollectionVC, animated: true)
+    }
+    
+    func handleRemoveFromCollection(reload: Bool) {
+        if reload {
+            reloadQuote()
+        }
     }
     
     func handleShare(cell: QuoteTableViewCell) {

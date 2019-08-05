@@ -67,19 +67,16 @@ class AddQuoteViewController: UIViewController {
     }
     
     @objc func quoteLabelTapped() {
-        print("quote label tapped")
         DispatchQueue.main.async {
             self.quoteTextField.becomeFirstResponder()
         }
     }
     
     @objc func authorLabelTapped() {
-        print("author label tapped")
         self.authorTextField.becomeFirstResponder()
     }
     
     @objc func collectionLabelTapped() {
-        print("collection label tapped")
         performSegue(withIdentifier: "goToSelectCollectionView", sender: self)
     }
     
