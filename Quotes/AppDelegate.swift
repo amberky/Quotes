@@ -14,11 +14,18 @@ import WatchConnectivity
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
+    /// Saved shortcut item used as a result of an app launch, used later when app is activated.
+    var launchedShortcutItem: UIApplicationShortcutItem?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         WatchSessionManager.sharedManager.startSession()
+        
+        if let shortcutItem = launchOptions?[UIApplication.LaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
+            launchedShortcutItem = shortcutItem
+        }
         
         return true
     }
@@ -39,12 +46,67 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+        guard let shortcutItem = launchedShortcutItem else { return }
+        
+        //If there is any shortcutItem, that will be handled upon the app becomes active
+        _ = handleShortcutItem(item: shortcutItem)
+        
+        //We make it nil after perform/handle method call for that shortcutItem action
+        launchedShortcutItem = nil
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
         self.saveContext()
     }
+    
+    
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        
+        completionHandler(handleShortcutItem(item: shortcutItem))
+    }
+    
+    enum ShortcutIdentifier: String {
+        case NewQuote
+        
+        // MARK: Initializers
+        init?(fullNameForType: String) {
+            guard let last = fullNameForType.components(separatedBy: ".").last else { return nil }
+            
+            self.init(rawValue: last)
+        }
+        
+        // MARK: Properties
+        var type: String {
+            return Bundle.main.bundleIdentifier! + ".\(self.rawValue)"
+        }
+    }
+    
+    func handleShortcutItem(item: UIApplicationShortcutItem) -> Bool {
+        
+        var handled = false
+        // Verify that the provided shortcutItem's type is one handled by the application.
+        guard ShortcutIdentifier(fullNameForType: item.type) != nil else { return false }
+        guard let shortCutType = item.type as String? else { return false }
 
+        let mainStoryboard = UIStoryboard.init(name: "Main", bundle: Bundle.main)
+
+        switch shortCutType {
+        case ShortcutIdentifier.NewQuote.type:
+            guard let homeVC = self.window?.rootViewController as? UINavigationController else { return handled }
+            
+            guard let addQuoteVC = mainStoryboard.instantiateViewController(withIdentifier: "AddQuoteVC") as? AddQuoteViewController  else { return handled }
+            
+            homeVC.present(addQuoteVC, animated: true, completion: nil)
+            
+            handled = true
+        default:
+            print("unhandled shortCutType")
+        }
+
+        return handled
+    }
+    
     // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {

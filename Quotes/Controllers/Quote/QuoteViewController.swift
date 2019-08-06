@@ -12,7 +12,7 @@ import CoreData
 class QuoteViewController: UITableViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
+
     lazy var quoteActionSheetService = QuoteActionSheetService()
     lazy var editQuoteService = EditQuoteService()
     lazy var moveCollectionService = MoveCollectionService()
@@ -37,7 +37,7 @@ class QuoteViewController: UITableViewController {
         
         configureTableView()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         self.loadQuotes()
     }
