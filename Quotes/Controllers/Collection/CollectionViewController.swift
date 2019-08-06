@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class CollectionViewController: UIViewController {
+class CollectionViewController: UICollectionViewController {
     
     // MARK: Variables
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -23,15 +23,15 @@ class CollectionViewController: UIViewController {
     var defaultIcon = "bookmark"
     
     // MARK: - IBOutlet
-    @IBOutlet weak var collectionCollectionView: UICollectionView!
+//    @IBOutlet weak var collectionCollectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionCollectionView.delegate = self
-        collectionCollectionView.dataSource = self
+//        collectionCollectionView.delegate = self
+//        collectionCollectionView.dataSource = self
         
-        collectionCollectionView.allowsMultipleSelection = false
+        collectionView.allowsMultipleSelection = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,7 +43,7 @@ class CollectionViewController: UIViewController {
         collectionArray = [CollectionModel]()
         
         let request: NSFetchRequest<Collection> = Collection.fetchRequest()
-        let sort = [NSSortDescriptor(key: "addedOn", ascending: true)]
+        let sort = [NSSortDescriptor(key: "updatedOn", ascending: false)]
         
         request.sortDescriptors = sort
         
@@ -71,7 +71,7 @@ class CollectionViewController: UIViewController {
             print("Error fetching data from context \(error)")
         }
         
-        collectionCollectionView.reloadData()
+        collectionView.reloadData()
     }
     
     // MARK: - Unwind Segue
@@ -84,7 +84,7 @@ class CollectionViewController: UIViewController {
         case "goToCollectionQuoteView":
             print("Let's go to collection-quote view")
             
-            if let indexPath = collectionCollectionView.indexPathsForSelectedItems {
+            if let indexPath = collectionView.indexPathsForSelectedItems {
                 if let firstItem = indexPath.first {
                     let destinationVC = segue.destination as! CollectionQuoteViewController
                     destinationVC.selectedCollection = collectionArray[firstItem.row]
@@ -97,20 +97,20 @@ class CollectionViewController: UIViewController {
 }
 
 // MARK: - UICollectionView
-extension CollectionViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
-    
+extension CollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (collectionView.frame.width - 20 - 40) / 2
         let height = width + 20 + 20
-        
+
+        print(collectionView.frame.width)
         return CGSize(width: width, height: height)
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return collectionArray.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let collection = collectionArray[indexPath.row]
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionCollectionViewCell", for: indexPath) as! CollectionCollectionViewCell

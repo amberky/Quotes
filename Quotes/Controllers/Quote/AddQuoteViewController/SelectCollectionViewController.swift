@@ -35,7 +35,7 @@ class SelectCollectionViewController: UIViewController {
     // MARK: - Functions
     func loadCollections() {
         let request: NSFetchRequest<Collection> = Collection.fetchRequest()
-        let sort = [NSSortDescriptor(key: "addedOn", ascending: true)]
+        let sort = [NSSortDescriptor(key: "updatedOn", ascending: true)]
         
         request.sortDescriptors = sort
         

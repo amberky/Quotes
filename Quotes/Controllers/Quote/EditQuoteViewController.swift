@@ -128,11 +128,11 @@ class EditQuoteViewController: UIViewController {
         
         do {
             if let quoteContext = try self.context.fetch(request) as [NSManagedObject]?, quoteContext.first != nil {
-                let quote = quoteContext.first as! Quote
+                let updateQuote = quoteContext.first as! Quote
                 
-                quote.setValue(quote, forKey: "quote")
-                quote.setValue((authorTextField?.text ?? "").trimmingCharacters(in: .whitespaces), forKey: "author")
-                quote.setValue(Date(), forKey: "updatedOn")
+                updateQuote.setValue(quote, forKey: "quote")
+                updateQuote.setValue((authorTextField?.text ?? "").trimmingCharacters(in: .whitespaces), forKey: "author")
+                updateQuote.setValue(Date(), forKey: "updatedOn")
                 
                 saveContext()
             }
@@ -147,7 +147,7 @@ class EditQuoteViewController: UIViewController {
         request.predicate = predicate
         
         do {
-            let result = try self.context.fetch(request) as [NSManagedObject]?
+            let result = try context.fetch(request) as [NSManagedObject]?
             
             if (result?.count ?? 0) > 0 && result?.first?.objectID != objectId {
                 showExistsAlert()
@@ -171,6 +171,7 @@ class EditQuoteViewController: UIViewController {
         }
         
         alert.addAction(action)
+        alert.view.tintColor = UIColor.mainBlue()
         
         present(alert, animated: true, completion: nil)
     }

@@ -130,7 +130,7 @@ class CollectionQuoteViewController: UITableViewController {
     }
     
     // MARK: - Unwind Segue
-    @IBAction func backToCategoryQuoteView(_ unwindSegue: UIStoryboardSegue) {}
+    @IBAction func backToCollectionQuoteView(_ unwindSegue: UIStoryboardSegue) {}
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier else { return }

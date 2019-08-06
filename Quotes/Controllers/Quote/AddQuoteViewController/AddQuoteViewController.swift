@@ -131,6 +131,7 @@ class AddQuoteViewController: UIViewController {
         }
         
         alert.addAction(action)
+        alert.view.tintColor = UIColor.mainBlue()
         
         present(alert, animated: true, completion: nil)
     }

@@ -96,13 +96,14 @@ class AddCollectionViewController: UIViewController {
     }
 
     func showExistAlert() {
-        let alert = UIAlertController(title: "Collection Already Exists", message: "Please choose a different title.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Collection Already Exists", message: "Please choose a different name.", preferredStyle: .alert)
         
         let action = UIAlertAction(title: "OK", style: .cancel) { (action) in
             self.collectionTextField.becomeFirstResponder()
         }
         
         alert.addAction(action)
+        alert.view.tintColor = UIColor.mainBlue()
         
         present(alert, animated: true, completion: nil)
     }
@@ -129,6 +130,7 @@ class AddCollectionViewController: UIViewController {
             newCollection.name = collectionName
             newCollection.icon = iconArray[selectedIndex].name
             newCollection.addedOn = Date()
+            newCollection.updatedOn = Date()
             
             context.insert(newCollection)
             

@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class MoveCollectionViewController: UIViewController {
+class MoveCollectionViewController: UICollectionViewController {
     
     // MARK: Variables
     lazy var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -82,7 +82,7 @@ class MoveCollectionViewController: UIViewController {
     // MARK: - Functions
     func loadCollections() {
         let request: NSFetchRequest<Collection> = Collection.fetchRequest()
-        let sort = [NSSortDescriptor(key: "addedOn", ascending: true)]
+        let sort = [NSSortDescriptor(key: "updatedOn", ascending: true)]
         
         request.sortDescriptors = sort
         
@@ -117,7 +117,7 @@ class MoveCollectionViewController: UIViewController {
         case "goToAddCollectionFromMoveView":
             // perform Add New Collection
             // nothing to pass to Collection view
-            print("Let's go to add new collection for move category")
+            print("Let's go to add new collection for move collection")
         default:
             print("unknown segue identifier")
         }
