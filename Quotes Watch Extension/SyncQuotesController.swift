@@ -12,13 +12,21 @@ import WatchConnectivity
 
 class SyncQuotesController: WKInterfaceController {
     
-    
+    // MARK: - IBOutlet
     @IBOutlet weak var syncButton: WKInterfaceButton!
     
     override func awake(withContext context: Any?) {
         NotificationCenter.default.addObserver(self, selector: #selector(receivedMessageFromPhone(_:)), name: NSNotification.Name(rawValue: "receivedMessageFromPhone"), object: nil)
     }
     
+    // MARK: - IBAction
+    @IBAction func syncPressed() {
+        WatchSessionManager.sharedManager.requestSyncQuotes()
+        
+        syncButton.setTitle("Syncing...")
+    }
+    
+    // MARK: - Objc Functions
     @objc func receivedMessageFromPhone(_ notification: Notification) {
         guard let success = notification.object as? Bool else { return }
        
@@ -28,12 +36,6 @@ class SyncQuotesController: WKInterfaceController {
         } else {
             syncButton.setTitle("Sync")
         }
-    }
-    
-    @IBAction func syncPressed() {
-        WatchSessionManager.sharedManager.requestSyncQuotes()
-        
-        syncButton.setTitle("Syncing...")
     }
     
 }

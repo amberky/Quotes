@@ -15,28 +15,28 @@ protocol EditQuoteViewControllerDelegate {
 
 class EditQuoteViewController: UIViewController {
     
+    // MARK: Variables
     lazy var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    lazy var maxLength: Int = 500
     
     var delegate: EditQuoteViewControllerDelegate?
 
-    //MARK: - IBOutlet
+    var cell = QuoteTableViewCell()
+    var objectId : NSManagedObjectID?
+    
+    // MARK: - IBOutlet
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
-//    @IBOutlet weak var collectionLabel: UILabel!
     
     @IBOutlet weak var quoteTextField: UITextField!
     @IBOutlet weak var authorTextField: UITextField!
     
-//    @IBOutlet weak var collectionButton: UIButton!
-    
     @IBOutlet weak var doneButton: UIBarButtonItem!
-    
-    var cell = QuoteTableViewCell()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        quoteTextField.becomeFirstResponder()
         quoteTextField.delegate = self
         authorTextField.delegate = self
         quoteTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
@@ -45,34 +45,30 @@ class EditQuoteViewController: UIViewController {
         setupGesture()
     }
     
-    func setupView() {
-        quoteTextField.text = cell.quoteLabel.text
-        authorTextField.text = cell.authorLabel.text
+    // MARK: - IBAction
+    @IBAction func doneClicked(_ sender: UIBarButtonItem) {
+        print("Done bar button clicked")
         
-//        guard let collections = cell.quote?.collections?.allObjects as? [Collection] else { return }
-//
-//        if (collections.count) > 0 {
-//            let concatCollection = collections.map { (m) -> String in
-//                m.name ?? ""
-//                }.joined(separator: ", ")
-//
-//            collectionButton.setTitle(concatCollection, for: .normal)
-//        } else {
-//            collectionButton.setTitle("None", for: .normal)
-//        }
+        checkAndResignFirstResponder()
+        
+        let quote = quoteTextField.text!.trimmingCharacters(in: .whitespaces)
+        
+        if checkQuoteExists(quote: quote) == false {
+            updateQuote(quote: quote)
+            dimissView(reload: true)
+        }
     }
     
-    func setupGesture() {
-        let quoteLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(quoteLabelTapped))
-        quoteLabel.addGestureRecognizer(quoteLabelTapGesture)
+    @IBAction func cancelClicked(_ sender: UIBarButtonItem) {
+        print("Cancel bar button clicked")
+        checkAndResignFirstResponder()
         
-        let authorLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(authorLabelTapped))
-        authorLabel.addGestureRecognizer(authorLabelTapGesture)
-        
-//        let collectionLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(collectionLabelTapped))
-//        collectionLabel.addGestureRecognizer(collectionLabelTapGesture)
+        dimissView(reload: false)
     }
     
+    @IBAction func backToEditQuoteView(_ unwindSegue: UIStoryboardSegue) {}
+    
+    // MARK: - Objc Functions
     @objc func quoteLabelTapped() {
         DispatchQueue.main.async {
             self.quoteTextField.becomeFirstResponder()
@@ -91,6 +87,32 @@ class EditQuoteViewController: UIViewController {
         doneButton.isEnabled = quoteTextField.text?.trimmingCharacters(in: .whitespaces) != "" ? true : false
     }
     
+    // MARK: - Functions
+    func setupView() {
+        quoteTextField.text = cell.quoteLabel.text
+        authorTextField.text = cell.authorLabel.text
+        
+        //        guard let collections = cell.quote?.collections?.allObjects as? [Collection] else { return }
+        //
+        //        if (collections.count) > 0 {
+        //            let concatCollection = collections.map { (m) -> String in
+        //                m.name ?? ""
+        //                }.joined(separator: ", ")
+        //
+        //            collectionButton.setTitle(concatCollection, for: .normal)
+        //        } else {
+        //            collectionButton.setTitle("None", for: .normal)
+        //        }
+    }
+    
+    func setupGesture() {
+        let quoteLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(quoteLabelTapped))
+        quoteLabel.addGestureRecognizer(quoteLabelTapGesture)
+        
+        let authorLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(authorLabelTapped))
+        authorLabel.addGestureRecognizer(authorLabelTapGesture)
+    }
+
     func saveContext() {
         do {
             try context.save()
@@ -100,13 +122,7 @@ class EditQuoteViewController: UIViewController {
         }
     }
     
-    //MARK: - IBAction
-    
-    @IBAction func doneClicked(_ sender: UIBarButtonItem) {
-        print("Done bar button clicked")
-        
-        checkAndResignFirstResponder()
-        
+    func updateQuote(quote: String) {
         let request: NSFetchRequest<Quote> = Quote.fetchRequest()
         request.predicate = NSPredicate(format: "quote == %@", cell.quoteLabel.text ?? "")
         
@@ -114,7 +130,7 @@ class EditQuoteViewController: UIViewController {
             if let quoteContext = try self.context.fetch(request) as [NSManagedObject]?, quoteContext.first != nil {
                 let quote = quoteContext.first as! Quote
                 
-                quote.setValue(quoteTextField.text!.trimmingCharacters(in: .whitespaces), forKey: "quote")
+                quote.setValue(quote, forKey: "quote")
                 quote.setValue((authorTextField?.text ?? "").trimmingCharacters(in: .whitespaces), forKey: "author")
                 quote.setValue(Date(), forKey: "updatedOn")
                 
@@ -123,15 +139,40 @@ class EditQuoteViewController: UIViewController {
         } catch {
             print("Error in removing & adding collections to quote \(error)")
         }
-        
-        dimissView(reload: true)
     }
     
-    @IBAction func cancelClicked(_ sender: UIBarButtonItem) {
-        print("Cancel bar button clicked")
-        checkAndResignFirstResponder()
+    func checkQuoteExists(quote: String) -> Bool {
+        let predicate = NSPredicate(format: "quote == %@", quote)
+        let request : NSFetchRequest<Quote> = Quote.fetchRequest()
+        request.predicate = predicate
         
-        dimissView(reload: false)
+        do {
+            let result = try self.context.fetch(request) as [NSManagedObject]?
+            
+            if (result?.count ?? 0) > 0 && result?.first?.objectID != objectId {
+                showExistsAlert()
+                
+                return true
+            }
+        } catch {
+            print("Error in checking quote exists \(error)")
+        }
+        
+        return false
+    }
+    
+    func showExistsAlert() {
+        let alert = UIAlertController(title: "Quote is Already Added",
+                                      message: "This Quote has already been added.",
+                                      preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "OK", style: .cancel) { (action) in
+            self.quoteTextField.becomeFirstResponder()
+        }
+        
+        alert.addAction(action)
+        
+        present(alert, animated: true, completion: nil)
     }
     
     func dimissView(reload: Bool) {
@@ -142,8 +183,6 @@ class EditQuoteViewController: UIViewController {
         }
     }
     
-    @IBAction func backToEditQuoteView(_ unwindSegue: UIStoryboardSegue) {}
-    
     func checkAndResignFirstResponder() {
         if quoteTextField.isFirstResponder {
             quoteTextField.resignFirstResponder()
@@ -153,6 +192,7 @@ class EditQuoteViewController: UIViewController {
     }
 }
 
+// MARK: - UITextFieldDelegate
 extension EditQuoteViewController : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == quoteTextField {
@@ -161,5 +201,19 @@ extension EditQuoteViewController : UITextFieldDelegate {
             authorTextField.resignFirstResponder()
         }
         return false
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let textFieldText = textField.text, let rangeOfTextToReplace = Range(range, in: textFieldText) else { return false }
+        
+        let substringToReplace = textFieldText[rangeOfTextToReplace]
+        let count = textFieldText.count - substringToReplace.count + string.count
+        
+        if count > maxLength {
+            print("MaxLength \(count)")
+            textField.Shake()
+        }
+        
+        return count <= maxLength
     }
 }

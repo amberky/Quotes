@@ -12,7 +12,7 @@ import CoreData
 protocol QuoteActionSheetViewControllerDelegate {
     func handleDismissal()
     
-    func handleEditQuote(cell: QuoteTableViewCell)
+    func handleEditQuote(cell: QuoteTableViewCell, objectId: NSManagedObjectID)
     
     func handleMoveCollection(cell: QuoteTableViewCell)
     
@@ -23,20 +23,27 @@ protocol QuoteActionSheetViewControllerDelegate {
 
 class QuoteActionSheetViewController: UIViewController {
     
-    var delegate: QuoteActionSheetViewControllerDelegate?
-
+    // MARK: Variables
     lazy var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     lazy var selectionHaptic = UISelectionFeedbackGenerator()
     
     var cell = QuoteTableViewCell()
-    
-    var collection: Collection? {
+    var objectId: NSManagedObjectID? {
         didSet {
-            print("didSet")
+            print("didSet objectId")
         }
     }
     
+    var collection: Collection? {
+        didSet {
+            print("didSet collection")
+        }
+    }
+    
+    var delegate: QuoteActionSheetViewControllerDelegate?
+
+    // MARK: - IBOutlet
     @IBOutlet weak var bgView: UIView!
     
     @IBOutlet weak var removeFromCollectionView: UIView!
@@ -56,10 +63,7 @@ class QuoteActionSheetViewController: UIViewController {
         }
     }
     
-    @objc func tapped() {
-        dismissActionSheet()
-    }
-    
+    // MARK: - IBAction
     @IBAction func copyClicked(_ sender: Any) {
         selectionHaptic.selectionChanged()
         
@@ -81,7 +85,7 @@ class QuoteActionSheetViewController: UIViewController {
         selectionHaptic.selectionChanged()
         
         dismissActionSheet()
-        delegate?.handleEditQuote(cell: cell)
+        delegate?.handleEditQuote(cell: cell, objectId: objectId!)
     }
     
     @IBAction func moveClicked(_ sender: Any) {
@@ -132,6 +136,12 @@ class QuoteActionSheetViewController: UIViewController {
         dismissActionSheet()
     }
     
+    // MARK: - Objc Functions
+    @objc func tapped() {
+        dismissActionSheet()
+    }
+    
+    // MARK: - Functions
     func dismissActionSheet() {
         self.dismiss(animated: true, completion: nil)
         self.delegate?.handleDismissal()

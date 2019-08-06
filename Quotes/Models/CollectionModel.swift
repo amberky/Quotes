@@ -6,7 +6,8 @@
 //  Copyright © 2019 focus. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import CoreData
 
 class CollectionModel {
     let name : String
@@ -14,12 +15,14 @@ class CollectionModel {
     let count : Int
     let isAll: Bool
     var isSelected : Bool
+    let objectID : NSManagedObjectID?
     
-    init (name: String, icon: String, count: Int = 0, isAll: Bool = false, isSelected: Bool = false) {
+    init (name: String, icon: String, count: Int = 0, objectID: NSManagedObjectID? = nil, isAll: Bool = false, isSelected: Bool = false) {
         self.name = name
         self.icon = icon
         self.count = count
         self.isSelected = isSelected
         self.isAll = isAll
+        self.objectID = objectID
     }
 }

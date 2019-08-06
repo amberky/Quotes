@@ -11,8 +11,18 @@ import CoreData
 
 class AddQuoteViewController: UIViewController {
     
+    // MARK: Variables
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    lazy var maxLength: Int = 500
+    
+    var selectedCollection = [Collection?]() {
+        didSet {
+            setSelectedCollection()
+        }
+    }
+    
+    // MARK: - IBOutlet
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var collectionLabel: UILabel!
@@ -23,12 +33,6 @@ class AddQuoteViewController: UIViewController {
     @IBOutlet weak var collectionButton: UIButton!
     
     @IBOutlet weak var doneButton: UIBarButtonItem!
-    
-    var selectedCollection = [Collection?]() {
-        didSet {
-            setSelectedCollection()
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,11 +47,32 @@ class AddQuoteViewController: UIViewController {
         setupGesture()
     }
     
+    // MARK: - Objc Functions
+    @objc func quoteLabelTapped() {
+        DispatchQueue.main.async {
+            self.quoteTextField.becomeFirstResponder()
+        }
+    }
+    
+    @objc func authorLabelTapped() {
+        self.authorTextField.becomeFirstResponder()
+    }
+    
+    @objc func collectionLabelTapped() {
+        performSegue(withIdentifier: "goToSelectCollectionView", sender: self)
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        doneButton.isEnabled = quoteTextField.text?.trimmingCharacters(in: .whitespaces) != "" ? true : false
+    }
+    
+    
+    // MARK: - Functions
     func setSelectedCollection() {
         if selectedCollection.count > 0 {
             let concatCollection = selectedCollection.map { (m) -> String in
                 m!.name ?? ""
-            }.joined(separator: ", ")
+                }.joined(separator: ", ")
             
             collectionButton.setTitle(concatCollection, for: .normal)
         } else {
@@ -66,20 +91,6 @@ class AddQuoteViewController: UIViewController {
         collectionLabel.addGestureRecognizer(collectionLabelTapGesture)
     }
     
-    @objc func quoteLabelTapped() {
-        DispatchQueue.main.async {
-            self.quoteTextField.becomeFirstResponder()
-        }
-    }
-    
-    @objc func authorLabelTapped() {
-        self.authorTextField.becomeFirstResponder()
-    }
-    
-    @objc func collectionLabelTapped() {
-        performSegue(withIdentifier: "goToSelectCollectionView", sender: self)
-    }
-    
     func saveContext() {
         do {
             try context.save()
@@ -89,11 +100,50 @@ class AddQuoteViewController: UIViewController {
         }
     }
     
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        doneButton.isEnabled = quoteTextField.text?.trimmingCharacters(in: .whitespaces) != "" ? true : false
+    func checkQuoteExists(quote: String) -> Bool {
+        let predicate = NSPredicate(format: "quote == %@", quote)
+        let request : NSFetchRequest<Quote> = Quote.fetchRequest()
+        request.predicate = predicate
+        
+        do {
+            let result = try self.context.fetch(request) as [NSManagedObject]?
+            
+            if (result?.count ?? 0) > 0 {
+                
+                showExistAlert()
+                
+                return true
+            } else {
+                return false
+            }
+        } catch {
+            print("Error in checking quote exists \(error)")
+        }
+        
+        return false
     }
     
-    //MARK: - unwind Segue: done Clicked, cancel Clicked
+    func showExistAlert() {
+        let alert = UIAlertController(title: "Quote is Already Added", message: "This Quote has already been added.", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "OK", style: .cancel) { (action) in
+            self.quoteTextField.becomeFirstResponder()
+        }
+        
+        alert.addAction(action)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func checkAndResignFirstResponder() {
+        if quoteTextField.isFirstResponder {
+            quoteTextField.resignFirstResponder()
+        } else if authorTextField.isFirstResponder {
+            authorTextField.resignFirstResponder()
+        }
+    }
+    
+    // MARK: - Unwind Segue
     @IBAction func backToAddQuoteView(_ unwindSegue: UIStoryboardSegue) {}
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -140,16 +190,29 @@ class AddQuoteViewController: UIViewController {
         }
     }
     
-    func checkAndResignFirstResponder() {
-        if quoteTextField.isFirstResponder {
-            quoteTextField.resignFirstResponder()
-        } else if authorTextField.isFirstResponder {
-                authorTextField.resignFirstResponder()
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        print("shouldPerformSegue")
+        
+        checkAndResignFirstResponder()
+        
+        switch identifier {
+        case "doneClicked":
+            let quote = quoteTextField.text!.trimmingCharacters(in: .whitespaces)
+            
+            if checkQuoteExists(quote: quote) == true {
+                return false
+            } else {
+                return true
+            }
+        default:
+            return true
         }
     }
 }
 
+// MARK: - UITextFieldDelegate
 extension AddQuoteViewController : UITextFieldDelegate {
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == quoteTextField {
             authorTextField.becomeFirstResponder()
@@ -157,5 +220,19 @@ extension AddQuoteViewController : UITextFieldDelegate {
             authorTextField.resignFirstResponder()
         }
         return false
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let textFieldText = textField.text, let rangeOfTextToReplace = Range(range, in: textFieldText) else { return false }
+        
+        let substringToReplace = textFieldText[rangeOfTextToReplace]
+        let count = textFieldText.count - substringToReplace.count + string.count
+        
+        if count > maxLength {
+            print("MaxLength \(count)")
+            textField.Shake()
+        }
+        
+        return count <= maxLength
     }
 }

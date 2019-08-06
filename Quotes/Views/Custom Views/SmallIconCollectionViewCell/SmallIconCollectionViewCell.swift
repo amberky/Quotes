@@ -10,8 +10,6 @@ import UIKit
 
 class SmallIconCollectionViewCell: UICollectionViewCell {
 
-//    @IBOutlet var viewCell: SmallIconCollectionViewCell!
-    
     @IBOutlet weak var iconBackground: UIView!
     @IBOutlet weak var iconImage: UIImageView!
     
@@ -25,15 +23,5 @@ class SmallIconCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        
-//        iconLabel.font = UIFont.init(name: "FontAwesome5Free-Solid", size: 30)
     }
-    
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//
-//        // Configure the view for the selected state
-//    }
-    
 }

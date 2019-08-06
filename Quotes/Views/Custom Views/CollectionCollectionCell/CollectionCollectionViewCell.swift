@@ -17,8 +17,5 @@ class CollectionCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
-//        collectionImageLabel.font = UIFont.init(name: "FontAwesome5Free-Solid", size: 40)
-//        collectionImageLabel.tintColor = .white
     }
 }

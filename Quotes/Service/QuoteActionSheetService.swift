@@ -7,15 +7,17 @@
 //
 
 import UIKit
+import CoreData
 
 class QuoteActionSheetService {
-    func show(cell: QuoteTableViewCell, collection: Collection? = nil) -> QuoteActionSheetViewController {
+    func show(cell: QuoteTableViewCell, objectId: NSManagedObjectID, collection: Collection? = nil) -> QuoteActionSheetViewController {
         let storyboard = UIStoryboard(name: "QuoteActionSheetStoryboard", bundle: .main)
 
         let quoteActionSheetVC = storyboard.instantiateViewController(withIdentifier: "QuoteActionSheetVC") as! QuoteActionSheetViewController
 
 //        quoteActionSheetVC.modalPresentationStyle = .overFullScreen
         quoteActionSheetVC.cell = cell
+        quoteActionSheetVC.objectId = objectId
         quoteActionSheetVC.collection = collection
 
         return quoteActionSheetVC

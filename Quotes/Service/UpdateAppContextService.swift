@@ -13,12 +13,6 @@ import CoreData
 class UpdateAppContextService {
     func updateAppContext() {
         do {
-//            let pinQuotes = getPinnedQuotes()
-//
-//            let data = try? NSKeyedArchiver.archivedData(withRootObject: pinQuotes, requiringSecureCoding: false)
-//
-//            guard let quoteData = data else { return }
-
             let quoteData = archivedData()
             
             try WatchSessionManager.sharedManager.updateApplicationContext(applicationContext: quoteData)

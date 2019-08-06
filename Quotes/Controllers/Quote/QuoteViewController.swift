@@ -11,6 +11,7 @@ import CoreData
 
 class QuoteViewController: UITableViewController {
     
+    // MARK: Variables
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     lazy var quoteActionSheetService = QuoteActionSheetService()
@@ -25,11 +26,9 @@ class QuoteViewController: UITableViewController {
     var colorArray = ColorTheme.init(alpha: 0.2).colorArray
     var colorCount: Int = 0
     
+    // MARK: - IBOutlet
     @IBOutlet var searchBar: UISearchBar!
-    
     @IBOutlet var quoteTableView: UITableView!
-    
-    var quoteSection: QuoteSection?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,10 +47,22 @@ class QuoteViewController: UITableViewController {
         }
     }
     
+    
+    // MARK: - IBAction
+    @IBAction func showCopyMenu(_ sender: UILongPressGestureRecognizer) {
+        print("long pressed detected")
+    }
+    
+    // MARK: - Functions
     func loadQuotes(predicate: NSPredicate? = nil) {
         quoteSectionArray = QuoteSections.init(customPredicate: predicate).quoteSections
         
         tableView.reloadData()
+    }
+    
+    func configureTableView() {
+        quoteTableView.estimatedRowHeight = 500.0
+        quoteTableView.rowHeight = UITableView.automaticDimension
     }
     
     func saveContext() {
@@ -71,18 +82,57 @@ class QuoteViewController: UITableViewController {
         updateAppContextService.updateAppContext()
     }
     
-    func configureTableView() {
-        quoteTableView.estimatedRowHeight = 500.0
-        quoteTableView.rowHeight = UITableView.automaticDimension
+    func checkAndResignFirstResponder() {
+        if searchBar.isFirstResponder {
+            searchBar.resignFirstResponder()
+        }
     }
     
-    //MARK: - IBAction
-    
-    @IBAction func showCopyMenu(_ sender: UILongPressGestureRecognizer) {
-        print("long pressed detected")
+    func pinQuote(indexPath: IndexPath) {
+        let updateQuote = self.quoteSectionArray[indexPath.section].quotes[indexPath.row]
+        updateQuote.setValue(!updateQuote.isPin, forKey: "isPin")
+        updateQuote.setValue(Date(), forKey: "updatedOn")
+        
+        saveContext()
     }
     
-    //MARK: - TableView Delegate Methods
+    func showActionSheet(cell: QuoteTableViewCell, objectId: NSManagedObjectID) {
+        let quoteActionSheetVC = quoteActionSheetService.show(cell: cell, objectId: objectId)
+        quoteActionSheetVC.delegate = self
+        
+        self.navigationController?.view.alpha = 0.6;
+        self.present(quoteActionSheetVC, animated: true)
+    }
+    
+    func deleteQuote(indexPath: IndexPath) {
+        context.delete(quoteSectionArray[indexPath.section].quotes[indexPath.row])
+        quoteSectionArray[indexPath.section].quotes.remove(at: indexPath.row)
+        
+        tableView.deleteRows(at: [indexPath], with: .fade)
+        
+        saveContext()
+    }
+    
+    // MARK: - Unwind Segue
+    @IBAction func backToQuoteView(_ unwindSegue: UIStoryboardSegue) {}
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier != nil else { return }
+        
+        checkAndResignFirstResponder()
+        
+        switch segue.identifier {
+        case "goToAddQuoteView":
+            print("Let's go to add a quote")
+        default:
+            print("unknown segue identifier")
+            
+        }
+    }
+}
+
+// MARK: - UITableViewDelegate
+extension QuoteViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         if quoteSectionArray.count == 0 {
             tableView.setEmptyView(tableView: tableView)
@@ -94,7 +144,6 @@ class QuoteViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return quoteSectionArray[section].quotes.count
     }
     
@@ -148,15 +197,13 @@ class QuoteViewController: UITableViewController {
         let label = UILabel()
         label.text = headerInfo.sectionName
         label.textColor = .darkGray
-//        label.font = UIFont.boldSystemFont(ofSize: 15)
         
         label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
         
-        label.frame = CGRect(x: tableViewLeftMargin + 15 + 15,
-                             // table margin left - image width - margin (image - label)
-                            y: yAxis,
-                            width: tableViewFrame - (tableViewLeftMargin * 2) - 20 - 10,
-                            height: width)
+        label.frame = CGRect(x: tableViewLeftMargin + 15 + 15,  // table margin left - image width - margin (image - label)
+            y: yAxis,
+            width: tableViewFrame - (tableViewLeftMargin * 2) - 20 - 10,
+            height: width)
         
         headerView.addSubview(label)
         
@@ -205,12 +252,13 @@ class QuoteViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let cell = tableView.cellForRow(at: indexPath) as! QuoteTableViewCell
+        let quote = quoteSectionArray[indexPath.section].quotes[indexPath.row]
         
         let moreAction = UIContextualAction(style: .destructive, title: nil) { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
             
             self.selectionHaptic.selectionChanged()
             
-            self.showActionSheet(cell: cell)
+            self.showActionSheet(cell: cell, objectId: quote.objectID)
             completionHandler(false)
         }
         
@@ -244,72 +292,18 @@ class QuoteViewController: UITableViewController {
         
         return UISwipeActionsConfiguration(actions: [deleteAction, moreAction])
     }
-    
-    func pinQuote(indexPath: IndexPath) {
-        let updateQuote = self.quoteSectionArray[indexPath.section].quotes[indexPath.row]
-        updateQuote.setValue(!updateQuote.isPin, forKey: "isPin")
-        updateQuote.setValue(Date(), forKey: "updatedOn")
-        
-        saveContext()
-        
-//        loadQuotes()
-        
-//        updateAppContext()
-    }
-    
-    func showActionSheet(cell: QuoteTableViewCell) {
-        let quoteActionSheetVC = quoteActionSheetService.show(cell: cell)
-        quoteActionSheetVC.delegate = self
-        
-        self.navigationController?.view.alpha = 0.6;
-        self.present(quoteActionSheetVC, animated: true)
-    }
-    
-    func deleteQuote(indexPath: IndexPath) {
-        context.delete(quoteSectionArray[indexPath.section].quotes[indexPath.row])
-        quoteSectionArray[indexPath.section].quotes.remove(at: indexPath.row)
-        
-        tableView.deleteRows(at: [indexPath], with: .fade)
-        
-        saveContext()
-        
-//        updateAppContext()
-    }
-    
-    //MARK: - unwind Segue
-    @IBAction func backToQuoteView(_ unwindSegue: UIStoryboardSegue) {}
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier != nil else { return }
-        
-        checkAndResignFirstResponder()
-        
-        switch segue.identifier {
-        case "goToAddQuoteView":
-            print("Let's go to add a quote")
-        default:
-            print("unknown segue identifier")
-            
-        }
-    }
-    
-    func checkAndResignFirstResponder() {
-        if searchBar.isFirstResponder {
-            searchBar.resignFirstResponder()
-        }
-    }
 }
 
+// MARK: - QuoteActionSheetViewControllerDelegate
 extension QuoteViewController: QuoteActionSheetViewControllerDelegate {
-    
     func handleDismissal() {
         UIView.animate(withDuration: 0.1) {
             self.navigationController?.view.alpha = 1
         }
     }
     
-    func handleEditQuote(cell: QuoteTableViewCell) {
-        let editQuoteVC = editQuoteService.show(cell: cell)
+    func handleEditQuote(cell: QuoteTableViewCell, objectId: NSManagedObjectID) {
+        let editQuoteVC = editQuoteService.show(cell: cell, objectId: objectId)
         editQuoteVC.delegate = self
         
         self.present(editQuoteVC, animated: true)
@@ -339,6 +333,7 @@ extension QuoteViewController: QuoteActionSheetViewControllerDelegate {
     }
 }
 
+// MARK: - EditQuoteViewControllerDelegate
 extension QuoteViewController: EditQuoteViewControllerDelegate {
     func reloadQuote() {
         loadQuotes()

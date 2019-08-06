@@ -11,12 +11,9 @@ import CoreData
 
 class CollectionViewController: UIViewController {
     
+    // MARK: Variables
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    //MARK: - IBOutlet
-    @IBOutlet weak var collectionCollectionView: UICollectionView!
-    
-    //MARK: Variables
     var collectionArray = [CollectionModel]()
     var selectedCollection: CollectionModel?
     
@@ -25,6 +22,9 @@ class CollectionViewController: UIViewController {
     
     var defaultIcon = "bookmark"
     
+    // MARK: - IBOutlet
+    @IBOutlet weak var collectionCollectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,13 +32,13 @@ class CollectionViewController: UIViewController {
         collectionCollectionView.dataSource = self
         
         collectionCollectionView.allowsMultipleSelection = false
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         loadCollections()
     }
     
+    // MARK: Functions
     func loadCollections() {
         collectionArray = [CollectionModel]()
         
@@ -55,9 +55,16 @@ class CollectionViewController: UIViewController {
             
             let collectionContext = try context.fetch(request)
             
-            collectionArray.insert(CollectionModel.init(name: "All", icon: defaultIcon, count: totalCount, isAll: true), at: 0)
+            collectionArray.insert(CollectionModel.init(name: "All",
+                                                        icon: defaultIcon,
+                                                        count: totalCount,
+                                                        objectID: nil,
+                                                        isAll: true), at: 0)
             for i in collectionContext {
-                collectionArray.append(CollectionModel.init(name: i.name ?? "", icon: i.icon ?? "", count: i.quotes?.count ?? 0))
+                collectionArray.append(CollectionModel.init(name: i.name ?? "",
+                                                            icon: i.icon ?? "",
+                                                            count: i.quotes?.count ?? 0,
+                                                            objectID: i.objectID))
             }
             
         } catch {
@@ -67,9 +74,7 @@ class CollectionViewController: UIViewController {
         collectionCollectionView.reloadData()
     }
     
-    //MARK: - IBAction
-    
-    //MARK: - unwind Segue
+    // MARK: - Unwind Segue
     @IBAction func backToCollectionView(_ unwindSegue: UIStoryboardSegue) {}
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -91,6 +96,7 @@ class CollectionViewController: UIViewController {
     }
 }
 
+// MARK: - UICollectionView
 extension CollectionViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

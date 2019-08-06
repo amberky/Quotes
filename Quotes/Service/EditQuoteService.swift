@@ -7,15 +7,17 @@
 //
 
 import UIKit
+import CoreData
 
 class EditQuoteService {
-    func show(cell: QuoteTableViewCell) -> EditQuoteViewController {
+    func show(cell: QuoteTableViewCell, objectId: NSManagedObjectID) -> EditQuoteViewController {
         let storyboard = UIStoryboard(name: "EditQuoteStoryboard", bundle: .main)
 
         let editQuoteVC = storyboard.instantiateViewController(withIdentifier: "EditQuoteVC") as! EditQuoteViewController
 
         editQuoteVC.modalPresentationStyle = .custom
         editQuoteVC.cell = cell
+        editQuoteVC.objectId = objectId
 
         return editQuoteVC
     }

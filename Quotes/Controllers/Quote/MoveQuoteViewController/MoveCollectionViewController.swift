@@ -9,12 +9,9 @@
 import UIKit
 import CoreData
 
-protocol MoveCollectionViewControllerDelegate {
-    
-}
-
 class MoveCollectionViewController: UIViewController {
     
+    // MARK: Variables
     lazy var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     let selectionHaptic = UISelectionFeedbackGenerator()
@@ -22,10 +19,9 @@ class MoveCollectionViewController: UIViewController {
     var collectionArray = [Collection]()
     var selectedCollection = [Collection?]()
     
-    var delegate: MoveCollectionViewControllerDelegate?
-    
     var cell = QuoteTableViewCell()
-        //MARK: - IBOutlet
+    
+    // MARK: - IBOutlet
     @IBOutlet weak var collectionTableView: UITableView!
     
     override func viewDidLoad() {
@@ -41,23 +37,7 @@ class MoveCollectionViewController: UIViewController {
         selectedCollection = cell.quote?.collections?.allObjects as! [Collection]
     }
     
-    func loadCollections() {
-        let request: NSFetchRequest<Collection> = Collection.fetchRequest()
-        let sort = [NSSortDescriptor(key: "addedOn", ascending: true)]
-        
-        request.sortDescriptors = sort
-        
-        do {
-            collectionArray = try context.fetch(request)
-        } catch {
-            print("Error fetching data from context \(error)")
-        }
-        
-        collectionTableView.reloadData()
-    }
-    
-    //MARK: - IBAction
-    
+    // MARK: - IBAction
     @IBAction func doneClicked(_ sender: UIBarButtonItem) {
         print("done bar button clicked")
         
@@ -99,6 +79,22 @@ class MoveCollectionViewController: UIViewController {
         dismissView()
     }
     
+    // MARK: - Functions
+    func loadCollections() {
+        let request: NSFetchRequest<Collection> = Collection.fetchRequest()
+        let sort = [NSSortDescriptor(key: "addedOn", ascending: true)]
+        
+        request.sortDescriptors = sort
+        
+        do {
+            collectionArray = try context.fetch(request)
+        } catch {
+            print("Error fetching data from context \(error)")
+        }
+        
+        collectionTableView.reloadData()
+    }
+    
     func saveContext() {
         do {
             try context.save()
@@ -111,7 +107,7 @@ class MoveCollectionViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    //MARK: - unwind Segue
+    // MARK: - Unwind Segue
     @IBAction func backToMoveCollectionView(_ unwindSegue: UIStoryboardSegue) {}
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -128,8 +124,9 @@ class MoveCollectionViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDelegate
 extension MoveCollectionViewController: UITableViewDataSource, UITableViewDelegate {
-    //MARK: - Table View Data Source
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return collectionArray.count
     }

@@ -11,18 +11,11 @@ import CoreData
 
 class AddCollectionViewController: UIViewController {
     
+    // MARK: Variables
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    //MARK: - IBOutlet
-    @IBOutlet weak var doneButton: UIBarButtonItem!
+    lazy var maxLength: Int = 50
     
-    @IBOutlet weak var collectionLabel: UILabel!
-    
-    @IBOutlet weak var collectionTextField: UITextField!
-    
-    @IBOutlet weak var iconCollectionView: UICollectionView!
-    
-    //MARK: Variables
     let iconMode = "-light" // -dark or -light
     lazy var iconArray = IconThemeModel.init(iconMode: iconMode, alpha: 1).iconArray
     
@@ -31,7 +24,15 @@ class AddCollectionViewController: UIViewController {
     
     var selectedIndex = 0
     
-    //MARK: - view delegate
+    // MARK: - IBOutlet
+    @IBOutlet weak var doneButton: UIBarButtonItem!
+    
+    @IBOutlet weak var collectionLabel: UILabel!
+    
+    @IBOutlet weak var collectionTextField: UITextField!
+    
+    @IBOutlet weak var iconCollectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,38 +53,19 @@ class AddCollectionViewController: UIViewController {
         collectionLabel.addGestureRecognizer(collectionLabelTapGesture)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let identifier = segue.identifier else { return }
-
-        checkAndResignFirstResponder()
-        
-        switch identifier {
-        case "doneClicked":
-            checkAndResignFirstResponder()
-
-            let newCollection = Collection(context: self.context)
-            newCollection.name = (collectionTextField.text ?? "").trimmingCharacters(in: .whitespaces)
-            newCollection.icon = iconArray[selectedIndex].name
-            newCollection.addedOn = Date()
-            
-            context.insert(newCollection)
-
-            saveContext()
-
-            if segue.destination is SelectCollectionViewController {
-                let destination = segue.destination as! SelectCollectionViewController
-                destination.loadCollections()
-            } else { return }
-            
-        case "cancelClicked":
-            print("Cancel bar button clicked")
-
-        default:
-            print("unknown segue identifier")
+    // MARK: - Objc Functions
+    @objc func collectionLabelTapped() {
+        print("collection label tapped")
+        DispatchQueue.main.async {
+            self.collectionTextField.becomeFirstResponder()
         }
     }
-
-    //MARK: - functions
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        doneButton.isEnabled = collectionTextField.text?.trimmingCharacters(in: .whitespaces) != "" ? true : false
+    }
+    
+    // MARK: - Functions
     func saveContext() {
         do {
             try context.save()
@@ -92,16 +74,37 @@ class AddCollectionViewController: UIViewController {
             print("Error saving data from context \(error)")
         }
     }
-
-    @objc func collectionLabelTapped() {
-        print("collection label tapped")
-        DispatchQueue.main.async {
-            self.collectionTextField.becomeFirstResponder()
+    
+    func checkCollectionExists(name: String) -> Bool {
+        let predicate = NSPredicate(format: "name == %@", name)
+        let request : NSFetchRequest<Collection> = Collection.fetchRequest()
+        request.predicate = predicate
+        
+        do {
+            let result = try self.context.fetch(request) as [NSManagedObject]?
+            
+            if (result?.count ?? 0) > 0 {
+                return true
+            } else {
+                return false
+            }
+        } catch {
+            print("Error in checking collection exists \(error)")
         }
+        
+        return false
     }
 
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        doneButton.isEnabled = collectionTextField.text?.trimmingCharacters(in: .whitespaces) != "" ? true : false
+    func showExistAlert() {
+        let alert = UIAlertController(title: "Collection Already Exists", message: "Please choose a different title.", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "OK", style: .cancel) { (action) in
+            self.collectionTextField.becomeFirstResponder()
+        }
+        
+        alert.addAction(action)
+        
+        present(alert, animated: true, completion: nil)
     }
     
     func checkAndResignFirstResponder() {
@@ -109,15 +112,88 @@ class AddCollectionViewController: UIViewController {
             collectionTextField.resignFirstResponder()
         }
     }
+    
+    // MARK: - Unwind Segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let identifier = segue.identifier else { return }
+        
+        print("prepare")
+        
+        checkAndResignFirstResponder()
+        
+        switch identifier {
+        case "doneClicked":
+            let collectionName = (collectionTextField.text ?? "").trimmingCharacters(in: .whitespaces)
+            
+            let newCollection = Collection(context: self.context)
+            newCollection.name = collectionName
+            newCollection.icon = iconArray[selectedIndex].name
+            newCollection.addedOn = Date()
+            
+            context.insert(newCollection)
+            
+            saveContext()
+            
+            if segue.destination is SelectCollectionViewController {
+                let destination = segue.destination as! SelectCollectionViewController
+                destination.loadCollections()
+            } else { return }
+            
+        case "cancelClicked":
+            print("Cancel bar button clicked")
+            
+        default:
+            print("unknown segue identifier")
+        }
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        print("shouldPerformSegue")
+        
+        checkAndResignFirstResponder()
+        
+        switch identifier {
+        case "doneClicked":
+            let collectionName = (collectionTextField.text ?? "").trimmingCharacters(in: .whitespaces)
+            
+            if checkCollectionExists(name: collectionName) == true {
+                print("checkCollectionExists false")
+                
+                showExistAlert()
+                
+                return false
+            } else {
+                return true
+            }
+        default:
+            return true
+        }
+    }
 }
 
+// MARK: - UITextFieldDelegate
 extension AddCollectionViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         collectionTextField.resignFirstResponder()
         return false
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let textFieldText = textField.text, let rangeOfTextToReplace = Range(range, in: textFieldText) else { return false }
+        
+        let substringToReplace = textFieldText[rangeOfTextToReplace]
+        let count = textFieldText.count - substringToReplace.count + string.count
+        
+        if count > maxLength {
+            print("MaxLength \(count)")
+            textField.Shake()
+        }
+        
+        return count <= maxLength
+    }
 }
 
+// MARK: - UICollectionViewDelegate
 extension AddCollectionViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 

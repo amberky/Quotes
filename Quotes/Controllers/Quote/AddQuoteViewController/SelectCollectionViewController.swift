@@ -11,16 +11,16 @@ import CoreData
 
 class SelectCollectionViewController: UIViewController {
     
+    // MARK: Variables
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let selection = UISelectionFeedbackGenerator()
     
     var collectionArray = [Collection]()
     var selectedCollection = [Collection?]()
     
-    //MARK: - IBOutlet
+    // MARK: - IBOutlet
     @IBOutlet weak var collectionTableView: UITableView!
     
-    //MARK: - Functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,6 +32,7 @@ class SelectCollectionViewController: UIViewController {
         loadCollections()
     }
     
+    // MARK: - Functions
     func loadCollections() {
         let request: NSFetchRequest<Collection> = Collection.fetchRequest()
         let sort = [NSSortDescriptor(key: "addedOn", ascending: true)]
@@ -48,7 +49,7 @@ class SelectCollectionViewController: UIViewController {
         collectionTableView.reloadData()
     }
     
-    //MARK: - unwind Segue
+    // MARK: - Unwind Segue
     @IBAction func backToSelectCollectionView(_ unwindSegue: UIStoryboardSegue) {}
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -82,8 +83,8 @@ class SelectCollectionViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDelegate
 extension SelectCollectionViewController: UITableViewDataSource, UITableViewDelegate {
-    //MARK: - Table View Data Source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return collectionArray.count
     }

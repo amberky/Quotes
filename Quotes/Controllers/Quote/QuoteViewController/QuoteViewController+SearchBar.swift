@@ -8,7 +8,7 @@
 
 import UIKit
 
-//MARK: - Search Bar methods
+// MARK: - Search Bar methods
 extension QuoteViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(true, animated: true)
@@ -44,7 +44,6 @@ extension QuoteViewController: UISearchBarDelegate {
         }
         
         if quoteSectionArray.count > 0 {
-            //tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
             tableView.scrollsToTop = true
         }
         

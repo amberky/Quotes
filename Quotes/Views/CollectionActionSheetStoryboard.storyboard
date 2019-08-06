@@ -100,6 +100,7 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="pMT-hT-xX4" firstAttribute="leading" secondItem="SF0-Ic-mR4" secondAttribute="leading" id="D7t-bz-NZi"/>
                             <constraint firstItem="pMT-hT-xX4" firstAttribute="top" secondItem="7Sy-tU-WR5" secondAttribute="top" id="KMr-RG-ChM"/>

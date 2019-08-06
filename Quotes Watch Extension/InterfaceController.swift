@@ -12,9 +12,11 @@ import WatchConnectivity
 
 class InterfaceController: WKInterfaceController {
 
+    // MARK: - Variables
     var tableData = [QuoteWatchModel]()
     var colorArray = ColorTheme.init(alpha: 1).colorArray
     
+    // MARK: - IBOutlet
     @IBOutlet weak var tableView: WKInterfaceTable!
     
     @IBOutlet weak var interfaceGroup: WKInterfaceGroup!
@@ -34,6 +36,19 @@ class InterfaceController: WKInterfaceController {
         setBackgroundImage()
     }
     
+    override func willActivate() {
+        // This method is called when watch view controller is about to be visible to user
+        super.willActivate()
+        
+        print("willActivate")
+    }
+    
+    override func didDeactivate() {
+        // This method is called when watch view controller is no longer visible
+        super.didDeactivate()
+    }
+    
+    // MARK: - Objc Functions
     @objc func receivedApplicationContext(_ notification: Notification) {
         print("receivedApplicationContext")
         
@@ -70,18 +85,7 @@ class InterfaceController: WKInterfaceController {
         super.becomeCurrentPage()
     }
     
-    override func willActivate() {
-        // This method is called when watch view controller is about to be visible to user
-        super.willActivate()
-        
-        print("willActivate")
-    }
-    
-    override func didDeactivate() {
-        // This method is called when watch view controller is no longer visible
-        super.didDeactivate()
-    }
-    
+    // MARK: - Functions
     private func setBackgroundImage() {
         if tableData.count > 0 {
             interfaceGroup.setHidden(true)

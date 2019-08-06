@@ -11,6 +11,7 @@ import CoreData
 
 class CollectionQuoteViewController: UITableViewController {
     
+    // MARK: - Variables
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     lazy var quoteActionSheetService = QuoteActionSheetService()
@@ -24,11 +25,6 @@ class CollectionQuoteViewController: UITableViewController {
     
     var colorArray = ColorTheme.init(alpha: 0.2).colorArray
     var colorCount: Int = 0
-    
-    //MARK: - IBOutlet
-    @IBOutlet weak var searchBar: UISearchBar!
-    
-//    @IBOutlet var quoteTableView: UITableView!
     
     var didSet: Bool = false
     var selectedCollection: CollectionModel? {
@@ -45,14 +41,13 @@ class CollectionQuoteViewController: UITableViewController {
             print("didSet")
         }
     }
+    
+    // MARK: - IBOutlet
+    @IBOutlet weak var searchBar: UISearchBar!
+    
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        quoteTableView.register(UINib(nibName: "QuoteTableViewCell", bundle: nil) , forCellReuseIdentifier: "QuoteCell")
-//
-//        quoteTableView.delegate = self
-//        quoteTableView.dataSource = self
         
         searchBar.delegate = self
         
@@ -75,6 +70,7 @@ class CollectionQuoteViewController: UITableViewController {
         }
     }
     
+    // MARK: - Functions
     func setTitle() {
         self.title = selectedCollection?.name
         
@@ -110,25 +106,6 @@ class CollectionQuoteViewController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
     }
     
-    //MARK: - unwindSegue
-    @IBAction func backToCategoryQuoteView(_ unwindSegue: UIStoryboardSegue) {}
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let identifier = segue.identifier else { return }
-        
-        checkAndResignFirstResponder()
-        
-        switch identifier {
-        case "goToEditCollectionView":
-            print("Let's go to edit a collection")
-            
-            let destination = segue.destination as! EditCollectionViewController
-            destination.selectedCollection = selectedCollection
-        default:
-            print("unknown segue identifier")
-        }
-    }
-    
     func checkAndResignFirstResponder() {
         if searchBar.isFirstResponder {
             searchBar.resignFirstResponder()
@@ -151,10 +128,29 @@ class CollectionQuoteViewController: UITableViewController {
     func updateAppContext() {
         updateAppContextService.updateAppContext()
     }
+    
+    // MARK: - Unwind Segue
+    @IBAction func backToCategoryQuoteView(_ unwindSegue: UIStoryboardSegue) {}
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let identifier = segue.identifier else { return }
+        
+        checkAndResignFirstResponder()
+        
+        switch identifier {
+        case "goToEditCollectionView":
+            print("Let's go to edit a collection")
+            
+            let destination = segue.destination as! EditCollectionViewController
+            destination.selectedCollection = selectedCollection
+        default:
+            print("unknown segue identifier")
+        }
+    }
 }
 
+// MARK: - UITableViewDelegate
 extension CollectionQuoteViewController {
-    //MARK: - TableView Delegate Methods
     override func numberOfSections(in tableView: UITableView) -> Int {
         if quoteSectionArray.count == 0 {
             tableView.setEmptyView()
@@ -276,12 +272,13 @@ extension CollectionQuoteViewController {
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let cell = tableView.cellForRow(at: indexPath) as! QuoteTableViewCell
+        let quote = quoteSectionArray[indexPath.section].quotes[indexPath.row]
         
         let moreAction = UIContextualAction(style: .destructive, title: nil) { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
             
             self.selectionHaptic.selectionChanged()
             
-            self.showActionSheet(cell: cell)
+            self.showActionSheet(cell: cell, objectId: quote.objectID)
             completionHandler(false)
         }
         
@@ -322,12 +319,10 @@ extension CollectionQuoteViewController {
         updateQuote.setValue(Date(), forKey: "updatedOn")
         
         saveContext()
-        
-//        loadQuotes()
     }
     
-    func showActionSheet(cell: QuoteTableViewCell) {
-        let quoteActionSheetVC = quoteActionSheetService.show(cell: cell, collection: collection)
+    func showActionSheet(cell: QuoteTableViewCell, objectId: NSManagedObjectID) {
+        let quoteActionSheetVC = quoteActionSheetService.show(cell: cell, objectId: objectId, collection: collection)
         quoteActionSheetVC.delegate = self
         
         self.navigationController?.view.alpha = 0.6;
@@ -344,13 +339,14 @@ extension CollectionQuoteViewController {
     }
 }
 
+// MARK: - QuoteActionSheetViewControllerDelegate
 extension CollectionQuoteViewController: QuoteActionSheetViewControllerDelegate {
     func handleDismissal() {
         self.navigationController?.view.alpha = 1
     }
     
-    func handleEditQuote(cell: QuoteTableViewCell) {
-        let editQuoteVC = editQuoteService.show(cell: cell)
+    func handleEditQuote(cell: QuoteTableViewCell, objectId: NSManagedObjectID) {
+        let editQuoteVC = editQuoteService.show(cell: cell, objectId: objectId)
         editQuoteVC.delegate = self
         
         self.present(editQuoteVC, animated: true)
@@ -381,6 +377,7 @@ extension CollectionQuoteViewController: QuoteActionSheetViewControllerDelegate 
     }
 }
 
+// MARK: - EditQuoteViewControllerDelegate
 extension CollectionQuoteViewController: EditQuoteViewControllerDelegate {
     func reloadQuote() {
         loadQuotes()

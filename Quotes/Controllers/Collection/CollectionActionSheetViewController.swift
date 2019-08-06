@@ -17,6 +17,7 @@ protocol CollectionActionSheetViewControllerDelegate {
 
 class CollectionActionSheetViewController: UIViewController {
     
+    // MARK: - Variables
     var delegate: CollectionActionSheetViewControllerDelegate?
     
     lazy var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -27,6 +28,7 @@ class CollectionActionSheetViewController: UIViewController {
     
     var collections = [Collection]()
     
+    // MARK: - IBOutlet
     @IBOutlet weak var bgView: UIView!
     
     override func viewDidLoad() {
@@ -38,10 +40,7 @@ class CollectionActionSheetViewController: UIViewController {
         bgView.addGestureRecognizer(tapGesture)
     }
     
-    @objc func tapped() {
-        dismissActionSheet(with: "")
-    }
-    
+    // MARK: - IBAction
     @IBAction func deleteClicked(_ sender: Any) {
         selectionHaptic.selectionChanged()
         
@@ -69,6 +68,12 @@ class CollectionActionSheetViewController: UIViewController {
         dismissActionSheet(with: "")
     }
     
+    // MARK: - Objc Functions
+    @objc func tapped() {
+        dismissActionSheet(with: "")
+    }
+    
+    // MARK: - Functions
     func dismissActionSheet(with destination: String) {
         switch destination {
         case "BackToCollectionView":

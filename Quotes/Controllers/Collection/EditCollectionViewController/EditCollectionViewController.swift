@@ -11,19 +11,12 @@ import CoreData
 
 class EditCollectionViewController: UIViewController {
     
+    // MARK: - Variables
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     lazy var collectionActionSheetService = CollectionActionSheetService()
     
-    //MARK: - IBOutlet
-    @IBOutlet weak var doneButton: UIBarButtonItem!
+    lazy var maxLength: Int = 500
     
-    @IBOutlet weak var collectionLabel: UILabel!
-    
-    @IBOutlet weak var collectionTextField: UITextField!
-    
-    @IBOutlet weak var iconCollectionView: UICollectionView!
-    
-    //MARK: Variables
     let iconMode = "-light" // -dark or -light
     lazy var iconArray = IconThemeModel.init(iconMode: iconMode, alpha: 1).iconArray
     
@@ -34,7 +27,15 @@ class EditCollectionViewController: UIViewController {
     
     var selectedCollection: CollectionModel?
     
-    //MARK: - view delegate
+    // MARK: - IBOutlet
+    @IBOutlet weak var doneButton: UIBarButtonItem!
+    
+    @IBOutlet weak var collectionLabel: UILabel!
+    
+    @IBOutlet weak var collectionTextField: UITextField!
+    
+    @IBOutlet weak var iconCollectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,7 +49,6 @@ class EditCollectionViewController: UIViewController {
         iconCollectionView.register(nib, forCellWithReuseIdentifier: "SmallIconCollectionViewCell")
         
         collectionTextField.delegate = self
-//        collectionTextField.becomeFirstResponder()
         
         collectionTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         
@@ -58,7 +58,7 @@ class EditCollectionViewController: UIViewController {
         bindValueToComponents()
     }
     
-    
+    // MARK: - IBAction
     @IBAction func deleteButtonClicked(_ sender: Any) {
         checkAndResignFirstResponder()
         
@@ -69,11 +69,86 @@ class EditCollectionViewController: UIViewController {
         self.present(collectionActionSheetVC, animated: true)
     }
     
+    // MARK: - Objc Functions
+    @objc func collectionLabelTapped() {
+        print("collection label tapped")
+        DispatchQueue.main.async {
+            self.collectionTextField.becomeFirstResponder()
+        }
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        doneButton.isEnabled = collectionTextField.text != "" ? true : false
+    }
+    
+    // MARK: - Functions
+    func bindValueToComponents() {
+        if selectedCollection != nil {
+            collectionTextField.text = selectedCollection?.name
+            
+            let index = iconArray.map({ (item) -> String in
+                item.name
+            }).firstIndex(of: selectedCollection?.icon ?? "")
+            selectedIndex = index ?? 0
+            
+            doneButton.isEnabled = true
+            
+            iconCollectionView.reloadData()
+        }
+    }
+    
+    func saveContext() {
+        do {
+            try context.save()
+            print("Saved successfully")
+        } catch {
+            print("Error saving data from context \(error)")
+        }
+    }
+    
+    func checkCollectionExists(name: String) -> Bool {
+        let predicate = NSPredicate(format: "name == %@", name)
+        let request : NSFetchRequest<Collection> = Collection.fetchRequest()
+        request.predicate = predicate
+        
+        do {
+            let result = try self.context.fetch(request) as [NSManagedObject]?
+            
+            if (result?.count ?? 0) > 0 {
+                if result?.first?.objectID != selectedCollection?.objectID {
+                    return true
+                }
+            }
+        } catch {
+            print("Error in checking collection exists \(error)")
+        }
+        
+        return false
+    }
+    
+    func showExistAlert() {
+        let alert = UIAlertController(title: "Collection Already Exists", message: "Please choose a different title.", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "OK", style: .cancel) { (action) in
+            self.collectionTextField.becomeFirstResponder()
+        }
+        
+        alert.addAction(action)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func checkAndResignFirstResponder() {
+        if collectionTextField.isFirstResponder {
+            collectionTextField.resignFirstResponder()
+        }
+    }
+    
     func backToCollectionView() {
         performSegue(withIdentifier: "backToCollectionView", sender: self)
     }
     
-    //MARK: - unwind Segue
+    // MARK: - Unwind Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier else { return }
         
@@ -83,11 +158,11 @@ class EditCollectionViewController: UIViewController {
         case "doneClicked":
             print("Done bar button clicked")
             
-            let trimmedText = collectionTextField.text?.trimmingCharacters(in: .whitespaces) ?? ""
+            let collectionName = collectionTextField.text?.trimmingCharacters(in: .whitespaces) ?? ""
             let newIcon = iconArray[selectedIndex].name
             
-            if trimmedText != selectedCollection?.name || selectedCollection!.icon != newIcon {
-                let updatedCollection = CollectionModel.init(name: trimmedText, icon: iconArray[selectedIndex].name)
+            if collectionName != selectedCollection?.name || selectedCollection!.icon != newIcon {
+                let updatedCollection = CollectionModel.init(name: collectionName, icon: iconArray[selectedIndex].name)
                 
                 let request: NSFetchRequest<Collection> = Collection.fetchRequest()
                 request.predicate = NSPredicate(format: "name == %@", selectedCollection!.name)
@@ -118,56 +193,53 @@ class EditCollectionViewController: UIViewController {
         }
     }
     
-    //MARK: - functions
-    func bindValueToComponents() {
-        if selectedCollection != nil {
-            collectionTextField.text = selectedCollection?.name
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        print("shouldPerformSegue")
+        
+        checkAndResignFirstResponder()
+        
+        switch identifier {
+        case "doneClicked":
+            let collectionName = collectionTextField.text?.trimmingCharacters(in: .whitespaces) ?? ""
             
-            let index = iconArray.map({ (item) -> String in
-                item.name
-            }).firstIndex(of: selectedCollection?.icon ?? "")
-            selectedIndex = index ?? 0
-            
-            doneButton.isEnabled = true
-            
-            iconCollectionView.reloadData()
+            if checkCollectionExists(name: collectionName) == true {
+                print("checkCollectionExists false")
+                
+                showExistAlert()
+                
+                return false
+            } else {
+                return true
+            }
+        default:
+            return true
         }
-    }
-    
-    func checkAndResignFirstResponder() {
-        if collectionTextField.isFirstResponder {
-            collectionTextField.resignFirstResponder()
-        }
-    }
-    
-    func saveContext() {
-        do {
-            try context.save()
-            print("Saved successfully")
-        } catch {
-            print("Error saving data from context \(error)")
-        }
-    }
-    
-    @objc func collectionLabelTapped() {
-        print("collection label tapped")
-        DispatchQueue.main.async {
-            self.collectionTextField.becomeFirstResponder()
-        }
-    }
-    
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        doneButton.isEnabled = collectionTextField.text != "" ? true : false
     }
 }
 
+// MARK: - UITextFieldDelegate
 extension EditCollectionViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         collectionTextField.resignFirstResponder()
         return false
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let textFieldText = textField.text, let rangeOfTextToReplace = Range(range, in: textFieldText) else { return false }
+        
+        let substringToReplace = textFieldText[rangeOfTextToReplace]
+        let count = textFieldText.count - substringToReplace.count + string.count
+        
+        if count > maxLength {
+            print("MaxLength \(count)")
+            textField.Shake()
+        }
+        
+        return count <= maxLength
+    }
 }
 
+// MARK: - CollectionActionSheetViewControllerDelegate
 extension EditCollectionViewController: CollectionActionSheetViewControllerDelegate {
     func handleDismissal() {
         UIView.animate(withDuration: 0.1) {
@@ -180,7 +252,6 @@ extension EditCollectionViewController: CollectionActionSheetViewControllerDeleg
             self.view.alpha = 1
         }
         
-//        self.navigationController?.popViewController(animated: true)
         self.backToCollectionView()
     }
 }

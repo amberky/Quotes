@@ -115,6 +115,7 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="UYH-js-zG8" firstAttribute="top" secondItem="quR-3w-Wpf" secondAttribute="bottom" constant="30" id="5fa-Ui-Lb7"/>
                             <constraint firstItem="Vek-SX-Ze5" firstAttribute="trailing" secondItem="nPf-1i-mx0" secondAttribute="trailing" id="75i-u2-1M1"/>
@@ -188,6 +189,7 @@
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="UPB-gt-gK0" userLabel="Collection Text Field">
                                                 <rect key="frame" x="5" y="40" width="364" height="35"/>
+                                                <color key="tintColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="NlB-Rb-0Hj"/>
                                                 </constraints>
@@ -235,6 +237,7 @@
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cqe-XN-eQN">
                                         <rect key="frame" x="5" y="50" width="364" height="195"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="15" minimumInteritemSpacing="10" id="v1L-hZ-lsB">
                                             <size key="itemSize" width="50" height="50"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -272,6 +275,7 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="N6w-xR-lpd" firstAttribute="top" secondItem="gMU-eT-uUy" secondAttribute="bottom" constant="20" id="Lfn-vi-jNH"/>
                             <constraint firstItem="1op-9v-tqQ" firstAttribute="leading" secondItem="7vC-Ey-Ft0" secondAttribute="leading" constant="20" id="Vk5-2X-UTk"/>

@@ -62,6 +62,7 @@
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="vho-vU-MtH">
                                                 <rect key="frame" x="5" y="40" width="364" height="35"/>
+                                                <color key="tintColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="fFC-as-ZmZ"/>
                                                 </constraints>
@@ -105,6 +106,7 @@
                                             </label>
                                             <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Jzx-Gy-9ug">
                                                 <rect key="frame" x="5" y="40" width="364" height="35"/>
+                                                <color key="tintColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="tzF-rK-mO8"/>
                                                 </constraints>
@@ -138,6 +140,7 @@
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="9Qr-Nb-x7C" firstAttribute="trailing" secondItem="qkR-Lf-5gA" secondAttribute="trailing" constant="20" id="5Vv-i8-qfF"/>
                             <constraint firstItem="OEo-8S-3MT" firstAttribute="trailing" secondItem="9Qr-Nb-x7C" secondAttribute="trailing" id="EDo-2L-8na"/>
