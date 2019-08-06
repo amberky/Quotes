@@ -173,6 +173,7 @@ class EditCollectionViewController: UIViewController {
                         if collection.first != nil {
                             collection.first!.setValue(updatedCollection.name, forKey: "name")
                             collection.first!.setValue(updatedCollection.icon, forKey: "icon")
+                            collection.first!.setValue(Date(), forKey: "updatedOn")
                             
                             saveContext()
                         }

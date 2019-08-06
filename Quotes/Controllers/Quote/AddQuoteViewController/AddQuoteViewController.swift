@@ -161,6 +161,7 @@ class AddQuoteViewController: UIViewController {
             
             if selectedCollection.count > 0 {
                 for c in selectedCollection {
+                    c?.updatedOn = Date()
                     newQuote.addToCollections(c!)
                 }
             }

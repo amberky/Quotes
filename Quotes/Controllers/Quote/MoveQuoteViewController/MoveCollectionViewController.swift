@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class MoveCollectionViewController: UICollectionViewController {
+class MoveCollectionViewController: UIViewController {
     
     // MARK: Variables
     lazy var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -61,6 +61,7 @@ class MoveCollectionViewController: UICollectionViewController {
                 
                 if selectedArray.count > 0 {
                     for c in selectedArray {
+                        c.updatedOn = Date()
                         quote.addToCollections(c)
                     }
                 }
@@ -82,7 +83,7 @@ class MoveCollectionViewController: UICollectionViewController {
     // MARK: - Functions
     func loadCollections() {
         let request: NSFetchRequest<Collection> = Collection.fetchRequest()
-        let sort = [NSSortDescriptor(key: "updatedOn", ascending: true)]
+        let sort = [NSSortDescriptor(key: "updatedOn", ascending: false)]
         
         request.sortDescriptors = sort
         

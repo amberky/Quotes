@@ -107,6 +107,7 @@ class QuoteActionSheetViewController: UIViewController {
                 if let quoteContext = try self.context.fetch(request) as [NSManagedObject]?, quoteContext.first != nil {
                     let quote = quoteContext.first as! Quote
                     
+                    collection?.setValue(Date(), forKey: "updatedOn")
                     quote.removeFromCollections(collection!)
                     
                     saveContext()
