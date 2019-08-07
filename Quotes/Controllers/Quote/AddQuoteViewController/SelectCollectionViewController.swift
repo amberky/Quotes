@@ -108,14 +108,21 @@ extension SelectCollectionViewController: UITableViewDataSource, UITableViewDele
         if selectedCollection.contains(collection) {
             cell.accessoryType = .checkmark
             tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+        } else {
+            cell.accessoryType = .none
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        
+        selectedCollection.append(collectionArray[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         tableView.cellForRow(at: indexPath)?.accessoryType = .none
+        
+        guard let index = selectedCollection.firstIndex(of: collectionArray[indexPath.row]) else { return }
+        selectedCollection.remove(at: index)
     }
 }

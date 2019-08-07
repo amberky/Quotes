@@ -229,7 +229,6 @@ extension EditQuoteViewController : UITextFieldDelegate {
         let aRect = self.view.frame;
         
         if aRect.contains((activeField?.frame.origin ?? CGPoint(x: 0, y: 0))) {
-            print("scroll")
             self.scrollView.scrollRectToVisible(activeField!.frame, animated: true)
         }
     }

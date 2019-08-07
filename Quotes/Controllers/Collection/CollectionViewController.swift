@@ -31,7 +31,6 @@ class CollectionViewController: UICollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         collectionView.scrollsToTop = true
         loadCollections()
-        print("scrollsToTop")
     }
     
     // MARK: Functions

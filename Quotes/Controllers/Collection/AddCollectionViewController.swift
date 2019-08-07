@@ -183,6 +183,7 @@ class AddCollectionViewController: UIViewController {
             if segue.destination is SelectCollectionViewController {
                 let destination = segue.destination as! SelectCollectionViewController
                 destination.loadCollections()
+                destination.selectedCollection.append(newCollection)
             } else { return }
             
         case "cancelClicked":
@@ -225,7 +226,6 @@ extension AddCollectionViewController: UITextFieldDelegate {
         let aRect = self.view.frame;
         
         if aRect.contains((activeField?.frame.origin ?? CGPoint(x: 0, y: 0))) {
-            print("scroll")
             self.scrollView.scrollRectToVisible(activeField!.frame, animated: true)
         }
     }
@@ -246,7 +246,6 @@ extension AddCollectionViewController: UITextFieldDelegate {
         let count = textFieldText.count - substringToReplace.count + string.count
         
         if count > maxLength {
-            print("MaxLength \(count)")
             textField.Shake()
         }
         

@@ -179,6 +179,7 @@ class AddCollectionFromMoveViewController: UIViewController {
             if segue.destination is MoveCollectionViewController {
                 let destination = segue.destination as! MoveCollectionViewController
                 destination.loadCollections()
+                destination.selectedCollection.append(newCollection)
             } else { return }
             
         case "cancelClicked":

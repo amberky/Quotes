@@ -29,7 +29,7 @@ class CollectionQuoteViewController: UITableViewController {
     var didSet: Bool = false
     var selectedCollection: CollectionModel? {
         didSet {
-            print("didSet")
+            print("didSet selectedCollection")
             didSet = true
             
             setTitle()
@@ -38,7 +38,7 @@ class CollectionQuoteViewController: UITableViewController {
     
     var collection: Collection? {
         didSet {
-            print("didSet")
+            print("didSet collection")
         }
     }
     

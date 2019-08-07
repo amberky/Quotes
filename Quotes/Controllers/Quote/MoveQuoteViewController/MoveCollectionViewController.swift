@@ -162,10 +162,15 @@ extension MoveCollectionViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         edited = true
         tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        
+        selectedCollection.append(collectionArray[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         edited = true
         tableView.cellForRow(at: indexPath)?.accessoryType = .none
+        
+        guard let index = selectedCollection.firstIndex(of: collectionArray[indexPath.row]) else { return }
+        selectedCollection.remove(at: index)
     }
 }

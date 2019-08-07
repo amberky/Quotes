@@ -303,7 +303,7 @@
                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
                                                                 <connections>
-                                                                    <segue destination="oHD-BC-j5N" kind="popoverPresentation" identifier="goToSelectCollectionView" popoverAnchorView="KZ0-MI-iBo" id="2hk-3G-dt0">
+                                                                    <segue destination="oHD-BC-j5N" kind="popoverPresentation" identifier="goToAddSelectCollectionView" popoverAnchorView="KZ0-MI-iBo" id="2hk-3G-dt0">
                                                                         <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                                                     </segue>
                                                                 </connections>
