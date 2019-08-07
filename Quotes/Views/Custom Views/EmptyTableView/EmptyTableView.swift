@@ -12,6 +12,8 @@ class EmptyTableView: UIView {
 
     var view: UIView!
     
+    var noResult: Bool = false
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -25,27 +27,9 @@ class EmptyTableView: UIView {
     }
     
     func setup() {
-        
         guard let nib = Bundle.main.loadNibNamed("EmptyTableView", owner: self, options: nil)?[0] as? UIView else { return }
         nib.frame = bounds
         
         self.addSubview(nib)
-        
-    }
-}
-
-extension UITableView {
-    func setEmptyView() {
-        let emptyView = EmptyTableView.init()
-        self.backgroundView = emptyView
-    }
-    
-    func removeEmptyView() {
-        self.backgroundView = nil
-    }
-    
-    func setEmptyView(tableView: UITableView) {
-        let emptyView = EmptyTableView.init()
-        self.backgroundView = emptyView
     }
 }

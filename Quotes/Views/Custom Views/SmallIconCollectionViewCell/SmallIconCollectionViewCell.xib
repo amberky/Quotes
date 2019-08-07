@@ -23,7 +23,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart-light" translatesAutoresizingMaskIntoConstraints="NO" id="L0h-oI-LfY">
-                                <rect key="frame" x="5" y="5" width="40" height="40"/>
+                                <rect key="frame" x="2.5" y="2.5" width="45" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="L0h-oI-LfY" secondAttribute="height" id="fYb-W5-uZu"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <integer key="value" value="10"/>
@@ -33,10 +36,9 @@
                         </subviews>
                         <color key="backgroundColor" red="0.90187495949999996" green="0.89024925229999996" blue="0.88627439740000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="L0h-oI-LfY" firstAttribute="leading" secondItem="TUZ-ZT-QS8" secondAttribute="leading" constant="5" id="J2u-Eg-yIp"/>
+                            <constraint firstItem="L0h-oI-LfY" firstAttribute="width" secondItem="TUZ-ZT-QS8" secondAttribute="height" multiplier="1:1.1" id="6dX-xb-5Km"/>
                             <constraint firstItem="L0h-oI-LfY" firstAttribute="centerX" secondItem="TUZ-ZT-QS8" secondAttribute="centerX" id="TOg-p1-thD"/>
                             <constraint firstItem="L0h-oI-LfY" firstAttribute="centerY" secondItem="TUZ-ZT-QS8" secondAttribute="centerY" id="q04-1e-o0O"/>
-                            <constraint firstItem="L0h-oI-LfY" firstAttribute="top" secondItem="TUZ-ZT-QS8" secondAttribute="top" constant="5" id="tHe-rN-xgc"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -61,6 +63,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="heart-light" width="50" height="50"/>
+        <image name="heart-light" width="400" height="400"/>
     </resources>
 </document>

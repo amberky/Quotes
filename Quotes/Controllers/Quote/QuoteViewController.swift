@@ -135,7 +135,11 @@ class QuoteViewController: UITableViewController {
 extension QuoteViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         if quoteSectionArray.count == 0 {
-            tableView.setEmptyView(tableView: tableView)
+            if searchBar.text == "" {
+                tableView.setEmptyView(tableView: tableView)
+            } else {
+                tableView.setNoResultView(tableView: tableView)
+            }
         } else {
             tableView.removeEmptyView()
         }
@@ -178,7 +182,7 @@ extension QuoteViewController {
         let tableViewLeftMargin = tableView.separatorInset.left
         let tableViewSectionHeight = tableView.sectionHeaderHeight
         let yAxis = (tableViewSectionHeight - 15) / 2
-        let width : CGFloat = 15
+        let width : CGFloat = 20
         
         let headerView = UIView()
         headerView.backgroundColor = .clear
@@ -221,6 +225,8 @@ extension QuoteViewController {
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         selectionHaptic.prepare()
         
+        let size = 25
+        
         let quoteInfo = quoteSectionArray[indexPath.section].quotes[indexPath.row]
         var pinIcon = "star-yellow"
         
@@ -236,8 +242,8 @@ extension QuoteViewController {
             completionHandler(true)
         }
         
-        let pinImage = UIGraphicsImageRenderer(size: CGSize(width: 25, height: 25)).image { _ in
-            UIImage(named: pinIcon)?.draw(in: CGRect(x: 0, y: 0, width: 25, height: 25))
+        let pinImage = UIGraphicsImageRenderer(size: CGSize(width: size, height: size)).image { _ in
+            UIImage(named: pinIcon)?.draw(in: CGRect(x: 0, y: 0, width: size, height: size))
         }
         
         if let cgImageX =  pinImage.cgImage {
@@ -251,6 +257,8 @@ extension QuoteViewController {
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
+        var size = 35
+        
         let cell = tableView.cellForRow(at: indexPath) as! QuoteTableViewCell
         let quote = quoteSectionArray[indexPath.section].quotes[indexPath.row]
         
@@ -262,8 +270,8 @@ extension QuoteViewController {
             completionHandler(false)
         }
         
-        let moreImage = UIGraphicsImageRenderer(size: CGSize(width: 25, height: 25)).image { _ in
-            UIImage(named: "more-dark")?.draw(in: CGRect(x: 0, y: 0, width: 25, height: 25))
+        let moreImage = UIGraphicsImageRenderer(size: CGSize(width: size, height: size)).image { _ in
+            UIImage(named: "more-dark")?.draw(in: CGRect(x: 0, y: 0, width: size, height: size))
         }
         
         if let cgImageX = moreImage.cgImage {
@@ -271,6 +279,8 @@ extension QuoteViewController {
         }
         
         moreAction.backgroundColor = .white
+        
+        size = 30
         
         let deleteAction = UIContextualAction(style: .destructive, title: nil) { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
             
@@ -280,8 +290,8 @@ extension QuoteViewController {
             completionHandler(true)
         }
         
-        let trashImage = UIGraphicsImageRenderer(size: CGSize(width: 25, height: 25)).image { _ in
-            UIImage(named: "trash-red")?.draw(in: CGRect(x: 0, y: 0, width: 25, height: 25))
+        let trashImage = UIGraphicsImageRenderer(size: CGSize(width: size, height: size)).image { _ in
+            UIImage(named: "trash-red")?.draw(in: CGRect(x: 0, y: 0, width: size, height: size))
         }
         
         if let cgImageX = trashImage.cgImage {

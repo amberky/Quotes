@@ -22,20 +22,16 @@ class CollectionViewController: UICollectionViewController {
     
     var defaultIcon = "bookmark"
     
-    // MARK: - IBOutlet
-//    @IBOutlet weak var collectionCollectionView: UICollectionView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        collectionCollectionView.delegate = self
-//        collectionCollectionView.dataSource = self
         
         collectionView.allowsMultipleSelection = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        collectionView.scrollsToTop = true
         loadCollections()
+        print("scrollsToTop")
     }
     
     // MARK: Functions

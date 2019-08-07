@@ -36,7 +36,10 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UXf-iH-Ij1">
-                                    <rect key="frame" x="42.5" y="259" width="228" height="34"/>
+                                    <rect key="frame" x="41.5" y="259" width="230" height="34"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="230" id="qs3-xR-yno"/>
+                                    </constraints>
                                     <string key="text">Looks like you haven’t added a quote.
 Let's add some quotes!</string>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>

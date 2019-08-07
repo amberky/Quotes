@@ -24,12 +24,14 @@ class IconThemeModel {
     init(iconMode: String, alpha: CGFloat = 1) {
         iconArray.append(IconModel.init(iconName: "star", iconImage: UIImage.init(named: "star\(iconMode)")!))
         iconArray.append(IconModel.init(iconName: "heart", iconImage: UIImage.init(named: "heart\(iconMode)")!))
-        iconArray.append(IconModel.init(iconName: "smile", iconImage: UIImage.init(named: "smile\(iconMode)")!))
         iconArray.append(IconModel.init(iconName: "thumbs-up", iconImage: UIImage.init(named: "thumbs-up\(iconMode)")!))
-        iconArray.append(IconModel.init(iconName: "idea", iconImage: UIImage.init(named: "idea\(iconMode)")!))
+        iconArray.append(IconModel.init(iconName: "book", iconImage: UIImage.init(named: "book\(iconMode)")!))
         iconArray.append(IconModel.init(iconName: "home", iconImage: UIImage.init(named: "home\(iconMode)")!))
-        iconArray.append(IconModel.init(iconName: "toolbox", iconImage: UIImage.init(named: "toolbox\(iconMode)")!))
-        iconArray.append(IconModel.init(iconName: "coffee", iconImage: UIImage.init(named: "coffee\(iconMode)")!))
+        iconArray.append(IconModel.init(iconName: "briefcase", iconImage: UIImage.init(named: "briefcase\(iconMode)")!))
+//        iconArray.append(IconModel.init(iconName: "gift", iconImage: UIImage.init(named: "gift\(iconMode)")!))
+        iconArray.append(IconModel.init(iconName: "music", iconImage: UIImage.init(named: "music\(iconMode)")!))
+//        iconArray.append(IconModel.init(iconName: "paperclip", iconImage: UIImage.init(named: "paperclip\(iconMode)")!))
+        iconArray.append(IconModel.init(iconName: "quote", iconImage: UIImage.init(named: "quote\(iconMode)")!))
         iconArray.append(IconModel.init(iconName: "fire", iconImage: UIImage.init(named: "fire\(iconMode)")!))
         iconArray.append(IconModel.init(iconName: "sun", iconImage: UIImage.init(named: "sun\(iconMode)")!))
     }

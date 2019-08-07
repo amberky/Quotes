@@ -67,6 +67,9 @@
 		25D369A622F0BC3200D81E76 /* QuoteActionSheetStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25D369A522F0BC3200D81E76 /* QuoteActionSheetStoryboard.storyboard */; };
 		25D6503F22F3637D00F96DC0 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D6503E22F3637D00F96DC0 /* WatchSessionManager.swift */; };
 		25D6504122F3652F00F96DC0 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D6504022F3652F00F96DC0 /* WatchSessionManager.swift */; };
+		25EEF95122FAC3E9005C84A4 /* EmptyTableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EEF95022FAC3E9005C84A4 /* EmptyTableViewExtension.swift */; };
+		25EEF95322FAC613005C84A4 /* NoResultTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25EEF95222FAC613005C84A4 /* NoResultTableView.xib */; };
+		25EEF95522FACDA6005C84A4 /* NoResultTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EEF95422FACDA6005C84A4 /* NoResultTableView.swift */; };
 		25F0CE5022E69EA0001DE1A0 /* QuoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F0CE4E22E69EA0001DE1A0 /* QuoteTableViewCell.swift */; };
 		25F5290622F9BBCD002586BC /* ShakeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F5290522F9BBCD002586BC /* ShakeExtension.swift */; };
 /* End PBXBuildFile section */
@@ -180,6 +183,9 @@
 		25D369A522F0BC3200D81E76 /* QuoteActionSheetStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = QuoteActionSheetStoryboard.storyboard; sourceTree = "<group>"; };
 		25D6503E22F3637D00F96DC0 /* WatchSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionManager.swift; sourceTree = "<group>"; };
 		25D6504022F3652F00F96DC0 /* WatchSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionManager.swift; sourceTree = "<group>"; };
+		25EEF95022FAC3E9005C84A4 /* EmptyTableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTableViewExtension.swift; sourceTree = "<group>"; };
+		25EEF95222FAC613005C84A4 /* NoResultTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoResultTableView.xib; sourceTree = "<group>"; };
+		25EEF95422FACDA6005C84A4 /* NoResultTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoResultTableView.swift; sourceTree = "<group>"; };
 		25F0CE4E22E69EA0001DE1A0 /* QuoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteTableViewCell.swift; sourceTree = "<group>"; };
 		25F5290522F9BBCD002586BC /* ShakeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShakeExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -415,6 +421,9 @@
 			children = (
 				258B0E4322F40A040059CF70 /* EmptyTableView.xib */,
 				258B0E4122F409D40059CF70 /* EmptyTableView.swift */,
+				25EEF95222FAC613005C84A4 /* NoResultTableView.xib */,
+				25EEF95422FACDA6005C84A4 /* NoResultTableView.swift */,
+				25EEF95022FAC3E9005C84A4 /* EmptyTableViewExtension.swift */,
 			);
 			path = EmptyTableView;
 			sourceTree = "<group>";
@@ -605,6 +614,7 @@
 				2566C29222E4970A003BFA91 /* Main.storyboard in Resources */,
 				250DD9AE22F1C44F0092BF34 /* CollectionActionSheetStoryboard.storyboard in Resources */,
 				25D369A622F0BC3200D81E76 /* QuoteActionSheetStoryboard.storyboard in Resources */,
+				25EEF95322FAC613005C84A4 /* NoResultTableView.xib in Resources */,
 				258B0E4422F40A040059CF70 /* EmptyTableView.xib in Resources */,
 				250DD97C22F13AD00092BF34 /* SmallIconCollectionViewCell.xib in Resources */,
 			);
@@ -635,6 +645,7 @@
 				250DD97D22F13AD00092BF34 /* SmallIconCollectionViewCell.swift in Sources */,
 				25D369A022F0B54E00D81E76 /* QuoteActionSheetViewController.swift in Sources */,
 				2566C28F22E4970A003BFA91 /* QuoteViewController.swift in Sources */,
+				25EEF95122FAC3E9005C84A4 /* EmptyTableViewExtension.swift in Sources */,
 				2566C2B422E4D0B5003BFA91 /* AddQuoteViewController.swift in Sources */,
 				252782E322EEE63F00643736 /* QuoteViewController+Drop.swift in Sources */,
 				250DD99F22F1848D0092BF34 /* AddCollectionFromMoveViewController.swift in Sources */,
@@ -644,6 +655,7 @@
 				252782E122EEE63300643736 /* QuoteViewController+Drag.swift in Sources */,
 				25B5D02F22E991B8004E5099 /* AddCollectionViewController.swift in Sources */,
 				258B0E4222F409D40059CF70 /* EmptyTableView.swift in Sources */,
+				25EEF95522FACDA6005C84A4 /* NoResultTableView.swift in Sources */,
 				2589380A22E86DAC001E10FE /* CollectionQuoteViewController.swift in Sources */,
 				25D6503F22F3637D00F96DC0 /* WatchSessionManager.swift in Sources */,
 				250DD9AA22F1C0E20092BF34 /* CollectionActionSheetViewController.swift in Sources */,

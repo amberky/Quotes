@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NoResultTableView" customModule="Quotes" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZXE-fR-HkF">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8KH-Rl-7zI">
+                            <rect key="frame" x="50.5" y="274.5" width="313" height="313"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no-result" translatesAutoresizingMaskIntoConstraints="NO" id="BzQ-oZ-f5U">
+                                    <rect key="frame" x="66.5" y="40" width="180" height="180"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="BzQ-oZ-f5U" secondAttribute="height" multiplier="1:1" id="IgT-MT-TEn"/>
+                                        <constraint firstAttribute="height" constant="180" id="Xx5-vU-CvI"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Results." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ize-Nf-SJX">
+                                    <rect key="frame" x="106.5" y="225" width="100" height="24"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Couldn't find any Quotes matching your search." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FsS-0Z-Slb">
+                                    <rect key="frame" x="41.5" y="259" width="230" height="34"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="230" id="Hff-2V-zvN"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="FsS-0Z-Slb" firstAttribute="centerX" secondItem="8KH-Rl-7zI" secondAttribute="centerX" id="FNW-iV-DC4"/>
+                                <constraint firstItem="BzQ-oZ-f5U" firstAttribute="top" secondItem="8KH-Rl-7zI" secondAttribute="top" constant="40" id="Oky-Oq-4qn"/>
+                                <constraint firstItem="FsS-0Z-Slb" firstAttribute="top" secondItem="Ize-Nf-SJX" secondAttribute="bottom" constant="10" id="PrZ-U0-1Z4"/>
+                                <constraint firstItem="BzQ-oZ-f5U" firstAttribute="centerX" secondItem="8KH-Rl-7zI" secondAttribute="centerX" id="SzD-Vk-knb"/>
+                                <constraint firstItem="Ize-Nf-SJX" firstAttribute="top" secondItem="BzQ-oZ-f5U" secondAttribute="bottom" constant="5" id="UTJ-Va-QXt"/>
+                                <constraint firstAttribute="width" secondItem="8KH-Rl-7zI" secondAttribute="height" multiplier="1:1" id="alc-Yj-2jY"/>
+                                <constraint firstAttribute="bottom" secondItem="FsS-0Z-Slb" secondAttribute="bottom" constant="20" id="eow-zr-L6w"/>
+                                <constraint firstItem="Ize-Nf-SJX" firstAttribute="centerX" secondItem="8KH-Rl-7zI" secondAttribute="centerX" id="fPW-cu-ssM"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="8KH-Rl-7zI" firstAttribute="centerY" secondItem="ZXE-fR-HkF" secondAttribute="centerY" id="62f-pN-3RU"/>
+                        <constraint firstItem="8KH-Rl-7zI" firstAttribute="centerX" secondItem="ZXE-fR-HkF" secondAttribute="centerX" id="KXu-mu-NT8"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="ZXE-fR-HkF" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="UOy-I6-LgU"/>
+                <constraint firstItem="ZXE-fR-HkF" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="Yk4-ye-IT6"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="ZXE-fR-HkF" secondAttribute="bottom" id="knd-Gl-hZL"/>
+                <constraint firstItem="ZXE-fR-HkF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="qJ7-1L-TLu"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="no-result" width="341" height="341"/>
+    </resources>
+</document>

@@ -810,7 +810,7 @@
         <scene sceneID="w3m-ly-tUo">
             <objects>
                 <collectionViewController id="A96-tM-Z1V" customClass="CollectionViewController" customModule="Quotes" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="FCr-Er-yKN">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" id="FCr-Er-yKN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -831,17 +831,19 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oQE-we-b1E">
                                             <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coffee-light" translatesAutoresizingMaskIntoConstraints="NO" id="8iG-bi-BH9">
-                                                    <rect key="frame" x="10" y="10" width="100" height="100"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fire-light" translatesAutoresizingMaskIntoConstraints="NO" id="8iG-bi-BH9">
+                                                    <rect key="frame" x="36" y="36" width="48" height="48"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="8iG-bi-BH9" secondAttribute="height" id="2t4-nc-JRm"/>
+                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" red="0.90196078430000004" green="0.89019607840000003" blue="0.8862745098" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="8iG-bi-BH9" secondAttribute="trailing" constant="10" id="BJn-wM-a0w"/>
-                                                <constraint firstItem="8iG-bi-BH9" firstAttribute="leading" secondItem="oQE-we-b1E" secondAttribute="leading" constant="10" id="FgC-Ml-qUe"/>
-                                                <constraint firstItem="8iG-bi-BH9" firstAttribute="top" secondItem="oQE-we-b1E" secondAttribute="top" constant="10" id="bdw-ig-eJG"/>
+                                                <constraint firstItem="8iG-bi-BH9" firstAttribute="centerY" secondItem="oQE-we-b1E" secondAttribute="centerY" id="0nH-lN-lg8"/>
                                                 <constraint firstAttribute="width" secondItem="oQE-we-b1E" secondAttribute="height" multiplier="1:1" id="c9F-AM-Xw3"/>
-                                                <constraint firstAttribute="bottom" secondItem="8iG-bi-BH9" secondAttribute="bottom" constant="10" id="ln8-Ci-cND"/>
+                                                <constraint firstItem="8iG-bi-BH9" firstAttribute="centerX" secondItem="oQE-we-b1E" secondAttribute="centerX" id="cI1-Fz-Dh5"/>
+                                                <constraint firstItem="8iG-bi-BH9" firstAttribute="width" secondItem="oQE-we-b1E" secondAttribute="height" multiplier="1:2.5" id="qcc-aR-6L4"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -1266,7 +1268,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="coffee-light" width="50" height="50"/>
+        <image name="fire-light" width="400" height="400"/>
     </resources>
     <color key="tintColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
 </document>

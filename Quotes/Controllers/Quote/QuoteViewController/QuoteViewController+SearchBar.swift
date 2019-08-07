@@ -43,10 +43,10 @@ extension QuoteViewController: UISearchBarDelegate {
             loadQuotes(predicate: predicate)
         }
         
-        if quoteSectionArray.count > 0 {
-            tableView.scrollsToTop = true
-        }
-        
+//        if quoteSectionArray.count > 0 {
+//            tableView.scrollsToTop = true
+//        }
+                
         if hideKeyboard {
             //Dispatch Queue assign the task to different threads
             DispatchQueue.main.async {
