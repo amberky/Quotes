@@ -89,7 +89,7 @@ class EditCollectionViewController: UIViewController {
         
         guard let kbSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
         
-        let estimatedHeight = kbSize.height + 50
+        let estimatedHeight = kbSize.height + 20
         
         if notification.name != UIResponder.keyboardWillHideNotification {
             let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: estimatedHeight, right: 0)

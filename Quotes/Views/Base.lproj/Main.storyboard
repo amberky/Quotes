@@ -1257,17 +1257,17 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGJ-b7-b52">
-                                            <rect key="frame" x="2" y="125" width="116" height="15"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGJ-b7-b52">
+                                            <rect key="frame" x="2" y="125" width="116" height="18"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="15" id="FIS-yI-HqP"/>
+                                                <constraint firstAttribute="height" constant="18" id="FIS-yI-HqP"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MKc-IX-TFr">
-                                            <rect key="frame" x="2" y="145" width="116" height="15"/>
+                                            <rect key="frame" x="2" y="148" width="116" height="15"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="15" id="fbw-DR-oAm"/>
                                             </constraints>

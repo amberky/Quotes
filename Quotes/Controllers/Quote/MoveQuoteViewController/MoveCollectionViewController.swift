@@ -21,6 +21,8 @@ class MoveCollectionViewController: UIViewController {
     
     var cell = QuoteTableViewCell()
     
+    var edited = false
+    
     // MARK: - IBOutlet
     @IBOutlet weak var collectionTableView: UITableView!
     
@@ -41,37 +43,38 @@ class MoveCollectionViewController: UIViewController {
     @IBAction func doneClicked(_ sender: UIBarButtonItem) {
         print("done bar button clicked")
         
-        var selectedArray = [Collection]()
-        if let indexPaths = collectionTableView.indexPathsForSelectedRows {
-            for i in indexPaths {
-                selectedArray.append(collectionArray[i.row])
-            }
-        }
-        
-        let request: NSFetchRequest<Quote> = Quote.fetchRequest()
-        request.predicate = NSPredicate(format: "quote == %@", cell.quoteLabel.text ?? "")
-        
-        do {
-            if let quoteContext = try self.context.fetch(request) as [NSManagedObject]?, quoteContext.first != nil {
-                let quote = quoteContext.first as! Quote
-                
-                for c in quote.collections! {
-                    quote.removeFromCollections(c as! Collection)
+        if edited {
+            var selectedArray = [Collection]()
+            if let indexPaths = collectionTableView.indexPathsForSelectedRows {
+                for i in indexPaths {
+                    selectedArray.append(collectionArray[i.row])
                 }
-                
-                if selectedArray.count > 0 {
-                    for c in selectedArray {
-                        c.updatedOn = Date()
-                        quote.addToCollections(c)
+            }
+            
+            let request: NSFetchRequest<Quote> = Quote.fetchRequest()
+            request.predicate = NSPredicate(format: "quote == %@", cell.quoteLabel.text ?? "")
+            
+            do {
+                if let quoteContext = try self.context.fetch(request) as [NSManagedObject]?, quoteContext.first != nil {
+                    let quote = quoteContext.first as! Quote
+                    
+                    for c in quote.collections! {
+                        quote.removeFromCollections(c as! Collection)
                     }
+                    
+                    if selectedArray.count > 0 {
+                        for c in selectedArray {
+                            c.updatedOn = Date()
+                            quote.addToCollections(c)
+                        }
+                    }
+                    
+                    saveContext()
                 }
-                
-                saveContext()
+            } catch {
+                print("Error in removing & adding collections to quote \(error)")
             }
-        } catch {
-            print("Error in removing & adding collections to quote \(error)")
         }
-        
         dismissView()
     }
     
@@ -151,14 +154,18 @@ extension MoveCollectionViewController: UITableViewDataSource, UITableViewDelega
         if selectedCollection.contains(collection) {
             cell.accessoryType = .checkmark
             tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+        } else {
+            cell.accessoryType = .none
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        edited = true
         tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        edited = true
         tableView.cellForRow(at: indexPath)?.accessoryType = .none
     }
 }
