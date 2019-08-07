@@ -22,6 +22,8 @@ class AddQuoteViewController: UIViewController {
         }
     }
     
+    var activeField: UITextField?
+    
     // MARK: - IBOutlet
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
@@ -34,6 +36,9 @@ class AddQuoteViewController: UIViewController {
     
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var containerView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,6 +50,13 @@ class AddQuoteViewController: UIViewController {
         quoteTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         
         setupGesture()
+        setupNotificationCenter()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
     // MARK: - Objc Functions
@@ -66,6 +78,32 @@ class AddQuoteViewController: UIViewController {
         doneButton.isEnabled = quoteTextField.text?.trimmingCharacters(in: .whitespaces) != "" ? true : false
     }
     
+    @objc func keyboardWillChange(_ notification: Notification) {
+        
+        guard let kbSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        
+        let estimatedHeight = kbSize.height + 50
+        
+        if notification.name != UIResponder.keyboardWillHideNotification {
+            let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: estimatedHeight, right: 0)
+            
+            scrollView.contentInset = contentInset
+            scrollView.scrollIndicatorInsets = contentInset
+            
+//            // If active text field is hidden by keyboard, scroll it so it's visible
+//            // Your app might not need or want this behavior.
+//            var aRect = self.view.frame;
+//            aRect.size.height = aRect.size.height - kbSize.height;
+//            
+//            if aRect.contains((activeField?.frame.origin ?? CGPoint(x: 0, y: 0))) {
+//                scrollView.scrollRectToVisible(activeField!.frame, animated: true)
+//            }
+            
+        } else {
+            scrollView.contentInset = UIEdgeInsets.zero
+            scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
+        }
+    }
     
     // MARK: - Functions
     func setSelectedCollection() {
@@ -89,6 +127,14 @@ class AddQuoteViewController: UIViewController {
         
         let collectionLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(collectionLabelTapped))
         collectionLabel.addGestureRecognizer(collectionLabelTapGesture)
+    }
+    
+    func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
     func saveContext() {
@@ -214,6 +260,21 @@ class AddQuoteViewController: UIViewController {
 
 // MARK: - UITextFieldDelegate
 extension AddQuoteViewController : UITextFieldDelegate {
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        activeField = textField
+        
+        let aRect = self.view.frame;
+        
+        if aRect.contains((activeField?.frame.origin ?? CGPoint(x: 0, y: 0))) {
+            print("scroll")
+            self.scrollView.scrollRectToVisible(activeField!.frame, animated: true)
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        activeField = nil
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == quoteTextField {

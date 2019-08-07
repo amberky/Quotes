@@ -24,6 +24,8 @@ class AddCollectionViewController: UIViewController {
     
     var selectedIndex = 0
     
+    var activeField: UITextField?
+    
     // MARK: - IBOutlet
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
@@ -32,6 +34,8 @@ class AddCollectionViewController: UIViewController {
     @IBOutlet weak var collectionTextField: UITextField!
     
     @IBOutlet weak var iconCollectionView: UICollectionView!
+    
+    @IBOutlet weak var scrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,8 +53,8 @@ class AddCollectionViewController: UIViewController {
 
         collectionTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
 
-        let collectionLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(collectionLabelTapped))
-        collectionLabel.addGestureRecognizer(collectionLabelTapGesture)
+        setupGesture()
+        setupNotificationCenter()
     }
     
     // MARK: - Objc Functions
@@ -65,7 +69,47 @@ class AddCollectionViewController: UIViewController {
         doneButton.isEnabled = collectionTextField.text?.trimmingCharacters(in: .whitespaces) != "" ? true : false
     }
     
+    @objc func keyboardWillChange(_ notification: Notification) {
+        
+        guard let kbSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        
+        let estimatedHeight = kbSize.height + 50
+        
+        if notification.name == UIResponder.keyboardWillShowNotification {
+            let contentInset = UIEdgeInsets(top: 0, left: 0, bottom: estimatedHeight, right: 0)
+            
+            scrollView.contentInset = contentInset
+            scrollView.scrollIndicatorInsets = contentInset
+            
+            // If active text field is hidden by keyboard, scroll it so it's visible
+            // Your app might not need or want this behavior.
+            var aRect = self.view.frame;
+            aRect.size.height = aRect.size.height - kbSize.height;
+            
+            if aRect.contains((activeField?.frame.origin ?? CGPoint(x: 0, y: 0))) {
+                self.scrollView.scrollRectToVisible(activeField!.frame, animated: true)
+            }
+            
+        } else {
+            scrollView.contentInset = UIEdgeInsets.zero
+            scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
+        }
+    }
+    
     // MARK: - Functions
+    func setupGesture() {
+        let collectionLabelTapGesture = UITapGestureRecognizer(target: self, action: #selector(collectionLabelTapped))
+        collectionLabel.addGestureRecognizer(collectionLabelTapGesture)
+    }
+    
+    func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+    
     func saveContext() {
         do {
             try context.save()
@@ -175,6 +219,21 @@ class AddCollectionViewController: UIViewController {
 
 // MARK: - UITextFieldDelegate
 extension AddCollectionViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        activeField = textField
+        
+        let aRect = self.view.frame;
+        
+        if aRect.contains((activeField?.frame.origin ?? CGPoint(x: 0, y: 0))) {
+            print("scroll")
+            self.scrollView.scrollRectToVisible(activeField!.frame, animated: true)
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        activeField = nil
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         collectionTextField.resignFirstResponder()
         return false

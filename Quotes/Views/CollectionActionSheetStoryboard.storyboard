@@ -23,7 +23,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GVA-o4-UCT" userLabel="Cancel">
-                                <rect key="frame" x="20" y="807" width="374" height="55"/>
+                                <rect key="frame" x="20" y="797" width="374" height="55"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yVi-4d-DaD">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="55"/>
@@ -51,7 +51,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S7c-q5-UyX">
-                                <rect key="frame" x="20" y="742" width="374" height="55"/>
+                                <rect key="frame" x="20" y="732" width="374" height="55"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mjO-yh-uyR">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="55"/>
@@ -107,7 +107,7 @@
                             <constraint firstItem="SF0-Ic-mR4" firstAttribute="trailing" secondItem="S7c-q5-UyX" secondAttribute="trailing" constant="20" id="SAi-7L-PJy"/>
                             <constraint firstItem="pMT-hT-xX4" firstAttribute="centerX" secondItem="7Sy-tU-WR5" secondAttribute="centerX" id="X1V-nv-iYi"/>
                             <constraint firstItem="pMT-hT-xX4" firstAttribute="centerY" secondItem="7Sy-tU-WR5" secondAttribute="centerY" id="Zir-18-JjK"/>
-                            <constraint firstItem="GVA-o4-UCT" firstAttribute="bottom" secondItem="SF0-Ic-mR4" secondAttribute="bottom" id="eTV-iE-Qiq"/>
+                            <constraint firstItem="SF0-Ic-mR4" firstAttribute="bottom" secondItem="GVA-o4-UCT" secondAttribute="bottom" constant="10" id="eTV-iE-Qiq"/>
                             <constraint firstItem="GVA-o4-UCT" firstAttribute="top" secondItem="S7c-q5-UyX" secondAttribute="bottom" constant="10" id="fm4-ak-O6I"/>
                             <constraint firstItem="SF0-Ic-mR4" firstAttribute="trailing" secondItem="GVA-o4-UCT" secondAttribute="trailing" constant="20" id="jxI-Hy-cUq"/>
                             <constraint firstItem="S7c-q5-UyX" firstAttribute="leading" secondItem="SF0-Ic-mR4" secondAttribute="leading" constant="20" id="q8c-m3-pUM"/>
