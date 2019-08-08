@@ -71,7 +71,7 @@ class AddQuoteViewController: UIViewController {
     }
     
     @objc func collectionLabelTapped() {
-        performSegue(withIdentifier: "goToSelectCollectionView", sender: self)
+        performSegue(withIdentifier: "goToAddSelectCollectionView", sender: self)
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {

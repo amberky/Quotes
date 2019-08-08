@@ -163,7 +163,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7eA-ZA-qSq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3293" y="117"/>
+            <point key="canvasLocation" x="3312" y="112"/>
         </scene>
         <!--Edit Quote View Controller-->
         <scene sceneID="kBM-KQ-ZX1">
@@ -212,7 +212,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="80"/>
                                                         <subviews>
                                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quote" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qMc-aE-Ltu">
-                                                                <rect key="frame" x="5" y="10" width="364" height="20"/>
+                                                                <rect key="frame" x="5" y="0.0" width="364" height="20"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="20" id="nLq-jk-7aV"/>
                                                                 </constraints>
@@ -221,9 +221,9 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="XhP-Mi-DWY">
-                                                                <rect key="frame" x="5" y="40" width="364" height="35"/>
+                                                                <rect key="frame" x="5" y="20" width="364" height="55"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="35" id="ofd-L8-fv4"/>
+                                                                    <constraint firstAttribute="height" constant="55" id="ofd-L8-fv4"/>
                                                                 </constraints>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -242,10 +242,10 @@
                                                             <constraint firstAttribute="height" constant="80" id="9xC-sX-fSU"/>
                                                             <constraint firstAttribute="trailing" secondItem="XhP-Mi-DWY" secondAttribute="trailing" constant="5" id="BhB-HX-Tbz"/>
                                                             <constraint firstItem="qMc-aE-Ltu" firstAttribute="leading" secondItem="c6y-KG-MzN" secondAttribute="leading" constant="5" id="Bwi-fg-f2U"/>
-                                                            <constraint firstItem="XhP-Mi-DWY" firstAttribute="top" secondItem="qMc-aE-Ltu" secondAttribute="bottom" constant="10" id="HER-x2-oac"/>
+                                                            <constraint firstItem="XhP-Mi-DWY" firstAttribute="top" secondItem="qMc-aE-Ltu" secondAttribute="bottom" id="HER-x2-oac"/>
                                                             <constraint firstItem="gLE-ms-Btf" firstAttribute="leading" secondItem="c6y-KG-MzN" secondAttribute="leading" constant="5" id="KWj-OR-WdG"/>
                                                             <constraint firstAttribute="trailing" secondItem="gLE-ms-Btf" secondAttribute="trailing" constant="5" id="NRv-rX-z4f"/>
-                                                            <constraint firstItem="qMc-aE-Ltu" firstAttribute="top" secondItem="c6y-KG-MzN" secondAttribute="top" constant="10" id="VeK-b8-f7g"/>
+                                                            <constraint firstItem="qMc-aE-Ltu" firstAttribute="top" secondItem="c6y-KG-MzN" secondAttribute="top" id="VeK-b8-f7g"/>
                                                             <constraint firstAttribute="trailing" secondItem="qMc-aE-Ltu" secondAttribute="trailing" constant="5" id="cmx-qD-sqK"/>
                                                             <constraint firstItem="XhP-Mi-DWY" firstAttribute="leading" secondItem="c6y-KG-MzN" secondAttribute="leading" constant="5" id="w0Z-9d-mr5"/>
                                                         </constraints>
@@ -254,7 +254,7 @@
                                                         <rect key="frame" x="0.0" y="90" width="374" height="80"/>
                                                         <subviews>
                                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nwF-aq-cQr">
-                                                                <rect key="frame" x="5" y="10" width="364" height="20"/>
+                                                                <rect key="frame" x="5" y="0.0" width="364" height="20"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="20" id="vas-4M-5S8"/>
                                                                 </constraints>
@@ -263,9 +263,9 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Ys0-7M-NdY">
-                                                                <rect key="frame" x="5" y="40" width="364" height="35"/>
+                                                                <rect key="frame" x="5" y="20" width="364" height="55"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="35" id="cga-q4-C9X"/>
+                                                                    <constraint firstAttribute="height" constant="55" id="cga-q4-C9X"/>
                                                                 </constraints>
                                                                 <nil key="textColor"/>
                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -288,8 +288,8 @@
                                                             <constraint firstItem="Nk6-H2-CfF" firstAttribute="top" secondItem="Ys0-7M-NdY" secondAttribute="bottom" id="U31-DC-3lP"/>
                                                             <constraint firstAttribute="trailing" secondItem="Nk6-H2-CfF" secondAttribute="trailing" constant="5" id="ZDc-TJ-89c"/>
                                                             <constraint firstAttribute="trailing" secondItem="nwF-aq-cQr" secondAttribute="trailing" constant="5" id="gxi-zU-27s"/>
-                                                            <constraint firstItem="nwF-aq-cQr" firstAttribute="top" secondItem="nOR-cq-Vda" secondAttribute="top" constant="10" id="ie6-B5-fIZ"/>
-                                                            <constraint firstItem="Ys0-7M-NdY" firstAttribute="top" secondItem="nwF-aq-cQr" secondAttribute="bottom" constant="10" id="kPe-X7-TzP"/>
+                                                            <constraint firstItem="nwF-aq-cQr" firstAttribute="top" secondItem="nOR-cq-Vda" secondAttribute="top" id="ie6-B5-fIZ"/>
+                                                            <constraint firstItem="Ys0-7M-NdY" firstAttribute="top" secondItem="nwF-aq-cQr" secondAttribute="bottom" id="kPe-X7-TzP"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
