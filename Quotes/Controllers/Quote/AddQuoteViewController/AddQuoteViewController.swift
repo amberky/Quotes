@@ -22,8 +22,6 @@ class AddQuoteViewController: UIViewController {
         }
     }
     
-    var activeField: UITextField?
-    
     // MARK: - IBOutlet
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
@@ -89,15 +87,6 @@ class AddQuoteViewController: UIViewController {
             
             scrollView.contentInset = contentInset
             scrollView.scrollIndicatorInsets = contentInset
-            
-//            // If active text field is hidden by keyboard, scroll it so it's visible
-//            // Your app might not need or want this behavior.
-//            var aRect = self.view.frame;
-//            aRect.size.height = aRect.size.height - kbSize.height;
-//            
-//            if aRect.contains((activeField?.frame.origin ?? CGPoint(x: 0, y: 0))) {
-//                scrollView.scrollRectToVisible(activeField!.frame, animated: true)
-//            }
             
         } else {
             scrollView.contentInset = UIEdgeInsets.zero
@@ -200,6 +189,8 @@ class AddQuoteViewController: UIViewController {
         
         switch identifier {
         case "doneClicked":
+            print("Done bar button clicked")
+            
             let newQuote = Quote(context: self.context)
             newQuote.quote = quoteTextField.text!.trimmingCharacters(in: .whitespaces)
             newQuote.author = (authorTextField?.text ?? "").trimmingCharacters(in: .whitespaces)
@@ -218,11 +209,6 @@ class AddQuoteViewController: UIViewController {
             context.insert(newQuote)
             
             saveContext()
-            
-            print("Done bar button clicked")
-            
-            let destination = segue.destination as! QuoteViewController
-            destination.loadQuotes()
             
         case "cancelClicked":
             print("Cancel bar button clicked")
@@ -260,21 +246,6 @@ class AddQuoteViewController: UIViewController {
 
 // MARK: - UITextFieldDelegate
 extension AddQuoteViewController : UITextFieldDelegate {
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        activeField = textField
-        
-        let aRect = self.view.frame;
-        
-        if aRect.contains((activeField?.frame.origin ?? CGPoint(x: 0, y: 0))) {
-            self.scrollView.scrollRectToVisible(activeField!.frame, animated: true)
-        }
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        activeField = nil
-    }
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == quoteTextField {
             authorTextField.becomeFirstResponder()

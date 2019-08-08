@@ -36,7 +36,7 @@ class InterfaceController: WKInterfaceController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(receivedMessage(_:)), name: NSNotification.Name(rawValue: "receivedMessageData"), object: nil)
         
-        setBackgroundImage()
+        controlEmptyScreen()
         
         colorCount = colorArray.count
     }
@@ -51,6 +51,7 @@ class InterfaceController: WKInterfaceController {
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
+        print("didDeactivate")
     }
     
     // MARK: - Objc Functions
@@ -91,7 +92,7 @@ class InterfaceController: WKInterfaceController {
     }
     
     // MARK: - Functions
-    private func setBackgroundImage() {
+    private func controlEmptyScreen() {
         if tableData.count > 0 {
             interfaceGroup.setHidden(true)
         } else {
@@ -100,7 +101,7 @@ class InterfaceController: WKInterfaceController {
     }
     
     private func loadTableData() {
-        setBackgroundImage()
+        controlEmptyScreen()
         
         tableView.setNumberOfRows(tableData.count, withRowType: "QuoteTableRowController")
         

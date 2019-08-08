@@ -679,7 +679,9 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="QyO-0G-f1F" kind="presentation" identifier="goToAddCollectionView" id="Hfg-mA-Thv"/>
+                                    <segue destination="QyO-0G-f1F" kind="popoverPresentation" identifier="goToAddCollectionView" popoverAnchorView="hza-Xg-QMj" id="Hfg-mA-Thv">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
                                 </connections>
                             </button>
                         </subviews>

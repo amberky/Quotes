@@ -27,8 +27,6 @@ class EditCollectionViewController: UIViewController {
     
     var selectedCollection: CollectionModel?
     
-    var activeField: UITextField?
-    
     // MARK: - IBOutlet
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
@@ -96,15 +94,6 @@ class EditCollectionViewController: UIViewController {
             
             scrollView.contentInset = contentInset
             scrollView.scrollIndicatorInsets = contentInset
-            
-            //            // If active text field is hidden by keyboard, scroll it so it's visible
-            //            // Your app might not need or want this behavior.
-            //            var aRect = self.view.frame;
-            //            aRect.size.height = aRect.size.height - kbSize.height;
-            //
-            //            if aRect.contains((activeField?.frame.origin ?? CGPoint(x: 0, y: 0))) {
-            //                scrollView.scrollRectToVisible(activeField!.frame, animated: true)
-            //            }
             
         } else {
             scrollView.contentInset = UIEdgeInsets.zero
@@ -265,19 +254,6 @@ class EditCollectionViewController: UIViewController {
 
 // MARK: - UITextFieldDelegate
 extension EditCollectionViewController: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        activeField = textField
-        
-        let aRect = self.view.frame;
-        
-        if aRect.contains((activeField?.frame.origin ?? CGPoint(x: 0, y: 0))) {
-            self.scrollView.scrollRectToVisible(activeField!.frame, animated: true)
-        }
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        activeField = nil
-    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         collectionTextField.resignFirstResponder()

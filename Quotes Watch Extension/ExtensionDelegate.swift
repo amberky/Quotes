@@ -10,16 +10,38 @@ import WatchKit
 import WatchConnectivity
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
+    
+    // Hold the KVO observers as we want to keep oberving in the extension life time.
+    //
+    private var activationStateObservation: NSKeyValueObservation?
+    private var hasContentPendingObservation: NSKeyValueObservation?
+    
+    // An array to keep the background tasks.
+    //
+    private var wcBackgroundTasks = [WKWatchConnectivityRefreshBackgroundTask]()
+    
     func applicationDidFinishLaunching() {
         print("applicationDidFinishLaunching")
         
-        WatchSessionManager.sharedManager.startSession()
+        activationStateObservation = WCSession.default.observe(\.activationState) { _, _ in
+            DispatchQueue.main.async {
+                self.completeBackgroundTasks()
+            }
+        }
+        hasContentPendingObservation = WCSession.default.observe(\.hasContentPending) { _, _ in
+            DispatchQueue.main.async {
+                self.completeBackgroundTasks()
+            }
+        }
         
-        WatchSessionManager.sharedManager.requestSyncQuotes()
+        WatchSessionManager.sharedManager.startSession()
     }
     
     func applicationDidBecomeActive() {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+        print("applicationDidBecomeActive")
+        WatchSessionManager.sharedManager.requestSyncQuotes()
     }
 
     func applicationWillResignActive() {
@@ -55,5 +77,28 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
                 task.setTaskCompletedWithSnapshot(false)
             }
         }
+    }
+    
+    // Compelete the background tasks, and schedule a snapshot refresh.
+    //
+    func completeBackgroundTasks() {
+        print("wcBackgroundTasks.isEmpty \(wcBackgroundTasks.isEmpty)")
+        guard !wcBackgroundTasks.isEmpty else { return }
+        
+        guard WCSession.default.activationState == .activated,
+            WCSession.default.hasContentPending == false else { return }
+        
+        wcBackgroundTasks.forEach { $0.setTaskCompleted() }
+        
+        // Schedule a snapshot refresh if the UI is updated by background tasks.
+        //
+        let date = Date(timeIntervalSinceNow: 1)
+        WKExtension.shared().scheduleSnapshotRefresh(withPreferredDate: date, userInfo: nil) { error in
+            
+            if let error = error {
+                print("scheduleSnapshotRefresh error: \(error)!")
+            }
+        }
+        wcBackgroundTasks.removeAll()
     }
 }

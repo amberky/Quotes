@@ -41,11 +41,13 @@ class WatchSessionManager: NSObject, WCSessionDelegate {
         // when user trigger 'Sync' button
         session.sendMessage(["request" : "pinQuotes"], replyHandler: { (response) in
             print(response)
+            print("success requestSyncQuotes")
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "receivedMessageFromPhone"), object: true)
             }
             
         }) { (error) in
+            print("error requestSyncQuotes")
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "receivedMessageFromPhone"), object: false)
             }
@@ -57,7 +59,5 @@ class WatchSessionManager: NSObject, WCSessionDelegate {
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "receivedMessageData"), object: message)
         }
-        
-//        replyHandler["received": "thank you"]
     }
 }

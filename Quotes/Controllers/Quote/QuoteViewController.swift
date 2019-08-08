@@ -18,6 +18,7 @@ class QuoteViewController: UITableViewController {
     lazy var editQuoteService = EditQuoteService()
     lazy var moveCollectionService = MoveCollectionService()
     lazy var updateAppContextService = UpdateAppContextService()
+    lazy var reviewService = ReviewService.shared
     
     lazy var selectionHaptic = UISelectionFeedbackGenerator()
     
@@ -55,9 +56,19 @@ class QuoteViewController: UITableViewController {
     
     // MARK: - Functions
     func loadQuotes(predicate: NSPredicate? = nil) {
+        print("loadQuotes")
         quoteSectionArray = QuoteSections.init(customPredicate: predicate).quoteSections
         
         tableView.reloadData()
+        
+        if quoteSectionArray.count > 0, (quoteSectionArray.first?.quotes.count ?? 0) > 1 {
+            
+            let deadline = DispatchTime.now() + .seconds(1)
+            
+            DispatchQueue.main.asyncAfter(deadline: deadline) {
+                self.reviewService.requestReview()
+            }
+        }
     }
     
     func configureTableView() {

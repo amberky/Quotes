@@ -88,7 +88,6 @@
                             </items>
                         </table>
                     </items>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
                         <outlet property="interfaceGroup" destination="MHV-Qf-9MQ" id="VDJ-zp-kKD"/>
                         <outlet property="tableView" destination="vno-Xf-oul" id="K0A-N0-Kdv"/>

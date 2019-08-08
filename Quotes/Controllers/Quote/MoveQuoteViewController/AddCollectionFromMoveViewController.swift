@@ -79,15 +79,6 @@ class AddCollectionFromMoveViewController: UIViewController {
             scrollView.contentInset = contentInset
             scrollView.scrollIndicatorInsets = contentInset
             
-            //            // If active text field is hidden by keyboard, scroll it so it's visible
-            //            // Your app might not need or want this behavior.
-            //            var aRect = self.view.frame;
-            //            aRect.size.height = aRect.size.height - kbSize.height;
-            //
-            //            if aRect.contains((activeField?.frame.origin ?? CGPoint(x: 0, y: 0))) {
-            //                scrollView.scrollRectToVisible(activeField!.frame, animated: true)
-            //            }
-            
         } else {
             scrollView.contentInset = UIEdgeInsets.zero
             scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
