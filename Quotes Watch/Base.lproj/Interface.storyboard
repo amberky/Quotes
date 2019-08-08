@@ -67,7 +67,7 @@
                                         <items>
                                             <group alignment="left" layout="vertical" id="Bqj-T0-wTZ">
                                                 <items>
-                                                    <label width="136" alignment="left" verticalAlignment="center" text="Focusing is about saying no" numberOfLines="0" id="JSw-N0-3c3">
+                                                    <label width="136" alignment="left" verticalAlignment="center" text="Focusing is about saying no" numberOfLines="2" id="JSw-N0-3c3">
                                                         <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
                                                     </label>
                                                     <label width="136" alignment="left" verticalAlignment="center" text="Steve Jobs" id="vOF-Gk-0nZ">
@@ -95,7 +95,42 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="476" y="340.75892857142856"/>
+            <point key="canvasLocation" x="476" y="346"/>
+        </scene>
+        <!--Back-->
+        <scene sceneID="6b2-Ol-t8A">
+            <objects>
+                <controller identifier="QuoteDetail" title="Back" id="8IU-GN-ZEr" customClass="QuotesDetailController" customModule="Quotes_Watch_Extension">
+                    <items>
+                        <group width="1" alignment="left" layout="vertical" spacing="5" id="0Sw-bz-zWA">
+                            <items>
+                                <group width="1" alignment="left" id="tyb-np-jAp">
+                                    <items>
+                                        <label width="1" alignment="left" verticalAlignment="center" text="Label" numberOfLines="0" id="FjZ-5L-Rh9">
+                                            <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                        </label>
+                                    </items>
+                                    <edgeInsets key="margins" left="10" right="10" top="10" bottom="0.0"/>
+                                </group>
+                                <group width="1" alignment="left" id="ghY-PU-cSd">
+                                    <items>
+                                        <label width="1" alignment="left" verticalAlignment="center" text="Label" numberOfLines="0" id="zWO-wU-Qhf">
+                                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                        </label>
+                                    </items>
+                                    <edgeInsets key="margins" left="10" right="10" top="0.0" bottom="10"/>
+                                </group>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="authorLabel" destination="zWO-wU-Qhf" id="GFB-0U-wuF"/>
+                        <outlet property="bgView" destination="0Sw-bz-zWA" id="YSJ-Xo-kzq"/>
+                        <outlet property="quoteLabel" destination="FjZ-5L-Rh9" id="Fc9-33-Cim"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="721" y="346"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">

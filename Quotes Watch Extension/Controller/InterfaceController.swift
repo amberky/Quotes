@@ -16,6 +16,8 @@ class InterfaceController: WKInterfaceController {
     var tableData = [QuoteWatchModel]()
     var colorArray = ColorTheme.init(alpha: 1).colorArray
     
+    lazy var colorCount = 0
+    
     // MARK: - IBOutlet
     @IBOutlet weak var tableView: WKInterfaceTable!
     
@@ -27,6 +29,7 @@ class InterfaceController: WKInterfaceController {
         print("awake")
         
         super.becomeCurrentPage()
+        
         // Configure interface objects here.
         
         NotificationCenter.default.addObserver(self, selector: #selector(receivedApplicationContext(_:)), name: NSNotification.Name(rawValue: "receivedApplicationContext"), object: nil)
@@ -34,6 +37,8 @@ class InterfaceController: WKInterfaceController {
         NotificationCenter.default.addObserver(self, selector: #selector(receivedMessage(_:)), name: NSNotification.Name(rawValue: "receivedMessageData"), object: nil)
         
         setBackgroundImage()
+        
+        colorCount = colorArray.count
     }
     
     override func willActivate() {
@@ -99,8 +104,6 @@ class InterfaceController: WKInterfaceController {
         
         tableView.setNumberOfRows(tableData.count, withRowType: "QuoteTableRowController")
         
-        let colorCount = colorArray.count
-        
         for (index, rowModel) in tableData.enumerated() {
             let mod = index % colorCount
             
@@ -110,5 +113,15 @@ class InterfaceController: WKInterfaceController {
                 rowController.bgColor.setBackgroundColor(colorArray[mod])
             }
         }
+    }
+    
+    override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
+        let data = tableData[rowIndex]
+        
+        let mod = rowIndex % colorCount
+        
+        let context = ["quote": data.quote, "author": data.author, "color" : colorArray[mod]] as [String : Any]
+        
+        presentController(withName: "QuoteDetail", context: context)
     }
 }

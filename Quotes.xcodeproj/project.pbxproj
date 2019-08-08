@@ -60,6 +60,7 @@
 		25B5D01922E95003004E5099 /* ColorThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B5D01822E95003004E5099 /* ColorThemeModel.swift */; };
 		25B5D02F22E991B8004E5099 /* AddCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B5D02D22E991B8004E5099 /* AddCollectionViewController.swift */; };
 		25B5D04522E9CFCB004E5099 /* EditCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B5D04422E9CFCA004E5099 /* EditCollectionViewController.swift */; };
+		25D3572122FBFB9D0047C499 /* QuotesDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D3572022FBFB9D0047C499 /* QuotesDetailController.swift */; };
 		25D3699A22F0B49900D81E76 /* CollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D3699922F0B49900D81E76 /* CollectionModel.swift */; };
 		25D3699C22F0B4A900D81E76 /* IconThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D3699B22F0B4A900D81E76 /* IconThemeModel.swift */; };
 		25D369A022F0B54E00D81E76 /* QuoteActionSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D3699F22F0B54E00D81E76 /* QuoteActionSheetViewController.swift */; };
@@ -176,6 +177,7 @@
 		25B5D01822E95003004E5099 /* ColorThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorThemeModel.swift; sourceTree = "<group>"; };
 		25B5D02D22E991B8004E5099 /* AddCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCollectionViewController.swift; sourceTree = "<group>"; };
 		25B5D04422E9CFCA004E5099 /* EditCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCollectionViewController.swift; sourceTree = "<group>"; };
+		25D3572022FBFB9D0047C499 /* QuotesDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesDetailController.swift; sourceTree = "<group>"; };
 		25D3699922F0B49900D81E76 /* CollectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionModel.swift; sourceTree = "<group>"; };
 		25D3699B22F0B4A900D81E76 /* IconThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconThemeModel.swift; sourceTree = "<group>"; };
 		25D3699F22F0B54E00D81E76 /* QuoteActionSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteActionSheetViewController.swift; sourceTree = "<group>"; };
@@ -223,15 +225,13 @@
 			children = (
 				25D6504022F3652F00F96DC0 /* WatchSessionManager.swift */,
 				2509A96322F2E6C1008723AB /* ExtensionDelegate.swift */,
-				2509A96122F2E6C1008723AB /* InterfaceController.swift */,
-				258B0E4522F44B040059CF70 /* SyncQuotesController.swift */,
 				2509A96522F2E6C1008723AB /* NotificationController.swift */,
-				2509A97622F2E76F008723AB /* QuoteTableRowController.swift */,
+				25D3572322FBFBB70047C499 /* Controller */,
+				25D3572422FBFBC90047C499 /* Custom View */,
 				2509A96722F2E6C1008723AB /* Assets.xcassets */,
 				2509A96922F2E6C1008723AB /* Info.plist */,
 				2509A96A22F2E6C1008723AB /* PushNotificationPayload.apns */,
-				2516C26B22F32302001C15B3 /* QuoteWatchModel.swift */,
-				251978E322F32E7A00694308 /* ColorThemeModel.swift */,
+				25D3572222FBFBA90047C499 /* Model */,
 			);
 			path = "Quotes Watch Extension";
 			sourceTree = "<group>";
@@ -444,6 +444,33 @@
 			path = CollectionCollectionCell;
 			sourceTree = "<group>";
 		};
+		25D3572222FBFBA90047C499 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2516C26B22F32302001C15B3 /* QuoteWatchModel.swift */,
+				251978E322F32E7A00694308 /* ColorThemeModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		25D3572322FBFBB70047C499 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2509A96122F2E6C1008723AB /* InterfaceController.swift */,
+				25D3572022FBFB9D0047C499 /* QuotesDetailController.swift */,
+				258B0E4522F44B040059CF70 /* SyncQuotesController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		25D3572422FBFBC90047C499 /* Custom View */ = {
+			isa = PBXGroup;
+			children = (
+				2509A97622F2E76F008723AB /* QuoteTableRowController.swift */,
+			);
+			path = "Custom View";
+			sourceTree = "<group>";
+		};
 		25D369A422F0B7F500D81E76 /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -628,6 +655,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2509A96622F2E6C1008723AB /* NotificationController.swift in Sources */,
+				25D3572122FBFB9D0047C499 /* QuotesDetailController.swift in Sources */,
 				2509A96422F2E6C1008723AB /* ExtensionDelegate.swift in Sources */,
 				2509A97722F2E76F008723AB /* QuoteTableRowController.swift in Sources */,
 				2509A96222F2E6C1008723AB /* InterfaceController.swift in Sources */,

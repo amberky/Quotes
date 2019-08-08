@@ -37,6 +37,7 @@ class WatchSessionManager: NSObject, WCSessionDelegate {
     }
     
     func requestSyncQuotes() {
+        print("requestSyncQuotes")
         // when user trigger 'Sync' button
         session.sendMessage(["request" : "pinQuotes"], replyHandler: { (response) in
             print(response)

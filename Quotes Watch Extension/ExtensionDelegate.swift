@@ -14,6 +14,8 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         print("applicationDidFinishLaunching")
         
         WatchSessionManager.sharedManager.startSession()
+        
+        WatchSessionManager.sharedManager.requestSyncQuotes()
     }
     
     func applicationDidBecomeActive() {
