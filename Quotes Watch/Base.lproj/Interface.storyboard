@@ -65,19 +65,25 @@
                                 <tableRow identifier="QuoteTableRowController" id="v9A-AM-0v8" customClass="QuoteTableRowController" customModule="Quotes_Watch_Extension">
                                     <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" radius="10" id="o2w-Ba-JIo">
                                         <items>
-                                            <group alignment="left" layout="vertical" id="Bqj-T0-wTZ">
+                                            <group width="1" alignment="left" id="XX4-2w-bN4">
                                                 <items>
                                                     <label width="136" alignment="left" verticalAlignment="center" text="Focusing is about saying no" numberOfLines="2" id="JSw-N0-3c3">
                                                         <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
                                                     </label>
+                                                </items>
+                                                <edgeInsets key="margins" left="0.0" right="0.0" top="10" bottom="0.0"/>
+                                            </group>
+                                            <group width="1" alignment="left" id="bC1-b8-f4M">
+                                                <items>
                                                     <label width="136" alignment="left" verticalAlignment="center" text="Steve Jobs" id="vOF-Gk-0nZ">
                                                         <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                                                     </label>
                                                 </items>
+                                                <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="10"/>
                                             </group>
                                         </items>
                                         <color key="backgroundColor" red="0.9233627915" green="0.7531259656" blue="0.34499227999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <edgeInsets key="margins" left="10" right="10" top="10" bottom="10"/>
+                                        <edgeInsets key="margins" left="10" right="10" top="0.0" bottom="0.0"/>
                                     </group>
                                     <connections>
                                         <outlet property="authorLabel" destination="vOF-Gk-0nZ" id="7qQ-fc-5FZ"/>
@@ -101,7 +107,7 @@
             <objects>
                 <controller identifier="QuoteDetail" title="Back" id="8IU-GN-ZEr" customClass="QuotesDetailController" customModule="Quotes_Watch_Extension">
                     <items>
-                        <group width="1" alignment="left" layout="vertical" spacing="5" id="0Sw-bz-zWA">
+                        <group width="1" alignment="left" layout="vertical" radius="10" id="0Sw-bz-zWA">
                             <items>
                                 <group width="1" alignment="left" id="tyb-np-jAp">
                                     <items>
@@ -109,7 +115,7 @@
                                             <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
                                         </label>
                                     </items>
-                                    <edgeInsets key="margins" left="10" right="10" top="10" bottom="0.0"/>
+                                    <edgeInsets key="margins" left="0.0" right="0.0" top="10" bottom="0.0"/>
                                 </group>
                                 <group width="1" alignment="left" id="ghY-PU-cSd">
                                     <items>
@@ -117,9 +123,11 @@
                                             <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
                                         </label>
                                     </items>
-                                    <edgeInsets key="margins" left="10" right="10" top="0.0" bottom="10"/>
+                                    <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="10"/>
                                 </group>
                             </items>
+                            <color key="backgroundColor" red="0.9233627915" green="0.7531259656" blue="0.34499227999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <edgeInsets key="margins" left="10" right="10" top="0.0" bottom="0.0"/>
                         </group>
                     </items>
                     <connections>

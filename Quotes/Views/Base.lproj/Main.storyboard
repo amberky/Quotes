@@ -158,7 +158,7 @@
         <!--Add Quote View Controller-->
         <scene sceneID="XYO-xe-YDM">
             <objects>
-                <viewController id="jch-zb-Uoa" customClass="AddQuoteViewController" customModule="Quotes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddQuoteVC" id="jch-zb-Uoa" customClass="AddQuoteViewController" customModule="Quotes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hQm-Dp-Qfe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
