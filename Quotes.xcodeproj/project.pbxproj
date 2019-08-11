@@ -158,6 +158,8 @@
 		252782E522EF3E8C00643736 /* CollectionQuoteViewController+Drop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionQuoteViewController+Drop.swift"; sourceTree = "<group>"; };
 		252782E922EF3EF500643736 /* CollectionQuoteViewController+SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionQuoteViewController+SearchBar.swift"; sourceTree = "<group>"; };
 		2544D9B722F9A686008A4449 /* Quotes.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Quotes.entitlements; sourceTree = "<group>"; };
+		2553BDAD22FDA347009E71D0 /* Quotes Watch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Quotes Watch.entitlements"; sourceTree = "<group>"; };
+		2553BDAE22FDA351009E71D0 /* Quotes Watch Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Quotes Watch Extension.entitlements"; sourceTree = "<group>"; };
 		255627EF22F3F57200A7A585 /* UpdateAppContextService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAppContextService.swift; sourceTree = "<group>"; };
 		2566C28922E4970A003BFA91 /* Quotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Quotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2566C28C22E4970A003BFA91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 		2509A95122F2E6C0008723AB /* Quotes Watch */ = {
 			isa = PBXGroup;
 			children = (
+				2553BDAD22FDA347009E71D0 /* Quotes Watch.entitlements */,
 				2509A95222F2E6C0008723AB /* Interface.storyboard */,
 				2509A95522F2E6C1008723AB /* Assets.xcassets */,
 				2509A95722F2E6C1008723AB /* Info.plist */,
@@ -225,6 +228,7 @@
 		2509A96022F2E6C1008723AB /* Quotes Watch Extension */ = {
 			isa = PBXGroup;
 			children = (
+				2553BDAE22FDA351009E71D0 /* Quotes Watch Extension.entitlements */,
 				2509A96322F2E6C1008723AB /* ExtensionDelegate.swift */,
 				25D6504022F3652F00F96DC0 /* WatchSessionManager.swift */,
 				2509A96522F2E6C1008723AB /* NotificationController.swift */,
@@ -377,10 +381,10 @@
 			isa = PBXGroup;
 			children = (
 				2566C29322E4970A003BFA91 /* Quotes.xcdatamodeld */,
+				2516C26D22F3234E001C15B3 /* QuoteSectionModel.swift */,
 				25D3699922F0B49900D81E76 /* CollectionModel.swift */,
 				25B5D01822E95003004E5099 /* ColorThemeModel.swift */,
 				25D3699B22F0B4A900D81E76 /* IconThemeModel.swift */,
-				2516C26D22F3234E001C15B3 /* QuoteSectionModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -575,14 +579,27 @@
 				TargetAttributes = {
 					2509A94F22F2E6C0008723AB = {
 						CreatedOnToolsVersion = 10.2.1;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 					2509A95B22F2E6C1008723AB = {
 						CreatedOnToolsVersion = 10.2.1;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 0;
+							};
+						};
 					};
 					2566C28822E4970A003BFA91 = {
 						CreatedOnToolsVersion = 10.2.1;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+							com.apple.InAppPurchase = {
 								enabled = 0;
 							};
 							com.apple.Push = {
@@ -774,7 +791,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.focus.Quotes.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.focusios.Quotes.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -796,7 +813,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.focus.Quotes.watchkitapp.watchkitextension;
+				PRODUCT_BUNDLE_IDENTIFIER = com.focusios.Quotes.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -815,7 +832,7 @@
 				DEVELOPMENT_TEAM = PJJ3VQZGFP;
 				IBSC_MODULE = Quotes_Watch_Extension;
 				INFOPLIST_FILE = "Quotes Watch/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = com.focus.Quotes.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.focusios.Quotes.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -834,7 +851,7 @@
 				DEVELOPMENT_TEAM = PJJ3VQZGFP;
 				IBSC_MODULE = Quotes_Watch_Extension;
 				INFOPLIST_FILE = "Quotes Watch/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = com.focus.Quotes.watchkitapp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.focusios.Quotes.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -972,7 +989,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.focus.Quotes;
+				PRODUCT_BUNDLE_IDENTIFIER = com.focusios.Quotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -992,7 +1009,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.focus.Quotes;
+				PRODUCT_BUNDLE_IDENTIFIER = com.focusios.Quotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
