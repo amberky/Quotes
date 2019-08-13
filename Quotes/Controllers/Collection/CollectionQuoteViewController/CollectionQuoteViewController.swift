@@ -3,7 +3,7 @@
 //  Quotes
 //
 //  Created by Kharnyee Eu on 24/07/2019.
-//  Copyright © 2019 focus. All rights reserved.
+//  Copyright © 2019 focusios. All rights reserved.
 //
 
 import UIKit
@@ -26,6 +26,9 @@ class CollectionQuoteViewController: UITableViewController {
     var colorArray = ColorTheme.init(alpha: 0.2).colorArray
     var colorCount: Int = 0
     
+    var editMode = false
+    var selectedRows = [IndexPath]()
+    
     var didSet: Bool = false
     var selectedCollection: CollectionModel? {
         didSet {
@@ -45,6 +48,9 @@ class CollectionQuoteViewController: UITableViewController {
     // MARK: - IBOutlet
     @IBOutlet weak var searchBar: UISearchBar!
     
+    @IBOutlet var editButton: UIBarButtonItem!
+    @IBOutlet var actionButton: UIBarButtonItem!
+    @IBOutlet var cancelButton: UIBarButtonItem!
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,12 +68,25 @@ class CollectionQuoteViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.loadQuotes()
+        
+        self.navigationItem.rightBarButtonItems = [editButton]
+        editMode = false
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         if searchBar.text != "" {
             searchBar.text = ""
         }
+    }
+    
+    // MARK: - IBAction
+    @IBAction func actionClicked(_ sender: Any) {
+        print("actionClicked")
+        showActionSheet()
+    }
+    
+    @IBAction func cancelClicked(_ sender: Any) {
+        setupEditMode(mode: "End Editing")
     }
     
     // MARK: - Functions
@@ -102,8 +121,40 @@ class CollectionQuoteViewController: UITableViewController {
     }
     
     func configureTableView() {
+        tableView.allowsMultipleSelection = true
         tableView.estimatedRowHeight = 500.0
         tableView.rowHeight = UITableView.automaticDimension
+    }
+    
+    func setupEditMode(mode: String) {
+        selectedRows = [IndexPath]()
+        
+        if mode == "Begin Editing" {
+            editMode = true
+            self.navigationItem.rightBarButtonItems = [cancelButton, actionButton]
+            
+        } else if mode == "End Editing" {
+            editMode = false
+            self.navigationItem.rightBarButtonItems = [editButton]
+            
+        } else {
+            editMode = false
+            print("unhandled mode")
+        }
+        
+        tableView.reloadData()
+        
+//        for i in 0 ... (quoteSectionArray.count - 1) {
+//            for j in 0 ... (quoteSectionArray[i].quotes.count - 1)
+//            {
+//                let cell = tableView.cellForRow(at: IndexPath(row: j, section: i)) as! QuoteTableViewCell
+//
+//                selectedRows = [IndexPath]()
+//
+//                cell.rowSelected = false
+//                cell.rowSelectedImage.isHidden = !editMode
+//            }
+//        }
     }
     
     func checkAndResignFirstResponder() {
@@ -179,20 +230,49 @@ extension CollectionQuoteViewController {
         cell.quote = quote
         cell.color = colorArray[mod]
         
+        if editMode {
+            cell.rowSelectedImage.isHidden = false
+            
+            if selectedRows.contains(indexPath) {
+                cell.rowSelected = true
+            } else {
+                cell.rowSelected = false
+            }
+        } else {
+            cell.rowSelectedImage.isHidden = true
+            cell.rowSelected = false
+        }
+        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        tableView.beginUpdates()
         let cell = tableView.cellForRow(at: indexPath) as! QuoteTableViewCell
         
-        if cell.quoteLabel.numberOfLines == 2 {
-            cell.quoteLabel.numberOfLines = 0
+        if editMode {
+            selectedRows.append(indexPath)
+            
+            cell.rowSelected = true
         } else {
-            cell.quoteLabel.numberOfLines = 2
+            tableView.beginUpdates()
+            cell.quoteLabel.numberOfLines = 0
+            tableView.endUpdates()
         }
-        tableView.endUpdates()
+    }
+    
+    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! QuoteTableViewCell
+        
+        if editMode {
+            guard let index = selectedRows.firstIndex(of:indexPath) else { return }
+            selectedRows.remove(at: index)
+            
+            cell.rowSelected = false
+        } else {
+            tableView.beginUpdates()
+            cell.quoteLabel.numberOfLines = 2
+            tableView.endUpdates()
+        }
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -277,16 +357,18 @@ extension CollectionQuoteViewController {
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        var size = 35
-        
-        let cell = tableView.cellForRow(at: indexPath) as! QuoteTableViewCell
-        let quote = quoteSectionArray[indexPath.section].quotes[indexPath.row]
+        let size = 35
         
         let moreAction = UIContextualAction(style: .destructive, title: nil) { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
             
-            self.selectionHaptic.selectionChanged()
+//            let cell = self.tableView.cellForRow(at: indexPath) as! QuoteTableViewCell
             
-            self.showActionSheet(cell: cell, objectId: quote.objectID)
+            self.selectionHaptic.selectionChanged()
+            self.setupEditMode(mode: "Begin Editing")
+            
+//            self.selectedRows.append(indexPath)
+//            cell.rowSelected = true
+            
             completionHandler(false)
         }
         
@@ -300,27 +382,25 @@ extension CollectionQuoteViewController {
         
         moreAction.backgroundColor = .white
         
-        size = 30
-        
-        let deleteAction = UIContextualAction(style: .destructive, title: nil) { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
+        let editAction = UIContextualAction(style: .destructive, title: nil) { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
             
             self.selectionHaptic.selectionChanged()
+            self.editQuote(indexPath: indexPath)
             
-            self.deleteQuote(indexPath: indexPath)
             completionHandler(true)
         }
         
-        let trashImage = UIGraphicsImageRenderer(size: CGSize(width: size, height: size)).image { _ in
-            UIImage(named: "trash-red")?.draw(in: CGRect(x: 0, y: 0, width: size, height: size))
+        let editImage = UIGraphicsImageRenderer(size: CGSize(width: size, height: size)).image { _ in
+            UIImage(named: "pencil-blue")?.draw(in: CGRect(x: 0, y: 0, width: size, height: size))
         }
         
-        if let cgImageX = trashImage.cgImage {
-            deleteAction.image = ImageWithoutRender(cgImage: cgImageX, scale: UIScreen.main.nativeScale, orientation: .up)
+        if let cgImageX = editImage.cgImage {
+            editAction.image = ImageWithoutRender(cgImage: cgImageX, scale: UIScreen.main.nativeScale, orientation: .up)
         }
         
-        deleteAction.backgroundColor = .white
+        editAction.backgroundColor = .white
         
-        return UISwipeActionsConfiguration(actions: [deleteAction, moreAction])
+        return UISwipeActionsConfiguration(actions: [moreAction, editAction])
     }
     
     func pinQuote(indexPath: IndexPath) {
@@ -331,12 +411,23 @@ extension CollectionQuoteViewController {
         saveContext()
     }
     
-    func showActionSheet(cell: QuoteTableViewCell, objectId: NSManagedObjectID) {
-        let quoteActionSheetVC = quoteActionSheetService.show(cell: cell, objectId: objectId, collection: collection)
-        quoteActionSheetVC.delegate = self
-        
-        self.navigationController?.view.alpha = 0.6;
-        self.present(quoteActionSheetVC, animated: true)
+    func showActionSheet() {
+        if selectedRows.count > 0 {
+            var quotes = [Quote]()
+            
+            print(selectedRows)
+            
+            for i in selectedRows {
+                let quote = quoteSectionArray[i.section].quotes[i.row]
+                quotes.append(quote)
+            }
+            
+            let quoteActionSheetVC = quoteActionSheetService.show(quotes: quotes, collection: collection)
+            quoteActionSheetVC.delegate = self
+            
+            self.navigationController?.view.alpha = 0.6;
+            self.present(quoteActionSheetVC, animated: true)
+        }
     }
     
     func deleteQuote(indexPath: IndexPath) {
@@ -347,12 +438,26 @@ extension CollectionQuoteViewController {
         
         saveContext()
     }
+    
+    func editQuote(indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! QuoteTableViewCell
+        let objectId = quoteSectionArray[indexPath.section].quotes[indexPath.row].objectID
+        
+        let editQuoteVC = editQuoteService.show(cell: cell, objectId: objectId)
+        editQuoteVC.delegate = self
+        
+        self.present(editQuoteVC, animated: true)
+    }
 }
 
 // MARK: - QuoteActionSheetViewControllerDelegate
 extension CollectionQuoteViewController: QuoteActionSheetViewControllerDelegate {
     func handleDismissal() {
-        self.navigationController?.view.alpha = 1
+        UIView.animate(withDuration: 0.1) {
+            self.navigationController?.view.alpha = 1
+            
+            self.setupEditMode(mode: "End Editing")
+        }
     }
     
     func handleEditQuote(cell: QuoteTableViewCell, objectId: NSManagedObjectID) {
@@ -362,8 +467,9 @@ extension CollectionQuoteViewController: QuoteActionSheetViewControllerDelegate 
         self.present(editQuoteVC, animated: true)
     }
     
-    func handleMoveCollection(cell: QuoteTableViewCell) {
-        let moveCollectionVC = moveCollectionService.show(cell: cell)
+    func handleMoveCollection(quotes: [Quote]) {
+        print("Move Collection")
+        let moveCollectionVC = moveCollectionService.show(quotes: quotes)
         
         self.present(moveCollectionVC, animated: true)
     }
@@ -374,15 +480,8 @@ extension CollectionQuoteViewController: QuoteActionSheetViewControllerDelegate 
         }
     }
     
-    func handleShare(cell: QuoteTableViewCell) {
-        var text = cell.quoteLabel.text
-        if cell.authorLabel.text != "" {
-            text = "\(text ?? "") \n- \(cell.authorLabel.text ?? "")"
-        }
-        
-        let shareText = text ?? ""
-        
-        let vc = UIActivityViewController(activityItems: [shareText], applicationActivities: [])
+    func handleShare(text: String) {
+        let vc = UIActivityViewController(activityItems: [text], applicationActivities: [])
         present(vc, animated: true, completion: nil)
     }
 }

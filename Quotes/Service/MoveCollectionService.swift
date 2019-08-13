@@ -3,20 +3,20 @@
 //  Quotes
 //
 //  Created by Kharnyee Eu on 31/07/2019.
-//  Copyright © 2019 focus. All rights reserved.
+//  Copyright © 2019 focusios. All rights reserved.
 //
 
 import UIKit
 
 class MoveCollectionService {
-    func show(cell: QuoteTableViewCell) -> MoveCollectionViewController {
+    func show(quotes: [Quote]) -> MoveCollectionViewController {
         let storyboard = UIStoryboard(name: "MoveCollectionStoryboard", bundle: .main)
         
-        let moveCollectionVC = storyboard.instantiateViewController(withIdentifier: "MoveCollectionVC") as! MoveCollectionViewController
+        let vc = storyboard.instantiateViewController(withIdentifier: "MoveCollectionVC") as! MoveCollectionViewController
         
-        moveCollectionVC.modalPresentationStyle = .custom
-        moveCollectionVC.cell = cell
+        vc.modalPresentationStyle = .custom
+        vc.quotes = quotes
         
-        return moveCollectionVC
+        return vc
     }
 }

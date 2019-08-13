@@ -3,11 +3,15 @@
 //  Quotes
 //
 //  Created by Kharnyee Eu on 31/07/2019.
-//  Copyright © 2019 focus. All rights reserved.
+//  Copyright © 2019 focusios. All rights reserved.
 //
 
 import UIKit
 import CoreData
+
+protocol MoveCollectionViewControllerDelegate {
+    func handleDismissal(endEditMode: Bool)
+}
 
 class MoveCollectionViewController: UIViewController {
     
@@ -16,10 +20,12 @@ class MoveCollectionViewController: UIViewController {
     
     let selectionHaptic = UISelectionFeedbackGenerator()
     
+    var delegate: MoveCollectionViewControllerDelegate?
+    
     var collectionArray = [Collection]()
     var selectedCollection = [Collection?]()
     
-    var cell = QuoteTableViewCell()
+    var quotes = [Quote]()
     
     var edited = false
     
@@ -36,7 +42,10 @@ class MoveCollectionViewController: UIViewController {
         
         loadCollections()
         
-        selectedCollection = cell.quote?.collections?.allObjects as! [Collection]
+        // NOTE: if select multiple, no selectedCollection
+        if quotes.count == 1 {
+            selectedCollection = quotes.first!.collections?.allObjects as! [Collection]
+        }
     }
     
     // MARK: - IBAction
@@ -51,36 +60,27 @@ class MoveCollectionViewController: UIViewController {
                 }
             }
             
-            let request: NSFetchRequest<Quote> = Quote.fetchRequest()
-            request.predicate = NSPredicate(format: "quote == %@", cell.quoteLabel.text ?? "")
-            
-            do {
-                if let quoteContext = try self.context.fetch(request) as [NSManagedObject]?, quoteContext.first != nil {
-                    let quote = quoteContext.first as! Quote
-                    
-                    for c in quote.collections! {
-                        quote.removeFromCollections(c as! Collection)
-                    }
-                    
-                    if selectedArray.count > 0 {
-                        for c in selectedArray {
-                            c.updatedOn = Date()
-                            quote.addToCollections(c)
-                        }
-                    }
-                    
-                    saveContext()
+            for quote in quotes {
+                for c in quote.collections! {
+                    quote.removeFromCollections(c as! Collection)
                 }
-            } catch {
-                print("Error in removing & adding collections to quote \(error)")
+                
+                if selectedArray.count > 0 {
+                    for c in selectedArray {
+                        c.updatedOn = Date()
+                        quote.addToCollections(c)
+                    }
+                }
             }
+            
+            saveContext()
         }
-        dismissView()
+        dismissView(endEditMode: true)
     }
     
     @IBAction func cancelClicked(_ sender: UIBarButtonItem) {
         print("cancel bar button clicked")
-        dismissView()
+        dismissView(endEditMode: false)
     }
     
     // MARK: - Functions
@@ -107,8 +107,10 @@ class MoveCollectionViewController: UIViewController {
         }
     }
     
-    func dismissView() {
+    func dismissView(endEditMode: Bool) {
         dismiss(animated: true, completion: nil)
+        
+        self.delegate?.handleDismissal(endEditMode: endEditMode)
     }
     
     // MARK: - Unwind Segue

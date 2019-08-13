@@ -3,7 +3,7 @@
 //  Quotes
 //
 //  Created by Kharnyee Eu on 31/07/2019.
-//  Copyright © 2019 focus. All rights reserved.
+//  Copyright © 2019 focusios. All rights reserved.
 //
 
 import UIKit
@@ -12,11 +12,11 @@ class CollectionActionSheetService {
     func show(collection: CollectionModel) -> CollectionActionSheetViewController {
         let storyboard = UIStoryboard(name: "CollectionActionSheetStoryboard", bundle: .main)
 
-        let collectionActionSheetVC = storyboard.instantiateViewController(withIdentifier: "CollectionActionSheetVC") as! CollectionActionSheetViewController
+        let actionSheetVC = storyboard.instantiateViewController(withIdentifier: "CollectionActionSheetVC") as! CollectionActionSheetViewController
 
-        collectionActionSheetVC.modalPresentationStyle = .custom
-        collectionActionSheetVC.collection = collection
+        actionSheetVC.modalPresentationStyle = .custom
+        actionSheetVC.collection = collection
 
-        return collectionActionSheetVC
+        return actionSheetVC
     }
 }

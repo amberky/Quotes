@@ -3,7 +3,7 @@
 //  Quotes
 //
 //  Created by Kharnyee Eu on 22/07/2019.
-//  Copyright © 2019 focus. All rights reserved.
+//  Copyright © 2019 focusios. All rights reserved.
 //
 
 import UIKit
@@ -61,13 +61,13 @@ class SelectCollectionViewController: UIViewController {
             if let indexPath = collectionTableView.indexPathsForSelectedRows {
                 let destinationVC = segue.destination as! AddQuoteViewController
                 
-                var selectedArray = [Collection]()
+                var prepareCollectionForDestination = [Collection]()
                 
                 for i in indexPath {
-                    selectedArray.append(collectionArray[i.row])
+                    prepareCollectionForDestination.append(collectionArray[i.row])
                 }
                 
-                destinationVC.selectedCollection = selectedArray
+                destinationVC.selectedCollection = prepareCollectionForDestination
             }
             
         case "cancelClicked":

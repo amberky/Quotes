@@ -3,7 +3,7 @@
 //  Quotes
 //
 //  Created by Kharnyee Eu on 31/07/2019.
-//  Copyright © 2019 focus. All rights reserved.
+//  Copyright © 2019 focusios. All rights reserved.
 //
 
 import UIKit
@@ -14,11 +14,11 @@ protocol QuoteActionSheetViewControllerDelegate {
     
     func handleEditQuote(cell: QuoteTableViewCell, objectId: NSManagedObjectID)
     
-    func handleMoveCollection(cell: QuoteTableViewCell)
+    func handleMoveCollection(quotes: [Quote])
     
     func handleRemoveFromCollection(reload: Bool)
     
-    func handleShare(cell: QuoteTableViewCell)
+    func handleShare(text: String)
 }
 
 class QuoteActionSheetViewController: UIViewController {
@@ -28,12 +28,7 @@ class QuoteActionSheetViewController: UIViewController {
     
     lazy var selectionHaptic = UISelectionFeedbackGenerator()
     
-    var cell = QuoteTableViewCell()
-    var objectId: NSManagedObjectID? {
-        didSet {
-            print("didSet objectId")
-        }
-    }
+    var quotes = [Quote]()
     
     var collection: Collection? {
         didSet {
@@ -67,17 +62,9 @@ class QuoteActionSheetViewController: UIViewController {
     @IBAction func copyClicked(_ sender: Any) {
         selectionHaptic.selectionChanged()
         
-        guard cell.quoteLabel.text != nil
-            else { return }
-        
-        var text = cell.quoteLabel.text
-        if cell.authorLabel.text != "" {
-            text = "\(text ?? "") \n- \(cell.authorLabel.text ?? "")"
-        }
-        
         let copy = UIPasteboard.general
-        copy.string = text
-        
+        copy.string = concatText()
+    
         dismissActionSheet()
     }
     
@@ -85,14 +72,14 @@ class QuoteActionSheetViewController: UIViewController {
         selectionHaptic.selectionChanged()
         
         dismissActionSheet()
-        delegate?.handleEditQuote(cell: cell, objectId: objectId!)
     }
     
     @IBAction func moveClicked(_ sender: Any) {
         selectionHaptic.selectionChanged()
         
         dismissActionSheet()
-        delegate?.handleMoveCollection(cell: cell)
+        
+        delegate?.handleMoveCollection(quotes: quotes)
     }
     
     
@@ -100,22 +87,12 @@ class QuoteActionSheetViewController: UIViewController {
         selectionHaptic.selectionChanged()
         
         if collection != nil {
-            let request: NSFetchRequest<Quote> = Quote.fetchRequest()
-            request.predicate = NSPredicate(format: "quote == %@", cell.quoteLabel.text ?? "")
-            
-            do {
-                if let quoteContext = try self.context.fetch(request) as [NSManagedObject]?, quoteContext.first != nil {
-                    let quote = quoteContext.first as! Quote
-                    
-                    collection?.setValue(Date(), forKey: "updatedOn")
-                    quote.removeFromCollections(collection!)
-                    
-                    saveContext()
-                }
-            } catch {
-                print("Error in removing & adding collections to quote \(error)")
+            for quote in quotes {
+                collection?.setValue(Date(), forKey: "updatedOn")
+                quote.removeFromCollections(collection!)
+                
+                saveContext()
             }
-            
             delegate?.handleRemoveFromCollection(reload: true)
         } else {
             delegate?.handleRemoveFromCollection(reload: false)
@@ -128,7 +105,7 @@ class QuoteActionSheetViewController: UIViewController {
         selectionHaptic.selectionChanged()
         
         dismissActionSheet()
-        delegate?.handleShare(cell: cell)
+        delegate?.handleShare(text: concatText())
     }
     
     @IBAction func cancelClicked(_ sender: Any) {
@@ -155,5 +132,24 @@ class QuoteActionSheetViewController: UIViewController {
         } catch {
             print("Error saving data from context \(error)")
         }
+    }
+    
+    func concatText() -> String {
+        guard quotes.count > 0 else { return "" }
+        
+        var str = ""
+        
+        for i in quotes {
+            if i.quote != nil {
+                var text = i.quote
+                if i.author != "" {
+                    text = "\(text ?? "")\n- \(i.author ?? "")"
+                }
+                
+                str = "\(str)\n\n\(text ?? "")"
+            }
+        }
+        
+        return str
     }
 }

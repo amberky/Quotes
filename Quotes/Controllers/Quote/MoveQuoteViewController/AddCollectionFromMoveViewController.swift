@@ -3,7 +3,7 @@
 //  Quotes
 //
 //  Created by Kharnyee Eu on 22/07/2019.
-//  Copyright © 2019 focus. All rights reserved.
+//  Copyright © 2019 focusios. All rights reserved.
 //
 
 import UIKit
@@ -169,6 +169,7 @@ class AddCollectionFromMoveViewController: UIViewController {
 
             if segue.destination is MoveCollectionViewController {
                 let destination = segue.destination as! MoveCollectionViewController
+                destination.edited = true
                 destination.loadCollections()
                 destination.selectedCollection.append(newCollection)
             } else { return }

@@ -35,6 +35,7 @@
 		2516C26C22F32302001C15B3 /* QuoteWatchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2516C26B22F32302001C15B3 /* QuoteWatchModel.swift */; };
 		2516C26E22F3234E001C15B3 /* QuoteSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2516C26D22F3234E001C15B3 /* QuoteSectionModel.swift */; };
 		251978E422F32E7A00694308 /* ColorThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251978E322F32E7A00694308 /* ColorThemeModel.swift */; };
+		251C8D5E230150860021CD78 /* QuoteViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251C8D5D230150860021CD78 /* QuoteViewController+TableView.swift */; };
 		251E18B622EB41A700DEE0F3 /* FavouriteAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251E18B522EB41A700DEE0F3 /* FavouriteAnimator.swift */; };
 		252782DF22EEDE4500643736 /* QuoteViewController+SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252782DE22EEDE4500643736 /* QuoteViewController+SearchBar.swift */; };
 		252782E122EEE63300643736 /* QuoteViewController+Drag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252782E022EEE63300643736 /* QuoteViewController+Drag.swift */; };
@@ -150,6 +151,7 @@
 		2516C26B22F32302001C15B3 /* QuoteWatchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteWatchModel.swift; sourceTree = "<group>"; };
 		2516C26D22F3234E001C15B3 /* QuoteSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteSectionModel.swift; sourceTree = "<group>"; };
 		251978E322F32E7A00694308 /* ColorThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorThemeModel.swift; sourceTree = "<group>"; };
+		251C8D5D230150860021CD78 /* QuoteViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuoteViewController+TableView.swift"; sourceTree = "<group>"; };
 		251E18B522EB41A700DEE0F3 /* FavouriteAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteAnimator.swift; sourceTree = "<group>"; };
 		252782DE22EEDE4500643736 /* QuoteViewController+SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuoteViewController+SearchBar.swift"; sourceTree = "<group>"; };
 		252782E022EEE63300643736 /* QuoteViewController+Drag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuoteViewController+Drag.swift"; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				2566C28E22E4970A003BFA91 /* QuoteViewController.swift */,
+				251C8D5D230150860021CD78 /* QuoteViewController+TableView.swift */,
 				252782E022EEE63300643736 /* QuoteViewController+Drag.swift */,
 				252782E222EEE63F00643736 /* QuoteViewController+Drop.swift */,
 				252782DE22EEDE4500643736 /* QuoteViewController+SearchBar.swift */,
@@ -707,6 +710,7 @@
 				25EEF95522FACDA6005C84A4 /* NoResultTableView.swift in Sources */,
 				2589380A22E86DAC001E10FE /* CollectionQuoteViewController.swift in Sources */,
 				25D6503F22F3637D00F96DC0 /* WatchSessionManager.swift in Sources */,
+				251C8D5E230150860021CD78 /* QuoteViewController+TableView.swift in Sources */,
 				250DD9AA22F1C0E20092BF34 /* CollectionActionSheetViewController.swift in Sources */,
 				250DD9A322F19BA20092BF34 /* MoveCollectionService.swift in Sources */,
 				250DD98722F15F080092BF34 /* UIImageExtension.swift in Sources */,
