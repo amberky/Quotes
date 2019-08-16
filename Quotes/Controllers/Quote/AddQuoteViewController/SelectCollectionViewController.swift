@@ -79,16 +79,6 @@ extension SelectCollectionViewController {
         return collectionArray.count
     }
     
-    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        let test = UIContextualAction(style: .normal, title: "Hi") { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
-            print("hello")
-            
-            completionHandler(false)
-        }
-        return UISwipeActionsConfiguration(actions: [test])
-    }
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CollectionCell", for: indexPath) as! CollectionTableViewCell
         

@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 protocol MoveCollectionViewControllerDelegate {
-    func handleDismissal(endEditMode: Bool)
+    func handleDismissal(endEditMode: Bool, reload: Bool)
 }
 
 class MoveCollectionViewController: UITableViewController {
@@ -86,12 +86,12 @@ class MoveCollectionViewController: UITableViewController {
             
             saveContext()
         }
-        dismissView(endEditMode: true)
+        dismissView(endEditMode: true, reload: true)
     }
     
     @IBAction func cancelClicked(_ sender: UIBarButtonItem) {
         print("cancel bar button clicked")
-        dismissView(endEditMode: false)
+        dismissView(endEditMode: false, reload: false)
     }
     
     // MARK: - Functions
@@ -118,10 +118,10 @@ class MoveCollectionViewController: UITableViewController {
         }
     }
     
-    func dismissView(endEditMode: Bool) {
+    func dismissView(endEditMode: Bool, reload: Bool) {
         dismiss(animated: true, completion: nil)
         
-        self.delegate?.handleDismissal(endEditMode: endEditMode)
+        self.delegate?.handleDismissal(endEditMode: endEditMode, reload: reload)
     }
     
     // MARK: - Unwind Segue

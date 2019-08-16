@@ -15,7 +15,7 @@ class CollectionModel {
     let count : Int
     let isAll: Bool
     var isSelected : Bool
-    let objectID : NSManagedObjectID?
+    var objectID : NSManagedObjectID?
     
     init (name: String, icon: String, count: Int = 0, objectID: NSManagedObjectID? = nil, isAll: Bool = false, isSelected: Bool = false) {
         self.name = name

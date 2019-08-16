@@ -21,16 +21,12 @@
 		250DD98722F15F080092BF34 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250DD98622F15F080092BF34 /* UIImageExtension.swift */; };
 		250DD98A22F15F300092BF34 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250DD98922F15F300092BF34 /* UIColorExtension.swift */; };
 		250DD98E22F172F90092BF34 /* EditQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250DD98D22F172F90092BF34 /* EditQuoteViewController.swift */; };
-		250DD99622F1771A0092BF34 /* QuoteActionSheetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250DD99522F177190092BF34 /* QuoteActionSheetService.swift */; };
 		250DD99822F17AFC0092BF34 /* EditQuoteStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 250DD99722F17AFC0092BF34 /* EditQuoteStoryboard.storyboard */; };
 		250DD99A22F183CD0092BF34 /* MoveCollectionStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 250DD99922F183CD0092BF34 /* MoveCollectionStoryboard.storyboard */; };
 		250DD99C22F183E30092BF34 /* MoveCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250DD99B22F183E30092BF34 /* MoveCollectionViewController.swift */; };
 		250DD99F22F1848D0092BF34 /* AddCollectionFromMoveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250DD99E22F1848D0092BF34 /* AddCollectionFromMoveViewController.swift */; };
 		250DD9A322F19BA20092BF34 /* MoveCollectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250DD9A222F19BA20092BF34 /* MoveCollectionService.swift */; };
-		250DD9A822F1BF2A0092BF34 /* CollectionActionSheetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250DD9A722F1BF2A0092BF34 /* CollectionActionSheetService.swift */; };
-		250DD9AA22F1C0E20092BF34 /* CollectionActionSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250DD9A922F1C0E20092BF34 /* CollectionActionSheetViewController.swift */; };
 		250DD9AC22F1C38E0092BF34 /* EditCollectionViewController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250DD9AB22F1C38E0092BF34 /* EditCollectionViewController+CollectionView.swift */; };
-		250DD9AE22F1C44F0092BF34 /* CollectionActionSheetStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 250DD9AD22F1C44F0092BF34 /* CollectionActionSheetStoryboard.storyboard */; };
 		250DD9B122F1E3970092BF34 /* CollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250DD9B022F1E3970092BF34 /* CollectionTableViewCell.swift */; };
 		2516C26C22F32302001C15B3 /* QuoteWatchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2516C26B22F32302001C15B3 /* QuoteWatchModel.swift */; };
 		2516C26E22F3234E001C15B3 /* QuoteSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2516C26D22F3234E001C15B3 /* QuoteSectionModel.swift */; };
@@ -62,12 +58,11 @@
 		25B5D02F22E991B8004E5099 /* AddCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B5D02D22E991B8004E5099 /* AddCollectionViewController.swift */; };
 		25B5D04522E9CFCB004E5099 /* EditCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B5D04422E9CFCA004E5099 /* EditCollectionViewController.swift */; };
 		25B9B83722FC8A17004590D0 /* ReviewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B9B83622FC8A17004590D0 /* ReviewService.swift */; };
+		25BADDDD23070C1500F7D039 /* CollectionQuoteViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BADDDC23070C1500F7D039 /* CollectionQuoteViewController+TableView.swift */; };
 		25D3572122FBFB9D0047C499 /* QuotesDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D3572022FBFB9D0047C499 /* QuotesDetailController.swift */; };
 		25D3699A22F0B49900D81E76 /* CollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D3699922F0B49900D81E76 /* CollectionModel.swift */; };
 		25D3699C22F0B4A900D81E76 /* IconThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D3699B22F0B4A900D81E76 /* IconThemeModel.swift */; };
-		25D369A022F0B54E00D81E76 /* QuoteActionSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D3699F22F0B54E00D81E76 /* QuoteActionSheetViewController.swift */; };
 		25D369A322F0B7EF00D81E76 /* EditQuoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D369A222F0B7EF00D81E76 /* EditQuoteService.swift */; };
-		25D369A622F0BC3200D81E76 /* QuoteActionSheetStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25D369A522F0BC3200D81E76 /* QuoteActionSheetStoryboard.storyboard */; };
 		25D6503F22F3637D00F96DC0 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D6503E22F3637D00F96DC0 /* WatchSessionManager.swift */; };
 		25D6504122F3652F00F96DC0 /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D6504022F3652F00F96DC0 /* WatchSessionManager.swift */; };
 		25EEF95122FAC3E9005C84A4 /* EmptyTableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EEF95022FAC3E9005C84A4 /* EmptyTableViewExtension.swift */; };
@@ -137,16 +132,12 @@
 		250DD98622F15F080092BF34 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		250DD98922F15F300092BF34 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		250DD98D22F172F90092BF34 /* EditQuoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditQuoteViewController.swift; sourceTree = "<group>"; };
-		250DD99522F177190092BF34 /* QuoteActionSheetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteActionSheetService.swift; sourceTree = "<group>"; };
 		250DD99722F17AFC0092BF34 /* EditQuoteStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EditQuoteStoryboard.storyboard; sourceTree = "<group>"; };
 		250DD99922F183CD0092BF34 /* MoveCollectionStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MoveCollectionStoryboard.storyboard; sourceTree = "<group>"; };
 		250DD99B22F183E30092BF34 /* MoveCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveCollectionViewController.swift; sourceTree = "<group>"; };
 		250DD99E22F1848D0092BF34 /* AddCollectionFromMoveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCollectionFromMoveViewController.swift; sourceTree = "<group>"; };
 		250DD9A222F19BA20092BF34 /* MoveCollectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveCollectionService.swift; sourceTree = "<group>"; };
-		250DD9A722F1BF2A0092BF34 /* CollectionActionSheetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionActionSheetService.swift; sourceTree = "<group>"; };
-		250DD9A922F1C0E20092BF34 /* CollectionActionSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionActionSheetViewController.swift; sourceTree = "<group>"; };
 		250DD9AB22F1C38E0092BF34 /* EditCollectionViewController+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditCollectionViewController+CollectionView.swift"; sourceTree = "<group>"; };
-		250DD9AD22F1C44F0092BF34 /* CollectionActionSheetStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CollectionActionSheetStoryboard.storyboard; sourceTree = "<group>"; };
 		250DD9B022F1E3970092BF34 /* CollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewCell.swift; sourceTree = "<group>"; };
 		2516C26B22F32302001C15B3 /* QuoteWatchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteWatchModel.swift; sourceTree = "<group>"; };
 		2516C26D22F3234E001C15B3 /* QuoteSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteSectionModel.swift; sourceTree = "<group>"; };
@@ -183,12 +174,11 @@
 		25B5D02D22E991B8004E5099 /* AddCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCollectionViewController.swift; sourceTree = "<group>"; };
 		25B5D04422E9CFCA004E5099 /* EditCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCollectionViewController.swift; sourceTree = "<group>"; };
 		25B9B83622FC8A17004590D0 /* ReviewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReviewService.swift; path = ../Extension/ReviewService.swift; sourceTree = "<group>"; };
+		25BADDDC23070C1500F7D039 /* CollectionQuoteViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionQuoteViewController+TableView.swift"; sourceTree = "<group>"; };
 		25D3572022FBFB9D0047C499 /* QuotesDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesDetailController.swift; sourceTree = "<group>"; };
 		25D3699922F0B49900D81E76 /* CollectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionModel.swift; sourceTree = "<group>"; };
 		25D3699B22F0B4A900D81E76 /* IconThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconThemeModel.swift; sourceTree = "<group>"; };
-		25D3699F22F0B54E00D81E76 /* QuoteActionSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteActionSheetViewController.swift; sourceTree = "<group>"; };
 		25D369A222F0B7EF00D81E76 /* EditQuoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditQuoteService.swift; sourceTree = "<group>"; };
-		25D369A522F0BC3200D81E76 /* QuoteActionSheetStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = QuoteActionSheetStoryboard.storyboard; sourceTree = "<group>"; };
 		25D6503E22F3637D00F96DC0 /* WatchSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionManager.swift; sourceTree = "<group>"; };
 		25D6504022F3652F00F96DC0 /* WatchSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionManager.swift; sourceTree = "<group>"; };
 		25EEF95022FAC3E9005C84A4 /* EmptyTableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTableViewExtension.swift; sourceTree = "<group>"; };
@@ -305,6 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				2589380922E86DAC001E10FE /* CollectionQuoteViewController.swift */,
+				25BADDDC23070C1500F7D039 /* CollectionQuoteViewController+TableView.swift */,
 				252782E922EF3EF500643736 /* CollectionQuoteViewController+SearchBar.swift */,
 				252782E422EF3E8C00643736 /* CollectionQuoteViewController+Drag.swift */,
 				252782E522EF3E8C00643736 /* CollectionQuoteViewController+Drop.swift */,
@@ -371,8 +362,6 @@
 			children = (
 				2566C29822E4970C003BFA91 /* LaunchScreen.storyboard */,
 				2566C29022E4970A003BFA91 /* Main.storyboard */,
-				25D369A522F0BC3200D81E76 /* QuoteActionSheetStoryboard.storyboard */,
-				250DD9AD22F1C44F0092BF34 /* CollectionActionSheetStoryboard.storyboard */,
 				250DD99722F17AFC0092BF34 /* EditQuoteStoryboard.storyboard */,
 				250DD99922F183CD0092BF34 /* MoveCollectionStoryboard.storyboard */,
 				25F0CE5222E69EA4001DE1A0 /* Custom Views */,
@@ -408,7 +397,6 @@
 				25B5D02D22E991B8004E5099 /* AddCollectionViewController.swift */,
 				252782E822EF3EA400643736 /* CollectionQuoteViewController */,
 				250DD9B222F2023C0092BF34 /* EditCollectionViewController */,
-				250DD9A922F1C0E20092BF34 /* CollectionActionSheetViewController.swift */,
 			);
 			path = Collection;
 			sourceTree = "<group>";
@@ -420,7 +408,6 @@
 				2589380B22E86DBB001E10FE /* AddQuoteViewController */,
 				250DD9B422F2029E0092BF34 /* MoveQuoteViewController */,
 				250DD98D22F172F90092BF34 /* EditQuoteViewController.swift */,
-				25D3699F22F0B54E00D81E76 /* QuoteActionSheetViewController.swift */,
 			);
 			path = Quote;
 			sourceTree = "<group>";
@@ -487,8 +474,6 @@
 				25D6503E22F3637D00F96DC0 /* WatchSessionManager.swift */,
 				255627EF22F3F57200A7A585 /* UpdateAppContextService.swift */,
 				251E18B522EB41A700DEE0F3 /* FavouriteAnimator.swift */,
-				250DD99522F177190092BF34 /* QuoteActionSheetService.swift */,
-				250DD9A722F1BF2A0092BF34 /* CollectionActionSheetService.swift */,
 				25D369A222F0B7EF00D81E76 /* EditQuoteService.swift */,
 				250DD9A222F19BA20092BF34 /* MoveCollectionService.swift */,
 			);
@@ -662,8 +647,6 @@
 				2566C29722E4970C003BFA91 /* Assets.xcassets in Resources */,
 				250DD99822F17AFC0092BF34 /* EditQuoteStoryboard.storyboard in Resources */,
 				2566C29222E4970A003BFA91 /* Main.storyboard in Resources */,
-				250DD9AE22F1C44F0092BF34 /* CollectionActionSheetStoryboard.storyboard in Resources */,
-				25D369A622F0BC3200D81E76 /* QuoteActionSheetStoryboard.storyboard in Resources */,
 				25EEF95322FAC613005C84A4 /* NoResultTableView.xib in Resources */,
 				258B0E4422F40A040059CF70 /* EmptyTableView.xib in Resources */,
 				250DD97C22F13AD00092BF34 /* SmallIconCollectionViewCell.xib in Resources */,
@@ -694,7 +677,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				250DD97D22F13AD00092BF34 /* SmallIconCollectionViewCell.swift in Sources */,
-				25D369A022F0B54E00D81E76 /* QuoteActionSheetViewController.swift in Sources */,
 				25B9B83722FC8A17004590D0 /* ReviewService.swift in Sources */,
 				2566C28F22E4970A003BFA91 /* QuoteViewController.swift in Sources */,
 				25EEF95122FAC3E9005C84A4 /* EmptyTableViewExtension.swift in Sources */,
@@ -711,12 +693,10 @@
 				2589380A22E86DAC001E10FE /* CollectionQuoteViewController.swift in Sources */,
 				25D6503F22F3637D00F96DC0 /* WatchSessionManager.swift in Sources */,
 				251C8D5E230150860021CD78 /* QuoteViewController+TableView.swift in Sources */,
-				250DD9AA22F1C0E20092BF34 /* CollectionActionSheetViewController.swift in Sources */,
 				250DD9A322F19BA20092BF34 /* MoveCollectionService.swift in Sources */,
 				250DD98722F15F080092BF34 /* UIImageExtension.swift in Sources */,
 				250DD9AC22F1C38E0092BF34 /* EditCollectionViewController+CollectionView.swift in Sources */,
 				25D3699A22F0B49900D81E76 /* CollectionModel.swift in Sources */,
-				250DD99622F1771A0092BF34 /* QuoteActionSheetService.swift in Sources */,
 				2566C29522E4970A003BFA91 /* Quotes.xcdatamodeld in Sources */,
 				25B5D04522E9CFCB004E5099 /* EditCollectionViewController.swift in Sources */,
 				25D3699C22F0B4A900D81E76 /* IconThemeModel.swift in Sources */,
@@ -728,8 +708,8 @@
 				252782EA22EF3EF500643736 /* CollectionQuoteViewController+SearchBar.swift in Sources */,
 				257535E922E5C77300DB2BAD /* SelectCollectionViewController.swift in Sources */,
 				25D369A322F0B7EF00D81E76 /* EditQuoteService.swift in Sources */,
-				250DD9A822F1BF2A0092BF34 /* CollectionActionSheetService.swift in Sources */,
 				2589380822E81F4D001E10FE /* CollectionCollectionViewCell.swift in Sources */,
+				25BADDDD23070C1500F7D039 /* CollectionQuoteViewController+TableView.swift in Sources */,
 				250DD98E22F172F90092BF34 /* EditQuoteViewController.swift in Sources */,
 				252782DF22EEDE4500643736 /* QuoteViewController+SearchBar.swift in Sources */,
 				25F0CE5022E69EA0001DE1A0 /* QuoteTableViewCell.swift in Sources */,

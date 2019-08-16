@@ -13,7 +13,6 @@ class EditCollectionViewController: UIViewController {
     
     // MARK: - Variables
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    lazy var collectionActionSheetService = CollectionActionSheetService()
     
     lazy var selectionHaptic = UISelectionFeedbackGenerator()
     
@@ -235,6 +234,8 @@ class EditCollectionViewController: UIViewController {
                             collection.first!.setValue(Date(), forKey: "updatedOn")
                             
                             saveContext()
+                            
+                            updatedCollection.objectID = collection.first?.objectID
                         }
                     }
                 } catch {
@@ -297,22 +298,5 @@ extension EditCollectionViewController: UITextFieldDelegate {
         }
         
         return count <= maxLength
-    }
-}
-
-// MARK: - CollectionActionSheetViewControllerDelegate
-extension EditCollectionViewController: CollectionActionSheetViewControllerDelegate {
-    func handleDismissal() {
-        UIView.animate(withDuration: 0.1) {
-            self.view.alpha = 1
-        }
-    }
-    
-    func handleDismissalBackToCollectionView() {
-        UIView.animate(withDuration: 0.1) {
-            self.view.alpha = 1
-        }
-        
-        self.backToCollectionView()
     }
 }

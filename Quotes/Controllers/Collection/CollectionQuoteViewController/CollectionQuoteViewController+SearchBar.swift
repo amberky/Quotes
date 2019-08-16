@@ -32,6 +32,10 @@ extension CollectionQuoteViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(searchQuote(searchBar:hideKeyboard:)), object: searchBar)
         self.perform(#selector(searchQuote(searchBar:hideKeyboard:)), with: searchBar, afterDelay: 0.1)
+        
+        if editMode {
+            endEditMode()
+        }
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

@@ -1,21 +1,21 @@
 //
-//  QuoteViewController+TableView.swift
+//  CollectionQuoteViewController+TableView.swift
 //  Quotes
 //
-//  Created by Kharnyee Eu on 12/08/2019.
-//  Copyright © 2019 focusios. All rights reserved.
+//  Created by Kharnyee Eu on 17/08/2019.
+//  Copyright © 2019 focus. All rights reserved.
 //
 
 import UIKit
 
 // MARK: - UITableViewDelegate
-extension QuoteViewController {
+extension CollectionQuoteViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         if quoteSectionArray.count == 0 {
             if searchController.searchBar.text == "" {
-                tableView.setEmptyView(tableView: tableView)
+                tableView.setEmptyView()
             } else {
-                tableView.setNoResultView(tableView: tableView)
+                tableView.setNoResultView()
             }
         } else {
             tableView.removeEmptyView()
@@ -40,6 +40,7 @@ extension QuoteViewController {
         let mod = (indexPath.row + indexPath.section) % colorCount
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "QuoteCell", for: indexPath) as! QuoteTableViewCell
+        
         let quote = quoteSectionArray[indexPath.section].quotes[indexPath.row]
         
         cell.quote = quote
@@ -64,7 +65,6 @@ extension QuoteViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         let cell = tableView.cellForRow(at: indexPath) as! QuoteTableViewCell
         
         if editMode {
@@ -155,26 +155,7 @@ extension QuoteViewController {
             
             let size = 35
             
-            let editAction = UIContextualAction(style: .normal, title: nil) { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
-                
-                self.selectionHaptic.selectionChanged()
-                
-                completionHandler(false)
-                
-                self.editQuote(indexPath: indexPath)
-            }
-            
-            let editImage = UIGraphicsImageRenderer(size: CGSize(width: size, height: size)).image { _ in
-                UIImage(named: "pencil-blue")?.draw(in: CGRect(x: 0, y: 0, width: size, height: size))
-            }
-            
-            if let cgImageX = editImage.cgImage {
-                editAction.image = ImageWithoutRender(cgImage: cgImageX, scale: UIScreen.main.nativeScale, orientation: .up)
-            }
-            
-            editAction.backgroundColor = .white
-            
-            let action = UIContextualAction(style: .normal, title: nil) { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
+            let action = UIContextualAction(style: .destructive, title: nil) { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
                 
                 self.selectionHaptic.selectionChanged()
                 self.beginEditMode()
@@ -202,7 +183,7 @@ extension QuoteViewController {
             
             action.backgroundColor = .white
             
-            let swipeAction = UISwipeActionsConfiguration(actions: [action, editAction])
+            let swipeAction = UISwipeActionsConfiguration(actions: [action])
             //            swipeAction.performsFirstActionWithFullSwipe = false
             
             return swipeAction
@@ -215,8 +196,8 @@ extension QuoteViewController {
         let tableViewFrame = tableView.frame.width
         let tableViewLeftMargin = tableView.separatorInset.left
         let tableViewSectionHeight = tableView.sectionHeaderHeight
-        let widthHeight : CGFloat = 20
-        let yAxis = (tableViewSectionHeight - widthHeight) / 2
+        let yAxis = (tableViewSectionHeight - 15) / 2
+        let width : CGFloat = 20
         
         let headerView = UIView()
         headerView.backgroundColor = .clear
@@ -225,20 +206,25 @@ extension QuoteViewController {
         
         let imageName = headerInfo.sectionIcon
         let image = UIImageView(image: UIImage.init(named: imageName))
-        image.frame = CGRect(x: tableViewLeftMargin + 5, y: yAxis, width: widthHeight, height: widthHeight)
+        image.frame = CGRect(x: tableViewLeftMargin + 5,
+                             y: yAxis,
+                             width: width,
+                             height: width)
         
         headerView.addSubview(image)
         
         let label = UILabel()
         label.text = headerInfo.sectionName
         label.textColor = .darkGray
+        //        label.font = UIFont.boldSystemFont(ofSize: 15)
         
         label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
         
-        label.frame = CGRect(x: tableViewLeftMargin + widthHeight + 15,
-                             y: yAxis,
-                             width: tableViewFrame - (tableViewLeftMargin * 2) - 20 - 10,
-                             height: widthHeight)
+        label.frame = CGRect(x: tableViewLeftMargin + 15 + 15,
+                             // table margin left - image width - margin (image - label)
+            y: yAxis,
+            width: tableViewFrame - (tableViewLeftMargin * 2) - 20 - 10,
+            height: width)
         
         headerView.addSubview(label)
         

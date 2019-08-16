@@ -46,13 +46,13 @@ class AddCollectionFromMoveViewController: UIViewController {
         let nib = UINib.init(nibName: "SmallIconCollectionViewCell", bundle: nil)
         iconCollectionView.register(nib, forCellWithReuseIdentifier: "SmallIconCollectionViewCell")
 
-//        collectionTextField.delegate = self
-//        collectionTextField.becomeFirstResponder()
-//
+        collectionTextField.delegate = self
+        collectionTextField.becomeFirstResponder()
+
         collectionTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         
-//        setupGesture()
-//        setupNotificationCenter()
+        setupGesture()
+        setupNotificationCenter()
     }
     
     // MARK: - Objc Functions

@@ -14,7 +14,6 @@ class QuoteViewController: UITableViewController {
     // MARK: Variables
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    lazy var quoteActionSheetService = QuoteActionSheetService()
     lazy var editQuoteService = EditQuoteService()
     lazy var moveCollectionService = MoveCollectionService()
     lazy var updateAppContextService = UpdateAppContextService()
@@ -22,7 +21,7 @@ class QuoteViewController: UITableViewController {
     
     lazy var selectionHaptic = UISelectionFeedbackGenerator()
     
-    lazy var quoteSectionArray = QuoteSections.init().quoteSections
+    lazy var quoteSectionArray = [QuoteSection]()
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -62,29 +61,15 @@ class QuoteViewController: UITableViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.delegate = self
         
-//        if #available(iOS 13.0, *) {
-//            copyButton.image = UIImage.init(systemName: "doc.on.doc")
-//            favouriteButton.image = UIImage.init(systemName: "star")
-//            moveButton.image = UIImage.init(systemName: "folder")
-//            trashButton.image = UIImage.init(systemName: "trash")
-//            shareButton.image = UIImage.init(systemName: "square.and.arrow.up")
-//        } else {
-//            favouriteButton.image = nil
-//            moveButton.image = nil
-//            copyButton.image = nil
-//            trashButton.image = nil
-//            shareButton.image = nil
-//        }
-        
-        print("viewDidLoad")
+        reloadQuote()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         print("viewWillAppear")
+        reloadQuote()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        print("viewDidDisappear")
     }
     
     // MARK: - IBAction
@@ -206,12 +191,15 @@ class QuoteViewController: UITableViewController {
         selectedRows = [IndexPath]()
         
         editMode = false
-        selectedRows = [IndexPath]()
         
         self.navigationItem.rightBarButtonItems = [addButton]
         self.navigationController?.setToolbarHidden(true, animated: false)
    
         tableView.reloadData()
+        
+//        if quoteSectionArray.count > 0 {
+//            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .none, animated: true)
+//        }
     }
     
     func getSelectedQuotes() -> [Quote]? {
@@ -327,9 +315,18 @@ extension QuoteViewController: EditQuoteViewControllerDelegate {
 }
 
 extension QuoteViewController: MoveCollectionViewControllerDelegate {
-    func handleDismissal(endEditMode: Bool) {
+    func handleDismissal(endEditMode: Bool, reload: Bool) {
+        if reload {
+            loadQuotes()
+
+            if searchController.searchBar.text != "" {
+                searchController.isActive = false
+            }
+        }
+        
         if endEditMode {
             self.endEditMode()
         }
+
     }
 }

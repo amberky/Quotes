@@ -11,8 +11,6 @@ import UIKit
 // MARK: - Search Bar methods
 extension QuoteViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        print("updateSearchResults")
-        
 //        endEditMode()
 //        
 //        guard let searchText = searchController.searchBar.text?.trimmingCharacters(in: .whitespaces) else { return }
@@ -44,10 +42,6 @@ extension QuoteViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(searchQuote(searchBar:hideKeyboard:)), object: searchBar)
         self.perform(#selector(searchQuote(searchBar:hideKeyboard:)), with: searchBar, afterDelay: 0.1)
-        
-        if editMode {
-            endEditMode()
-        }
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -56,6 +50,10 @@ extension QuoteViewController: UISearchBarDelegate {
     }
     
     @objc func searchQuote(searchBar : UISearchBar, hideKeyboard : Bool = false) {
+        if editMode {
+            endEditMode()
+        }
+        
         if searchBar.text?.count == 0 {
             loadQuotes()
         }

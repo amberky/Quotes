@@ -97,7 +97,6 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout {
         let width = (collectionView.frame.width - 20 - 40) / 2
         let height = width + 20 + 20
 
-        print(collectionView.frame.width)
         return CGSize(width: width, height: height)
     }
     
