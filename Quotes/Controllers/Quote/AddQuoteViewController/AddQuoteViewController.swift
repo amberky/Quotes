@@ -210,6 +210,9 @@ class AddQuoteViewController: UIViewController {
             
             saveContext()
             
+            let destination = segue.destination as! QuoteViewController
+            destination.loadQuotes()
+            
         case "cancelClicked":
             print("Cancel bar button clicked")
             

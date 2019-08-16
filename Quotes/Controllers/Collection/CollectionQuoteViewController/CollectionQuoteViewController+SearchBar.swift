@@ -8,18 +8,26 @@
 
 import UIKit
 
+// MARK: - Search Bar methods
+extension CollectionQuoteViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        print("updateSearchResults")
+    }
+}
+
+
 extension CollectionQuoteViewController: UISearchBarDelegate {
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchBar.setShowsCancelButton(true, animated: true)
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchBar.setShowsCancelButton(false, animated: true)
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchQuote(searchBar: searchBar, hideKeyboard: true)
-    }
+//    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+//        searchBar.setShowsCancelButton(true, animated: true)
+//    }
+//
+//    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+//        searchBar.setShowsCancelButton(false, animated: true)
+//    }
+//
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        searchQuote(searchBar: searchBar, hideKeyboard: true)
+//    }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(searchQuote(searchBar:hideKeyboard:)), object: searchBar)
@@ -43,9 +51,9 @@ extension CollectionQuoteViewController: UISearchBarDelegate {
         
         if hideKeyboard {
             //Dispatch Queue assign the task to different threads
-            DispatchQueue.main.async {
-                searchBar.resignFirstResponder()
-            }
+//            DispatchQueue.main.async {
+//                searchBar.resignFirstResponder()
+//            }
         }
     }
 }

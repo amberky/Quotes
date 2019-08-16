@@ -7,17 +7,16 @@
 //
 
 import UIKit
-import CoreData
 
 class QuoteTableViewCell: UITableViewCell {
     @IBOutlet weak var quoteLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
     
     @IBOutlet weak var bgView: UIView!
-    
-    @IBOutlet weak var selectedButton: UIButton!
-    
+
     @IBOutlet var rowSelectedImage: UIImageView!
+    
+    @IBOutlet var selectedImageWidthConstraint: NSLayoutConstraint!
     
     var quote: Quote? {
         didSet {
@@ -34,6 +33,12 @@ class QuoteTableViewCell: UITableViewCell {
     var rowSelected: Bool = false {
         didSet {
             updateCheckedImage()
+        }
+    }
+    
+    var widthConstraint: CGFloat = 0 {
+        didSet {
+            updateWidthConstraint()
         }
     }
     
@@ -57,5 +62,10 @@ class QuoteTableViewCell: UITableViewCell {
         } else {
             rowSelectedImage.image = UIImage.init(named: "unchecked-blue")
         }
+    }
+    
+    func updateWidthConstraint() {
+        selectedImageWidthConstraint.constant = widthConstraint
+        self.updateConstraintsIfNeeded()
     }
 }

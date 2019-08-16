@@ -173,6 +173,9 @@ class AddCollectionViewController: UIViewController {
                 let destination = segue.destination as! SelectCollectionViewController
                 destination.loadCollections()
                 destination.selectedCollection.append(newCollection)
+            } else if segue.destination is CollectionViewController {
+                let destination = segue.destination as! CollectionViewController
+                destination.loadCollections()
             } else { return }
             
         case "cancelClicked":

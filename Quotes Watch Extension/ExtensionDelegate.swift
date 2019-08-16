@@ -88,7 +88,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         guard WCSession.default.activationState == .activated,
             WCSession.default.hasContentPending == false else { return }
         
-        wcBackgroundTasks.forEach { $0.setTaskCompleted() }
+        wcBackgroundTasks.forEach { $0.setTaskCompletedWithSnapshot(false) }
         
         // Schedule a snapshot refresh if the UI is updated by background tasks.
         //

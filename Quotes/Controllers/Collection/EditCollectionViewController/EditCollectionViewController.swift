@@ -15,6 +15,8 @@ class EditCollectionViewController: UIViewController {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     lazy var collectionActionSheetService = CollectionActionSheetService()
     
+    lazy var selectionHaptic = UISelectionFeedbackGenerator()
+    
     lazy var maxLength: Int = 500
     
     let iconMode = "-light" // -dark or -light
@@ -64,11 +66,35 @@ class EditCollectionViewController: UIViewController {
     @IBAction func deleteButtonClicked(_ sender: Any) {
         checkAndResignFirstResponder()
         
-        let collectionActionSheetVC = collectionActionSheetService.show(collection: selectedCollection!)
-        collectionActionSheetVC.delegate = self
+        selectionHaptic.selectionChanged()
         
-        self.view.alpha = 0.6;
-        self.present(collectionActionSheetVC, animated: true)
+        let alert = UIAlertController.init(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
+            let request: NSFetchRequest<Collection> = Collection.fetchRequest()
+            request.predicate = NSPredicate(format: "name == %@", self.selectedCollection?.name ?? "")
+            
+            do {
+                if let collection = try self.context.fetch(request) as [NSManagedObject]? {
+                    if collection.count > 0 {
+                        self.context.delete(collection[0])
+                        self.saveContext()
+                    }
+                }
+            } catch {
+                print("Error deleting data \(error)")
+            }
+            
+            self.performSegue(withIdentifier: "BackToCollectionView", sender: self)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        alert.view.tintColor = UIColor.mainBlue()
+        
+        present(alert, animated: true)
     }
     
     // MARK: - Objc Functions

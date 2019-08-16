@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  QuoteViewController.swift
 //  Quotes
 //
 //  Created by Kharnyee Eu on 21/07/2019.
@@ -24,21 +24,22 @@ class QuoteViewController: UITableViewController {
     
     lazy var quoteSectionArray = QuoteSections.init().quoteSections
     
+    let searchController = UISearchController(searchResultsController: nil)
+    
     var colorArray = ColorTheme.init(alpha: 0.2).colorArray
     var colorCount: Int = 0
     
     var editMode = false
     var selectedRows = [IndexPath]()
     
-    
     // MARK: - IBOutlet
-    @IBOutlet var searchBar: UISearchBar!
-    
     @IBOutlet var addButton: UIBarButtonItem!
-    @IBOutlet var actionButton: UIBarButtonItem!
     @IBOutlet var cancelButton: UIBarButtonItem!
-    
-    let searchController = UISearchController(searchResultsController: nil)
+    @IBOutlet var favouriteButton: UIBarButtonItem!
+    @IBOutlet var copyButton: UIBarButtonItem!
+    @IBOutlet var moveButton: UIBarButtonItem!
+    @IBOutlet var trashButton: UIBarButtonItem!
+    @IBOutlet var shareButton: UIBarButtonItem!
     
     // MARK: - View
     override func viewDidLoad() {
@@ -54,25 +55,62 @@ class QuoteViewController: UITableViewController {
         
         self.navigationItem.searchController = searchController
         self.definesPresentationContext = true
+        
         searchController.searchResultsUpdater = self
         searchController.searchBar.tintColor = UIColor.mainBlue()
+
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.delegate = self
         
+//        if #available(iOS 13.0, *) {
+//            copyButton.image = UIImage.init(systemName: "doc.on.doc")
+//            favouriteButton.image = UIImage.init(systemName: "star")
+//            moveButton.image = UIImage.init(systemName: "folder")
+//            trashButton.image = UIImage.init(systemName: "trash")
+//            shareButton.image = UIImage.init(systemName: "square.and.arrow.up")
+//        } else {
+//            favouriteButton.image = nil
+//            moveButton.image = nil
+//            copyButton.image = nil
+//            trashButton.image = nil
+//            shareButton.image = nil
+//        }
+        
+        print("viewDidLoad")
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.loadQuotes()
+        print("viewWillAppear")
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        print("viewDidDisappear")
     }
-    
     
     // MARK: - IBAction
-    @IBAction func actionClicked(_ sender: Any) {
-        showActionSheet()
+    @IBAction func cancelClicked(_ sender: Any) {
+        endEditMode()
     }
     
-    @IBAction func cancelClicked(_ sender: Any) {
+    @IBAction func favouriteClicked(_ sender: Any) {
+
+        selectionHaptic.selectionChanged()
+        
+        guard let quotes = getSelectedQuotes() else { return }
+        
+        var isPin = true
+        if favouriteButton.title == "Favourite" {
+            isPin = true
+        } else {
+            isPin = false
+        }
+        
+        for i in quotes {
+            i.setValue(isPin, forKey: "isPin")
+            i.setValue(Date(), forKey: "updatedOn")
+        }
+        saveContext()
+
         endEditMode()
     }
     
@@ -134,6 +172,48 @@ class QuoteViewController: UITableViewController {
     }
     
     // MARK: - Functions
+    func loadQuotes(predicate: NSPredicate? = nil) {
+        quoteSectionArray = QuoteSections.init(customPredicate: predicate).quoteSections
+        
+        tableView.reloadData()
+        
+        if quoteSectionArray.count > 0, (quoteSectionArray.first?.quotes.count ?? 0) > 1 {
+            
+            let deadline = DispatchTime.now() + .seconds(1)
+            
+            DispatchQueue.main.asyncAfter(deadline: deadline) {
+                self.reviewService.requestReview()
+            }
+        }
+    }
+    
+    func configureTableView() {
+        tableView.estimatedRowHeight = 500.0
+        tableView.rowHeight = UITableView.automaticDimension
+    }
+    
+    func beginEditMode() {
+        selectedRows = [IndexPath]()
+        editMode = true
+        
+        self.navigationItem.rightBarButtonItems = [cancelButton]
+        self.navigationController?.setToolbarHidden(false, animated: false)
+        
+        tableView.reloadData()
+    }
+    
+    func endEditMode() {
+        selectedRows = [IndexPath]()
+        
+        editMode = false
+        selectedRows = [IndexPath]()
+        
+        self.navigationItem.rightBarButtonItems = [addButton]
+        self.navigationController?.setToolbarHidden(true, animated: false)
+   
+        tableView.reloadData()
+    }
+    
     func getSelectedQuotes() -> [Quote]? {
         if selectedRows.count > 0 {
             var quotes = [Quote]()
@@ -168,52 +248,6 @@ class QuoteViewController: UITableViewController {
         return str
     }
     
-    func loadQuotes(predicate: NSPredicate? = nil) {
-        quoteSectionArray = QuoteSections.init(customPredicate: predicate).quoteSections
-        
-        tableView.reloadData()
-        
-        if quoteSectionArray.count > 0, (quoteSectionArray.first?.quotes.count ?? 0) > 1 {
-            
-            let deadline = DispatchTime.now() + .seconds(1)
-            
-            DispatchQueue.main.asyncAfter(deadline: deadline) {
-                self.reviewService.requestReview()
-            }
-        }
-    }
-    
-    func configureTableView() {
-        tableView.allowsSelection = true
-        tableView.allowsMultipleSelection = true
-        tableView.allowsSelectionDuringEditing = true
-        tableView.allowsMultipleSelectionDuringEditing = true
-        tableView.estimatedRowHeight = 500.0
-        tableView.rowHeight = UITableView.automaticDimension
-    }
-    
-    func beginEditMode() {
-        selectedRows = [IndexPath]()
-        editMode = true
-        
-        self.navigationItem.rightBarButtonItems = [cancelButton]
-        self.navigationController?.setToolbarHidden(false, animated: false)
-        
-        tableView.reloadData()
-    }
-    
-    func endEditMode() {
-        selectedRows = [IndexPath]()
-        
-        editMode = false
-        selectedRows = [IndexPath]()
-        
-        self.navigationItem.rightBarButtonItems = [addButton]
-        self.navigationController?.setToolbarHidden(true, animated: false)
-   
-        tableView.reloadData()
-    }
-    
     func saveContext() {
         do {
             try context.save()
@@ -232,26 +266,6 @@ class QuoteViewController: UITableViewController {
     }
     
     func checkAndResignFirstResponder() {
-//        if searchBar.isFirstResponder {
-//            searchBar.resignFirstResponder()
-//        }
-    }
-    
-    func showActionSheet() {
-        if selectedRows.count > 0 {
-            var quotes = [Quote]()
-            
-            for i in selectedRows {
-                let quote = quoteSectionArray[i.section].quotes[i.row]
-                quotes.append(quote)
-            }
-            
-            let quoteActionSheetVC = quoteActionSheetService.show(quotes: quotes, collection: nil)
-            quoteActionSheetVC.delegate = self
-            
-            self.navigationController?.view.alpha = 0.6;
-            self.present(quoteActionSheetVC, animated: true)
-        }
     }
     
     func pinQuote(indexPath: IndexPath) {
@@ -266,7 +280,7 @@ class QuoteViewController: UITableViewController {
         for q in quotes {
             context.delete(q)
         }
-
+        
         saveContext()
         loadQuotes()
         endEditMode()
@@ -289,6 +303,7 @@ class QuoteViewController: UITableViewController {
         guard segue.identifier != nil else { return }
         
         checkAndResignFirstResponder()
+        
         if editMode {
             endEditMode()
         }
@@ -300,39 +315,6 @@ class QuoteViewController: UITableViewController {
             print("unknown segue identifier")
             
         }
-    }
-}
-
-// MARK: - QuoteActionSheetViewControllerDelegate
-extension QuoteViewController: QuoteActionSheetViewControllerDelegate {
-    func handleDismissal() {
-        UIView.animate(withDuration: 0.1) {
-            self.navigationController?.view.alpha = 1
-        }
-    }
-    
-    func handleEditQuote(cell: QuoteTableViewCell, objectId: NSManagedObjectID) {
-        let editQuoteVC = editQuoteService.show(cell: cell, objectId: objectId)
-        editQuoteVC.delegate = self
-        
-        self.present(editQuoteVC, animated: true)
-    }
-    
-    func handleMoveCollection(quotes: [Quote]) {
-        let moveCollectionVC = moveCollectionService.show(quotes: quotes)
-        
-        self.present(moveCollectionVC, animated: true)
-    }
-    
-    func handleRemoveFromCollection(reload: Bool) {
-        if reload {
-            reloadQuote()
-        }
-    }
-    
-    func handleShare(text: String) {
-        let vc = UIActivityViewController(activityItems: [text], applicationActivities: [])
-        present(vc, animated: true, completion: nil)
     }
 }
 

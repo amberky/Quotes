@@ -14,7 +14,7 @@ class MoveCollectionService {
         
         let vc = storyboard.instantiateViewController(withIdentifier: "MoveCollectionVC") as! MoveCollectionViewController
         
-        vc.modalPresentationStyle = .custom
+        vc.modalPresentationStyle = .popover
         vc.quotes = quotes
         
         return vc

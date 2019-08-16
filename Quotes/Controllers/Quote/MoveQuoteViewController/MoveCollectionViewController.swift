@@ -13,7 +13,7 @@ protocol MoveCollectionViewControllerDelegate {
     func handleDismissal(endEditMode: Bool)
 }
 
-class MoveCollectionViewController: UIViewController {
+class MoveCollectionViewController: UITableViewController {
     
     // MARK: Variables
     lazy var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -24,27 +24,32 @@ class MoveCollectionViewController: UIViewController {
     
     var collectionArray = [Collection]()
     var selectedCollection = [Collection?]()
+    var removedCollection = [Collection?]()
     
     var quotes = [Quote]()
     
     var edited = false
     
-    // MARK: - IBOutlet
-    @IBOutlet weak var collectionTableView: UITableView!
+    lazy var checked = 0
+    lazy var interminate = 1
+    lazy var unchecked = 2
+    
+    var qCollections = [Collection?]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        collectionTableView.delegate = self
-        collectionTableView.dataSource = self
         
-        collectionTableView.allowsMultipleSelection = true
+        print("viewDidLoad")
         
         loadCollections()
-        
-        // NOTE: if select multiple, no selectedCollection
-        if quotes.count == 1 {
-            selectedCollection = quotes.first!.collections?.allObjects as! [Collection]
+        configureTableView()
+    }
+    
+    func configureTableView() {
+        for i in quotes {
+            for j in (i.collections?.allObjects as! [Collection]) {
+                qCollections.append(j)
+            }
         }
     }
     
@@ -53,22 +58,28 @@ class MoveCollectionViewController: UIViewController {
         print("done bar button clicked")
         
         if edited {
-            var selectedArray = [Collection]()
-            if let indexPaths = collectionTableView.indexPathsForSelectedRows {
-                for i in indexPaths {
-                    selectedArray.append(collectionArray[i.row])
-                }
-            }
-            
             for quote in quotes {
-                for c in quote.collections! {
-                    quote.removeFromCollections(c as! Collection)
+//                for c in quote.collections! {
+//                    quote.removeFromCollections(c as! Collection)
+//                }
+                
+                if removedCollection.count > 0 {
+                    for c in removedCollection {
+                        c!.updatedOn = Date()
+                        
+                        if quote.collections?.contains(c!) == true {
+                            quote.removeFromCollections(c!)
+                        }
+                    }
                 }
                 
-                if selectedArray.count > 0 {
-                    for c in selectedArray {
-                        c.updatedOn = Date()
-                        quote.addToCollections(c)
+                if selectedCollection.count > 0 {
+                    for c in selectedCollection {
+                        c!.updatedOn = Date()
+                        
+                        if quote.collections?.contains(c!) == false {
+                            quote.addToCollections(c!)
+                        }
                     }
                 }
             }
@@ -96,7 +107,7 @@ class MoveCollectionViewController: UIViewController {
             print("Error fetching data from context \(error)")
         }
         
-        collectionTableView.reloadData()
+        tableView.reloadData()
     }
     
     func saveContext() {
@@ -119,6 +130,7 @@ class MoveCollectionViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier else { return }
         
+        print("prepare")
         switch identifier {
         case "goToAddCollectionFromMoveView":
             // perform Add New Collection
@@ -131,13 +143,12 @@ class MoveCollectionViewController: UIViewController {
 }
 
 // MARK: - UITableViewDelegate
-extension MoveCollectionViewController: UITableViewDataSource, UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension MoveCollectionViewController {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return collectionArray.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CollectionCell", for: indexPath) as! CollectionTableViewCell
         
         cell.selectionStyle = .none
@@ -145,34 +156,67 @@ extension MoveCollectionViewController: UITableViewDataSource, UITableViewDelega
         let collection = collectionArray[indexPath.row]
         
         cell.collectionLabel?.text = collection.name
+        print("cellForRowAt")
+        
+        let collectionCount = qCollections.filter({ (m) -> Bool in m?.name == collection.name }).count
+
+//        if collectionCount > 0 {
+//            if selectedCollection.contains(collection) {
+//                cell.rowSelected = checked
+//            } else if collectionCount == quotes.count {
+//                cell.rowSelected = checked
+//            } else {
+//                cell.rowSelected = interminate
+//            }
+//        } else {
+//            if selectedCollection.contains(collection) {
+//                cell.rowSelected = checked
+//            } else {
+//                cell.rowSelected = unchecked
+//            }
+//        }
+        
+        if selectedCollection.contains(collection) {
+            cell.rowSelected = checked
+        } else if removedCollection.contains(collection) {
+            cell.rowSelected = unchecked
+        } else if collectionCount > 0 {
+            if collectionCount == quotes.count {
+                cell.rowSelected = checked
+                selectedCollection.append(collection)
+            } else {
+                cell.rowSelected = interminate
+            }
+        } else {
+            cell.rowSelected = unchecked
+        }
         
         return cell
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        edited = true
+
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CollectionCell", for: indexPath) as! CollectionTableViewCell
         let collection = collectionArray[indexPath.row]
         
         if selectedCollection.contains(collection) {
-            cell.accessoryType = .checkmark
-            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+            cell.rowSelected = unchecked
+            tableView.deselectRow(at: indexPath, animated: false)
+            
+            guard let index = selectedCollection.firstIndex(of: collection) else { return }
+            selectedCollection.remove(at: index)
+            
+            if qCollections.contains(collection) {
+                removedCollection.append(collection)
+            }
         } else {
-            cell.accessoryType = .none
+            cell.rowSelected = checked
+            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+            
+            selectedCollection.append(collection)
         }
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        edited = true
-        tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
         
-        selectedCollection.append(collectionArray[indexPath.row])
-    }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        edited = true
-        tableView.cellForRow(at: indexPath)?.accessoryType = .none
-        
-        guard let index = selectedCollection.firstIndex(of: collectionArray[indexPath.row]) else { return }
-        selectedCollection.remove(at: index)
+        tableView.reloadRows(at: [indexPath], with: .none)
     }
 }
