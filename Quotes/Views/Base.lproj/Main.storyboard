@@ -18,9 +18,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="sectionIndexTrackingBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="QCb-qt-xvW">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="15"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="QuoteCell" rowHeight="183.99999999999997" id="4Ow-nR-UmW" customClass="QuoteTableViewCell" customModule="Quotes" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="184"/>
+                                <rect key="frame" x="0.0" y="70.333332061767578" width="375" height="184"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4Ow-nR-UmW" id="p05-AC-sj4">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="184"/>
@@ -35,14 +40,14 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aku-v5-nPK" userLabel="Label View">
                                                             <rect key="frame" x="30" y="20" width="275" height="124"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AUL-Nj-N16">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="275" height="87"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AUL-Nj-N16">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="275" height="75"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="phT-UF-BzG" userLabel="Space">
-                                                                    <rect key="frame" x="0.0" y="87" width="275" height="13"/>
+                                                                    <rect key="frame" x="0.0" y="75" width="275" height="25"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </view>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4eh-ly-3VF">
@@ -58,7 +63,7 @@
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstItem="AUL-Nj-N16" firstAttribute="top" secondItem="aku-v5-nPK" secondAttribute="top" id="3V8-PV-Wha"/>
-                                                                <constraint firstItem="phT-UF-BzG" firstAttribute="height" secondItem="4eh-ly-3VF" secondAttribute="height" multiplier="0.5" constant="1" id="8aP-nP-g5z"/>
+                                                                <constraint firstItem="phT-UF-BzG" firstAttribute="height" secondItem="4eh-ly-3VF" secondAttribute="height" constant="1" id="8aP-nP-g5z"/>
                                                                 <constraint firstAttribute="bottom" secondItem="4eh-ly-3VF" secondAttribute="bottom" id="AsY-ng-YNC"/>
                                                                 <constraint firstItem="4eh-ly-3VF" firstAttribute="leading" secondItem="aku-v5-nPK" secondAttribute="leading" id="UD6-ry-oWE"/>
                                                                 <constraint firstAttribute="trailing" secondItem="AUL-Nj-N16" secondAttribute="trailing" id="UMQ-3w-vvO"/>
@@ -131,31 +136,31 @@
                         <barButtonItem systemItem="flexibleSpace" id="y8l-ko-ifV">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
-                        <barButtonItem title="Favourite" width="80" id="sl1-QY-Oe7">
+                        <barButtonItem title="Favourite" id="sl1-QY-Oe7">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="favouriteClicked:" destination="xTY-V2-drf" id="joJ-eI-Yuk"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem title="Copy" width="80" id="Q2y-xr-g8T">
+                        <barButtonItem title="Copy" id="Q2y-xr-g8T">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="copyClicked:" destination="xTY-V2-drf" id="HMy-xE-Zxf"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem title="Move" width="80" id="Snp-BS-eea">
+                        <barButtonItem title="Move" id="Snp-BS-eea">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="moveClicked:" destination="xTY-V2-drf" id="m45-ry-ulG"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem title="Delete" width="80" id="v1p-j9-b8A">
+                        <barButtonItem title="Delete" id="v1p-j9-b8A">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="deleteClicked:" destination="xTY-V2-drf" id="r8U-aG-37s"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem title="Share" width="80" id="YDq-Ag-uFP">
+                        <barButtonItem title="Share" id="YDq-Ag-uFP">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="shareClicked:" destination="xTY-V2-drf" id="CdV-Y4-ood"/>
@@ -193,10 +198,10 @@
                         <outlet property="addButton" destination="OMS-UJ-1s1" id="cs2-dJ-rP0"/>
                         <outlet property="cancelButton" destination="1Ti-db-onl" id="BTU-ml-O8z"/>
                         <outlet property="copyButton" destination="Q2y-xr-g8T" id="7T0-jK-hva"/>
+                        <outlet property="deleteButton" destination="v1p-j9-b8A" id="HdE-1v-2tf"/>
                         <outlet property="favouriteButton" destination="sl1-QY-Oe7" id="dxg-6u-tKI"/>
                         <outlet property="moveButton" destination="Snp-BS-eea" id="mmx-xb-BNC"/>
                         <outlet property="shareButton" destination="YDq-Ag-uFP" id="zN5-Z0-FKo"/>
-                        <outlet property="trashButton" destination="v1p-j9-b8A" id="fT5-pe-0KB"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5va-4l-PFb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -795,9 +800,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="w8M-Fb-nrm">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="15"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="QuoteCell" rowHeight="190" id="RYt-ZG-9aO" customClass="QuoteTableViewCell" customModule="Quotes" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="55.333332061767578" width="375" height="190"/>
+                                <rect key="frame" x="0.0" y="70.333332061767578" width="375" height="190"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RYt-ZG-9aO" id="WAM-LF-OId">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
@@ -812,14 +822,14 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oQr-1x-ytU" userLabel="Label View">
                                                             <rect key="frame" x="30" y="20" width="280" height="130"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2EX-Uv-Dns">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="280" height="93"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2EX-Uv-Dns">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="280" height="81"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PqW-Bf-a8b" userLabel="Space">
-                                                                    <rect key="frame" x="0.0" y="93" width="280" height="13"/>
+                                                                    <rect key="frame" x="0.0" y="81" width="280" height="25"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </view>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xif-H7-18A">
@@ -842,7 +852,7 @@
                                                                 <constraint firstItem="xif-H7-18A" firstAttribute="top" secondItem="PqW-Bf-a8b" secondAttribute="bottom" id="Xaw-wK-HM9"/>
                                                                 <constraint firstItem="PqW-Bf-a8b" firstAttribute="leading" secondItem="oQr-1x-ytU" secondAttribute="leading" id="d3X-FG-m3A"/>
                                                                 <constraint firstItem="PqW-Bf-a8b" firstAttribute="top" secondItem="2EX-Uv-Dns" secondAttribute="bottom" id="eCG-Gi-Dbb"/>
-                                                                <constraint firstItem="PqW-Bf-a8b" firstAttribute="height" secondItem="xif-H7-18A" secondAttribute="height" multiplier="0.5" constant="1" id="iZJ-ZG-B8a"/>
+                                                                <constraint firstItem="PqW-Bf-a8b" firstAttribute="height" secondItem="xif-H7-18A" secondAttribute="height" constant="1" id="iZJ-ZG-B8a"/>
                                                                 <constraint firstItem="xif-H7-18A" firstAttribute="leading" secondItem="oQr-1x-ytU" secondAttribute="leading" id="kiw-8R-cjm"/>
                                                                 <constraint firstAttribute="trailing" secondItem="xif-H7-18A" secondAttribute="trailing" id="oid-Rh-D6s"/>
                                                             </constraints>
@@ -907,31 +917,31 @@
                         <barButtonItem systemItem="flexibleSpace" id="LcD-iQ-gtb">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
-                        <barButtonItem title="Favourite" width="80" id="uSJ-PB-HU4">
+                        <barButtonItem title="Favourite" id="uSJ-PB-HU4">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="favouriteClicked:" destination="Qqg-MU-Q1I" id="zYU-L2-Qjy"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem title="Copy" width="80" id="If1-ia-TOn">
+                        <barButtonItem title="Copy" id="If1-ia-TOn">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="copyClicked:" destination="Qqg-MU-Q1I" id="p5c-2Z-0h4"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem title="Move" width="80" id="Y5E-R8-HTx">
+                        <barButtonItem title="Move" id="Y5E-R8-HTx">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="moveClicked:" destination="Qqg-MU-Q1I" id="XVg-Bd-O8a"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem title="Delete" width="80" id="5zx-tn-yNx">
+                        <barButtonItem title="Delete" id="5zx-tn-yNx">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="deleteClicked:" destination="Qqg-MU-Q1I" id="o7c-dw-Ajo"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem title="Share" width="80" id="ato-ZD-7wJ">
+                        <barButtonItem title="Share" id="ato-ZD-7wJ">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="shareClicked:" destination="Qqg-MU-Q1I" id="rwJ-g2-lLp"/>
@@ -961,11 +971,11 @@
                     <connections>
                         <outlet property="cancelButton" destination="w7g-dJ-6FN" id="3du-GZ-UPu"/>
                         <outlet property="copyButton" destination="If1-ia-TOn" id="SdT-g5-ngc"/>
+                        <outlet property="deleteButton" destination="5zx-tn-yNx" id="Vii-Tn-RLa"/>
                         <outlet property="editButton" destination="3oS-bA-qVP" id="mZ8-r3-LSf"/>
                         <outlet property="favouriteButton" destination="uSJ-PB-HU4" id="eRn-AK-b0b"/>
                         <outlet property="moveButton" destination="Y5E-R8-HTx" id="9FK-Dv-ZUb"/>
                         <outlet property="shareButton" destination="ato-ZD-7wJ" id="u0l-LY-BIp"/>
-                        <outlet property="trashButton" destination="5zx-tn-yNx" id="8hL-hc-0fi"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HkO-tU-hVX" userLabel="First Responder" sceneMemberID="firstResponder"/>

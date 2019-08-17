@@ -93,15 +93,17 @@ extension CollectionQuoteViewController {
             } else {
                 favouriteButton.title = "Favourite"
             }
-        } else {
-            tableView.beginUpdates()
-            if cell.quoteLabel.numberOfLines == 0 {
-                cell.quoteLabel.numberOfLines = 2
-            } else {
-                cell.quoteLabel.numberOfLines = 0
-            }
-            tableView.endUpdates()
         }
+        
+//        else {
+//            tableView.beginUpdates()
+//            if cell.quoteLabel.numberOfLines == 0 {
+//                cell.quoteLabel.numberOfLines = 2
+//            } else {
+//                cell.quoteLabel.numberOfLines = 0
+//            }
+//            tableView.endUpdates()
+//        }
     }
     
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -155,6 +157,25 @@ extension CollectionQuoteViewController {
             
             let size = 35
             
+            let editAction = UIContextualAction(style: .normal, title: nil) { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
+                
+                self.selectionHaptic.selectionChanged()
+                
+                completionHandler(false)
+                
+                self.editQuote(indexPath: indexPath)
+            }
+            
+            let editImage = UIGraphicsImageRenderer(size: CGSize(width: size, height: size)).image { _ in
+                UIImage(named: "pencil-blue")?.draw(in: CGRect(x: 0, y: 0, width: size, height: size))
+            }
+            
+            if let cgImageX = editImage.cgImage {
+                editAction.image = ImageWithoutRender(cgImage: cgImageX, scale: UIScreen.main.nativeScale, orientation: .up)
+            }
+            
+            editAction.backgroundColor = .white
+            
             let action = UIContextualAction(style: .destructive, title: nil) { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
                 
                 self.selectionHaptic.selectionChanged()
@@ -183,7 +204,7 @@ extension CollectionQuoteViewController {
             
             action.backgroundColor = .white
             
-            let swipeAction = UISwipeActionsConfiguration(actions: [action])
+            let swipeAction = UISwipeActionsConfiguration(actions: [action, editAction])
             //            swipeAction.performsFirstActionWithFullSwipe = false
             
             return swipeAction

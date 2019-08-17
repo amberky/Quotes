@@ -15,7 +15,7 @@ class EditQuoteService {
 
         let vc = storyboard.instantiateViewController(withIdentifier: "EditQuoteVC") as! EditQuoteViewController
 
-        vc.modalPresentationStyle = .custom
+        vc.modalPresentationStyle = .popover
         vc.cell = cell
         vc.objectId = objectId
 

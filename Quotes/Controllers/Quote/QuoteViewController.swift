@@ -37,7 +37,7 @@ class QuoteViewController: UITableViewController {
     @IBOutlet var favouriteButton: UIBarButtonItem!
     @IBOutlet var copyButton: UIBarButtonItem!
     @IBOutlet var moveButton: UIBarButtonItem!
-    @IBOutlet var trashButton: UIBarButtonItem!
+    @IBOutlet var deleteButton: UIBarButtonItem!
     @IBOutlet var shareButton: UIBarButtonItem!
     
     // MARK: - View

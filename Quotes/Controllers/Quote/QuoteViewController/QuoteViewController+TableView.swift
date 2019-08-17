@@ -44,7 +44,7 @@ extension QuoteViewController {
         
         cell.quote = quote
         cell.color = colorArray[mod]
-        
+
         if editMode {
             cell.rowSelectedImage.isHidden = false
             cell.widthConstraint = 30
@@ -93,15 +93,16 @@ extension QuoteViewController {
             } else {
                 favouriteButton.title = "Favourite"
             }
-        } else {
-            tableView.beginUpdates()
-            if cell.quoteLabel.numberOfLines == 0 {
-                cell.quoteLabel.numberOfLines = 2
-            } else {
-                cell.quoteLabel.numberOfLines = 0
-            }
-            tableView.endUpdates()
         }
+//        else {
+//            tableView.beginUpdates()
+//            if cell.quoteLabel.numberOfLines == 0 {
+//                cell.quoteLabel.numberOfLines = 2
+//            } else {
+//                cell.quoteLabel.numberOfLines = 0
+//            }
+//            tableView.endUpdates()
+//        }
     }
     
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
