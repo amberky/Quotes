@@ -65,9 +65,9 @@ extension QuoteViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let cell = tableView.cellForRow(at: indexPath) as! QuoteTableViewCell
-        
         if editMode {
+            let cell = tableView.cellForRow(at: indexPath) as! QuoteTableViewCell
+            
             selectionHaptic.selectionChanged()
             
             if selectedRows.contains(indexPath) {
@@ -87,22 +87,15 @@ extension QuoteViewController {
                 
                 if groupPin.isPin == true {
                     favouriteButton.title = "Unfavourite"
+                    self.favouriteButton.image = self.heartImage
                 } else {
                     favouriteButton.title = "Favourite"
+                    self.favouriteButton.image = self.unheartImage
                 }
             } else {
                 favouriteButton.title = "Favourite"
             }
         }
-//        else {
-//            tableView.beginUpdates()
-//            if cell.quoteLabel.numberOfLines == 0 {
-//                cell.quoteLabel.numberOfLines = 2
-//            } else {
-//                cell.quoteLabel.numberOfLines = 0
-//            }
-//            tableView.endUpdates()
-//        }
     }
     
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -114,14 +107,10 @@ extension QuoteViewController {
             
             selectionHaptic.prepare()
             
-            let size = 25
+            let size = 30
             
             let quoteInfo = quoteSectionArray[indexPath.section].quotes[indexPath.row]
-            var pinIcon = "star-yellow"
             
-            if quoteInfo.isPin == true {
-                pinIcon = "unstar-yellow"
-            }
             
             let pinAction = UIContextualAction(style: .normal, title: nil) { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
                 
@@ -131,12 +120,10 @@ extension QuoteViewController {
                 completionHandler(true)
             }
             
-            let pinImage = UIGraphicsImageRenderer(size: CGSize(width: size, height: size)).image { _ in
-                UIImage(named: pinIcon)?.draw(in: CGRect(x: 0, y: 0, width: size, height: size))
-            }
-            
-            if let cgImageX =  pinImage.cgImage {
-                pinAction.image = ImageWithoutRender(cgImage: cgImageX, scale: UIScreen.main.nativeScale , orientation: .up)
+            if quoteInfo.isPin == true {
+                pinAction.image = UIIconExtension.init(size: size).unheartPink()
+            } else {
+                pinAction.image = UIIconExtension.init(size: size).heartpink()
             }
             
             pinAction.backgroundColor = .white
@@ -154,27 +141,8 @@ extension QuoteViewController {
                 searchController.searchBar.resignFirstResponder()
             }
             
-            let size = 35
-            
-            let editAction = UIContextualAction(style: .normal, title: nil) { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
-                
-                self.selectionHaptic.selectionChanged()
-                
-                completionHandler(false)
-                
-                self.editQuote(indexPath: indexPath)
-            }
-            
-            let editImage = UIGraphicsImageRenderer(size: CGSize(width: size, height: size)).image { _ in
-                UIImage(named: "pencil-blue")?.draw(in: CGRect(x: 0, y: 0, width: size, height: size))
-            }
-            
-            if let cgImageX = editImage.cgImage {
-                editAction.image = ImageWithoutRender(cgImage: cgImageX, scale: UIScreen.main.nativeScale, orientation: .up)
-            }
-            
-            editAction.backgroundColor = .white
-            
+            let size = 30
+  
             let action = UIContextualAction(style: .normal, title: nil) { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
                 
                 self.selectionHaptic.selectionChanged()
@@ -186,25 +154,20 @@ extension QuoteViewController {
                 let quote = self.quoteSectionArray[indexPath.section].quotes[indexPath.row]
                 if quote.isPin == true {
                     self.favouriteButton.title = "Unfavourite"
+                    self.favouriteButton.image = self.heartImage
                 } else {
                     self.favouriteButton.title = "Favourite"
+                    self.favouriteButton.image = self.unheartImage
                 }
                 
                 completionHandler(false)
             }
             
-            let image = UIGraphicsImageRenderer(size: CGSize(width: size, height: size)).image { _ in
-                UIImage(named: "list-blue")?.draw(in: CGRect(x: 0, y: 0, width: size, height: size))
-            }
-            
-            if let cgImageX = image.cgImage {
-                action.image = ImageWithoutRender(cgImage: cgImageX, scale: UIScreen.main.nativeScale, orientation: .up)
-            }
+            action.image = UIIconExtension.init(size: size).listBlue()
             
             action.backgroundColor = .white
             
-            let swipeAction = UISwipeActionsConfiguration(actions: [action, editAction])
-            //            swipeAction.performsFirstActionWithFullSwipe = false
+            let swipeAction = UISwipeActionsConfiguration(actions: [action])
             
             return swipeAction
         } else {

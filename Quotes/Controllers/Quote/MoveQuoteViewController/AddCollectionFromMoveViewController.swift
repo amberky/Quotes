@@ -155,8 +155,7 @@ class AddCollectionFromMoveViewController: UIViewController {
         
         switch identifier {
         case "doneClicked":
-            checkAndResignFirstResponder()
-
+            
             let newCollection = Collection(context: self.context)
             newCollection.name = (collectionTextField.text ?? "").trimmingCharacters(in: .whitespaces)
             newCollection.icon = iconArray[selectedIndex].name

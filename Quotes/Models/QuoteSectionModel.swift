@@ -102,7 +102,7 @@ class QuoteSections {
     var quoteSections: [QuoteSection] = [QuoteSection]()
     
     init(customPredicate: NSPredicate? = nil) {
-        let pinned = QuoteSection.init(sectionName: "FAVOURITE QUOTES", sectionIcon: "star-darkgray", isPin: true, customPredicate: customPredicate)
+        let pinned = QuoteSection.init(sectionName: "FAVOURITE QUOTES", sectionIcon: "heart-thin-darkgray", isPin: true, customPredicate: customPredicate)
         
         if pinned.quotes.count > 0 {
             quoteSections.append(pinned)
@@ -116,7 +116,7 @@ class QuoteSections {
     }
     
     init(collection: String? = nil, customPredicate: NSPredicate? = nil) {
-        let pinned = QuoteSection.init(sectionName: "FAVOURITE QUOTES", sectionIcon: "star-darkgray", isPin: true, collection: collection, customPredicate: customPredicate)
+        let pinned = QuoteSection.init(sectionName: "FAVOURITE QUOTES", sectionIcon: "heart-thin-darkgray", isPin: true, collection: collection, customPredicate: customPredicate)
         
         if pinned.quotes.count > 0 {
             quoteSections.append(pinned)

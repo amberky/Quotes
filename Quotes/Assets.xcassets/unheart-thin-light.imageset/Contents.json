@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Star-light-ultratin.png",
+      "filename" : "unheart-ulthin.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Star-light-ultratin@2x.png",
+      "filename" : "unheart-ulthin@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Star-light-ultratin@3x.png",
+      "filename" : "unheart-ulthin@3x.png",
       "scale" : "3x"
     }
   ],

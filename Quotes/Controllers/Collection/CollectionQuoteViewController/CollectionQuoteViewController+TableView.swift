@@ -115,14 +115,9 @@ extension CollectionQuoteViewController {
             
             selectionHaptic.prepare()
             
-            let size = 25
+            let size = 30
             
             let quoteInfo = quoteSectionArray[indexPath.section].quotes[indexPath.row]
-            var pinIcon = "star-yellow"
-            
-            if quoteInfo.isPin == true {
-                pinIcon = "unstar-yellow"
-            }
             
             let pinAction = UIContextualAction(style: .normal, title: nil) { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
                 
@@ -132,12 +127,10 @@ extension CollectionQuoteViewController {
                 completionHandler(true)
             }
             
-            let pinImage = UIGraphicsImageRenderer(size: CGSize(width: size, height: size)).image { _ in
-                UIImage(named: pinIcon)?.draw(in: CGRect(x: 0, y: 0, width: size, height: size))
-            }
-            
-            if let cgImageX =  pinImage.cgImage {
-                pinAction.image = ImageWithoutRender(cgImage: cgImageX, scale: UIScreen.main.nativeScale , orientation: .up)
+            if quoteInfo.isPin == true {
+                pinAction.image = UIIconExtension.init(size: size).unheartPink()
+            } else {
+                pinAction.image = UIIconExtension.init(size: size).heartpink()
             }
             
             pinAction.backgroundColor = .white
@@ -155,26 +148,7 @@ extension CollectionQuoteViewController {
                 searchController.searchBar.resignFirstResponder()
             }
             
-            let size = 35
-            
-            let editAction = UIContextualAction(style: .normal, title: nil) { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
-                
-                self.selectionHaptic.selectionChanged()
-                
-                completionHandler(false)
-                
-                self.editQuote(indexPath: indexPath)
-            }
-            
-            let editImage = UIGraphicsImageRenderer(size: CGSize(width: size, height: size)).image { _ in
-                UIImage(named: "pencil-blue")?.draw(in: CGRect(x: 0, y: 0, width: size, height: size))
-            }
-            
-            if let cgImageX = editImage.cgImage {
-                editAction.image = ImageWithoutRender(cgImage: cgImageX, scale: UIScreen.main.nativeScale, orientation: .up)
-            }
-            
-            editAction.backgroundColor = .white
+            let size = 30
             
             let action = UIContextualAction(style: .destructive, title: nil) { (contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
                 
@@ -194,18 +168,11 @@ extension CollectionQuoteViewController {
                 completionHandler(false)
             }
             
-            let image = UIGraphicsImageRenderer(size: CGSize(width: size, height: size)).image { _ in
-                UIImage(named: "list-blue")?.draw(in: CGRect(x: 0, y: 0, width: size, height: size))
-            }
-            
-            if let cgImageX = image.cgImage {
-                action.image = ImageWithoutRender(cgImage: cgImageX, scale: UIScreen.main.nativeScale, orientation: .up)
-            }
+            action.image = UIIconExtension.init(size: size).listBlue()
             
             action.backgroundColor = .white
             
-            let swipeAction = UISwipeActionsConfiguration(actions: [action, editAction])
-            //            swipeAction.performsFirstActionWithFullSwipe = false
+            let swipeAction = UISwipeActionsConfiguration(actions: [action])
             
             return swipeAction
         } else {

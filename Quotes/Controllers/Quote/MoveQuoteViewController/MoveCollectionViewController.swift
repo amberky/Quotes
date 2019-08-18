@@ -159,22 +159,6 @@ extension MoveCollectionViewController {
         print("cellForRowAt")
         
         let collectionCount = qCollections.filter({ (m) -> Bool in m?.name == collection.name }).count
-
-//        if collectionCount > 0 {
-//            if selectedCollection.contains(collection) {
-//                cell.rowSelected = checked
-//            } else if collectionCount == quotes.count {
-//                cell.rowSelected = checked
-//            } else {
-//                cell.rowSelected = interminate
-//            }
-//        } else {
-//            if selectedCollection.contains(collection) {
-//                cell.rowSelected = checked
-//            } else {
-//                cell.rowSelected = unchecked
-//            }
-//        }
         
         if selectedCollection.contains(collection) {
             cell.rowSelected = checked

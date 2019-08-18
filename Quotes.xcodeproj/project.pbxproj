@@ -54,11 +54,13 @@
 		258B0E4222F409D40059CF70 /* EmptyTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258B0E4122F409D40059CF70 /* EmptyTableView.swift */; };
 		258B0E4422F40A040059CF70 /* EmptyTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 258B0E4322F40A040059CF70 /* EmptyTableView.xib */; };
 		258B0E4622F44B040059CF70 /* SyncQuotesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258B0E4522F44B040059CF70 /* SyncQuotesController.swift */; };
+		259EC120230804D900A9DEA0 /* QuoteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259EC11F230804D900A9DEA0 /* QuoteDetailViewController.swift */; };
 		25B5D01922E95003004E5099 /* ColorThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B5D01822E95003004E5099 /* ColorThemeModel.swift */; };
 		25B5D02F22E991B8004E5099 /* AddCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B5D02D22E991B8004E5099 /* AddCollectionViewController.swift */; };
 		25B5D04522E9CFCB004E5099 /* EditCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B5D04422E9CFCA004E5099 /* EditCollectionViewController.swift */; };
 		25B9B83722FC8A17004590D0 /* ReviewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B9B83622FC8A17004590D0 /* ReviewService.swift */; };
 		25BADDDD23070C1500F7D039 /* CollectionQuoteViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BADDDC23070C1500F7D039 /* CollectionQuoteViewController+TableView.swift */; };
+		25BF547C23095C5000A61105 /* UIIconExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25BF547B23095C5000A61105 /* UIIconExtension.swift */; };
 		25D3572122FBFB9D0047C499 /* QuotesDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D3572022FBFB9D0047C499 /* QuotesDetailController.swift */; };
 		25D3699A22F0B49900D81E76 /* CollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D3699922F0B49900D81E76 /* CollectionModel.swift */; };
 		25D3699C22F0B4A900D81E76 /* IconThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D3699B22F0B4A900D81E76 /* IconThemeModel.swift */; };
@@ -170,11 +172,13 @@
 		258B0E4122F409D40059CF70 /* EmptyTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTableView.swift; sourceTree = "<group>"; };
 		258B0E4322F40A040059CF70 /* EmptyTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = EmptyTableView.xib; path = ../EmptyTableView.xib; sourceTree = "<group>"; };
 		258B0E4522F44B040059CF70 /* SyncQuotesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncQuotesController.swift; sourceTree = "<group>"; };
+		259EC11F230804D900A9DEA0 /* QuoteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteDetailViewController.swift; sourceTree = "<group>"; };
 		25B5D01822E95003004E5099 /* ColorThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorThemeModel.swift; sourceTree = "<group>"; };
 		25B5D02D22E991B8004E5099 /* AddCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCollectionViewController.swift; sourceTree = "<group>"; };
 		25B5D04422E9CFCA004E5099 /* EditCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCollectionViewController.swift; sourceTree = "<group>"; };
 		25B9B83622FC8A17004590D0 /* ReviewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReviewService.swift; path = ../Extension/ReviewService.swift; sourceTree = "<group>"; };
 		25BADDDC23070C1500F7D039 /* CollectionQuoteViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionQuoteViewController+TableView.swift"; sourceTree = "<group>"; };
+		25BF547B23095C5000A61105 /* UIIconExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIIconExtension.swift; sourceTree = "<group>"; };
 		25D3572022FBFB9D0047C499 /* QuotesDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesDetailController.swift; sourceTree = "<group>"; };
 		25D3699922F0B49900D81E76 /* CollectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionModel.swift; sourceTree = "<group>"; };
 		25D3699B22F0B4A900D81E76 /* IconThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconThemeModel.swift; sourceTree = "<group>"; };
@@ -248,6 +252,7 @@
 			children = (
 				250DD98622F15F080092BF34 /* UIImageExtension.swift */,
 				250DD98922F15F300092BF34 /* UIColorExtension.swift */,
+				25BF547B23095C5000A61105 /* UIIconExtension.swift */,
 				25F5290522F9BBCD002586BC /* ShakeExtension.swift */,
 			);
 			path = Extension;
@@ -405,9 +410,10 @@
 			isa = PBXGroup;
 			children = (
 				252782DD22EEDE2B00643736 /* QuoteViewController */,
+				259EC11F230804D900A9DEA0 /* QuoteDetailViewController.swift */,
+				250DD98D22F172F90092BF34 /* EditQuoteViewController.swift */,
 				2589380B22E86DBB001E10FE /* AddQuoteViewController */,
 				250DD9B422F2029E0092BF34 /* MoveQuoteViewController */,
-				250DD98D22F172F90092BF34 /* EditQuoteViewController.swift */,
 			);
 			path = Quote;
 			sourceTree = "<group>";
@@ -676,6 +682,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				259EC120230804D900A9DEA0 /* QuoteDetailViewController.swift in Sources */,
 				250DD97D22F13AD00092BF34 /* SmallIconCollectionViewCell.swift in Sources */,
 				25B9B83722FC8A17004590D0 /* ReviewService.swift in Sources */,
 				2566C28F22E4970A003BFA91 /* QuoteViewController.swift in Sources */,
@@ -683,6 +690,7 @@
 				2566C2B422E4D0B5003BFA91 /* AddQuoteViewController.swift in Sources */,
 				252782E322EEE63F00643736 /* QuoteViewController+Drop.swift in Sources */,
 				250DD99F22F1848D0092BF34 /* AddCollectionFromMoveViewController.swift in Sources */,
+				25BF547C23095C5000A61105 /* UIIconExtension.swift in Sources */,
 				251E18B622EB41A700DEE0F3 /* FavouriteAnimator.swift in Sources */,
 				250DD9B122F1E3970092BF34 /* CollectionTableViewCell.swift in Sources */,
 				25F5290622F9BBCD002586BC /* ShakeExtension.swift in Sources */,

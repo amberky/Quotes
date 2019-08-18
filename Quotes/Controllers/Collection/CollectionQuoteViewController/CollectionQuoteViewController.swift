@@ -33,7 +33,6 @@ class CollectionQuoteViewController: UITableViewController {
     var didSet: Bool = false
     var selectedCollection: CollectionModel? {
         didSet {
-            print("didSet selectedCollection")
             didSet = true
             
             setTitle()
@@ -42,7 +41,6 @@ class CollectionQuoteViewController: UITableViewController {
     
     var collection: Collection? {
         didSet {
-            print("didSet collection")
         }
     }
     
@@ -55,7 +53,6 @@ class CollectionQuoteViewController: UITableViewController {
     @IBOutlet var deleteButton: UIBarButtonItem!
     @IBOutlet var shareButton: UIBarButtonItem!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -63,11 +60,6 @@ class CollectionQuoteViewController: UITableViewController {
         
         configureTableView()
         
-        if didSet {
-            loadQuotes()
-        }
-        
-        self.navigationController?.setToolbarHidden(true, animated: false)
         self.navigationController?.toolbar.barTintColor = UIColor.mainBlue()
         
         self.navigationItem.searchController = searchController
@@ -81,17 +73,15 @@ class CollectionQuoteViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        self.loadQuotes()
-        
         editMode = false
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        endEditMode()
+        
+        if didSet {
+            loadQuotes()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        self.navigationController?.setToolbarHidden(true, animated: false)
+        endEditMode()
     }
     
     // MARK: - IBAction
@@ -239,10 +229,6 @@ class CollectionQuoteViewController: UITableViewController {
         self.navigationController?.setToolbarHidden(true, animated: false)
         
         tableView.reloadData()
-        
-//        if quoteSectionArray.count > 0 {
-//            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-//        }
     }
     
     func getSelectedQuotes() -> [Quote]? {
@@ -334,6 +320,16 @@ class CollectionQuoteViewController: UITableViewController {
     // MARK: - Unwind Segue
     @IBAction func backToCollectionQuoteView(_ unwindSegue: UIStoryboardSegue) {}
     
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "goToQuoteDetailView" {
+            if editMode == true {
+                return false
+            }
+        }
+        
+        return true
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier else { return }
         
@@ -345,6 +341,18 @@ class CollectionQuoteViewController: UITableViewController {
             
             let destination = segue.destination as! EditCollectionViewController
             destination.selectedCollection = selectedCollection
+        case "goToQuoteDetailView":
+            print("Let's go to quote detail view")
+            
+            guard let q = sender as? QuoteTableViewCell else { return }
+            guard q.quote != nil else { return }
+            
+            let destination = segue.destination as! QuoteDetailViewController
+            destination.quote = q.quote!
+            destination.color = q.color ?? UIColor.white
+            
+            destination.source = "CollectionQuoteViewController"
+            
         default:
             print("unknown segue identifier")
         }
@@ -354,7 +362,7 @@ class CollectionQuoteViewController: UITableViewController {
 // MARK: - EditQuoteViewControllerDelegate
 extension CollectionQuoteViewController: EditQuoteViewControllerDelegate {
     func reloadQuote() {
-        loadQuotes()
+//        loadQuotes()
         updateAppContext()
     }
 }
@@ -366,7 +374,7 @@ extension CollectionQuoteViewController: MoveCollectionViewControllerDelegate {
         }
         
         if reload {
-            loadQuotes()
+//            loadQuotes()
 
             if searchController.searchBar.text != "" {
                 searchController.isActive = false

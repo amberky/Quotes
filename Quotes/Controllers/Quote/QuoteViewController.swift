@@ -11,13 +11,18 @@ import CoreData
 
 class QuoteViewController: UITableViewController {
     
-    // MARK: Variables
+    // MARK: - Variables
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     lazy var editQuoteService = EditQuoteService()
     lazy var moveCollectionService = MoveCollectionService()
     lazy var updateAppContextService = UpdateAppContextService()
     lazy var reviewService = ReviewService.shared
+    
+    let size = 30
+    
+    lazy var heartImage = UIIconExtension.init(size: size).heart()
+    lazy var unheartImage = UIIconExtension.init(size: size).unheart()
     
     lazy var selectionHaptic = UISelectionFeedbackGenerator()
     
@@ -31,14 +36,16 @@ class QuoteViewController: UITableViewController {
     var editMode = false
     var selectedRows = [IndexPath]()
     
+    
     // MARK: - IBOutlet
+    @IBOutlet var collectionButton: UIBarButtonItem!
     @IBOutlet var addButton: UIBarButtonItem!
     @IBOutlet var cancelButton: UIBarButtonItem!
     @IBOutlet var favouriteButton: UIBarButtonItem!
-    @IBOutlet var copyButton: UIBarButtonItem!
     @IBOutlet var moveButton: UIBarButtonItem!
     @IBOutlet var deleteButton: UIBarButtonItem!
     @IBOutlet var shareButton: UIBarButtonItem!
+    
     
     // MARK: - View
     override func viewDidLoad() {
@@ -62,6 +69,7 @@ class QuoteViewController: UITableViewController {
         searchController.searchBar.delegate = self
         
         reloadQuote()
+        setupToolbar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,6 +79,7 @@ class QuoteViewController: UITableViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
     }
+    
     
     // MARK: - IBAction
     @IBAction func cancelClicked(_ sender: Any) {
@@ -147,14 +156,15 @@ class QuoteViewController: UITableViewController {
     
     @IBAction func shareClicked(_ sender: Any) {
         guard let quotes = getSelectedQuotes() else { return }
-        
+
         selectionHaptic.selectionChanged()
         let text = concatText(quotes: quotes)
-        
+
         let vc = UIActivityViewController(activityItems: [text], applicationActivities: [])
-        
+
         present(vc, animated: true)
     }
+    
     
     // MARK: - Functions
     func loadQuotes(predicate: NSPredicate? = nil) {
@@ -177,10 +187,22 @@ class QuoteViewController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
     }
     
+    func setupToolbar() {
+        let folderImage = UIIconExtension.init(size: size).folder()
+        let trashImage = UIIconExtension.init(size: size).delete()
+        let shareImage = UIIconExtension.init(size: size).share()
+        
+        deleteButton.image = trashImage
+        moveButton.image = folderImage
+        favouriteButton.image = unheartImage
+        shareButton.image = shareImage
+    }
+    
     func beginEditMode() {
         selectedRows = [IndexPath]()
         editMode = true
         
+        self.navigationItem.leftBarButtonItem = nil
         self.navigationItem.rightBarButtonItems = [cancelButton]
         self.navigationController?.setToolbarHidden(false, animated: false)
         
@@ -192,14 +214,11 @@ class QuoteViewController: UITableViewController {
         
         editMode = false
         
+        self.navigationItem.leftBarButtonItem = collectionButton
         self.navigationItem.rightBarButtonItems = [addButton]
         self.navigationController?.setToolbarHidden(true, animated: false)
    
         tableView.reloadData()
-        
-//        if quoteSectionArray.count > 0 {
-//            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .none, animated: true)
-//        }
     }
     
     func getSelectedQuotes() -> [Quote]? {
@@ -284,8 +303,19 @@ class QuoteViewController: UITableViewController {
         self.present(editQuoteVC, animated: true)
     }
     
+    
     // MARK: - Unwind Segue
     @IBAction func backToQuoteView(_ unwindSegue: UIStoryboardSegue) {}
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "goToQuoteDetailView" {
+            if editMode == true {
+                return false
+            }
+        }
+        
+        return true
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier != nil else { return }
@@ -299,6 +329,18 @@ class QuoteViewController: UITableViewController {
         switch segue.identifier {
         case "goToAddQuoteView":
             print("Let's go to add a quote")
+        case "goToQuoteDetailView":
+            print("Let's go to quote detail view")
+            
+            guard let q = sender as? QuoteTableViewCell else { return }
+            guard q.quote != nil else { return }
+            
+            let destination = segue.destination as! QuoteDetailViewController
+            destination.quote = q.quote!
+            destination.color = q.color ?? UIColor.white
+            
+            destination.source = "QuoteViewController"
+            
         default:
             print("unknown segue identifier")
             
