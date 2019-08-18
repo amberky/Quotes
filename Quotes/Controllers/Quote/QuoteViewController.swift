@@ -252,6 +252,11 @@ class QuoteViewController: UITableViewController {
             }
         }
         
+        
+        let text = "\n\nQuotes: Place to collect quote\n\nhttps://apps.apple.com/app/id1476059661\n\n#Quotes"
+        
+        str = "\(str)\n\n\(text)"
+        
         return str
     }
     

@@ -120,7 +120,9 @@ class QuoteDetailViewController: UIViewController {
         
         let image = generateImage()
         
-        let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        let text = "Quotes: Place to collect quote\n\nhttps://apps.apple.com/app/id1476059661\n\n#Quotes"
+        
+        let activityViewController = UIActivityViewController(activityItems: [text, image], applicationActivities: nil)
         present(activityViewController, animated: true, completion: nil)
     }
     

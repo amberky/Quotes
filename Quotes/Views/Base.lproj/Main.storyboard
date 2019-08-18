@@ -209,7 +209,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aku-v5-nPK" userLabel="Label View">
                                                             <rect key="frame" x="30" y="20" width="275" height="124"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AUL-Nj-N16">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AUL-Nj-N16">
                                                                     <rect key="frame" x="0.0" y="0.0" width="275" height="75"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="16"/>
                                                                     <nil key="textColor"/>
@@ -252,7 +252,7 @@
                                                             </constraints>
                                                         </imageView>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.92156862750000001" green="0.75294117650000003" blue="0.34509803919999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <gestureRecognizers/>
                                                     <constraints>
                                                         <constraint firstItem="aku-v5-nPK" firstAttribute="top" secondItem="cVf-Cp-fEl" secondAttribute="top" constant="20" id="0XN-oj-0OZ"/>
@@ -989,7 +989,7 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oQr-1x-ytU" userLabel="Label View">
                                                             <rect key="frame" x="30" y="20" width="280" height="130"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2EX-Uv-Dns">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2EX-Uv-Dns">
                                                                     <rect key="frame" x="0.0" y="0.0" width="280" height="81"/>
                                                                     <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="15"/>
                                                                     <nil key="textColor"/>
@@ -1032,7 +1032,7 @@
                                                             </constraints>
                                                         </imageView>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.92156862750000001" green="0.75294117650000003" blue="0.34509803919999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <gestureRecognizers/>
                                                     <constraints>
                                                         <constraint firstItem="Oa5-Hb-x42" firstAttribute="leading" secondItem="oQr-1x-ytU" secondAttribute="trailing" constant="5" id="1YN-57-uIk"/>
@@ -1839,7 +1839,7 @@
         <image name="unchecked-blue" width="400" height="400"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yJn-uX-dgJ"/>
+        <segue reference="Wxh-90-JL9"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.36470588240000001" green="0.45882352939999999" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
 </document>
