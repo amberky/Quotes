@@ -18,6 +18,11 @@ class CollectionQuoteViewController: UITableViewController {
     lazy var moveCollectionService = MoveCollectionService()
     lazy var updateAppContextService = UpdateAppContextService()
     
+    let size = 30
+    
+    lazy var heartImage = UIIconExtension.init(size: size).heart()
+    lazy var unheartImage = UIIconExtension.init(size: size).unheart()
+    
     lazy var selectionHaptic = UISelectionFeedbackGenerator()
     
     lazy var quoteSectionArray = QuoteSections.init().quoteSections
@@ -62,6 +67,9 @@ class CollectionQuoteViewController: UITableViewController {
         
         self.navigationController?.toolbar.barTintColor = UIColor.mainBlue()
         
+        self.navigationController?.setToolbarHidden(true, animated: false)
+        self.navigationController?.toolbar.barTintColor = UIColor.mainBlue()
+        
         self.navigationItem.searchController = searchController
         self.definesPresentationContext = true
         
@@ -70,6 +78,8 @@ class CollectionQuoteViewController: UITableViewController {
         
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.delegate = self
+        
+        setupToolbar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -204,6 +214,17 @@ class CollectionQuoteViewController: UITableViewController {
         tableView.allowsMultipleSelection = true
         tableView.estimatedRowHeight = 500.0
         tableView.rowHeight = UITableView.automaticDimension
+    }
+    
+    func setupToolbar() {
+        let folderImage = UIIconExtension.init(size: size).folder()
+        let trashImage = UIIconExtension.init(size: size).delete()
+        let shareImage = UIIconExtension.init(size: size).share()
+        
+        deleteButton.image = trashImage
+        moveButton.image = folderImage
+        favouriteButton.image = unheartImage
+        shareButton.image = shareImage
     }
     
     func beginEditMode() {

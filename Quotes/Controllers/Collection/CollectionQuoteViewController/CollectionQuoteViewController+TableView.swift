@@ -65,9 +65,9 @@ extension CollectionQuoteViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath) as! QuoteTableViewCell
-        
         if editMode {
+            let cell = tableView.cellForRow(at: indexPath) as! QuoteTableViewCell
+            
             selectionHaptic.selectionChanged()
             
             if selectedRows.contains(indexPath) {
@@ -87,8 +87,10 @@ extension CollectionQuoteViewController {
                 
                 if groupPin.isPin == true {
                     favouriteButton.title = "Unfavourite"
+                    self.favouriteButton.image = self.heartImage
                 } else {
                     favouriteButton.title = "Favourite"
+                    self.favouriteButton.image = self.unheartImage
                 }
             } else {
                 favouriteButton.title = "Favourite"
@@ -161,8 +163,10 @@ extension CollectionQuoteViewController {
                 let quote = self.quoteSectionArray[indexPath.section].quotes[indexPath.row]
                 if quote.isPin == true {
                     self.favouriteButton.title = "Unfavourite"
+                    self.favouriteButton.image = self.heartImage
                 } else {
                     self.favouriteButton.title = "Favourite"
+                    self.favouriteButton.image = self.unheartImage
                 }
                 
                 completionHandler(false)
@@ -184,8 +188,8 @@ extension CollectionQuoteViewController {
         let tableViewFrame = tableView.frame.width
         let tableViewLeftMargin = tableView.separatorInset.left
         let tableViewSectionHeight = tableView.sectionHeaderHeight
-        let yAxis = (tableViewSectionHeight - 15) / 2
-        let width : CGFloat = 20
+        let widthHeight : CGFloat = 20
+        let yAxis = (tableViewSectionHeight - widthHeight) / 2
         
         let headerView = UIView()
         headerView.backgroundColor = .clear
@@ -194,10 +198,7 @@ extension CollectionQuoteViewController {
         
         let imageName = headerInfo.sectionIcon
         let image = UIImageView(image: UIImage.init(named: imageName))
-        image.frame = CGRect(x: tableViewLeftMargin + 5,
-                             y: yAxis,
-                             width: width,
-                             height: width)
+        image.frame = CGRect(x: tableViewLeftMargin + 5, y: yAxis, width: widthHeight, height: widthHeight)
         
         headerView.addSubview(image)
         
@@ -208,11 +209,10 @@ extension CollectionQuoteViewController {
         
         label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
         
-        label.frame = CGRect(x: tableViewLeftMargin + 15 + 15,
-                             // table margin left - image width - margin (image - label)
-            y: yAxis,
-            width: tableViewFrame - (tableViewLeftMargin * 2) - 20 - 10,
-            height: width)
+        label.frame = CGRect(x: tableViewLeftMargin + widthHeight + 15,
+                             y: yAxis,
+                             width: tableViewFrame - (tableViewLeftMargin * 2) - 20 - 10,
+                             height: widthHeight)
         
         headerView.addSubview(label)
         

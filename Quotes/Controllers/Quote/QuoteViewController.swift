@@ -50,6 +50,7 @@ class QuoteViewController: UITableViewController {
     // MARK: - View
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         colorCount = colorArray.count
         
         configureTableView()

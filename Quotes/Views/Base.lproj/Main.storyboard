@@ -1082,41 +1082,38 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem systemItem="flexibleSpace" id="LcD-iQ-gtb">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </barButtonItem>
-                        <barButtonItem title="Favourite" id="uSJ-PB-HU4">
+                        <barButtonItem title="Move" id="PAa-hN-lqJ">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <action selector="favouriteClicked:" destination="Qqg-MU-Q1I" id="zYU-L2-Qjy"/>
+                                <action selector="moveClicked:" destination="Qqg-MU-Q1I" id="oqZ-6u-TWp"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem title="Copy" id="If1-ia-TOn">
+                        <barButtonItem systemItem="flexibleSpace" id="GmW-O6-my4">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
+                        <barButtonItem title="Fav." id="PUF-AT-JTW">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <action selector="copyClicked:" destination="Qqg-MU-Q1I" id="p5c-2Z-0h4"/>
+                                <action selector="favouriteClicked:" destination="Qqg-MU-Q1I" id="47m-wi-y2w"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem title="Move" id="Y5E-R8-HTx">
+                        <barButtonItem systemItem="flexibleSpace" id="mXf-07-i4M">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
+                        <barButtonItem title="Delete" id="FAD-gX-6S9">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <action selector="moveClicked:" destination="Qqg-MU-Q1I" id="XVg-Bd-O8a"/>
+                                <action selector="deleteClicked:" destination="Qqg-MU-Q1I" id="lHe-oI-HpO"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem title="Delete" id="5zx-tn-yNx">
+                        <barButtonItem systemItem="flexibleSpace" id="ZFN-oC-TlL">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
+                        <barButtonItem title="Share" id="Jih-qg-y76">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <action selector="deleteClicked:" destination="Qqg-MU-Q1I" id="o7c-dw-Ajo"/>
+                                <action selector="shareClicked:" destination="Qqg-MU-Q1I" id="rIz-2O-2Sk"/>
                             </connections>
-                        </barButtonItem>
-                        <barButtonItem title="Share" id="ato-ZD-7wJ">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="shareClicked:" destination="Qqg-MU-Q1I" id="rwJ-g2-lLp"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem systemItem="flexibleSpace" id="jVO-bZ-epJ">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Collection Quote" id="CFF-4c-elD">
@@ -1138,12 +1135,11 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="cancelButton" destination="w7g-dJ-6FN" id="3du-GZ-UPu"/>
-                        <outlet property="copyButton" destination="If1-ia-TOn" id="SdT-g5-ngc"/>
-                        <outlet property="deleteButton" destination="5zx-tn-yNx" id="Vii-Tn-RLa"/>
+                        <outlet property="deleteButton" destination="FAD-gX-6S9" id="vpt-7R-6T1"/>
                         <outlet property="editButton" destination="3oS-bA-qVP" id="mZ8-r3-LSf"/>
-                        <outlet property="favouriteButton" destination="uSJ-PB-HU4" id="eRn-AK-b0b"/>
-                        <outlet property="moveButton" destination="Y5E-R8-HTx" id="9FK-Dv-ZUb"/>
-                        <outlet property="shareButton" destination="ato-ZD-7wJ" id="u0l-LY-BIp"/>
+                        <outlet property="favouriteButton" destination="PUF-AT-JTW" id="nvJ-lU-Lmu"/>
+                        <outlet property="moveButton" destination="PAa-hN-lqJ" id="bTj-yt-2tm"/>
+                        <outlet property="shareButton" destination="Jih-qg-y76" id="thI-oU-uNl"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HkO-tU-hVX" userLabel="First Responder" sceneMemberID="firstResponder"/>
