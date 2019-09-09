@@ -340,7 +340,6 @@
 			isa = PBXGroup;
 			children = (
 				2544D9B722F9A686008A4449 /* Quotes.entitlements */,
-				25D909EA22F5D36500D8FCB6 /* Resources */,
 				2566C29B22E4970C003BFA91 /* Info.plist */,
 				2566C28C22E4970A003BFA91 /* AppDelegate.swift */,
 				2566C2A122E49720003BFA91 /* Controllers */,
@@ -484,13 +483,6 @@
 				250DD9A222F19BA20092BF34 /* MoveCollectionService.swift */,
 			);
 			path = Service;
-			sourceTree = "<group>";
-		};
-		25D909EA22F5D36500D8FCB6 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		25F0CE5222E69EA4001DE1A0 /* Custom Views */ = {
