@@ -211,7 +211,6 @@ class CollectionQuoteViewController: UITableViewController {
     }
     
     func configureTableView() {
-        tableView.allowsMultipleSelection = true
         tableView.estimatedRowHeight = 500.0
         tableView.rowHeight = UITableView.automaticDimension
     }
