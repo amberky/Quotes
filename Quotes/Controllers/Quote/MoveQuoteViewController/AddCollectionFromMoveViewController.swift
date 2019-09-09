@@ -3,7 +3,7 @@
 //  Quotes
 //
 //  Created by Kharnyee Eu on 22/07/2019.
-//  Copyright © 2019 focus. All rights reserved.
+//  Copyright © 2019 focusios. All rights reserved.
 //
 
 import UIKit
@@ -50,7 +50,7 @@ class AddCollectionFromMoveViewController: UIViewController {
         collectionTextField.becomeFirstResponder()
 
         collectionTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
-
+        
         setupGesture()
         setupNotificationCenter()
     }
@@ -155,8 +155,7 @@ class AddCollectionFromMoveViewController: UIViewController {
         
         switch identifier {
         case "doneClicked":
-            checkAndResignFirstResponder()
-
+            
             let newCollection = Collection(context: self.context)
             newCollection.name = (collectionTextField.text ?? "").trimmingCharacters(in: .whitespaces)
             newCollection.icon = iconArray[selectedIndex].name
@@ -169,6 +168,7 @@ class AddCollectionFromMoveViewController: UIViewController {
 
             if segue.destination is MoveCollectionViewController {
                 let destination = segue.destination as! MoveCollectionViewController
+                destination.edited = true
                 destination.loadCollections()
                 destination.selectedCollection.append(newCollection)
             } else { return }
@@ -207,10 +207,10 @@ class AddCollectionFromMoveViewController: UIViewController {
 
 // MARK: - UITextFieldDelegate
 extension AddCollectionFromMoveViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        collectionTextField.resignFirstResponder()
-        return false
-    }
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        collectionTextField.resignFirstResponder()
+//        return false
+//    }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let textFieldText = textField.text, let rangeOfTextToReplace = Range(range, in: textFieldText) else { return false }
@@ -254,9 +254,9 @@ extension AddCollectionFromMoveViewController: UICollectionViewDelegateFlowLayou
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionTextField.isFirstResponder {
-            collectionTextField.resignFirstResponder()
-        }
+//        if collectionTextField.isFirstResponder {
+//            collectionTextField.resignFirstResponder()
+//        }
         
         selectedIndex = indexPath.row
         collectionView.reloadData()

@@ -3,7 +3,7 @@
 //  Quotes Watch Extension
 //
 //  Created by Kharnyee Eu on 08/08/2019.
-//  Copyright © 2019 focus. All rights reserved.
+//  Copyright © 2019 focusios. All rights reserved.
 //
 
 import WatchKit

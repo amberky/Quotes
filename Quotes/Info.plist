@@ -20,6 +20,10 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Quotes needs access to your album to save images</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Quotes needs access to your album to save images</string>
 	<key>UIApplicationShortcutItems</key>
 	<array>
 		<dict>

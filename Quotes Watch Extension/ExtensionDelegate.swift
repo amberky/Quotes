@@ -3,7 +3,7 @@
 //  Quotes Watch Extension
 //
 //  Created by Kharnyee Eu on 01/08/2019.
-//  Copyright © 2019 focus. All rights reserved.
+//  Copyright © 2019 focusios. All rights reserved.
 //
 
 import WatchKit
@@ -88,7 +88,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         guard WCSession.default.activationState == .activated,
             WCSession.default.hasContentPending == false else { return }
         
-        wcBackgroundTasks.forEach { $0.setTaskCompleted() }
+        wcBackgroundTasks.forEach { $0.setTaskCompletedWithSnapshot(false) }
         
         // Schedule a snapshot refresh if the UI is updated by background tasks.
         //

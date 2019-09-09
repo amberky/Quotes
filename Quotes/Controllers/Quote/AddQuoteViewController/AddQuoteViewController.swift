@@ -3,7 +3,7 @@
 //  Quotes
 //
 //  Created by Kharnyee Eu on 22/07/2019.
-//  Copyright © 2019 focus. All rights reserved.
+//  Copyright © 2019 focusios. All rights reserved.
 //
 
 import UIKit
@@ -209,6 +209,9 @@ class AddQuoteViewController: UIViewController {
             context.insert(newQuote)
             
             saveContext()
+            
+            let destination = segue.destination as! QuoteViewController
+            destination.loadQuotes()
             
         case "cancelClicked":
             print("Cancel bar button clicked")

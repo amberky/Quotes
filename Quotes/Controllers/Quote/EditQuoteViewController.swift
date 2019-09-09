@@ -3,7 +3,7 @@
 //  Quotes
 //
 //  Created by Kharnyee Eu on 31/07/2019.
-//  Copyright © 2019 focus. All rights reserved.
+//  Copyright © 2019 focusios. All rights reserved.
 //
 
 import UIKit
@@ -23,6 +23,19 @@ class EditQuoteViewController: UIViewController {
     var delegate: EditQuoteViewControllerDelegate?
 
     var cell = QuoteTableViewCell()
+    
+    var quote: String = "" {
+        didSet {
+            
+        }
+    }
+    
+    var author: String = "" {
+        didSet {
+            
+        }
+    }
+    
     var objectId : NSManagedObjectID?
     
     // MARK: - IBOutlet
@@ -46,27 +59,6 @@ class EditQuoteViewController: UIViewController {
         setupView()
         setupGesture()
         setupNotificationCenter()
-    }
-    
-    // MARK: - IBAction
-    @IBAction func doneClicked(_ sender: UIBarButtonItem) {
-        print("Done bar button clicked")
-        
-        checkAndResignFirstResponder()
-        
-        let quote = quoteTextField.text!.trimmingCharacters(in: .whitespaces)
-        
-        if checkQuoteExists(quote: quote) == false {
-            updateQuote(quote: quote)
-            dimissView(reload: true)
-        }
-    }
-    
-    @IBAction func cancelClicked(_ sender: UIBarButtonItem) {
-        print("Cancel bar button clicked")
-        checkAndResignFirstResponder()
-        
-        dimissView(reload: false)
     }
     
     @IBAction func backToEditQuoteView(_ unwindSegue: UIStoryboardSegue) {}
@@ -110,8 +102,8 @@ class EditQuoteViewController: UIViewController {
     
     // MARK: - Functions
     func setupView() {
-        quoteTextField.text = cell.quoteLabel.text
-        authorTextField.text = cell.authorLabel.text
+        quoteTextField.text = quote
+        authorTextField.text = author
     }
     
     func setupGesture() {
@@ -139,23 +131,33 @@ class EditQuoteViewController: UIViewController {
         }
     }
     
-    func updateQuote(quote: String) {
+    func updateQuote() -> Quote? {
+        
         let request: NSFetchRequest<Quote> = Quote.fetchRequest()
-        request.predicate = NSPredicate(format: "quote == %@", cell.quoteLabel.text ?? "")
+        request.predicate = NSPredicate(format: "quote == %@", quote)
         
         do {
             if let quoteContext = try self.context.fetch(request) as [NSManagedObject]?, quoteContext.first != nil {
+                
+                let quoteText = quoteTextField.text!.trimmingCharacters(in: .whitespaces)
+                
                 let updateQuote = quoteContext.first as! Quote
                 
-                updateQuote.setValue(quote, forKey: "quote")
+                updateQuote.setValue(quoteText, forKey: "quote")
                 updateQuote.setValue((authorTextField?.text ?? "").trimmingCharacters(in: .whitespaces), forKey: "author")
                 updateQuote.setValue(Date(), forKey: "updatedOn")
                 
                 saveContext()
+                
+                objectId = updateQuote.objectID
+                
+                return updateQuote
             }
         } catch {
             print("Error in removing & adding collections to quote \(error)")
         }
+        
+        return nil
     }
     
     func checkQuoteExists(quote: String) -> Bool {
@@ -206,6 +208,42 @@ class EditQuoteViewController: UIViewController {
             quoteTextField.resignFirstResponder()
         } else if authorTextField.isFirstResponder {
             authorTextField.resignFirstResponder()
+        }
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        switch identifier {
+        case "doneClicked":
+            let quote = quoteTextField.text!.trimmingCharacters(in: .whitespaces)
+            
+            if checkQuoteExists(quote: quote) == true {
+                self.showExistsAlert()
+                
+                return false
+            } else {
+                return true
+            }
+        default:
+            return true
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier != nil else { return }
+        
+        checkAndResignFirstResponder()
+        
+        switch segue.identifier {
+        case "doneClicked":
+            let updatedQuote = updateQuote()
+            
+            let destination = segue.destination as! QuoteDetailViewController
+            destination.quote = updatedQuote
+            
+        case "cancelClicked":
+            print("cancel bar clicked")
+        default:
+            print("unknown segue identifier")
         }
     }
 }

@@ -3,7 +3,7 @@
 //  Quotes
 //
 //  Created by Kharnyee Eu on 31/07/2019.
-//  Copyright © 2019 focus. All rights reserved.
+//  Copyright © 2019 focusios. All rights reserved.
 //
 
 import UIKit
@@ -13,12 +13,12 @@ class EditQuoteService {
     func show(cell: QuoteTableViewCell, objectId: NSManagedObjectID) -> EditQuoteViewController {
         let storyboard = UIStoryboard(name: "EditQuoteStoryboard", bundle: .main)
 
-        let editQuoteVC = storyboard.instantiateViewController(withIdentifier: "EditQuoteVC") as! EditQuoteViewController
+        let vc = storyboard.instantiateViewController(withIdentifier: "EditQuoteVC") as! EditQuoteViewController
 
-        editQuoteVC.modalPresentationStyle = .custom
-        editQuoteVC.cell = cell
-        editQuoteVC.objectId = objectId
+        vc.modalPresentationStyle = .popover
+        vc.cell = cell
+        vc.objectId = objectId
 
-        return editQuoteVC
+        return vc
     }
 }

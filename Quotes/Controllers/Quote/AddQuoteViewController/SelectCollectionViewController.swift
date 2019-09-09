@@ -1,15 +1,15 @@
 //
-//  
+//  SelectCollectionViewController.swift
 //  Quotes
 //
 //  Created by Kharnyee Eu on 22/07/2019.
-//  Copyright © 2019 focus. All rights reserved.
+//  Copyright © 2019 focusios. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-class SelectCollectionViewController: UIViewController {
+class SelectCollectionViewController: UITableViewController {
     
     // MARK: Variables
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -17,17 +17,15 @@ class SelectCollectionViewController: UIViewController {
     
     var collectionArray = [Collection]()
     var selectedCollection = [Collection?]()
+
+    lazy var checked = 0
+    lazy var interminate = 1
+    lazy var unchecked = 2
     
     // MARK: - IBOutlet
-    @IBOutlet weak var collectionTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        collectionTableView.delegate = self
-        collectionTableView.dataSource = self
-        
-        collectionTableView.allowsMultipleSelection = true
         
         loadCollections()
     }
@@ -46,7 +44,7 @@ class SelectCollectionViewController: UIViewController {
             print("Error fetching data from context \(error)")
         }
         
-        collectionTableView.reloadData()
+        tableView.reloadData()
     }
     
     // MARK: - Unwind Segue
@@ -58,17 +56,9 @@ class SelectCollectionViewController: UIViewController {
         switch identifier {
         case "doneClicked":
             print("Done bar button clicked")
-            if let indexPath = collectionTableView.indexPathsForSelectedRows {
-                let destinationVC = segue.destination as! AddQuoteViewController
-                
-                var selectedArray = [Collection]()
-                
-                for i in indexPath {
-                    selectedArray.append(collectionArray[i.row])
-                }
-                
-                destinationVC.selectedCollection = selectedArray
-            }
+            
+            let destinationVC = segue.destination as! AddQuoteViewController
+            destinationVC.selectedCollection = selectedCollection
             
         case "cancelClicked":
             print("Cancel bar button clicked")
@@ -84,45 +74,46 @@ class SelectCollectionViewController: UIViewController {
 }
 
 // MARK: - UITableViewDelegate
-extension SelectCollectionViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension SelectCollectionViewController {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return collectionArray.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CollectionCell", for: indexPath) as! CollectionTableViewCell
-        
-        cell.selectionStyle = .none
         
         let collection = collectionArray[indexPath.row]
         
-        cell.collectionLabel?.text = collection.name
+        cell.collection = collection
+        
+        if selectedCollection.contains(collection) {
+            cell.rowSelected = checked
+        } else {
+            cell.rowSelected = unchecked
+        }
         
         return cell
     }
+
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        print("didSelectRowAt")
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CollectionCell", for: indexPath) as! CollectionTableViewCell
         
         let collection = collectionArray[indexPath.row]
-        
+
         if selectedCollection.contains(collection) {
-            cell.accessoryType = .checkmark
-            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+            cell.rowSelected = checked
+            selectedCollection.remove(at: selectedCollection.firstIndex(of: collection)!)
+            tableView.deselectRow(at: indexPath, animated: false)
         } else {
-            cell.accessoryType = .none
+            cell.rowSelected = checked
+            selectedCollection.append(collection)
+            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
         }
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
         
-        selectedCollection.append(collectionArray[indexPath.row])
-    }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        tableView.cellForRow(at: indexPath)?.accessoryType = .none
-        
-        guard let index = selectedCollection.firstIndex(of: collectionArray[indexPath.row]) else { return }
-        selectedCollection.remove(at: index)
+        self.tableView.reloadRows(at: [indexPath], with: .none)
     }
 }

@@ -3,7 +3,7 @@
 //  Quotes
 //
 //  Created by Kharnyee Eu on 31/07/2019.
-//  Copyright © 2019 focus. All rights reserved.
+//  Copyright © 2019 focusios. All rights reserved.
 //
 
 import UIKit
@@ -15,7 +15,7 @@ class CollectionModel {
     let count : Int
     let isAll: Bool
     var isSelected : Bool
-    let objectID : NSManagedObjectID?
+    var objectID : NSManagedObjectID?
     
     init (name: String, icon: String, count: Int = 0, objectID: NSManagedObjectID? = nil, isAll: Bool = false, isSelected: Bool = false) {
         self.name = name

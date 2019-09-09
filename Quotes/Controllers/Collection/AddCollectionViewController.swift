@@ -3,7 +3,7 @@
 //  Quotes
 //
 //  Created by Kharnyee Eu on 22/07/2019.
-//  Copyright © 2019 focus. All rights reserved.
+//  Copyright © 2019 focusios. All rights reserved.
 //
 
 import UIKit
@@ -173,6 +173,9 @@ class AddCollectionViewController: UIViewController {
                 let destination = segue.destination as! SelectCollectionViewController
                 destination.loadCollections()
                 destination.selectedCollection.append(newCollection)
+            } else if segue.destination is CollectionViewController {
+                let destination = segue.destination as! CollectionViewController
+                destination.loadCollections()
             } else { return }
             
         case "cancelClicked":
